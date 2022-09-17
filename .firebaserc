@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "aika-bc46c"
+  },
+  "targets": {
+    "aika-bc46c": {
+      "hosting": {
+        "aika-angular": [
+          "aika-bc46c"
+        ]
+      }
+    }
+  }
+}

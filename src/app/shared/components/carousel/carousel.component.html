@@ -1,0 +1,13 @@
+<div *ngIf="images" >
+  <ngb-carousel class="small-padding">
+    <ng-template ngbSlide *ngFor="let i of images">
+      <div [style.height.px]="height">
+        <img [src]="i" alt="Random first slide" class="img-fluid" />
+      </div>
+      <div class="carousel-caption">
+        <h3>10 seconds between slides...</h3>
+        <p>This carousel uses customized default values.</p>
+      </div>
+    </ng-template>
+  </ngb-carousel>
+</div>

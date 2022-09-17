@@ -1,0 +1,68 @@
+<form class="form-register-sign" action="/action_page.php" method="post">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="rekisteroidyLabel">Rekisteröidy</h5>
+        <button
+          type="button"
+          class="btn-close"
+          (click)="close()"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <form class="row g-3">
+            <!-- <div class="form-floating mb-4">
+              <input
+                type="etunimi"
+                class="form-control"
+                id="floatingInput"
+                placeholder="Etunimi"
+              />
+              <label for="floatingInput">Etunimi</label>
+            </div>
+
+            <div class="form-floating mb-4">
+              <input
+                type="sukuNimi"
+                class="form-control"
+                id="floatingInput1"
+                placeholder="Sukunimi"
+              />
+              <label for="floatingInput1">Sukunimi</label>
+            </div> -->
+            <div class="form-floating mb-4">
+              <input
+                type="email"
+                class="form-control"
+                id="floatingInput2"
+                placeholder="name@example.com"
+                #email
+                required
+              />
+              <label for="floatingInput2">Sähköposti</label>
+            </div>
+            <div class="form-floating mb-4">
+              <input
+                type="password"
+                class="form-control"
+                id="floatingInput3"
+                placeholder="Salasana"
+                #userPwd
+                required
+              />
+              <label for="floatingInput3">Salasana</label>
+            </div>
+
+            <div class="col-12">
+              <button type="button" class="btn btn-primary float-end" (click)="signUp(email.value, userPwd.value)">
+                Rekisteröidy
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
