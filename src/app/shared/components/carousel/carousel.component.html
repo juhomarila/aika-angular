@@ -1,13 +1,15 @@
 <div *ngIf="carouselArray">
-  <ngb-carousel class="small-padding">
-    <ng-template ngbSlide *ngFor="let i of carouselArray">
-      <div [style.height.px]="height">
-        <img [src]="i.photoUrl" alt="Random first slide" class="img-fluid" />
-      </div>
-      <div class="carousel-caption">
-        <h3>{{i.header}}</h3>
-        <p>{{i.text}}</p>
-      </div>
-    </ng-template>
-  </ngb-carousel>
+  <div *ngFor="let i of carouselArray">
+    <ngb-carousel class="small-padding" *ngIf="i.active">
+      <ng-template ngbSlide>
+        <div [style.height.px]="height">
+          <img [src]="i.photoUrl" alt="Random first slide" class="img-fluid" />
+        </div>
+        <div class="carousel-caption">
+          <h3>{{i.header}}</h3>
+          <p>{{i.text}}</p>
+        </div>
+      </ng-template>
+    </ngb-carousel>
+  </div>
 </div>

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Observable, of } from 'rxjs';
 import { CarouselEntity } from '../interfaces/carouselentity';
 import { FirestoreService } from './firestore.service';
@@ -9,7 +8,9 @@ import { FirestoreService } from './firestore.service';
 })
 export class StorageService {
   carouselEntityList: CarouselEntity[] = [];
-  constructor(private fireStoreSvc: FirestoreService) {}
+  constructor(private fireStoreSvc: FirestoreService) {
+    this.getUrls();
+  }
 
   getUrls() {
     this.fireStoreSvc
