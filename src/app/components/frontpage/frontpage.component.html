@@ -1,9 +1,8 @@
-<div class="container-fluid-lg">
-  <carousel [images]="carouselImageUrlList"></carousel>
+<div class="container-fluid">
+  <carousel [carouselArray]="carouselEntityList"></carousel>
   <hr class="featurette-divider" />
-
   <div *ngIf="isLogged" class="row">
-    <div *ngFor="let a of articleList" class="col-md-6">
+    <div *ngFor="let a of articleList" class="col">
       <preview [article]="a" (selectedArticle)="onSelect($event)"></preview>
     </div>
   </div>

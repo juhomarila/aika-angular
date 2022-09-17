@@ -1,13 +1,24 @@
 import { Injectable } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { Observable, of } from 'rxjs';
+import { CarouselEntity } from '../interfaces/carouselentity';
+import { FirestoreService } from './firestore.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StorageService {
-  constructor(private afs: AngularFireStorage) {}
+  carouselEntityList: CarouselEntity[] = [];
+  constructor(private fireStoreSvc: FirestoreService) {}
 
   getUrls() {
-    return this.afs.storage.ref('kuvat/karusellikuvat').listAll();
+    this.fireStoreSvc
+    .getAllCarouselEntities()
+    .then(carouselEntities => (this.carouselEntityList = carouselEntities));
+  }
+
+  getCarouselEntities(): Observable<CarouselEntity[]> {
+    const carouselEntites = of(this.carouselEntityList);
+    return carouselEntites;
   }
 }

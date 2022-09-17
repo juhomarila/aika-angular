@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Article } from 'src/app/shared/interfaces/article';
+import { CarouselEntity } from 'src/app/shared/interfaces/carouselentity';
 import { ArticlesvcService } from 'src/app/shared/services/articlesvc.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { StorageService } from 'src/app/shared/services/storage.service';
@@ -11,7 +12,7 @@ import { StorageService } from 'src/app/shared/services/storage.service';
 })
 export class FrontpageComponent implements OnInit {
   articleList: Article[] = [];
-  carouselImageUrlList: string[] = [];
+  carouselEntityList: CarouselEntity[] = [];
   selectedArticle?: Article;
   constructor(
     private authSvc: AuthService,
@@ -38,14 +39,8 @@ export class FrontpageComponent implements OnInit {
 
   getCarouselImages(): void {
     this.storageSvc
-      .getUrls()
-      .then(imgUrlsRef =>
-        imgUrlsRef.items.forEach(imgUrlRef =>
-          imgUrlRef
-            .getDownloadURL()
-            .then(imgUrl => this.carouselImageUrlList.push(imgUrl))
-        )
-      );
+    .getCarouselEntities()
+    .subscribe(carouselEntities => (this.carouselEntityList = carouselEntities));
   }
 
   onSelect(article: Article) {

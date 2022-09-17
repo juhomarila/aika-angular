@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Article } from '../interfaces/article';
+import { CarouselEntity } from '../interfaces/carouselentity';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FirestoreService {
   articleList: Article[] = [];
+  carouselEntityList: CarouselEntity[] = [];
   constructor(public afs: AngularFirestore) {}
 
   // async getAllArticles() {
@@ -26,5 +28,15 @@ export class FirestoreService {
       )
     );
     return this.articleList;
+  }
+
+  async getAllCarouselEntities() {
+    const snapShot = this.afs.collection('frontpagecarousel').get();
+    snapShot.subscribe(carouselEntities =>
+      carouselEntities.forEach(carouselEntity =>
+        this.carouselEntityList.push(carouselEntity.data() as CarouselEntity)
+      )
+    );
+    return this.carouselEntityList;
   }
 }

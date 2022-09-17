@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
+import { CarouselEntity } from '../../interfaces/carouselentity';
 
 @Component({
   selector: 'carousel',
@@ -7,7 +8,7 @@ import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
   providers: [NgbCarouselConfig],
 })
 export class CarouselComponent implements OnInit {
-  @Input() images: string[] = [];
+  @Input() carouselArray: CarouselEntity[] = [];
   // ehkä sinne state handleriin tääkin screenin hallinta
   height: number = 0;
 
