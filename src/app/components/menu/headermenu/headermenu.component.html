@@ -1,63 +1,67 @@
 <nav>
-  <div class="container-fluid navbar navbar-expand-lg bg-tumma-oma">
-    <a class="navbar-brand" href="aikaoyab.html">Logo</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarTogglerDemo02"
-      aria-controls="navbarTogglerDemo02"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a
-            class="nav-link text-white"
-            aria-current="page"
-            href="aikaoyab.html"
-            ><i class="bi bi-house"></i>Etusivu</a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" href="aikaoyablehdet.html"
-            ><i class="bi bi-book"></i>Aikakauslehdet</a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" href="#"
-            ><i class="bi bi-book-half"></i>Blogit</a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" href="aikaoyabtuki.html"
-            ><i class="bi bi-question-circle"></i>Tuki</a
-          >
-        </li>
-      </ul>
-      <form class="d-flex search-box">
-        <input
-          class="form-control-sm me-2 search-box-input"
-          type="search"
-          placeholder="Hae"
-          aria-label="Search"
-        />
-        <button id="search-box-btn" type="button" class="btn">
-          <i class="bi bi-search"></i>
-        </button>
-      </form>
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link text-white" href="#">
-            <i class="bi bi-bag-plus"></i>
-            Tilaa
-          </a>
-        </li>
-      </ul>
-      <div class="dropdown navbar-nav me-auto mb-2 mb-lg-0">
+  <div
+    class="container-fluid bg-tumma-oma justify-content-between"
+  >
+    <div class="float-left navbar navbar-expand-lg">
+      <a class="navbar-brand" href="aikaoyab.html">Logo</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarTogglerDemo02"
+        aria-controls="navbarTogglerDemo02"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a
+              class="nav-link text-white"
+              aria-current="page"
+              href="aikaoyab.html"
+              ><i class="bi bi-house"></i>Etusivu</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="aikaoyablehdet.html"
+              ><i class="bi bi-book"></i>Aikakauslehdet</a
+            >
+          </li>
+          <li class="nav-item" *ngIf="isLogged">
+            <a class="nav-link text-white" href="#"
+              ><i class="bi bi-book-half"></i>Blogit</a
+            >
+          </li>
+          <li class="nav-item" *ngIf="isLogged">
+            <a class="nav-link text-white" href="aikaoyabtuki.html"
+              ><i class="bi bi-question-circle"></i>Tuki</a
+            >
+          </li>
+        </ul>
+        <form class="d-flex search-box" *ngIf="isLogged">
+          <input
+            class="form-control-sm me-2 search-box-input"
+            type="search"
+            placeholder="Hae"
+            aria-label="Search"
+          />
+          <button id="search-box-btn" type="button" class="btn">
+            <i class="bi bi-search"></i>
+          </button>
+        </form>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="isLogged">
+          <li class="nav-item">
+            <a class="nav-link text-white" href="#">
+              <i class="bi bi-bag-plus"></i>
+              Tilaa
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="dropdown navbar-nav me-auto mb-2 mb-lg-0 float-right">
         <a
           class="nav-link omasivunappi text-white bg-tumma-oma"
           id="navbarScrollingDropdown"
@@ -66,7 +70,7 @@
           aria-expanded="false"
         >
           <i class="bi bi-person"></i>
-          <span *ngIf="isLogged">{{username}}</span>
+          <span *ngIf="isLogged">{{ username }}</span>
           <span *ngIf="!isLogged">Kirjadu</span>
         </a>
 

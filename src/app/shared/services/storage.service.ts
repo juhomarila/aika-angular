@@ -14,8 +14,8 @@ export class StorageService {
 
   getUrls() {
     this.fireStoreSvc
-    .getAllCarouselEntities()
-    .then(carouselEntities => (this.carouselEntityList = carouselEntities));
+      .getAllCarouselEntities()
+      .then(carouselEntities => (this.carouselEntityList = carouselEntities));
   }
 
   getCarouselEntities(): Observable<CarouselEntity[]> {

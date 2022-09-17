@@ -3,7 +3,7 @@
   box-sizing: border-box;
 }
 
-p {
+p, i, small {
   color: white;
 }
 
@@ -16,8 +16,34 @@ h6 {
   color: white;
 }
 
+.btn-close {
+  background-color: white;
+}
+
+.modal-footer {
+  border: 0px solid black;
+}
+.modal-header {
+  border: 0px solid black;
+}
+
 .my-overlay img {
   filter: blur(0.5px) brightness(0.97) opacity(0.985) saturate(0.94) sepia(0.05);
+}
+
+.carousel-overlay img {  
+  filter: blur(1px) brightness(0.65) opacity(0.80) saturate(0.80) sepia(0.15);
+}
+
+#carousel p {
+  font-size:larger;
+}
+
+.centered {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .small-padding {
@@ -28,17 +54,26 @@ h6 {
   width: 95%;
 }
 
+.img-fluid {
+  padding: 0;
+  margin: 0;
+}
+
 .front-page-image {
   float: left;
-  width: 13.75vw;
   height: 18vh;
   object-fit: cover;
 }
 
 body {
-  padding-top: 70px;
+  padding-top: 65px;
   background: rgb(2, 0, 36);
   background: linear-gradient(99deg, rgba(2, 0, 36, 1) 21%, rgba(93, 24, 62, 0.9839286056219363) 100%);
+}
+
+.modal-footer button {
+  background: rgb(93, 24, 62);
+  border: 0px solid black;
 }
 
 .my-overlay:hover img {
@@ -52,8 +87,6 @@ body {
 
 .bg-tumma-oma {
   background: rgb(2, 0, 36);
-  border-bottom: 2px solid rgb(11, 8, 68);
-  border-top: 2px solid rgb(11, 8, 68);
 }
 
 

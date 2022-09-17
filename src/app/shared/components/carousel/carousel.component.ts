@@ -17,6 +17,8 @@ export class CarouselComponent implements OnInit {
     config.wrap = false;
     config.keyboard = false;
     config.pauseOnHover = false;
+    config.showNavigationArrows = false;
+    config.showNavigationIndicators = false;
 
     this.height = screen.availHeight * 0.85;
   }
