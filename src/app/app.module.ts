@@ -13,8 +13,6 @@ import { MenuModule } from './components/menu/menu.module';
 import { FrontpageModule } from './components/frontpage/frontpage.module';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import { CommonModule } from '@angular/common';
-import { CarouselComponent } from './shared/components/carousel/carousel.component';
-import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [AppComponent],

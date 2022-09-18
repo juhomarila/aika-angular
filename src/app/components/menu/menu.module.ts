@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 import { SignInModalComponent } from './signinmodal/signinmodal.component';
 import { SignUpModalComponent } from './signupmodal/signupmodal.component';
 import { FooterComponent } from './footer/footer.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -16,8 +17,8 @@ import { FooterComponent } from './footer/footer.component';
     SignUpModalComponent,
     FooterComponent,
   ],
-  imports: [BrowserModule, CommonModule],
+  imports: [BrowserModule, CommonModule, RouterModule],
   exports: [HeadermenuComponent, ForgotPasswordComponent, FooterComponent],
-  providers: [AuthService],
+  providers: [AuthService, RouterModule],
 })
 export class MenuModule {}

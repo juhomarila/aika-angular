@@ -38,19 +38,45 @@
             <input
               type="password"
               class="form-control"
-              id="floatingInput3"
+              id="floatingInput4"
               placeholder="Salasana"
               #userPwdReEnter
               required
             />
-            <label for="floatingInput3">Salasana Uudelleen</label>
+            <label for="floatingInput3">Salasana uudelleen</label>
+          </div>
+          <div class="form-floating mb-4">
+            <ul class="ul-no-bullets">
+              <li>
+                <i
+                  >Salasanan tulee sisältää isoja ja pieniä kirjaimia, sekä
+                  numeroita</i
+                >
+              </li>
+              <li>
+                <i>Salasanan tulee olla vähintään kahdeksan merkkiä pitkä</i>
+              </li>
+              <li>
+                <i>Salasanassa ei saa olla tyhjiä välejä</i>
+              </li>
+            </ul>
+          </div>
+
+          <div class="form-floating mb-4">
+            <a class="google btn" (click)="signInWithGoogle()"
+              ><img
+                src="../../../../assets/logos/btn_google_signin_dark_normal_web.png"
+                alt="Google sign in"
+                class="img-fluid"
+              />
+            </a>
           </div>
 
           <div class="modal-footer">
             <button
               type="button"
               class="btn btn-primary float-end"
-              (click)="signUp(email.value, userPwd.value)"
+              (click)="signUp(email.value, userPwd.value, userPwdReEnter.value)"
             >
               Rekisteröidy
             </button>

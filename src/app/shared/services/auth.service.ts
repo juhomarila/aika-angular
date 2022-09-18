@@ -43,7 +43,7 @@ export class AuthService {
     await this.AuthLogin(new auth.GoogleAuthProvider());
   }
 
-  async AuthLogin(provider: any) {
+  async AuthLogin(provider: any): Promise<boolean> {
     try {
       const result = await this.afAuth.signInWithPopup(provider);
       this.SetUserData(result.user);
@@ -52,20 +52,24 @@ export class AuthService {
     } catch (error) {
       console.log(error);
     }
+    return false;
   }
 
-  async SignIn(email: string, password: string) {
+  async SignIn(email: string, password: string): Promise<boolean> {
     try {
       const result = await this.afAuth.signInWithEmailAndPassword(
         email,
         password
       );
       this.SetUserData(result.user);
-      this.router.navigate(['frontpage']);
-      window.location.reload();
+      if (result.user?.emailVerified) {
+        this.router.navigate(['frontpage']);
+        window.location.reload();
+      }
     } catch (error) {
       console.log(error);
     }
+    return false;
   }
 
   async SignUp(email: string, password: string) {
@@ -74,12 +78,10 @@ export class AuthService {
         email,
         password
       );
-      /* Call the SendVerificaitonMail() function when new user sign
-      up and returns promise */
-      //this.SendVerificationMail();
+      result.user?.sendEmailVerification();
       this.SetUserData(result.user);
     } catch (error) {
-      window.alert(error);
+      console.log(error);
     }
   }
 

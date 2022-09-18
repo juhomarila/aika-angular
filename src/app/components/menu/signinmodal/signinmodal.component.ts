@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 })
 export class SignInModalComponent {
   forgotClicked: boolean = false;
+  failed: boolean = false;
   constructor(
     private activeModal: NgbActiveModal,
     private router: Router,
@@ -25,8 +26,12 @@ export class SignInModalComponent {
   }
 
   async signIn(email: string, psw: string) {
-    await this.authSvc.SignIn(email, psw);
-    this.activeModal.dismiss();
+    const login = await this.authSvc.SignIn(email, psw);
+    if (!login) {
+      this.failed = true;
+    } else {
+      this.activeModal.dismiss();
+    }
   }
 
   forgotPassword() {
