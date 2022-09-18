@@ -5,10 +5,7 @@
         <img [src]="article.fileUrl" class="front-page-image" alt="{{ article.name }}" />
         <h5 class="card-title float-left">{{ article.name }}</h5>
       </div>
-      <div *ngIf="!hover">
-        <p hidden>paska</p>
-      </div>
-      <div *ngIf="hover">
+      <div [hidden]="!hover">
         <p>{{ article.magazine }}</p>
       </div>
       <small class="text-muted">{{ article.date.day }}/{{ article.date.month }}/{{
