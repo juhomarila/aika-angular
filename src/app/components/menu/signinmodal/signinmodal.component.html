@@ -40,6 +40,9 @@
         <div class="form-floating mb-4" (click)="forgotPassword()">
           <p id="forgotpsw">Unohtuiko salasana?</p>
         </div>
+        <div class="form-floating mb-4" [hidden]="!error">
+          <p style="color: red;">{{ errorMsg }}</p>
+        </div>
         <div class="form-floating mb-4">
           <a class="google btn" (click)="signInWithGoogle()"
             ><img

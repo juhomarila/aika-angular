@@ -12,11 +12,11 @@ export class HeadermenuComponent implements OnInit {
   constructor(private modalSvc: NgbModal, private authSvc: AuthService) {}
 
   isLogged = false;
-  username!: string;
+  username?: string;
 
   ngOnInit(): void {
     this.isLogged = this.authSvc.isLoggedIn;
-    this.username = this.authSvc.user.displayName;
+    this.username = this.authSvc.user?.displayName;
   }
 
   openSignIn() {

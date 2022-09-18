@@ -59,6 +59,7 @@
               <li>
                 <i>Salasanassa ei saa olla tyhjiä välejä</i>
               </li>
+              <li [hidden]="!error"><h5 style="color: red;">{{errorMsg}}</h5></li>
             </ul>
           </div>
 

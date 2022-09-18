@@ -7,10 +7,8 @@ import { AuthService } from 'src/app/shared/services/auth.service';
   templateUrl: './signupmodal.component.html',
 })
 export class SignUpModalComponent {
-  matchError: boolean = false;
-  formatError: boolean = false;
-  lengthError: boolean = false;
-  whiteSpaceError: boolean = false;
+  error: boolean = false;
+  errorMsg: string = '';
 
   constructor(
     private activeModal: NgbActiveModal,
@@ -21,35 +19,39 @@ export class SignUpModalComponent {
     this.activeModal.dismiss();
   }
 
-  signUp(email: string, psw: string, retypePassword: string) {
+  async signUp(email: string, psw: string, retypePassword: string) {
     if (this.validatePasswords(psw, retypePassword)) {
       if (this.checkAllRequirements(psw)) {
-        this.authSvc.SignUp(email, psw);
+        const result = await this.authSvc.SignUp(email, psw, this.activeModal);
+        if (result === 'auth/email-already-in-use') {
+          this.error = true;
+          this.errorMsg = 'Sähköpostiosoite on jo käytössä';
+        }
       }
       if (!this.passwordRequirements(psw)) {
-        this.formatError = true;
-        console.log(
-          'Salasanan tulee sisältää isoja ja pieniä kirjaimia, sekä numeroita.'
-        );
+        this.error = true;
+        this.errorMsg =
+          'Salasanan tulee sisältää isoja ja pieniä kirjaimia, sekä numeroita.';
       }
       if (!this.passwordLength(psw)) {
-        this.lengthError = true;
-        console.log('Salasanan tulee olla vähintään kahdeksan merkkiä pitkä.');
+        this.error = true;
+        this.errorMsg =
+          'Salasanan tulee olla vähintään kahdeksan merkkiä pitkä.';
       }
       if (!this.checkWhiteSpace(psw)) {
-        this.whiteSpaceError = true;
-        console.log('Salasanassa ei saa olla tyhjiä välejä.');
+        this.error = true;
+        this.errorMsg = 'Salasanassa ei saa olla tyhjiä välejä.';
       }
     }
     if (!this.validatePasswords(psw, retypePassword)) {
-      this.matchError = true;
-      console.log('Salasanat eivät täsmää.');
+      this.error = true;
+      this.errorMsg = 'Salasanat eivät täsmää.';
     }
   }
 
   async signInWithGoogle() {
-    await this.authSvc.GoogleAuth();
-    this.activeModal.dismiss();
+    await this.authSvc.GoogleAuth(this.activeModal);
+    //this.activeModal.dismiss();
   }
 
   validatePasswords(password: string, retypePassword: string) {

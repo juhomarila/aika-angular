@@ -38,7 +38,6 @@ export class FrontpageComponent implements OnInit {
     this.getArticles();
     this.getCarouselImages();
     this.getOwnedArticles();
-    console.log(this.ownedArticlesList);
   }
 
   getArticles(): void {

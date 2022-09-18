@@ -9,7 +9,9 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 })
 export class SignInModalComponent {
   forgotClicked: boolean = false;
-  failed: boolean = false;
+  error: boolean = false;
+  errorMsg: string = '';
+
   constructor(
     private activeModal: NgbActiveModal,
     private router: Router,
@@ -21,17 +23,38 @@ export class SignInModalComponent {
   }
 
   async signInWithGoogle() {
-    await this.authSvc.GoogleAuth();
-    this.activeModal.dismiss();
+    await this.authSvc.GoogleAuth(this.activeModal);
+    //this.activeModal.dismiss();
   }
 
   async signIn(email: string, psw: string) {
-    const login = await this.authSvc.SignIn(email, psw);
-    if (!login) {
-      this.failed = true;
-    } else {
-      this.activeModal.dismiss();
+    const login = await this.authSvc.SignIn(email, psw, this.activeModal);
+    console.log(login);
+    if (login === 'auth/invalid-email') {
+      this.error = true;
+      this.errorMsg = 'Väärä sähköpostiosoite';
     }
+    if (login === 'auth/user-not-found') {
+      this.error = true;
+      this.errorMsg = 'Annetulla sähköpostilla ei rekisteröityneitä käyttäjiä';
+    }
+    if (login === 'auth/wrong-password') {
+      this.error = true;
+      this.errorMsg = 'Väärä salasana';
+    }
+    if (login === 'auth/email-not-verified') {
+      this.error = true;
+      this.errorMsg =
+        'Sähköpostiosoitetta ei ole vahvistettu, tarkasta sähköpostisi';
+    }
+
+    // if (!login) {
+    //   this.error = true;
+    //   this.errorMsg =
+    //     'Käyttäjätiliäsi ei ole vahvistettu. Käy tarkistamassa sähköpostisi';
+    // } else {
+    //   this.activeModal.dismiss();
+    // }
   }
 
   forgotPassword() {

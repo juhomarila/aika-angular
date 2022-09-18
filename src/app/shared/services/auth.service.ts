@@ -7,6 +7,7 @@ import {
   AngularFirestore,
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Injectable({
   providedIn: 'root',
@@ -39,50 +40,74 @@ export class AuthService {
     return user !== null && user.emailVerified !== false ? true : false;
   }
 
-  async GoogleAuth() {
-    await this.AuthLogin(new auth.GoogleAuthProvider());
+  async GoogleAuth(modal: NgbActiveModal) {
+    await this.AuthLogin(new auth.GoogleAuthProvider(), modal);
   }
 
-  async AuthLogin(provider: any): Promise<boolean> {
-    try {
-      const result = await this.afAuth.signInWithPopup(provider);
-      this.SetUserData(result.user);
-      this.router.navigate(['frontpage']);
-      window.location.reload();
-    } catch (error) {
-      console.log(error);
-    }
-    return false;
-  }
-
-  async SignIn(email: string, password: string): Promise<boolean> {
-    try {
-      const result = await this.afAuth.signInWithEmailAndPassword(
-        email,
-        password
-      );
-      this.SetUserData(result.user);
-      if (result.user?.emailVerified) {
+  async AuthLogin(provider: any, modal: NgbActiveModal) {
+    await this.afAuth
+      .signInWithPopup(provider)
+      .then(user => {
+        this.SetUserData(user.user);
         this.router.navigate(['frontpage']);
-        window.location.reload();
-      }
-    } catch (error) {
-      console.log(error);
-    }
-    return false;
+        modal.dismiss();
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
+        return true;
+      })
+      .catch(e => {
+        console.log(e);
+        return false;
+      });
   }
 
-  async SignUp(email: string, password: string) {
-    try {
-      const result = await this.afAuth.createUserWithEmailAndPassword(
-        email,
-        password
-      );
-      result.user?.sendEmailVerification();
-      this.SetUserData(result.user);
-    } catch (error) {
-      console.log(error);
-    }
+  async SignIn(
+    email: string,
+    password: string,
+    modal: NgbActiveModal
+  ): Promise<string> {
+    let msg = '';
+    await this.afAuth
+      .signInWithEmailAndPassword(email, password)
+      .then(user => {
+        if (user.user?.emailVerified) {
+          this.SetUserData(user.user);
+          this.router.navigate(['frontpage']);
+          modal.dismiss();
+          setTimeout(() => {
+            window.location.reload();
+          }, 3000);
+        } else {
+          msg = 'auth/email-not-verified';
+        }
+      })
+      .catch(e => {
+        msg = e.code;
+      });
+    return msg;
+  }
+
+  async SignUp(
+    email: string,
+    password: string,
+    modal: NgbActiveModal
+  ): Promise<string> {
+    let msg = '';
+    await this.afAuth
+      .createUserWithEmailAndPassword(email, password)
+      .then(userCredentials => {
+        userCredentials.user?.sendEmailVerification();
+        this.SetUserData(userCredentials.user);
+        modal.dismiss();
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
+      })
+      .catch(e => {
+        msg = e.code;
+      });
+    return msg;
   }
 
   SetUserData(user: any) {
