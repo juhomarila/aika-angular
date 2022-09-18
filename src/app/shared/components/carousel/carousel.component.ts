@@ -13,8 +13,8 @@ export class CarouselComponent implements OnInit {
   height: number = 0;
 
   constructor(config: NgbCarouselConfig) {
-    config.interval = 5000;
-    config.wrap = false;
+    config.interval = 8000;
+    config.wrap = true;
     config.keyboard = false;
     config.pauseOnHover = false;
     config.showNavigationArrows = false;

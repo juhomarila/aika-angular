@@ -2,10 +2,8 @@
   <carousel [carouselArray]="carouselEntityList"></carousel>
   <hr class="featurette-divider" />
   <div *ngIf="isLogged" class="row">
-    <div *ngFor="let a of articleList" class="col">
+    <div *ngFor="let a of articleList" class="col-sm-2">
       <preview [article]="a" (selectedArticle)="onSelect($event)"></preview>
     </div>
   </div>
 </div>
-
-<!-- <div class="row row-cols-1 row-cols-md-2 g-4"> -->

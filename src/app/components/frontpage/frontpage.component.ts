@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ArticleModalComponent } from 'src/app/shared/components/article-modal/article-modal.component';
 import { Article } from 'src/app/shared/interfaces/article';
 import { CarouselEntity } from 'src/app/shared/interfaces/carouselentity';
 import { ArticlesvcService } from 'src/app/shared/services/articlesvc.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { StorageService } from 'src/app/shared/services/storage.service';
+import { UserService } from 'src/app/shared/services/user.service';
+import { Owned } from 'src/app/shared/interfaces/owned';
 
 @Component({
   selector: 'app-frontpage',
@@ -14,21 +18,27 @@ export class FrontpageComponent implements OnInit {
   articleList: Article[] = [];
   carouselEntityList: CarouselEntity[] = [];
   selectedArticle?: Article;
+  isLogged: boolean = false;
+  username: string = '';
+  uid: string = '';
+  ownedArticlesList: Owned[] = [];
+
   constructor(
     private authSvc: AuthService,
     private articleSvc: ArticlesvcService,
-    private router: Router,
-    private storageSvc: StorageService
+    private storageSvc: StorageService,
+    private modalSvc: NgbModal,
+    private userSvc: UserService
   ) {}
-
-  public isLogged: boolean = false;
-  public username: string = '';
 
   ngOnInit(): void {
     this.isLogged = this.authSvc.isLoggedIn;
     this.username = this.authSvc.user.displayName;
+    this.uid = this.authSvc.user.uid;
     this.getArticles();
     this.getCarouselImages();
+    this.getOwnedArticles();
+    console.log(this.ownedArticlesList);
   }
 
   getArticles(): void {
@@ -39,13 +49,40 @@ export class FrontpageComponent implements OnInit {
 
   getCarouselImages(): void {
     this.storageSvc
-    .getCarouselEntities()
-    .subscribe(carouselEntities => (this.carouselEntityList = carouselEntities));
+      .getCarouselEntities()
+      .subscribe(
+        carouselEntities => (this.carouselEntityList = carouselEntities)
+      );
+  }
+
+  getOwnedArticles(): void {
+    this.userSvc
+      .getOwnedArticles()
+      // .subscribe(owned =>
+      //   owned.forEach(i => this.ownedArticlesList.push(i.key))
+      // );
+      .subscribe(owned => (this.ownedArticlesList = owned));
   }
 
   onSelect(article: Article) {
+    let owned = false;
     this.selectedArticle = article;
-    console.log(this.selectedArticle);
-    this.router.navigate([`article/${this.selectedArticle.key}`]);
+    for (let i = 0; i < this.ownedArticlesList.length; i++) {
+      console.log(this.selectedArticle.key);
+      console.log(this.ownedArticlesList[i]);
+      if (this.selectedArticle.key === this.ownedArticlesList[i].key) {
+        owned = true;
+      }
+    }
+    const modalRef = this.modalSvc.open(ArticleModalComponent, { size: 'lg' });
+    modalRef.componentInstance.article = this.selectedArticle;
+    modalRef.componentInstance.owned = owned;
+    modalRef.result.then(
+      result => {
+        console.log(result);
+      },
+      () => {}
+    );
+    //this.router.navigate([`article/${this.selectedArticle.key}`]);
   }
 }

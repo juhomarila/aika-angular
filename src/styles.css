@@ -16,6 +16,19 @@ h6 {
   color: white;
 }
 
+.logo-img {
+  width: 40px;
+}
+
+.logo-text {
+  padding-top: 6px;
+  padding-right: 35px;
+}
+
+#closeButton:hover {
+  background-color: black;
+}
+
 .btn-close {
   background-color: white;
 }
@@ -28,7 +41,7 @@ h6 {
 }
 
 .my-overlay img {
-  filter: blur(0.5px) brightness(0.97) opacity(0.985) saturate(0.94) sepia(0.05);
+  filter: blur(0.6px) brightness(0.95) opacity(0.965) saturate(0.91) sepia(0.08);
 }
 
 .carousel-overlay img {  
@@ -46,6 +59,38 @@ h6 {
   transform: translate(-50%, -50%);
 }
 
+.modal-content {
+  background-color: transparent;
+}
+
+.animate-bottom {
+  position: relative;
+  animation: animatebottom 1s;
+  background-image: transparent;
+}
+
+@keyframes animatebottom {
+  from {
+    bottom: -300px;
+    opacity: 0;
+  }
+
+  to {
+    bottom: 0;
+    opacity: 1;
+  }
+}
+
+.zoom {
+  transition: transform .5s;
+}
+
+.zoom:hover {
+  -ms-transform: scale(1.5); /* IE 9 */
+  -webkit-transform: scale(1.5); /* Safari 3-8 */
+  transform: scale(1.5);
+}
+
 .small-padding {
   padding-top: 10px;
 }
@@ -57,6 +102,12 @@ h6 {
 .img-fluid {
   padding: 0;
   margin: 0;
+}
+
+#forgotpsw:hover{
+  text-decoration: underline;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .front-page-image {

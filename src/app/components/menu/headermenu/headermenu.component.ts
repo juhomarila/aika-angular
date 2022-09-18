@@ -6,14 +6,10 @@ import { SignUpModalComponent } from '../signupmodal/signupmodal.component';
 
 @Component({
   selector: 'headerMenu',
-  templateUrl: './headermenu.component.html'
+  templateUrl: './headermenu.component.html',
 })
 export class HeadermenuComponent implements OnInit {
-
-  constructor(
-    private modalSvc: NgbModal,
-    private authSvc: AuthService
-  ) { }
+  constructor(private modalSvc: NgbModal, private authSvc: AuthService) {}
 
   isLogged = false;
   username!: string;
@@ -21,15 +17,14 @@ export class HeadermenuComponent implements OnInit {
   ngOnInit(): void {
     this.isLogged = this.authSvc.isLoggedIn;
     this.username = this.authSvc.user.displayName;
-    console.log(this.username);
   }
 
   openSignIn() {
-    this.modalSvc.open(SignInModalComponent, {size: 'lg'});
+    this.modalSvc.open(SignInModalComponent, { size: 'lg' });
   }
 
   openSignUp() {
-    this.modalSvc.open(SignUpModalComponent, {size: 'lg'})
+    this.modalSvc.open(SignUpModalComponent, { size: 'lg' });
   }
 
   logout() {

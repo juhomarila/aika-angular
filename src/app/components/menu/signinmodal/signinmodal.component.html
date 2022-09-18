@@ -1,5 +1,5 @@
 <div>
-  <form class="form-register-sign">
+  <form class="form-register-sign" *ngIf="!forgotClicked">
     <div class="modal-content bg-tumma-oma">
       <div class="modal-header">
         <h5 class="modal-title">Kirjaudu sisään, näet lisää!</h5>
@@ -37,9 +37,16 @@
             <p>Muista minut</p>
           </label>
         </div>
-        <div class="col offset-md-3 my-4 float-center">
+        <div class="form-floating mb-4" (click)="forgotPassword()">
+          <p id="forgotpsw">Unohtuiko salasana?</p>
+        </div>
+        <div class="form-floating mb-4">
           <a class="google btn" (click)="signInWithGoogle()"
-            ><i class="bi bi-google fa-fw">  Kirjaudu Google+ kautta</i>
+            ><img
+              src="../../../../assets/logos/btn_google_signin_dark_normal_web.png"
+              alt="Google sign in"
+              class="img-fluid"
+            />
           </a>
         </div>
       </div>
@@ -50,6 +57,40 @@
           (click)="signIn(email.value, psw.value)"
         >
           Kirjaudu
+        </button>
+      </div>
+    </div>
+  </form>
+  <form class="form-register-sign" *ngIf="forgotClicked">
+    <div class="modal-content bg-tumma-oma">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          Anna sähköpostiosoite, lähetämme sinne salasanan nollauslinkin
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          (click)="close()"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-floating mb-4">
+          <input
+            type="email"
+            class="form-control"
+            id="floatingInput6"
+            placeholder="name@example.com"
+            #emailForgot
+          />
+          <label for="floatingInput6">Sähköposti</label>
+        </div>
+        <button
+          type="button"
+          class="btn btn-primary float-end"
+          (click)="handleForgotPassword(emailForgot.value)"
+        >
+          Lähetä
         </button>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { User } from '../services/user';
+import { User } from '../interfaces/user';
 import * as auth from 'firebase/auth';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';

@@ -1,0 +1,96 @@
+<div class="bg-transparent">
+  <div class="modal-content animate-bottom bg-tumma-oma delay">
+    <div class="modal-header">
+      <button
+        type="button"
+        class="btn-close"
+        (click)="close()"
+        aria-label="Close"
+      ></button>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-sm-5 offset-sm-2 col-md-8 offset-md-2">
+          <p class="jaaicon"><i class="bi bi-heart"></i></p>
+          <img
+            [src]="article.fileUrl"
+            class="card-img-top rounded-3 mx-auto d-block"
+            alt="..."
+          />
+          <small class="text-muted"
+            >{{ article.date.day }}/{{ article.date.month }}/{{
+              article.date.year
+            }}</small
+          >
+          <div class="row">
+            <div class="col">
+              <p class="kirjoittaja">
+                <!-- <img
+                  src="Kuvat/IMG_6413 2.JPG"
+                  class="rounded-circle"
+                  width="25"
+                  height="25"
+                  alt="..."
+                /> -->
+                <a href="#">{{ article.magazine }}</a>
+              </p>
+            </div>
+            <div class="col">
+              <p class="jaaicon">
+                <a href="#"><i class="bi bi-facebook"></i></a
+                ><a href="#"><i class="bi bi-twitter"></i></a
+                ><a href="#"><i class="bi bi-whatsapp"></i></a>
+              </p>
+            </div>
+          </div>
+          <div class="card-title h4 text-center mb-3">
+            <h4>{{ article.name }}</h4>
+          </div>
+          <div *ngIf="owned">
+            <p class="artikkeli">
+              {{ article.text }}
+            </p>
+
+            <!-- <video class="img-fluid rounded-3" playsinline autoplay muted loop>
+            <source
+              src="https://mdbootstrap.com/img/video/animation-intro.mp4"
+              type="video/mp4"
+            />
+          </video> -->
+
+            <img
+              [src]="article.fileUrl"
+              class="card-img-top rounded-3 mx-auto d-block"
+              alt="..."
+            />
+            <p class="artikkeli small-padding">
+              {{ article.text }}
+            </p>
+            <hr class="my-2" />
+            <img
+              [src]="article.fileUrl"
+              width="200"
+              class="rounded-3 mx-auto d-block"
+              alt="..."
+            />
+            <hr class="my-2" />
+            <p class="artikkeli">
+              {{ article.text }}
+            </p>
+            <div class="star-wrapper">
+              <div class="text-uppercase mitamielta">
+                <p>mitä mieltä artikkelista</p>
+              </div>
+              <a href="#" class="fas fa-star s1"></a>
+              <a href="#" class="fas fa-star s2"></a>
+              <a href="#" class="fas fa-star s3"></a>
+              <a href="#" class="fas fa-star s4"></a>
+              <a href="#" class="fas fa-star s5"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer"></div>
+  </div>
+</div>
