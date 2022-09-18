@@ -23,7 +23,7 @@
           <li class="logo-text">
             <h2>AIKA</h2>
           </li>
-          <li class="nav-item">
+          <li class="nav-item hover-nav">
             <a
               class="nav-link text-white"
               aria-current="page"
@@ -31,17 +31,17 @@
               ><i class="bi bi-house"></i>Etusivu</a
             >
           </li>
-          <li class="nav-item">
+          <li class="nav-item hover-nav">
             <a class="nav-link text-white" href="aikaoyablehdet.html"
               ><i class="bi bi-book"></i>Aikakauslehdet</a
             >
           </li>
-          <li class="nav-item" *ngIf="isLogged">
+          <li class="nav-item hover-nav" *ngIf="isLogged">
             <a class="nav-link text-white" href="#"
               ><i class="bi bi-book-half"></i>Blogit</a
             >
           </li>
-          <li class="nav-item" *ngIf="isLogged">
+          <li class="nav-item hover-nav" *ngIf="isLogged">
             <a class="nav-link text-white" href="aikaoyabtuki.html"
               ><i class="bi bi-question-circle"></i>Tuki</a
             >
@@ -59,7 +59,7 @@
           </button>
         </form>
         <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="isLogged">
-          <li class="nav-item">
+          <li class="nav-item hover-nav">
             <a class="nav-link text-white" href="#">
               <i class="bi bi-bag-plus"></i>
               Tilaa
@@ -67,16 +67,16 @@
           </li>
         </ul>
       </div>
-      <div class="dropdown navbar-nav me-auto mb-2 mb-lg-0 float-right">
+      <div class="dropdown navbar-nav me-auto mb-2 mb-lg-0 float-right hover-nav">
         <a
-          class="nav-link omasivunappi text-white bg-tumma-oma"
+          class="nav-link omasivunappi text-white bg-tumma-oma force-row"
           id="navbarScrollingDropdown"
           role="button"
           data-bs-toggle="dropdown"
           aria-expanded="false"
         >
           <i class="bi bi-person"></i>
-          <span *ngIf="isLogged">{{ username }}</span>
+          <span *ngIf="isLogged"><p>{{ username }}</p></span>
           <span *ngIf="!isLogged">Kirjadu</span>
         </a>
 

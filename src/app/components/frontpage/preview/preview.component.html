@@ -1,20 +1,14 @@
-<div class="container">
-  <div class="card bg-transparent zoom">
+<div class="container zoom">
+  <div class="card bg-transparent">
     <a (click)="onSelect(article)" routerLinkActive="active">
-      <div class="my-overlay">
-        <img
-          [src]="article.fileUrl"
-          class="img-fluid rounded-3 front-page-image"
-          alt="..."
-        />
+      <div class="my-overlay row">
+        <img [src]="article.fileUrl" class="front-page-image" alt="..." />
+        <h5 class="card-title">{{ article.name }}</h5>
       </div>
-      <h5 class="card-title">{{ article.name }}</h5>
       <!-- <p class="card-text">{{ article.text.substring(0, 199) }}...</p> -->
-      <small class="text-muted"
-        >{{ article.date.day }}/{{ article.date.month }}/{{
+      <small class="text-muted">{{ article.date.day }}/{{ article.date.month }}/{{
           article.date.year
-        }}</small
-      >
+        }}</small>
     </a>
   </div>
 </div>
