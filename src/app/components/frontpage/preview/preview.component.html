@@ -1,14 +1,20 @@
-<div class="container zoom">
-  <div class="card bg-transparent">
+<div class="my-overlay zoom" (mouseover)="mouseOver()" (mouseleave)="mouseLeave()">
+  <div class="card bg-transparent stack-top">
     <a (click)="onSelect(article)" routerLinkActive="active">
-      <div class="my-overlay row">
-        <img [src]="article.fileUrl" class="front-page-image" alt="..." />
-        <h5 class="card-title">{{ article.name }}</h5>
+      <div class="container row g-0">
+        <img [src]="article.fileUrl" class="front-page-image" alt="{{ article.name }}" />
+        <h5 class="card-title float-left">{{ article.name }}</h5>
       </div>
-      <!-- <p class="card-text">{{ article.text.substring(0, 199) }}...</p> -->
+      <div *ngIf="!hover">
+        <p hidden>paska</p>
+      </div>
+      <div *ngIf="hover">
+        <p>{{ article.magazine }}</p>
+      </div>
       <small class="text-muted">{{ article.date.day }}/{{ article.date.month }}/{{
-          article.date.year
-        }}</small>
+        article.date.year
+      }}</small>
+      <!-- <p class="card-text">{{ article.text.substring(0, 199) }}...</p> -->
     </a>
   </div>
 </div>

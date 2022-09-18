@@ -94,19 +94,29 @@ h6 {
   }
 }
 
-#singleCard img:active {
-  filter: blur(1px) brightness(0.65) opacity(0.80) saturate(0.80) sepia(0.15);
-}
-
 .zoom {
   transition: transform .5s;
 }
 
 .zoom:hover {
-  -ms-transform: scale(1.5); /* IE 9 */
-  -webkit-transform: scale(1.5); /* Safari 3-8 */
+  -ms-transform: scale(1.5);
+  -webkit-transform: scale(1.5);
   transform: scale(1.5);
-  flex:2;
+  -moz-transform: scale(1.5);
+  -o-transform: scale(1.5);
+  background: rgb(2, 0, 36);
+}
+
+.unzoom {
+  -ms-transform: scale(0.75);
+  -webkit-transform: scale(0.75);
+  transform: scale(0.75);
+  -moz-transform: scale(0.75);
+  -o-transform: scale(0.75);
+}
+
+.stack-top{
+  z-index: -1;
 }
 
 .hover-nav:hover {
@@ -175,7 +185,7 @@ a {
 
 a:hover {
   color: white;
-
+  cursor: pointer;
 }
 
 .text {
@@ -191,6 +201,11 @@ button {
 
 button {
   cursor: pointer;
+}
+
+.front-page-image {
+  padding: 0;
+  margin: 0;
 }
 
 .genremuoti {
@@ -404,7 +419,6 @@ button {
 
 /*ETUSIVUN OTSIKOT*/
 .card {
-  margin: 10px;
   border: none;
 }
 

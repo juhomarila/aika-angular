@@ -11,6 +11,7 @@ import { ArticlesvcService } from 'src/app/shared/services/articlesvc.service';
 export class PreviewComponent implements OnInit {
   @Input() article!: Article;
   @Output() selectedArticle = new EventEmitter<Article>();
+  hover: boolean = false;
 
   constructor() {}
 
@@ -18,5 +19,13 @@ export class PreviewComponent implements OnInit {
 
   onSelect(article: Article) {
     this.selectedArticle.emit(article);
+  }
+
+  mouseOver() {
+    this.hover = true;
+  }
+
+  mouseLeave() {
+    this.hover = false;
   }
 }
