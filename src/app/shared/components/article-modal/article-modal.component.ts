@@ -5,7 +5,6 @@ import { Article } from '../../interfaces/article';
 @Component({
   selector: 'app-article-modal',
   templateUrl: './article-modal.component.html',
-  styleUrls: ['./article-modal.component.css'],
 })
 export class ArticleModalComponent implements OnInit {
   @Input() article!: Article;
