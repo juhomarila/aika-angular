@@ -1,22 +1,42 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+} from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ShoppingCartModalComponent } from 'src/app/shared/components/shopping-cart-modal/shopping-cart-modal.component';
+import { Article } from 'src/app/shared/interfaces/article';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { ShoppingCartService } from 'src/app/shared/services/shopping-cart.service';
 import { SignInModalComponent } from '../signinmodal/signinmodal.component';
 import { SignUpModalComponent } from '../signupmodal/signupmodal.component';
 
 @Component({
   selector: 'headerMenu',
   templateUrl: './headermenu.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeadermenuComponent implements OnInit {
-  constructor(private modalSvc: NgbModal, private authSvc: AuthService) {}
+  noOfItemsInCart: number = 0;
+  constructor(
+    private modalSvc: NgbModal,
+    private authSvc: AuthService,
+    private shoppingCartSvc: ShoppingCartService,
+    private ref: ChangeDetectorRef
+  ) {
+    setInterval(() => {
+      this.noOfItemsInCart = this.shoppingCartSvc.getCart().length;
+      this.ref.markForCheck();
+    }, 1000);
+  }
 
   isLogged = false;
-  username?: string;
+  username: string | undefined;
 
   ngOnInit(): void {
     this.isLogged = this.authSvc.isLoggedIn;
-    this.username = this.authSvc.user?.displayName;
+    this.username = this.authSvc.user.displayName;
   }
 
   openSignIn() {
@@ -29,5 +49,9 @@ export class HeadermenuComponent implements OnInit {
 
   logout() {
     this.authSvc.SignOut();
+  }
+
+  openShoppingCartModal() {
+    this.modalSvc.open(ShoppingCartModalComponent, { size: 'lg' });
   }
 }

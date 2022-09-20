@@ -7,7 +7,6 @@ import { StorageService } from 'src/app/shared/services/storage.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
   carouselEntityList: CarouselEntity[] = [];

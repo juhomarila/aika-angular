@@ -1,11 +1,26 @@
 <nav>
-  <div class="bg-tumma-oma justify-content-between">
+  <div class="bg-tumma-oma-header justify-content-between">
     <div class="container-fluid">
       <div class="float-left navbar navbar-expand-lg">
-        <a class="navbar-brand" routerLink="/frontpage" routerLinkActive="active">
-          <img src="../../../../assets/logos/Asset 2@2x.png" class="logo-img" alt="AIKA LOGO" /></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
-          aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <a
+          class="navbar-brand"
+          routerLink="/frontpage"
+          routerLinkActive="active"
+        >
+          <img
+            src="../../../../assets/logos/Asset 2@2x.png"
+            class="logo-img"
+            alt="AIKA LOGO"
+        /></a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarTogglerDemo02"
+          aria-controls="navbarTogglerDemo02"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
@@ -14,62 +29,101 @@
               <h2>AIKA</h2>
             </li>
             <li class="nav-item hover-nav">
-              <a class="nav-link text-white" aria-current="page" href="aikaoyab.html"><i
-                  class="bi bi-house"></i>Etusivu</a>
+              <a
+                class="nav-link text-white"
+                aria-current="page"
+                href="aikaoyab.html"
+                ><i class="bi bi-house margin-navbar"></i>Etusivu</a
+              >
             </li>
             <li class="nav-item hover-nav">
-              <a class="nav-link text-white" href="aikaoyablehdet.html"><i class="bi bi-book"></i>Aikakausilehdet</a>
+              <a class="nav-link text-white" href="aikaoyablehdet.html"
+                ><i class="bi bi-book margin-navbar"></i>Aikakausilehdet</a
+              >
             </li>
             <li class="nav-item hover-nav" *ngIf="isLogged">
-              <a class="nav-link text-white" href="#"><i class="bi bi-book-half"></i>Blogit</a>
+              <a class="nav-link text-white" href="#"
+                ><i class="bi bi-book-half margin-navbar"></i>Blogit</a
+              >
             </li>
             <li class="nav-item hover-nav" *ngIf="isLogged">
-              <a class="nav-link text-white" href="aikaoyabtuki.html"><i class="bi bi-question-circle"></i>Tuki</a>
+              <a class="nav-link text-white" href="aikaoyabtuki.html"
+                ><i class="bi bi-question-circle margin-navbar"></i>Tuki</a
+              >
             </li>
           </ul>
           <form class="d-flex search-box" *ngIf="isLogged">
-            <input class="form-control-sm me-2 search-box-input" type="search" placeholder="Hae" aria-label="Search" />
-            <button id="search-box-btn" type="button" class="btn">
-              <i class="bi bi-search"></i>
+            <input
+              class="form-control-sm me-2 search-box-input"
+              type="search"
+              placeholder="Hae"
+              aria-label="Search"
+            />
+            <button
+              id="search-box-btn"
+              type="button"
+              class="background-transparent"
+            >
+              <i class="bi bi-search margin-navbar"></i>
             </button>
           </form>
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="isLogged">
-            <li class="nav-item hover-nav">
-              <a class="nav-link text-white" href="#">
-                <i class="bi bi-bag-plus"></i>
-                Tilaa
-              </a>
-            </li>
-          </ul>
         </div>
-        <div class="dropdown navbar-nav me-auto mb-2 mb-lg-0 float-right hover-nav">
-          <a class="nav-link omasivunappi text-white bg-tumma-oma force-row" id="navbarScrollingDropdown" role="button"
-            data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="bi bi-person"></i>
-            <span *ngIf="isLogged">
-              <p>{{ username }}</p>
-            </span>
+        <div
+          class="dropdown navbar-nav me-auto mb-2 mb-lg-0 float-right hover-nav"
+        >
+          <a *ngIf="noOfItemsInCart > 0" class="bi margin-navbar-right nav-link text-white" (click)="openShoppingCartModal()">{{ noOfItemsInCart }}</a>
+          <a *ngIf="noOfItemsInCart === 0" class="bi margin-navbar-right nav-link text-white">&nbsp;</a>
+          <a
+            class="nav-link text-white"
+            id="navbarScrollingDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <div *ngIf="isLogged">
+              <div *ngIf="username !== undefined">
+                <span>{{ username }}</span>
+              </div>
+              <div *ngIf="username === undefined">
+                <span>Oma tili</span>
+              </div>
+            </div>
             <span *ngIf="!isLogged">Kirjaudu</span>
           </a>
 
-          <ul class="dropdown-menu dropdown-menu-sm-end" aria-labelledby="navbarScrollingDropdown">
+          <ul
+            class="dropdown-menu dropdown-menu-sm-end"
+            aria-labelledby="navbarScrollingDropdown"
+          >
             <div *ngIf="!isLogged">
               <li>
-                <button type="button" class="dropdown-item kirjaudu" (click)="openSignIn()">
-                  <i class="bi bi-door-open"></i>Kirjaudu
+                <button
+                  type="button"
+                  class="dropdown-item kirjaudu"
+                  (click)="openSignIn()"
+                >
+                  <i class="bi bi-door-open margin-navbar"></i>Kirjaudu
                 </button>
               </li>
 
               <li>
-                <button type="button" class="rekisteri dropdown-item" (click)="openSignUp()">
-                  <i class="bi bi-door-closed"></i>Rekisteröidy
+                <button
+                  type="button"
+                  class="rekisteri dropdown-item"
+                  (click)="openSignUp()"
+                >
+                  <i class="bi bi-door-closed margin-navbar"></i>Rekisteröidy
                 </button>
               </li>
             </div>
             <div *ngIf="isLogged">
               <li>
-                <button type="button" class="dropdown-item kirjaudu" (click)="logout()">
-                  <i class="bi bi-door-open"></i>Kirjaudu Ulos
+                <button
+                  type="button"
+                  class="dropdown-item kirjaudu"
+                  (click)="logout()"
+                >
+                  <i class="bi bi-door-open margin-navbar"></i>Kirjaudu Ulos
                 </button>
               </li>
 
@@ -77,19 +131,27 @@
                 <hr class="dropdown-divider" />
               </li>
               <li>
-                <a class="dropdown-item kolmedropdown" href="#"><i class="bi bi-heart"></i>Suosikit</a>
+                <a class="dropdown-item kolmedropdown" href="#"
+                  ><i class="bi bi-heart margin-navbar"></i>Suosikit</a
+                >
               </li>
               <li>
-                <a class="dropdown-item kolmedropdown" href="#"><i class="bi bi-bag"></i>Ostoskori</a>
+                <a class="dropdown-item kolmedropdown" href="#"
+                  ><i class="bi bi-bag margin-navbar"></i>Ostoskori</a
+                >
               </li>
               <li>
                 <hr class="dropdown-divider" />
               </li>
               <li>
-                <a class="dropdown-item kolmedropdown" href="#"><i class="bi bi-person"></i>Asetukset</a>
+                <a class="dropdown-item kolmedropdown" href="#"
+                  ><i class="bi bi-person margin-navbar"></i>Asetukset</a
+                >
               </li>
               <li>
-                <a class="dropdown-item kolmedropdown" href="#"><i class="bi bi-info-circle"></i>Ohjeita</a>
+                <a class="dropdown-item kolmedropdown" href="#"
+                  ><i class="bi bi-info-circle margin-navbar"></i>Ohjeita</a
+                >
               </li>
             </div>
           </ul>

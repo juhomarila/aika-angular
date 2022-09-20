@@ -1,17 +1,78 @@
-<div class="my-overlay zoom" (mouseover)="mouseOver()" (mouseleave)="mouseLeave()">
+<div
+  class="my-overlay zoom rounded-top"
+  (mouseover)="mouseOver()"
+  (mouseleave)="mouseLeave()"
+>
   <div class="card bg-transparent stack-top">
-    <a (click)="onSelect(article)" routerLinkActive="active">
-      <div class="container row g-0">
-        <img [src]="article.fileUrl" class="front-page-image" alt="{{ article.name }}" />
-        <h5 class="card-title float-left">{{ article.name }}</h5>
-      </div>
-      <div [hidden]="!hover">
-        <p>{{ article.magazine }}</p>
-      </div>
-      <small class="text-muted">{{ article.date.day }}/{{ article.date.month }}/{{
-        article.date.year
-      }}</small>
-      <!-- <p class="card-text">{{ article.text.substring(0, 199) }}...</p> -->
-    </a>
+    <div class="container g-0">
+      <a (click)="onSelect(article)" routerLinkActive="active">
+        <div class="row g-0">
+          <img
+            [src]="article.fileUrl"
+            class="front-page-image rounded"
+            alt="{{ article.name }}"
+          />
+        </div>
+      </a>
+      <a
+        *ngIf="!inCart"
+        class="bi bi-bag-plus bottom-right rounded-circle"
+        (click)="addToCart()"
+      ></a>
+      <a
+        *ngIf="inCart"
+        class="bi bi-bag-dash bottom-right rounded-circle"
+        (click)="removeFromCart()"
+      ></a>
+    </div>
+
+    <div [hidden]="hover">
+      <ul class="ul-no-bullets">
+        <li>
+          <a
+            (click)="onSelect(article)"
+            routerLinkActive="active"
+            class="article-name-modal-show"
+          >
+            {{ article.name }}
+          </a>
+        </li>
+        <li>
+          <a class="article-info">Ilmestyy lehdessä: {{ article.magazine }}</a>
+        </li>
+        <li><a class="article-info">Toimittaja: Jaska Jokunen</a></li>
+        <li>
+          <p class="text-muted article-info">
+            {{ article.date.day }}/{{ article.date.month }}/{{
+              article.date.year
+            }}
+          </p>
+        </li>
+      </ul>
+    </div>
+    <div [hidden]="!hover">
+      <ul class="ul-no-bullets">
+        <li>
+          <a
+            (click)="onSelect(article)"
+            routerLinkActive="active"
+            class="article-name-modal-show"
+          >
+            {{ article.name }}
+          </a>
+        </li>
+        <li>
+          <a class="article-info">Ilmestyy lehdessä: {{ article.magazine }}</a>
+        </li>
+        <li><a class="article-info">Toimittaja: Jaska Jokunen</a></li>
+        <li>
+          <p class="text-muted article-info">
+            {{ article.date.day }}/{{ article.date.month }}/{{
+              article.date.year
+            }}
+          </p>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>

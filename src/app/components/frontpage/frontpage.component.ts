@@ -57,9 +57,6 @@ export class FrontpageComponent implements OnInit {
   getOwnedArticles(): void {
     this.userSvc
       .getOwnedArticles()
-      // .subscribe(owned =>
-      //   owned.forEach(i => this.ownedArticlesList.push(i.key))
-      // );
       .subscribe(owned => (this.ownedArticlesList = owned));
   }
 
@@ -82,6 +79,5 @@ export class FrontpageComponent implements OnInit {
       },
       () => {}
     );
-    //this.router.navigate([`article/${this.selectedArticle.key}`]);
   }
 }

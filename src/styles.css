@@ -1,3 +1,9 @@
+:root {
+  --bg: #17191c;
+  --text: #faf0e6;
+  --btn: #0f1122;
+}
+
 /* You can add global styles to this file, and also import other style files */
 * {
   box-sizing: border-box;
@@ -12,17 +18,14 @@
 }
 
 p, i, small {
-  color: white;
+  color: var(--text);
 }
 
 .ul-no-bullets {
   list-style-type: none;
   padding: 0;
   margin: 0;
-  font-size: small;
 }
-
-
 
 h1,
 h2,
@@ -30,24 +33,49 @@ h3,
 h4,
 h5,
 h6 {
-  color: white;
+  color: var(--text);
+}
+
+td, th {
+  font-size: 0.8em;
+  color: var(--text);
 }
 
 .logo-img {
-  width: 40px;
+  width: 1.5em;
 }
 
 .logo-text {
-  padding-top: 6px;
-  padding-right: 35px;
+  padding-top: 0.5em;
+  padding-right: 1em;
 }
 
 #closeButton:hover {
   background-color: black;
 }
 
+.btn {
+  background-color: var(--btn);
+}
+
+.btn-primary {
+  background-color: var(--btn);
+}
+
+.background-transparent {
+  background-color: transparent;
+}
+
+.btn:hover {
+  background: white;
+}
+
+.btn-primary:hover {
+  background: white;
+}
+
 .btn-close {
-  background-color: white;
+  background-color: var(--text);
 }
 
 .modal-footer {
@@ -66,6 +94,10 @@ h6 {
   filter: blur(0.6px) brightness(0.95) opacity(0.965) saturate(0.91) sepia(0.08);
 }
 
+.darken-overlay {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
 .carousel-overlay img {
   filter: blur(1px) brightness(0.65) opacity(0.80) saturate(0.80) sepia(0.15);
 }
@@ -76,9 +108,27 @@ h6 {
 
 .centered {
   position: absolute;
-  top: 55%;
+  top: 53%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.bi-bag-plus {
+  padding: 0.3em;
+  font-size: 1.5em;
+}
+
+.bi-bag-dash {
+  padding: 0.3em;
+  font-size: 1.5em;
+  margin-left: 1.00em;
+}
+
+.bottom-right {
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.5);
+  bottom: 2em;
+  right: -6em;
 }
 
 .modal-content {
@@ -93,7 +143,7 @@ h6 {
 
 @keyframes animatebottom {
   from {
-    bottom: -300px;
+    bottom: 0px;
     opacity: 0;
   }
 
@@ -104,16 +154,16 @@ h6 {
 }
 
 .zoom {
-  transition: transform .5s;
+  transition: transform .4s;
 }
 
 .zoom:hover {
-  -ms-transform: scale(1.5);
-  -webkit-transform: scale(1.5);
-  transform: scale(1.5);
-  -moz-transform: scale(1.5);
-  -o-transform: scale(1.5);
-  background: rgb(2, 0, 36);
+  -ms-transform: scale(1.4);
+  -webkit-transform: scale(1.4);
+  transform: scale(1.4);
+  -moz-transform: scale(1.4);
+  -o-transform: scale(1.4);
+  background: var(--bg);
 }
 
 .unzoom {
@@ -128,6 +178,20 @@ h6 {
   z-index: -1;
 }
 
+.article-name {
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+.article-name-modal-show {
+  font-weight: bold;
+  font-size: 1em;
+}
+
+.article-info {
+  font-size: 0.7em;
+}
+
 .hover-nav:hover {
   font-weight: bolder;
 }
@@ -137,7 +201,7 @@ h6 {
 }
 
 .small-padding {
-  padding-top: 10px;
+  padding-top: 1em;
 }
 
 .container-fluid {
@@ -162,13 +226,15 @@ h6 {
 }
 
 body {
-  padding-top: 65px;
-  background: rgb(2, 0, 36);
-  background: linear-gradient(99deg, rgba(2, 0, 36, 1) 21%, rgba(93, 24, 62, 0.9839286056219363) 100%);
+  background-image: linear-gradient(to left, #1d1f4e, #151f43, #121e36, #141c29, #17191c);
+  /* background-color: rgba(0, 0, 0, 0.2); */
+  /* background: linear-gradient(99deg, rgba(2, 0, 36, 1) 21%, rgba(93, 24, 62, 0.9839286056219363) 100%); */
 }
 
+
+
 .modal-footer button {
-  background: rgb(93, 24, 62);
+  /* background: rgb(93, 24, 62); */
   border: 0px solid black;
 }
 
@@ -177,23 +243,28 @@ body {
 }
 
 .bg-oma-gradient {
-  background: rgb(2, 0, 36);
-  background: linear-gradient(99deg, rgba(2, 0, 36, 1) 21%, rgba(93, 24, 62, 0.9839286056219363) 100%);
+  /* background: var(--bg); */
+  background-color: rgba(0, 0, 0, 0.15);
+  /* background: linear-gradient(99deg, rgba(2, 0, 36, 1) 21%, rgba(93, 24, 62, 0.9839286056219363) 100%); */
+  /* background-image: linear-gradient(to left, #1d1f4e, #151f43, #121e36, #141c29, #17191c); */
 }
 
 .bg-tumma-oma {
-  background: rgb(2, 0, 36);
+  background: var(--bg);
+}
+
+.bg-tumma-oma-header {
+  background: rgba(23,25,28, 0.01);
 }
 
 
 a {
-  color: white;
+  color: var(--text);
   text-decoration: none;
-
 }
 
 a:hover {
-  color: white;
+  color: var(--text);
   cursor: pointer;
 }
 
@@ -217,54 +288,6 @@ button {
   margin: 0;
 }
 
-.genremuoti {
-  color: #F5DF4D;
-  border-radius: 10px;
-  border: 1px solid;
-  padding: 5px;
-  font-size: 13px;
-}
-
-.genrevapaa-aika {
-  color: #03A69C;
-  border-radius: 10px;
-  border: 1px solid;
-  padding: 5px;
-  font-size: 13px;
-}
-
-.genrehaastattelu {
-  color: #CD1D1D;
-  border-radius: 10px;
-  border: 1px solid;
-  padding: 5px;
-  font-size: 13px;
-}
-
-.genrematkailu {
-  color: cadetblue;
-  border-radius: 10px;
-  border: 1px solid;
-  padding: 5px;
-  font-size: 13px;
-}
-
-.genrelektroniikka {
-  color: royalblue;
-  border-radius: 10px;
-  border: 1px solid;
-  padding: 5px;
-  font-size: 13px;
-}
-
-.genrerakentaminen {
-  color: sandybrown;
-  border-radius: 10px;
-  border: 1px solid;
-  padding: 5px;
-  font-size: 13px;
-}
-
 /*HAMPURILAINEN VALIKKO*/
 
 .navbar-toggler {
@@ -280,100 +303,75 @@ button {
 .navbar-toggler:active,
 .navbar-toggler:visited {
   border: none;
-  color: white;
+  color: var(--text);
 
 }
-
-
-
-
-/*NAVIGOINTIPALKKI*
-
-
 
 /*DROPDOWN*/
 
 .nav-item {
-  padding: 5px;
+  padding: 0.5em;
 }
 
-
-.tilausnappi {
-
-  border-radius: 10px;
-  background-color: #e97b86;
-  font-family: "Times New Roman", Times, serif;
-  font-size: 15px;
-  width: 140px;
-  margin-left: -5px;
-  letter-spacing: 2px;
+.margin-navbar {
+  margin-right: 0.5em;
 }
 
-.omasivunappi {
-  border-radius: 10px;
-  font-size: 15px;
-  font-family: "Times New Roman", Times, serif;
-  width: 140px;
-  letter-spacing: 1px;
-}
-
-.bi {
-  margin-right: 10px;
+.margin-navbar-right {
+  margin-right: 2em;
 }
 
 .dropdown {
-  margin-right: -20px;
+  margin-right: -1.5em;
 }
 
 .bi-person {
-  margin-left: 10px;
-  color: white;
+  color: var(--text);
 }
 
 .bi-bag-plus {
-  margin-left: 10px;
-  color: white;
+  margin-left: 1em;
+  color: var(--text);
 }
 
 .kolmedropdown,
 .kirjaudu,
 .rekisteri {
-  font-size: 12px;
-  color: white;
+  font-size: 0.75em;
+  color: var(--text);
 }
 
 
 .kolmedropdown:hover,
 .kirjaudu:hover,
 .rekisteri:hover {
-  background-color: rgb(2, 0, 36);
-  color: white;
+  background-color: rgba(23,25,28, 0.5);
+  color: var(--text);
 }
 
 
 .dropdown-menu {
   border: none;
-  background: rgb(2, 0, 36);
+  background-color: rgba(23,25,28, 0.5);
 }
 
 /*HAKU*/
 
 .d-flex {
-  margin-right: 100px;
+  margin-right: 5em;
 }
 
 .search-box {
   display: flex;
-  background: white;
-  background-color: rgb(2, 0, 36);
-  ;
+  background: var(--text);
+  background-color: transparent;
   border-radius: 4em;
 }
 
 .search-box-input {
   width: 0px;
   font-size: 1em;
-  color: white;
+  color: var(--text);
   transition: .5s;
 
 }
@@ -381,168 +379,41 @@ button {
 .search-box-btn {
   display: flex;
   border-radius: 50%;
-  background: white;
+  background: var(--text);
   transition: .3s;
 }
 
 .bi-search {
-  margin: -20px;
-  color: white;
+  color: var(--text);
 }
 
 .search-box-input::placeholder {
-  color: white;
+  color: var(--text);
   opacity: .7;
 }
 
 .search-box:hover .search-box-input {
   padding-left: 2em;
   padding-right: 1em;
-  border: 1px solid white;
-  width: 200px;
+  border: 1px solid var(--text);
+  width: 14em;
 }
 
 .search-box-btn:active {
   transform: scale(.75);
 }
 
-/*BANNERI*/
-
-.carousel-item {
-  text-justify: auto;
-  text-align: center;
-  float: center;
-
-}
-
-.p-4 {
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  position: relative;
-}
-
-.lead {
-  letter-spacing: 1px;
-}
-
-/*ETUSIVUN OTSIKOT*/
 .card {
   border: none;
 }
 
 .otsikonlinkki {
-  color: white;
-}
-
-.d-inline-block {
-  margin-top: 20px;
+  color: var(--text);
 }
 
 .text-muted {
-  margin-top: 20px;
-  float: right;
-}
-
-/*YKSITTÄISET AIKAKAUSLEHDET*/
-
-.ostayksi {
-  border: double white;
-  border-radius: 5px;
-  background-color: #e97b86;
-  font-family: "Times New Roman", Times, serif;
-  font-size: 15px;
-  width: 170px;
-  margin-left: -5px;
-}
-
-.card-product-list {
-  border: none;
-
-}
-
-
-.lehdenimi {
-  margin-top: 10px;
-  margin-left: 5px;
-  float: left;
-}
-
-/*LEHTIPAKETTI*/
-
-.form-select {
-  margin-top: 10px;
-}
-
-.table {
-  font-size: 12px;
-}
-
-/*AIKAKAUSILEHDET*/
-
-.imaget {
-  margin: 10px;
-}
-
-.lehtienboksit {
-  border: 1px solid;
-}
-
-.luelisaa {
-  border: white;
-  border-radius: 10px;
-  background-color: cornflowerblue;
-  font-family: "Times New Roman", Times, serif;
-  color: white;
-  font-size: 15px;
-  float: right;
-  padding: 5px;
-}
-
-.ostayksi1 {
-  border: white;
-  border-radius: 10px;
-  background-color: red;
-  color: white;
-  font-family: "Times New Roman", Times, serif;
-  font-size: 13px;
-  float: right;
-  padding: 10px;
-  letter-spacing: 2px;
-}
-
-
-/*ARTIKKELI*/
-.blog-post {
-  text-align: justify;
-}
-
-.col-md-2 {
-  margin-left: 50px;
-  float: right;
-}
-
-.kirjoittaja {
-  margin-top: 10px;
-
-}
-
-.artikkeli {
-  text-align: justify;
-}
-
-.luetuimmat {
-  text-align: center;
-  margin: 10px;
-}
-
-.lehti {
-  font-size: 12px;
-
-}
-
-.jaaicon {
-  margin-top: 10px;
+  margin-top: 1.8em;
+  margin-right: 0.5em;
   float: right;
 }
 
@@ -630,7 +501,7 @@ button {
 
 /*ALAOTSKKO*/
 .footer {
-  padding-top: 100px;
+  padding-top: 6em;
   bottom: 0;
 }
 
@@ -639,7 +510,7 @@ button {
   border-radius: 5px;
   font-size: 10px;
   padding: 10px;
-  background-color: rgb(2, 0, 36);
+  background-color: var(--bg);
   color: white;
   font-family: "Times New Roman", Times, serif;
   letter-spacing: 1px;
