@@ -91,6 +91,7 @@
             <li class="nav-item hover-nav">
               <a
                 class="nav-link text-white"
+                id="navbarScrollingDropdown"y
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
@@ -105,72 +106,71 @@
                 </div>
                 <span *ngIf="!isLogged">Kirjaudu</span>
               </a>
+              <ul
+              class="dropdown-menu dropdown-menu-sm-end"
+              aria-labelledby="navbarScrollingDropdown"
+            >
+              <div *ngIf="!isLogged">
+                <li>
+                  <button
+                    type="button"
+                    class="dropdown-item kirjaudu"
+                    (click)="openSignIn()"
+                  >
+                    <i class="bi bi-door-open margin-navbar"></i>Kirjaudu
+                  </button>
+                </li>
+  
+                <li>
+                  <button
+                    type="button"
+                    class="rekisteri dropdown-item"
+                    (click)="openSignUp()"
+                  >
+                    <i class="bi bi-door-closed margin-navbar"></i>Rekisteröidy
+                  </button>
+                </li>
+              </div>
+              <div *ngIf="isLogged">
+                <li>
+                  <button
+                    type="button"
+                    class="dropdown-item kirjaudu"
+                    (click)="logout()"
+                  >
+                    <i class="bi bi-door-open margin-navbar"></i>Kirjaudu Ulos
+                  </button>
+                </li>
+  
+                <li>
+                  <hr class="dropdown-divider" />
+                </li>
+                <li>
+                  <a class="dropdown-item kolmedropdown" href="#"
+                    ><i class="bi bi-heart margin-navbar"></i>Suosikit</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item kolmedropdown" href="#"
+                    ><i class="bi bi-bag margin-navbar"></i>Ostoskori</a
+                  >
+                </li>
+                <li>
+                  <hr class="dropdown-divider" />
+                </li>
+                <li>
+                  <a class="dropdown-item kolmedropdown" href="#"
+                    ><i class="bi bi-person margin-navbar"></i>Asetukset</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item kolmedropdown" href="#"
+                    ><i class="bi bi-info-circle margin-navbar"></i>Ohjeita</a
+                  >
+                </li>
+              </div>
+            </ul>
             </li>
-          </ul>
-
-          <ul
-            class="dropdown-menu dropdown-menu-sm-end"
-            aria-labelledby="navbarScrollingDropdown"
-          >
-            <div *ngIf="!isLogged">
-              <li>
-                <button
-                  type="button"
-                  class="dropdown-item kirjaudu"
-                  (click)="openSignIn()"
-                >
-                  <i class="bi bi-door-open margin-navbar"></i>Kirjaudu
-                </button>
-              </li>
-
-              <li>
-                <button
-                  type="button"
-                  class="rekisteri dropdown-item"
-                  (click)="openSignUp()"
-                >
-                  <i class="bi bi-door-closed margin-navbar"></i>Rekisteröidy
-                </button>
-              </li>
-            </div>
-            <div *ngIf="isLogged">
-              <li>
-                <button
-                  type="button"
-                  class="dropdown-item kirjaudu"
-                  (click)="logout()"
-                >
-                  <i class="bi bi-door-open margin-navbar"></i>Kirjaudu Ulos
-                </button>
-              </li>
-
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
-              <li>
-                <a class="dropdown-item kolmedropdown" href="#"
-                  ><i class="bi bi-heart margin-navbar"></i>Suosikit</a
-                >
-              </li>
-              <li>
-                <a class="dropdown-item kolmedropdown" href="#"
-                  ><i class="bi bi-bag margin-navbar"></i>Ostoskori</a
-                >
-              </li>
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
-              <li>
-                <a class="dropdown-item kolmedropdown" href="#"
-                  ><i class="bi bi-person margin-navbar"></i>Asetukset</a
-                >
-              </li>
-              <li>
-                <a class="dropdown-item kolmedropdown" href="#"
-                  ><i class="bi bi-info-circle margin-navbar"></i>Ohjeita</a
-                >
-              </li>
-            </div>
           </ul>
         </div>
       </div>

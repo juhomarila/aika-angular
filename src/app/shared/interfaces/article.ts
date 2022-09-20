@@ -4,7 +4,6 @@ export interface Article {
   text: string;
   fileUrl: string;
   fileName: string;
-  file: File;
   magazine: string;
   uploader: string;
   date: {

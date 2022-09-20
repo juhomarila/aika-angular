@@ -13,6 +13,8 @@ import { MenuModule } from './components/menu/menu.module';
 import { FrontpageModule } from './components/frontpage/frontpage.module';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import { CommonModule } from '@angular/common';
+import { StoreModule } from '@ngrx/store';
+import { reducers } from './shared/store/reducers';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,6 +25,7 @@ import { CommonModule } from '@angular/common';
     MenuModule,
     FrontpageModule,
     CommonModule,
+    StoreModule.forRoot(reducers),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),
