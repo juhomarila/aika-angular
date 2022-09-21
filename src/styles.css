@@ -115,6 +115,8 @@ td, th {
 
 .bi-bag-plus {
   padding: 0.3em;
+  margin-left: 1em;
+  color: var(--text);
   font-size: 1.5em;
 }
 
@@ -125,10 +127,17 @@ td, th {
 }
 
 .bottom-right {
-  position: relative;
+  position: absolute;
+  /* background-color: rgba(0, 0, 0, 0.5); */
+  bottom: 50%;
+  right: 5%;
+}
+
+.rounded-circle {
+  padding: 0;
+  margin: 0;
   background-color: rgba(0, 0, 0, 0.5);
-  bottom: 2em;
-  right: -6em;
+  padding: 0.3em;
 }
 
 .modal-content {
@@ -324,11 +333,6 @@ button {
 }
 
 .bi-person {
-  color: var(--text);
-}
-
-.bi-bag-plus {
-  margin-left: 1em;
   color: var(--text);
 }
 

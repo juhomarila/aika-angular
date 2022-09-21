@@ -28,14 +28,12 @@ export class PreviewComponent implements OnInit {
   hover: boolean = false;
   inCart: boolean = false;
   arrayKey: number = 0;
-  height: number = 0;
 
   constructor(
     private shoppingCartSvc: ShoppingCartService,
     private ref: ChangeDetectorRef,
     private store: Store<AppState>
   ) {
-    this.height = screen.availHeight * 0.85;
     ref.detach();
     setInterval(() => {
       this.inCart = this.checkIfIsInCart();
