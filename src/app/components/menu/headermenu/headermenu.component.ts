@@ -3,6 +3,7 @@ import {
   ChangeDetectorRef,
   Component,
   OnInit,
+  HostListener,
 } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ShoppingCartModalComponent } from 'src/app/shared/components/shopping-cart-modal/shopping-cart-modal.component';
@@ -36,6 +37,17 @@ export class HeadermenuComponent implements OnInit {
       this.noOfItemsInCart = this.shoppingCartSvc.getCart().length;
       this.ref.markForCheck();
     }, 1000);
+  }
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll() {
+    let element = document.querySelector(
+      '.justify-content-between'
+    ) as HTMLElement;
+    if (window.pageYOffset > element.clientHeight) {
+      element.classList.add('active-header');
+    } else {
+      element.classList.remove('active-header');
+    }
   }
 
   openSignIn() {

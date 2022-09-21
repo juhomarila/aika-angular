@@ -8,6 +8,8 @@ import { FavouritesComponent } from './favourites/favourites.component';
 import { MagazinesComponent } from './magazines/magazines.component';
 import { SettingsComponent } from './settings/settings.component';
 import { SupportComponent } from './support/support.component';
+import { MyLibraryComponent } from './my-library/my-library.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,7 @@ import { SupportComponent } from './support/support.component';
     SupportComponent,
     FavouritesComponent,
     SettingsComponent,
+    MyLibraryComponent,
   ],
   imports: [CommonModule, RouterModule, FrontpageModule, MenuModule],
   exports: [
@@ -27,5 +30,6 @@ import { SupportComponent } from './support/support.component';
     FavouritesComponent,
     SettingsComponent,
   ],
+  providers: [SharedModule, FrontpageModule],
 })
 export class ComponentsModule {}

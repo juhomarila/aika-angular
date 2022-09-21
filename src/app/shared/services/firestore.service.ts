@@ -13,6 +13,7 @@ import { Owned } from '../interfaces/owned';
 })
 export class FirestoreService {
   articleList: Article[] = [];
+  article!: Article;
   carouselEntityList: CarouselEntity[] = [];
   user: User[] = [];
   ownedArticlesList: Article[] = [];
@@ -27,6 +28,12 @@ export class FirestoreService {
       )
     );
     return this.articleList;
+  }
+
+  async getArticle(key: string) {
+    const snapShot = this.afs.collection('articles').doc(key).get();
+    snapShot.subscribe(article => (this.article = article.data() as Article));
+    return this.article;
   }
 
   async getAllCarouselEntities() {

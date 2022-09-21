@@ -21,7 +21,7 @@ export class FrontpageComponent implements OnInit {
   isLogged: boolean = false;
   username: string = '';
   uid: string = '';
-  ownedArticlesList: Article[] = [];
+  ownedArticlesList: Owned[] = [];
 
   constructor(
     private authSvc: AuthService,

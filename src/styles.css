@@ -282,6 +282,10 @@ body {
   background: rgba(23,25,28, 0.01);
 }
 
+.active-header {
+  background: rgba(23,25,28, 0.8);
+  transition: background 1.3s;
+}
 
 a {
   color: var(--text);

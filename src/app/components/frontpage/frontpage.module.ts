@@ -10,7 +10,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 @NgModule({
   declarations: [FrontpageComponent, LoginComponent, PreviewComponent],
   imports: [BrowserModule, CommonModule, RouterModule, SharedModule],
-  exports: [FrontpageComponent, LoginComponent],
+  exports: [FrontpageComponent, LoginComponent, PreviewComponent],
   providers: [SharedModule],
 })
 export class FrontpageModule {}

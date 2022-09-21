@@ -16,6 +16,7 @@ import {
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/shared/store/reducers';
 import { Owned } from 'src/app/shared/interfaces/owned';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'preview',
@@ -32,7 +33,8 @@ export class PreviewComponent implements OnInit {
   constructor(
     private shoppingCartSvc: ShoppingCartService,
     private ref: ChangeDetectorRef,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    public route: Router
   ) {}
 
   ngOnInit(): void {

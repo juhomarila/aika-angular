@@ -8,6 +8,7 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { MagazinesComponent } from './components/magazines/magazines.component';
 import { FavouritesComponent } from './components/favourites/favourites.component';
 import { AuthGuard } from './shared/guard/auth.guard';
+import { MyLibraryComponent } from './components/my-library/my-library.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/frontpage', pathMatch: 'full' },
@@ -34,6 +35,11 @@ const routes: Routes = [
   {
     path: 'favourites',
     component: FavouritesComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'my-library',
+    component: MyLibraryComponent,
     canActivate: [AuthGuard],
   },
   { path: 'login', component: LoginComponent },

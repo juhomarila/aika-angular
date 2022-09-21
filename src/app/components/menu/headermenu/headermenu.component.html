@@ -1,5 +1,8 @@
 <nav>
-  <div class="bg-tumma-oma-header justify-content-between">
+  <div
+    class="justify-content-between"
+    (scroll)="onWindowScroll()"
+  >
     <div class="container-fluid">
       <div class="navbar navbar-expand-lg navbar-dark">
         <a
@@ -25,7 +28,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="logo-text">
+            <li class="logo-text hover-nav">
               <a routerLink="/frontpage" routerLinkActive="active">
                 <h2>AIKA</h2>
               </a>
@@ -36,7 +39,7 @@
                 aria-current="page"
                 routerLink="/frontpage"
                 routerLinkActive="active"
-                ><i class="bi bi-house margin-navbar"></i>Etusivu</a
+                >Etusivu</a
               >
             </li>
             <li class="nav-item hover-nav">
@@ -44,7 +47,7 @@
                 class="nav-link text-white"
                 routerLink="/magazines"
                 routerLinkActive="active"
-                ><i class="bi bi-book margin-navbar"></i>Aikakausilehdet</a
+                >Aikakausilehdet</a
               >
             </li>
             <li class="nav-item hover-nav" *ngIf="isLogged">
@@ -52,7 +55,15 @@
                 class="nav-link text-white"
                 routerLink="/blogs"
                 routerLinkActive="active"
-                ><i class="bi bi-book-half margin-navbar"></i>Blogit</a
+                >Blogit</a
+              >
+            </li>
+            <li class="nav-item hover-nav" *ngIf="isLogged">
+              <a
+                class="nav-link text-white"
+                routerLink="/my-library"
+                routerLinkActive="active"
+                >Omat Lehdet</a
               >
             </li>
           </ul>

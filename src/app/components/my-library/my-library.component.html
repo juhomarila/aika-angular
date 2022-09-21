@@ -1,0 +1,8 @@
+<div class="container-fluid" style="padding-top: 72.8px">
+  <hr class="featurette-divider" />
+  <div class="row">
+    <div *ngFor="let a of ownedArticlesList" class="col-sm-3">
+      <preview [article]="getOwnedArticles(a.key)" (selectedArticle)="onSelect($event)" [owned]="true"></preview>
+    </div>
+  </div>
+</div>

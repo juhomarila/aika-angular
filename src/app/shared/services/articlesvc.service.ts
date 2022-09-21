@@ -8,6 +8,7 @@ import { FirestoreService } from './firestore.service';
 })
 export class ArticlesvcService {
   articleList: Article[] = [];
+  article!: Article;
 
   constructor(private fireStoreSvc: FirestoreService) {
     this.fireStoreSvc
@@ -25,4 +26,11 @@ export class ArticlesvcService {
     localStorage.setItem('article', JSON.stringify(article));
     return of(article);
   }
+
+  // getArticle(key: string): Observable<Article> {
+  //   this.fireStoreSvc.getArticle(key).then(article => {
+  //     this.article = article;
+  //   });
+  //   return of(this.article);
+  // }
 }
