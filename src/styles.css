@@ -120,6 +120,13 @@ td, th {
   font-size: 1.5em;
 }
 
+.bi-bag-check {
+  padding: 0.3em;
+  margin-left: 1em;
+  color: var(--text);
+  font-size: 1.5em;
+}
+
 .bi-bag-dash {
   padding: 0.3em;
   font-size: 1.5em;
@@ -128,12 +135,23 @@ td, th {
 
 .bottom-right {
   position: absolute;
-  /* background-color: rgba(0, 0, 0, 0.5); */
   bottom: 50%;
   right: 5%;
 }
 
 .rounded-circle {
+  padding: 0;
+  margin: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 0.3em;
+  transition: background-color .3s;
+}
+
+.rounded-circle:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.rouded-circle-bought {
   padding: 0;
   margin: 0;
   background-color: rgba(0, 0, 0, 0.5);
@@ -163,7 +181,7 @@ td, th {
 }
 
 .zoom {
-  transition: transform .4s;
+  transition: transform .6s;
 }
 
 .zoom:hover {

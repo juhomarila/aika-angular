@@ -15,11 +15,11 @@ import {
 } from 'src/app/shared/store/actions/cart.action';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/shared/store/reducers';
+import { Owned } from 'src/app/shared/interfaces/owned';
 
 @Component({
   selector: 'preview',
   templateUrl: './preview.component.html',
-  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PreviewComponent implements OnInit {
   @Input() article!: Article;
@@ -33,15 +33,15 @@ export class PreviewComponent implements OnInit {
     private shoppingCartSvc: ShoppingCartService,
     private ref: ChangeDetectorRef,
     private store: Store<AppState>
-  ) {
-    ref.detach();
+  ) {}
+
+  ngOnInit(): void {
+    this.ref.detach();
     setInterval(() => {
       this.inCart = this.checkIfIsInCart();
       this.ref.detectChanges();
     }, 1000);
   }
-
-  ngOnInit(): void {}
 
   onSelect(article: Article) {
     this.selectedArticle.emit(article);

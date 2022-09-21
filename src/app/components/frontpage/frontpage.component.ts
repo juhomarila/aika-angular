@@ -21,7 +21,7 @@ export class FrontpageComponent implements OnInit {
   isLogged: boolean = false;
   username: string = '';
   uid: string = '';
-  ownedArticlesList: Owned[] = [];
+  ownedArticlesList: Article[] = [];
 
   constructor(
     private authSvc: AuthService,
@@ -77,5 +77,15 @@ export class FrontpageComponent implements OnInit {
       },
       () => {}
     );
+  }
+
+  onSelectCheckIfOwned(selectedArticle: Article): boolean {
+    let owned = false;
+    this.ownedArticlesList.map(article => {
+      if (article.key === selectedArticle.key) {
+        owned = true;
+      }
+    });
+    return owned;
   }
 }

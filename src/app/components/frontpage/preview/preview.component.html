@@ -25,12 +25,9 @@
           class="bi bi-bag-dash rounded-circle"
           (click)="removeFromCart()"
         ></a>
-        <div *ngIf="owned">
-          <a
-          *ngIf="inCart"
-          class="bi bi-bag-check rounded-circle"
-        ></a>
-        </div>
+      </div>
+      <div *ngIf="owned" class="bottom-right">
+        <i class="bi bi-bag-check rounded-circle"></i>
       </div>
     </div>
 

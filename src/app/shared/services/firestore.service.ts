@@ -15,7 +15,7 @@ export class FirestoreService {
   articleList: Article[] = [];
   carouselEntityList: CarouselEntity[] = [];
   user: User[] = [];
-  ownedArticlesList: Owned[] = [];
+  ownedArticlesList: Article[] = [];
 
   constructor(public afs: AngularFirestore) {}
 
@@ -53,7 +53,7 @@ export class FirestoreService {
       .get();
     snapShot.subscribe(permissions =>
       permissions.forEach(permission =>
-        this.ownedArticlesList.push(permission.data() as Owned)
+        this.ownedArticlesList.push(permission.data() as Article)
       )
     );
     return this.ownedArticlesList;

@@ -24,12 +24,7 @@ export class HeadermenuComponent implements OnInit {
     private authSvc: AuthService,
     private shoppingCartSvc: ShoppingCartService,
     private ref: ChangeDetectorRef
-  ) {
-    setInterval(() => {
-      this.noOfItemsInCart = this.shoppingCartSvc.getCart().length;
-      this.ref.markForCheck();
-    }, 1000);
-  }
+  ) {}
 
   isLogged = false;
   username: string | undefined;
@@ -37,6 +32,10 @@ export class HeadermenuComponent implements OnInit {
   ngOnInit(): void {
     this.isLogged = this.authSvc.isLoggedIn;
     this.username = this.authSvc.user.displayName;
+    setInterval(() => {
+      this.noOfItemsInCart = this.shoppingCartSvc.getCart().length;
+      this.ref.markForCheck();
+    }, 1000);
   }
 
   openSignIn() {
