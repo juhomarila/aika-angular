@@ -60,11 +60,6 @@ export class FirestoreService {
   }
 
   async buyArticle(uid: string, key: string): Promise<any> {
-    console.log(uid);
-    // const cartRef: AngularFirestoreDocument<any> = this.afs.doc(
-    //   `users/${uid}/ownedArticles/`
-    // );
-    // return cartRef.set(key, { merge: true });
     const userRef: AngularFirestoreDocument<any> = this.afs
       .collection('users')
       .doc(uid)
