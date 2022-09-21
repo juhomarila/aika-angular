@@ -2,7 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FrontpageComponent } from './components/frontpage/frontpage.component';
 import { LoginComponent } from './components/frontpage/login/login.component';
-import { ForgotPasswordComponent } from './components/menu/forgot-password/forgot-password.component';
+import { BlogsComponent } from './components/blogs/blogs.component';
+import { SupportComponent } from './components/support/support.component';
+import { SettingsComponent } from './components/settings/settings.component';
+import { MagazinesComponent } from './components/magazines/magazines.component';
+import { FavouritesComponent } from './components/favourites/favourites.component';
 import { AuthGuard } from './shared/guard/auth.guard';
 
 const routes: Routes = [
@@ -12,8 +16,28 @@ const routes: Routes = [
     component: FrontpageComponent,
     canActivate: [AuthGuard],
   },
+  {
+    path: 'blogs',
+    component: BlogsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'support',
+    component: SupportComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'settings',
+    component: SettingsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'favourites',
+    component: FavouritesComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'login', component: LoginComponent },
-  { path: 'forgotpassword', component: ForgotPasswordComponent },
+  { path: 'magazines', component: MagazinesComponent },
 ];
 
 @NgModule({

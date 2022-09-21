@@ -231,8 +231,6 @@ body {
   /* background: linear-gradient(99deg, rgba(2, 0, 36, 1) 21%, rgba(93, 24, 62, 0.9839286056219363) 100%); */
 }
 
-
-
 .modal-footer button {
   /* background: rgb(93, 24, 62); */
   border: 0px solid black;
@@ -358,7 +356,7 @@ button {
 /*HAKU*/
 
 .d-flex {
-  margin-right: 5em;
+  margin-right: 10em;
 }
 
 .search-box {
@@ -396,7 +394,7 @@ button {
   padding-left: 2em;
   padding-right: 1em;
   border: 1px solid var(--text);
-  width: 14em;
+  width: 18em;
 }
 
 .search-box-btn:active {

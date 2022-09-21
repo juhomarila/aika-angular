@@ -23,20 +23,19 @@ import { AppState } from 'src/app/shared/store/reducers';
 })
 export class PreviewComponent implements OnInit {
   @Input() article!: Article;
+  @Input() owned: boolean = false;
   @Output() selectedArticle = new EventEmitter<Article>();
   hover: boolean = false;
   inCart: boolean = false;
   arrayKey: number = 0;
+  height: number = 0;
 
   constructor(
     private shoppingCartSvc: ShoppingCartService,
     private ref: ChangeDetectorRef,
     private store: Store<AppState>
   ) {
-    // setInterval(() => {
-    //   this.inCart = this.checkIfIsInCart();
-    //   this.ref.markForCheck();
-    // }, 1000);
+    this.height = screen.availHeight * 0.85;
     ref.detach();
     setInterval(() => {
       this.inCart = this.checkIfIsInCart();

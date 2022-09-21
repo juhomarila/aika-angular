@@ -14,16 +14,25 @@
           />
         </div>
       </a>
-      <a
-        *ngIf="!inCart"
-        class="bi bi-bag-plus bottom-right rounded-circle"
-        (click)="addToCart()"
-      ></a>
-      <a
+      <div *ngIf="!owned">
+        <a
+          *ngIf="!inCart"
+          class="bi bi-bag-plus bottom-right rounded-circle"
+          (click)="addToCart()"
+        ></a>
+        <a
+          *ngIf="inCart"
+          class="bi bi-bag-dash bottom-right rounded-circle"
+          (click)="removeFromCart()"
+        ></a>
+      </div>
+      <div *ngIf="owned">
+        <a
         *ngIf="inCart"
         class="bi bi-bag-dash bottom-right rounded-circle"
         (click)="removeFromCart()"
       ></a>
+      </div>
     </div>
 
     <div [hidden]="hover">

@@ -9,12 +9,11 @@ import { environment } from '../environments/environment';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideDatabase, getDatabase } from '@angular/fire/database';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
-import { MenuModule } from './components/menu/menu.module';
-import { FrontpageModule } from './components/frontpage/frontpage.module';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { reducers } from './shared/store/reducers';
+import { ComponentsModule } from './components/components.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,8 +21,7 @@ import { reducers } from './shared/store/reducers';
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    MenuModule,
-    FrontpageModule,
+    ComponentsModule,
     CommonModule,
     StoreModule.forRoot(reducers),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
@@ -33,9 +31,8 @@ import { reducers } from './shared/store/reducers';
     provideStorage(() => getStorage()),
   ],
   providers: [
-    MenuModule,
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase },
-    FrontpageModule,
+    ComponentsModule,
   ],
   bootstrap: [AppComponent],
 })
