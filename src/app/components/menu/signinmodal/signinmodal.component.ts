@@ -29,7 +29,6 @@ export class SignInModalComponent {
 
   async signIn(email: string, psw: string) {
     const login = await this.authSvc.SignIn(email, psw, this.activeModal);
-    console.log(login);
     if (login === 'auth/invalid-email') {
       this.error = true;
       this.errorMsg = 'Väärä sähköpostiosoite';

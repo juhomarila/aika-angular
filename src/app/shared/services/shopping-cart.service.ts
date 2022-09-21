@@ -43,7 +43,6 @@ export class ShoppingCartService {
 
   async checkOut() {
     if (this.doPayment()) {
-      console.log(this.authSvc.user.uid);
       this.shoppingCart.forEach(
         async article =>
           await this.fireStoreSvc.buyArticle(this.authSvc.user.uid, article.key)

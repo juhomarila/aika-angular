@@ -64,8 +64,6 @@ export class FrontpageComponent implements OnInit {
     let owned = false;
     this.selectedArticle = article;
     for (let i = 0; i < this.ownedArticlesList.length; i++) {
-      console.log(this.selectedArticle.key);
-      console.log(this.ownedArticlesList[i]);
       if (this.selectedArticle.key === this.ownedArticlesList[i].key) {
         owned = true;
       }

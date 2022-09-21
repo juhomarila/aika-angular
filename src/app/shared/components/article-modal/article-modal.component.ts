@@ -11,9 +11,7 @@ export class ArticleModalComponent implements OnInit {
   @Input() owned!: boolean;
   constructor(private activeModal: NgbActiveModal) {}
 
-  ngOnInit(): void {
-    console.log(this.article);
-  }
+  ngOnInit(): void {}
 
   close() {
     this.activeModal.dismiss();
