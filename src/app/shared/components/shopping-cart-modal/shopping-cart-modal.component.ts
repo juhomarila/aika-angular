@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Store } from '@ngrx/store';
 import { Article } from '../../interfaces/article';
 import { ShoppingCartService } from '../../services/shopping-cart.service';
+import { AppState } from '../../store/reducers';
 
 @Component({
   selector: 'app-shopping-cart-modal',
@@ -9,9 +11,11 @@ import { ShoppingCartService } from '../../services/shopping-cart.service';
 })
 export class ShoppingCartModalComponent implements OnInit {
   shoppingCartList: Article[] = [];
+  successfulPayment: boolean = true;
   constructor(
     private shoppingCartSvc: ShoppingCartService,
-    private activeModal: NgbActiveModal
+    private activeModal: NgbActiveModal,
+    private store: Store<AppState>
   ) {
     this.shoppingCartList = this.shoppingCartSvc.getCart();
   }
@@ -32,7 +36,10 @@ export class ShoppingCartModalComponent implements OnInit {
   }
 
   checkOut() {
-    this.shoppingCartSvc.checkOut();
+    const result = this.shoppingCartSvc.checkOut();
+    if (!result) {
+      this.successfulPayment = false;
+    }
     this.activeModal.dismiss();
   }
 }

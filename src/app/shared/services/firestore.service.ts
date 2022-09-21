@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import {
+  AngularFirestore,
+  AngularFirestoreDocument,
+} from '@angular/fire/compat/firestore';
 import { Article } from '../interfaces/article';
 import { CarouselEntity } from '../interfaces/carouselentity';
 import { User } from '../interfaces/user';
@@ -48,16 +51,30 @@ export class FirestoreService {
       .doc(uid)
       .collection('ownedArticles')
       .get();
-    // snapShot.subscribe(permissions =>
-    //   permissions.forEach(permission =>
-    //     console.log(permission.data() as unknown as string)
-    //   )
-    // );
     snapShot.subscribe(permissions =>
       permissions.forEach(permission =>
         this.ownedArticlesList.push(permission.data() as Owned)
       )
     );
     return this.ownedArticlesList;
+  }
+
+  async buyArticle(uid: string, key: string): Promise<any> {
+    console.log(uid);
+    // const cartRef: AngularFirestoreDocument<any> = this.afs.doc(
+    //   `users/${uid}/ownedArticles/`
+    // );
+    // return cartRef.set(key, { merge: true });
+    const userRef: AngularFirestoreDocument<any> = this.afs
+      .collection('users')
+      .doc(uid)
+      .collection('ownedArticles')
+      .doc(key);
+    return userRef.set(
+      { key: key },
+      {
+        merge: true,
+      }
+    );
   }
 }

@@ -3,7 +3,7 @@ import { Action } from '@ngrx/store';
 import { CartActions, CartActionTypes } from '../actions/cart.action';
 
 export interface CartState {
-  articles: Article[];
+  articles: Article;
 }
 
 // const initialState: CartState = {
@@ -27,23 +27,21 @@ export interface CartState {
 // };
 
 const initialState: CartState = {
-  articles: [
-    {
-      key: 'initial',
-      name: 'initial',
-      text: 'initial',
-      fileUrl: 'initial',
-      fileName: 'initial',
-      magazine: 'initial',
-      uploader: 'initial',
-      date: {
-        day: 'initial',
-        month: 'initial',
-        year: 'initial',
-      },
-      uploadDate: 1,
+  articles: {
+    key: 'initial',
+    name: 'initial',
+    text: 'initial',
+    fileUrl: 'initial',
+    fileName: 'initial',
+    magazine: 'initial',
+    uploader: 'initial',
+    date: {
+      day: 'initial',
+      month: 'initial',
+      year: 'initial',
     },
-  ],
+    uploadDate: 1,
+  },
 };
 
 export function cartReducer(
@@ -52,11 +50,13 @@ export function cartReducer(
 ): CartState {
   switch (action.type) {
     case CartActionTypes.ADD_ITEM:
-      return { ...state, articles: [action.payload] };
+      return { ...state, articles: action.payload };
     case CartActionTypes.REMOVE_ITEM:
-      return { ...state, articles: [action.payload] };
+      return { ...state, articles: action.payload };
     case CartActionTypes.RESET:
       return initialState;
+    case CartActionTypes.GET:
+      return state;
     default:
       return state;
   }

@@ -37,6 +37,9 @@
       <div *ngIf="shoppingCartList.length === 0">
         <h4>Ostoskori on tyhjä</h4>
       </div>
+      <div *ngIf="!successfulPayment">
+        <p>Maksu epäonnistui, yritä uudelleen</p>
+      </div>
     </div>
     <div class="modal-footer" *ngIf="shoppingCartList.length > 0">
       <a type="button" class="btn btn-primary" (click)="emptyCart()"

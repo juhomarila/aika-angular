@@ -4,6 +4,7 @@ export enum CartActionTypes {
   ADD_ITEM = '[ARTICLE] Add Cart',
   REMOVE_ITEM = '[ARTICLE] Remove Cart',
   RESET = '[ARTICLE] Reset Cart',
+  GET = '[ARTICLE] Get Cart',
 }
 export class AddCartAction implements Action {
   readonly type = CartActionTypes.ADD_ITEM;
@@ -19,4 +20,12 @@ export class ResetArticleAction implements Action {
   readonly type = CartActionTypes.RESET;
 }
 
-export type CartActions = AddCartAction | RemoveCartAction | ResetArticleAction;
+export class GetCartAction implements Action {
+  readonly type = CartActionTypes.GET;
+}
+
+export type CartActions =
+  | AddCartAction
+  | RemoveCartAction
+  | ResetArticleAction
+  | GetCartAction;

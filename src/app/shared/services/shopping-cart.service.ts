@@ -1,12 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Article } from '../interfaces/article';
+import { AuthService } from './auth.service';
+import { FirestoreService } from './firestore.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ShoppingCartService {
   shoppingCart: Article[] = [];
-  constructor() {
+  constructor(
+    private fireStoreSvc: FirestoreService,
+    private authSvc: AuthService
+  ) {
     if (this.shoppingCart.length === 0) {
       if (localStorage.getItem('cart') === null) {
         this.shoppingCart = [];
@@ -36,16 +41,27 @@ export class ShoppingCartService {
     JSON.parse(localStorage.getItem('cart')!);
   }
 
-  checkOut() {
-    // todo backend methods for shoppingcartss
-    console.log('ostettu');
-    console.log(this.shoppingCart);
-    localStorage.setItem('cart', JSON.stringify(this.shoppingCart));
-    JSON.parse(localStorage.getItem('cart')!);
-    this.shoppingCart = [];
+  async checkOut() {
+    if (this.doPayment()) {
+      console.log(this.authSvc.user.uid);
+      this.shoppingCart.forEach(
+        async article =>
+          await this.fireStoreSvc.buyArticle(this.authSvc.user.uid, article.key)
+      );
+      localStorage.removeItem('cart');
+      this.shoppingCart = [];
+      return true;
+    } else {
+      return false;
+      // todo inform about unsuccessfull payment
+    }
   }
 
   getCart() {
     return this.shoppingCart;
+  }
+
+  doPayment() {
+    return true;
   }
 }
