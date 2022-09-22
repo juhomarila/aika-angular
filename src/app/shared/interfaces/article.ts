@@ -5,11 +5,13 @@ export interface Article {
   fileUrl: string;
   fileName: string;
   magazine: string;
+  journalist: string;
+  genre: string;
   uploader: string;
   date: {
-    day: string;
-    month: string;
-    year: string;
+    day: number;
+    month: number;
+    year: number;
   };
   uploadDate: number;
 }
