@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ArticleModalComponent } from 'src/app/shared/components/article-modal/article-modal.component';
 import { Article } from 'src/app/shared/interfaces/article';
@@ -23,6 +22,7 @@ export class FrontpageComponent implements OnInit {
   username: string = '';
   uid: string = '';
   ownedArticlesList: Owned[] = [];
+  genreArray: string[] = [];
 
   constructor(
     private authSvc: AuthService,
@@ -40,6 +40,16 @@ export class FrontpageComponent implements OnInit {
     this.getArticles();
     this.getCarouselImages();
     this.getOwnedArticles();
+    this.genreArray = [
+      'Urheilu',
+      'Kauneus',
+      'Vapaa-aika',
+      'Sisustaminen',
+      'Käsityöt',
+      'Tiede',
+      'Ajankohtaista',
+      'Viihde',
+    ];
   }
 
   getArticles(): void {
@@ -93,5 +103,15 @@ export class FrontpageComponent implements OnInit {
 
   sort(articles: Article[]) {
     return this.utilSvc.byDateSorter(articles);
+  }
+
+  getGenreArticles(articles: Article[], genre: string) {
+    let tempArray: Article[] = [];
+    articles.forEach(article => {
+      if (genre === article.genre) {
+        tempArray.push(article);
+      }
+    });
+    return this.sort(tempArray);
   }
 }

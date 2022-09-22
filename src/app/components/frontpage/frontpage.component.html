@@ -3,13 +3,19 @@
   <div class="container-fluid" style="padding-top: 12.8px">
     <h4>Hei {{ username }}, mitä tänään luettaisiin?</h4>
     <hr class="featurette-divider" />
-    <div *ngIf="isLogged" class="row">
-      <div *ngFor="let a of sort(articleList)" class="col-sm-3">
-        <preview
-          [article]="a"
-          (selectedArticle)="onSelect($event)"
-          [owned]="onSelectCheckIfOwned(a)"
-        ></preview>
+    <div *ngIf="isLogged">
+      <div *ngFor="let g of genreArray" class="row">
+        <h4>{{ g }}</h4>
+        <div
+          *ngFor="let a of getGenreArticles(articleList, g)"
+          class="col-sm-3"
+        >
+          <preview
+            [article]="a"
+            (selectedArticle)="onSelect($event)"
+            [owned]="onSelectCheckIfOwned(a)"
+          ></preview>
+        </div>
       </div>
     </div>
   </div>
