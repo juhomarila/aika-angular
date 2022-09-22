@@ -47,7 +47,9 @@
         <li>
           <a class="article-info">Ilmestyy lehdessä: {{ article.magazine }}</a>
         </li>
-        <li><a class="article-info">Toimittaja: Jaska Jokunen</a></li>
+        <li>
+          <a class="article-info">Toimittaja: {{ article.journalist }}</a>
+        </li>
         <li>
           <p class="text-muted article-info">
             {{ article.date.day }}/{{ article.date.month }}/{{
@@ -71,7 +73,9 @@
         <li>
           <a class="article-info">Ilmestyy lehdessä: {{ article.magazine }}</a>
         </li>
-        <li><a class="article-info">Toimittaja: Jaska Jokunen</a></li>
+        <li>
+          <a class="article-info">Toimittaja: {{ article.journalist }}</a>
+        </li>
         <li>
           <p class="text-muted article-info">
             {{ article.date.day }}/{{ article.date.month }}/{{

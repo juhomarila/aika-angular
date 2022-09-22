@@ -15,7 +15,6 @@ import {
 } from 'src/app/shared/store/actions/cart.action';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/shared/store/reducers';
-import { Owned } from 'src/app/shared/interfaces/owned';
 import { Router } from '@angular/router';
 
 @Component({

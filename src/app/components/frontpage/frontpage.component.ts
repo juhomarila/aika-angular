@@ -36,6 +36,7 @@ export class FrontpageComponent implements OnInit {
     this.username = this.authSvc.user.displayName;
     this.uid = this.authSvc.user.uid;
     this.getArticles();
+
     this.getCarouselImages();
     this.getOwnedArticles();
   }
@@ -87,5 +88,14 @@ export class FrontpageComponent implements OnInit {
       }
     });
     return owned;
+  }
+
+  sort(articleArray: Article[]) {
+    return articleArray.sort(
+      (a, b) =>
+        b.date.year - a.date.year ||
+        b.date.month - a.date.month ||
+        b.date.day - a.date.day
+    );
   }
 }
