@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 import { StorageService } from 'src/app/shared/services/storage.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { Owned } from 'src/app/shared/interfaces/owned';
+import { UtilService } from 'src/app/shared/services/util.service';
 
 @Component({
   selector: 'app-frontpage',
@@ -28,7 +29,8 @@ export class FrontpageComponent implements OnInit {
     private articleSvc: ArticlesvcService,
     private storageSvc: StorageService,
     private modalSvc: NgbModal,
-    private userSvc: UserService
+    private userSvc: UserService,
+    private utilSvc: UtilService
   ) {}
 
   ngOnInit(): void {
@@ -36,7 +38,6 @@ export class FrontpageComponent implements OnInit {
     this.username = this.authSvc.user.displayName;
     this.uid = this.authSvc.user.uid;
     this.getArticles();
-
     this.getCarouselImages();
     this.getOwnedArticles();
   }
@@ -90,12 +91,7 @@ export class FrontpageComponent implements OnInit {
     return owned;
   }
 
-  sort(articleArray: Article[]) {
-    return articleArray.sort(
-      (a, b) =>
-        b.date.year - a.date.year ||
-        b.date.month - a.date.month ||
-        b.date.day - a.date.day
-    );
+  sort(articles: Article[]) {
+    return this.utilSvc.byDateSorter(articles);
   }
 }
