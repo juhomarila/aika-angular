@@ -8,6 +8,7 @@ import {
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { LoadingService } from './loading.service';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +18,8 @@ export class AuthService {
   constructor(
     private router: Router,
     private afAuth: AngularFireAuth,
-    private afs: AngularFirestore
+    private afs: AngularFirestore,
+    private loading: LoadingService
   ) {
     this.afAuth.authState.subscribe(user => {
       if (user) {
@@ -45,6 +47,7 @@ export class AuthService {
   }
 
   async AuthLogin(provider: any, modal: NgbActiveModal) {
+    this.loading.show();
     await this.afAuth
       .signInWithPopup(provider)
       .then(user => {
@@ -53,6 +56,7 @@ export class AuthService {
         modal.dismiss();
         setTimeout(() => {
           window.location.reload();
+          this.loading.hide();
         }, 3000);
         return true;
       })

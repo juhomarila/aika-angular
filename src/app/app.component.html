@@ -1,3 +1,7 @@
+<ng-container *ngIf="loading$ | async">
+  <div class="overlay"></div>
+  <spinner></spinner>  
+</ng-container>
 <div class="bg-oma-gradient">
   <headerMenu class="fixed-top"></headerMenu>
   <div>

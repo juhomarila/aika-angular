@@ -12,6 +12,45 @@
   font-family: 'Raleway', 'arial', 'lato';
 }
 
+.loader {
+  border: 11px solid rgba(255, 255, 255, 0.35);
+  border-radius: 50%;
+  border-top: 20px solid rgba(23,25,28, 0.95);
+  border-bottom: 20px solid rgba(23,25,28, 0.95);
+  width: 4em;
+  height: 4em;
+  -webkit-animation: spin 0.7s linear infinite;
+  animation: spin .7s linear infinite;
+  /* -webkit-animation: zoom 0.7s infinite;
+  animation: zoom .7s infinite; */
+  position: absolute;
+  top: 50%;
+  left: 48%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@-webkit-keyframes zoom {
+  0% { -webkit-transform: scale(1.25); }
+  100% { -webkit-transform: scale(0.75); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes zoom {
+  0% { transform: scale(1.25); }
+  100% { transform: scale(0.75); }
+}
+
 @font-face {
   font-family: Raleway;
   src: url(assets/fonts/raleway/Raleway-Medium.ttf) format("opentype");

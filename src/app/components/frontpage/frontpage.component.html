@@ -1,10 +1,15 @@
 <div>
   <carousel [carouselArray]="carouselEntityList"></carousel>
-  <div class="container-fluid">
+  <div class="container-fluid" style="padding-top: 12.8px">
+    <h4>Hei {{ username }}, mitä tänään luettaisiin?</h4>
     <hr class="featurette-divider" />
     <div *ngIf="isLogged" class="row">
       <div *ngFor="let a of sort(articleList)" class="col-sm-3">
-        <preview [article]="a" (selectedArticle)="onSelect($event)" [owned]="onSelectCheckIfOwned(a)"></preview>
+        <preview
+          [article]="a"
+          (selectedArticle)="onSelect($event)"
+          [owned]="onSelectCheckIfOwned(a)"
+        ></preview>
       </div>
     </div>
   </div>

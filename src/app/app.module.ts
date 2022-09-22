@@ -14,6 +14,8 @@ import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { reducers } from './shared/store/reducers';
 import { ComponentsModule } from './components/components.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,10 +31,13 @@ import { ComponentsModule } from './components/components.module';
     provideDatabase(() => getDatabase()),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
+    BrowserAnimationsModule,
+    SharedModule,
   ],
   providers: [
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase },
     ComponentsModule,
+    SharedModule,
   ],
   bootstrap: [AppComponent],
 })

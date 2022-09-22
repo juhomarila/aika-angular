@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
 import { Article } from '../../interfaces/article';
+import { LoadingService } from '../../services/loading.service';
 import { ShoppingCartService } from '../../services/shopping-cart.service';
 import { AppState } from '../../store/reducers';
 
@@ -15,7 +16,8 @@ export class ShoppingCartModalComponent implements OnInit {
   constructor(
     private shoppingCartSvc: ShoppingCartService,
     private activeModal: NgbActiveModal,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private loading: LoadingService
   ) {
     this.shoppingCartList = this.shoppingCartSvc.getCart();
   }
@@ -36,10 +38,15 @@ export class ShoppingCartModalComponent implements OnInit {
   }
 
   checkOut() {
+    this.loading.show();
     const result = this.shoppingCartSvc.checkOut();
     if (!result) {
       this.successfulPayment = false;
     }
     this.activeModal.dismiss();
+    setTimeout(() => {
+      window.location.reload();
+      this.loading.hide();
+    }, 1500);
   }
 }
