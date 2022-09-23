@@ -32,7 +32,9 @@ export class HeadermenuComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLogged = this.authSvc.isLoggedIn;
-    this.username = this.authSvc.user.displayName;
+    if(this.isLogged) {
+      this.username = this.authSvc.user.displayName;
+    };
     setInterval(() => {
       this.noOfItemsInCart = this.shoppingCartSvc.getCart().length;
       this.ref.markForCheck();

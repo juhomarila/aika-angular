@@ -4,8 +4,10 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnChanges,
   OnInit,
   Output,
+  SimpleChanges,
 } from '@angular/core';
 import { Article } from 'src/app/shared/interfaces/article';
 import { ShoppingCartService } from 'src/app/shared/services/shopping-cart.service';
@@ -20,8 +22,9 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'preview',
   templateUrl: './preview.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PreviewComponent implements OnInit {
+export class PreviewComponent implements OnInit, OnChanges {
   @Input() article!: Article;
   @Input() owned: boolean = false;
   @Output() selectedArticle = new EventEmitter<Article>();
@@ -35,6 +38,8 @@ export class PreviewComponent implements OnInit {
     private store: Store<AppState>,
     public route: Router
   ) {}
+
+  ngOnChanges(changes: SimpleChanges): void {}
 
   ngOnInit(): void {
     this.ref.detach();
