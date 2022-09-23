@@ -39,7 +39,9 @@ export class PreviewComponent implements OnInit, OnChanges {
     public route: Router
   ) {}
 
-  ngOnChanges(changes: SimpleChanges): void {}
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes['owned'].currentValue);
+  }
 
   ngOnInit(): void {
     this.ref.detach();
@@ -80,4 +82,8 @@ export class PreviewComponent implements OnInit, OnChanges {
     }
     return true;
   }
+
+  // checkIfBought() {
+  //   if (!this.)
+  // }
 }

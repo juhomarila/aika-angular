@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
+import { PreviewComponent } from 'src/app/components/frontpage/preview/preview.component';
 import { Article } from '../../interfaces/article';
 import { LoadingService } from '../../services/loading.service';
 import { ShoppingCartService } from '../../services/shopping-cart.service';
@@ -17,7 +19,8 @@ export class ShoppingCartModalComponent implements OnInit {
     private shoppingCartSvc: ShoppingCartService,
     private activeModal: NgbActiveModal,
     private store: Store<AppState>,
-    private loading: LoadingService
+    private loading: LoadingService,
+    private route: Router
   ) {
     this.shoppingCartList = this.shoppingCartSvc.getCart();
   }
@@ -45,6 +48,7 @@ export class ShoppingCartModalComponent implements OnInit {
     }
     setTimeout(() => {
       this.activeModal.dismiss();
+      window.location.reload();
       this.loading.hide();
     }, 1500);
   }

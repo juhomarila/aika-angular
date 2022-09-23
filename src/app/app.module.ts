@@ -16,6 +16,7 @@ import { reducers } from './shared/store/reducers';
 import { ComponentsModule } from './components/components.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
+import { DataSharingService } from './shared/services/data-sharing.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -38,6 +39,7 @@ import { SharedModule } from './shared/shared.module';
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase },
     ComponentsModule,
     SharedModule,
+    DataSharingService,
   ],
   bootstrap: [AppComponent],
 })
