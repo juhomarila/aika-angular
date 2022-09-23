@@ -37,16 +37,33 @@ export class ShoppingCartModalComponent implements OnInit {
     this.shoppingCartList = [];
   }
 
+  // checkOut() {
+  //   this.loading.show();
+  //   const result = this.shoppingCartSvc.checkOut();
+  //   if (!result) {
+  //     this.successfulPayment = false;
+  //   }
+  //   this.activeModal.dismiss();
+  //   setTimeout(() => {
+  //     window.location.reload();
+  //     this.loading.hide();
+  //   }, 1500);
+  // }
+
   checkOut() {
     this.loading.show();
-    const result = this.shoppingCartSvc.checkOut();
-    if (!result) {
-      this.successfulPayment = false;
-    }
-    this.activeModal.dismiss();
-    setTimeout(() => {
-      window.location.reload();
-      this.loading.hide();
-    }, 1500);
+    this.shoppingCartSvc
+      .checkOut()
+      .then(result => {
+        if (!result) {
+          this.successfulPayment = false;
+        }
+      })
+      .then(() => {
+        this.activeModal.dismiss();
+        window.location.reload();
+        this.loading.hide();
+      })
+      .catch(error => error.log(error));
   }
 }

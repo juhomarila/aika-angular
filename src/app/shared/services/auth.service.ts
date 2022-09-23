@@ -52,12 +52,11 @@ export class AuthService {
       .signInWithPopup(provider)
       .then(user => {
         this.SetUserData(user.user);
-        this.router.navigate(['frontpage']);
-        modal.dismiss();
-        setTimeout(() => {
+        this.router.navigate(['frontpage']).then(() => {
+          modal.dismiss();
           window.location.reload();
           this.loading.hide();
-        }, 3000);
+        });
         return true;
       })
       .catch(e => {
@@ -77,11 +76,11 @@ export class AuthService {
       .then(user => {
         if (user.user?.emailVerified) {
           this.SetUserData(user.user);
-          this.router.navigate(['frontpage']);
-          modal.dismiss();
-          setTimeout(() => {
+          this.router.navigate(['frontpage']).then(() => {
+            modal.dismiss();
             window.location.reload();
-          }, 3000);
+            this.loading.hide();
+          });
         } else {
           msg = 'auth/email-not-verified';
         }
@@ -98,15 +97,16 @@ export class AuthService {
     modal: NgbActiveModal
   ): Promise<string> {
     let msg = '';
+    this.loading.show();
     await this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then(userCredentials => {
         userCredentials.user?.sendEmailVerification();
-        this.SetUserData(userCredentials.user);
-        modal.dismiss();
-        setTimeout(() => {
+        this.SetUserData(userCredentials.user).then(() => {
+          modal.dismiss();
           window.location.reload();
-        }, 3000);
+          this.loading.hide();
+        });
       })
       .catch(e => {
         msg = e.code;
