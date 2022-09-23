@@ -7,7 +7,6 @@ import { ArticleModalComponent } from './components/article-modal/article-modal.
 import { ShoppingCartModalComponent } from './components/shopping-cart-modal/shopping-cart-modal.component';
 import { MagazineComponent } from './components/magazine/magazine.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
-import { CardCarouselComponent } from './components/card-carousel/card-carousel.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +15,6 @@ import { CardCarouselComponent } from './components/card-carousel/card-carousel.
     ShoppingCartModalComponent,
     MagazineComponent,
     SpinnerComponent,
-    CardCarouselComponent,
   ],
   imports: [CommonModule, BrowserModule, NgbCarouselModule],
   exports: [CarouselComponent, ArticleModalComponent, SpinnerComponent],
