@@ -40,7 +40,7 @@ export class PreviewComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes['owned'].currentValue);
+    //console.log(changes['owned'].currentValue);
   }
 
   ngOnInit(): void {

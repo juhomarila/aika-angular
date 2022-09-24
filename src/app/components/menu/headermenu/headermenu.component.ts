@@ -5,6 +5,7 @@ import {
   OnInit,
   HostListener,
 } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ShoppingCartModalComponent } from 'src/app/shared/components/shopping-cart-modal/shopping-cart-modal.component';
 import { AuthService } from 'src/app/shared/services/auth.service';
@@ -20,6 +21,7 @@ import { SignUpModalComponent } from '../signupmodal/signupmodal.component';
 })
 export class HeadermenuComponent implements OnInit {
   noOfItemsInCart: number = 0;
+  searchValues = '';
   constructor(
     private modalSvc: NgbModal,
     private authSvc: AuthService,
@@ -41,6 +43,7 @@ export class HeadermenuComponent implements OnInit {
       this.ref.markForCheck();
     }, 1000);
   }
+
   @HostListener('window:scroll', ['$event'])
   onWindowScroll() {
     let element = document.querySelector(
@@ -53,8 +56,10 @@ export class HeadermenuComponent implements OnInit {
     }
   }
 
-  search() {
-    this.searchSvc.search();
+  search(event: any) {
+    this.searchValues += event.target.value;
+    console.log(this.searchValues);
+    //this.searchSvc.search(this.searchForm.controls.searchString.value!);
   }
 
   openSignIn() {

@@ -7,10 +7,10 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 export class SearchService {
   constructor(public afs: AngularFirestore) {}
 
-  search() {
+  search(string: string) {
     this.afs
       .collection('articles')
-      .ref.where('name', '==', 'Viihdettä')
+      .ref.where('magazine', '==', string)
       .get()
       .then(snap => {
         snap.forEach(doc => {
