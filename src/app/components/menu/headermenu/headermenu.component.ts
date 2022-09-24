@@ -7,8 +7,8 @@ import {
 } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ShoppingCartModalComponent } from 'src/app/shared/components/shopping-cart-modal/shopping-cart-modal.component';
-import { Article } from 'src/app/shared/interfaces/article';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { SearchService } from 'src/app/shared/services/search.service';
 import { ShoppingCartService } from 'src/app/shared/services/shopping-cart.service';
 import { SignInModalComponent } from '../signinmodal/signinmodal.component';
 import { SignUpModalComponent } from '../signupmodal/signupmodal.component';
@@ -24,7 +24,8 @@ export class HeadermenuComponent implements OnInit {
     private modalSvc: NgbModal,
     private authSvc: AuthService,
     private shoppingCartSvc: ShoppingCartService,
-    private ref: ChangeDetectorRef
+    private ref: ChangeDetectorRef,
+    private searchSvc: SearchService
   ) {}
 
   isLogged = false;
@@ -32,9 +33,9 @@ export class HeadermenuComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLogged = this.authSvc.isLoggedIn;
-    if(this.isLogged) {
+    if (this.isLogged) {
       this.username = this.authSvc.user.displayName;
-    };
+    }
     setInterval(() => {
       this.noOfItemsInCart = this.shoppingCartSvc.getCart().length;
       this.ref.markForCheck();
@@ -50,6 +51,10 @@ export class HeadermenuComponent implements OnInit {
     } else {
       element.classList.remove('active-header');
     }
+  }
+
+  search() {
+    this.searchSvc.search();
   }
 
   openSignIn() {
