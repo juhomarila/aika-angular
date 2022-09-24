@@ -7,6 +7,7 @@ import { FirestoreService } from './firestore.service';
   providedIn: 'root',
 })
 export class ShoppingCartService {
+  // unused at the moment
   shoppingCart: Article[] = [];
   constructor(
     private fireStoreSvc: FirestoreService,
