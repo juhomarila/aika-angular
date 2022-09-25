@@ -1,13 +1,32 @@
-<ngb-carousel>
+<div class="d-flex justify-content-center">
+  <ngb-carousel>
+    <ng-template ngbSlide *ngFor="let i of carouselArray">
+      <div>
+        <div class="carousel-overlay">
+          <img
+            [src]="i.photoUrl"
+            alt="Random first slide"
+            class="img-fluid"
+            [ngStyle]="{ 'max-height.px': height }"
+          />
+        </div>
+        <div class="carousel-caption centered" id="carousel">
+          <h1>{{ i.header }}</h1>
+          <p>{{ i.text }}</p>
+        </div>
+      </div>
+    </ng-template>
+  </ngb-carousel>
+</div>
+
+<!-- <ngb-carousel>
   <ng-template ngbSlide *ngFor="let i of carouselArray">
-    <div [style.height.px]="height">
-      <div class="carousel-overlay">
-        <img [src]="i.photoUrl" alt="Random first slide" class="img-fluid" />
-      </div>
-      <div class="carousel-caption centered" id="carousel">
-        <h1>{{ i.header }}</h1>
-        <p>{{ i.text }}</p>
-      </div>
+    <div>
+      <img [src]="i.photoUrl" alt="Random first slide" [ngStyle]="{'max-height.px': height}">
+    </div>
+    <div class="carousel-caption">
+      <h3>{{ i.header }}</h3>
+      <p>{{ i.text }}</p>
     </div>
   </ng-template>
-</ngb-carousel>
+</ngb-carousel> -->

@@ -15,6 +15,7 @@ export class FirestoreService {
   articleList: Article[] = [];
   article!: Article;
   carouselEntityList: CarouselEntity[] = [];
+  loginCarouselEntityList: CarouselEntity[] = [];
   user: User[] = [];
   ownedArticlesList: Article[] = [];
 
@@ -36,7 +37,7 @@ export class FirestoreService {
     return this.article;
   }
 
-  async getAllCarouselEntities() {
+  async getAllLoginCarouselEntities() {
     const snapShot = this.afs.collection('frontpagecarousel').get();
     snapShot.subscribe(carouselEntities =>
       carouselEntities.forEach(carouselEntity =>
@@ -44,6 +45,18 @@ export class FirestoreService {
       )
     );
     return this.carouselEntityList;
+  }
+
+  async getAllLoggedInCarouselEntities() {
+    const snapShot = this.afs.collection('loginfrontpagecarousel').get();
+    snapShot.subscribe(carouselEntities =>
+      carouselEntities.forEach(carouselEntity =>
+        this.loginCarouselEntityList.push(
+          carouselEntity.data() as CarouselEntity
+        )
+      )
+    );
+    return this.loginCarouselEntityList;
   }
 
   async getUser(uid: string) {

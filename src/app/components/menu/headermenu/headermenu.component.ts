@@ -5,11 +5,10 @@ import {
   OnInit,
   HostListener,
 } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ShoppingCartModalComponent } from 'src/app/shared/components/shopping-cart-modal/shopping-cart-modal.component';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { SearchService } from 'src/app/shared/services/search.service';
 import { ShoppingCartService } from 'src/app/shared/services/shopping-cart.service';
 import { SignInModalComponent } from '../signinmodal/signinmodal.component';
 import { SignUpModalComponent } from '../signupmodal/signupmodal.component';
@@ -21,13 +20,12 @@ import { SignUpModalComponent } from '../signupmodal/signupmodal.component';
 })
 export class HeadermenuComponent implements OnInit {
   noOfItemsInCart: number = 0;
-  searchValues = '';
   constructor(
     private modalSvc: NgbModal,
     private authSvc: AuthService,
     private shoppingCartSvc: ShoppingCartService,
     private ref: ChangeDetectorRef,
-    private searchSvc: SearchService
+    private router: Router
   ) {}
 
   isLogged = false;
@@ -57,9 +55,17 @@ export class HeadermenuComponent implements OnInit {
   }
 
   search(event: any) {
-    this.searchValues += event.target.value;
-    console.log(this.searchValues);
-    //this.searchSvc.search(this.searchForm.controls.searchString.value!);
+    if (event.target.value.length === 1) {
+      this.router.navigate(['search'], {
+        queryParams: { s: event.target.value },
+      });
+    }
+    if (event.target.value.length > 1) {
+      this.router.navigate(['search'], {
+        queryParams: { s: event.target.value },
+        replaceUrl: true,
+      });
+    }
   }
 
   openSignIn() {

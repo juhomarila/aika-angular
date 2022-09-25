@@ -12,6 +12,12 @@
   font-family: 'Raleway', 'arial', 'lato';
 }
 
+.skriinii {
+  display: block;
+  width: auto;
+  height: auto;
+}
+
 .loader {
   border: 11px solid rgba(255, 255, 255, 0.35);
   border-radius: 50%;
@@ -64,6 +70,10 @@ p, i, small {
   list-style-type: none;
   padding: 0;
   margin: 0;
+}
+
+.padding-bottom {
+  padding-bottom: 1em;
 }
 
 h1,
@@ -138,7 +148,7 @@ td, th {
 }
 
 .carousel-overlay img {
-  filter: blur(1px) brightness(0.65) opacity(0.80) saturate(0.80) sepia(0.15);
+  filter: blur(0.2px) brightness(0.85) opacity(0.95) saturate(0.95) sepia(0.05);
 }
 
 #carousel p {
@@ -421,15 +431,12 @@ button {
 
 /*HAKU*/
 
-.d-flex {
-  margin-right: 10em;
-}
-
 .search-box {
   display: flex;
   background: var(--text);
   background-color: transparent;
   border-radius: 4em;
+  margin-right: 10em;
 }
 
 .search-box-input {

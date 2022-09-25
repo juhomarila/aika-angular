@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
 
   getCarouselImages(): void {
     this.storageSvc
-      .getCarouselEntities()
+      .getLoginCarouselEntities()
       .subscribe(
         carouselEntities => (this.carouselEntityList = carouselEntities)
       );

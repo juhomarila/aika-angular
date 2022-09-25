@@ -60,7 +60,7 @@ export class FrontpageComponent implements OnInit {
 
   getCarouselImages(): void {
     this.storageSvc
-      .getCarouselEntities()
+      .getLoggedInCarouselEntities()
       .subscribe(
         carouselEntities => (this.carouselEntityList = carouselEntities)
       );

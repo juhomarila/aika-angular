@@ -10,6 +10,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { SupportComponent } from './support/support.component';
 import { MyLibraryComponent } from './my-library/my-library.component';
 import { SharedModule } from '../shared/shared.module';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { SharedModule } from '../shared/shared.module';
     FavouritesComponent,
     SettingsComponent,
     MyLibraryComponent,
+    SearchComponent,
   ],
   imports: [CommonModule, RouterModule, FrontpageModule, MenuModule],
   exports: [

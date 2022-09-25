@@ -7,19 +7,36 @@ import { FirestoreService } from './firestore.service';
   providedIn: 'root',
 })
 export class StorageService {
-  carouselEntityList: CarouselEntity[] = [];
+  carouselEntityListLogin: CarouselEntity[] = [];
+  carouselEntityListLoggedIn: CarouselEntity[] = [];
   constructor(private fireStoreSvc: FirestoreService) {
-    this.getUrls();
+    this.getLoginUrls();
+    this.getLoggedInUrls();
   }
 
-  getUrls() {
+  getLoginUrls() {
     this.fireStoreSvc
-      .getAllCarouselEntities()
-      .then(carouselEntities => (this.carouselEntityList = carouselEntities));
+      .getAllLoginCarouselEntities()
+      .then(
+        carouselEntities => (this.carouselEntityListLogin = carouselEntities)
+      );
   }
 
-  getCarouselEntities(): Observable<CarouselEntity[]> {
-    const carouselEntites = of(this.carouselEntityList);
+  getLoginCarouselEntities(): Observable<CarouselEntity[]> {
+    const carouselEntites = of(this.carouselEntityListLogin);
+    return carouselEntites;
+  }
+
+  getLoggedInUrls() {
+    this.fireStoreSvc
+      .getAllLoggedInCarouselEntities()
+      .then(
+        carouselEntities => (this.carouselEntityListLoggedIn = carouselEntities)
+      );
+  }
+
+  getLoggedInCarouselEntities(): Observable<CarouselEntity[]> {
+    const carouselEntites = of(this.carouselEntityListLoggedIn);
     return carouselEntites;
   }
 }

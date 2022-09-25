@@ -2,10 +2,25 @@
   <div class="justify-content-between" (scroll)="onWindowScroll()">
     <div class="container-fluid">
       <div class="navbar navbar-expand-lg navbar-dark">
-        <a class="navbar-brand" routerLink="/frontpage" routerLinkActive="active">
-          <img src="../../../../assets/logos/Asset 2@2x.png" class="logo-img" alt="AIKA LOGO" /></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
-          aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <a
+          class="navbar-brand"
+          routerLink="/frontpage"
+          routerLinkActive="active"
+        >
+          <img
+            src="../../../../assets/logos/Asset 2@2x.png"
+            class="logo-img"
+            alt="AIKA LOGO"
+        /></a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarTogglerDemo02"
+          aria-controls="navbarTogglerDemo02"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
@@ -16,39 +31,84 @@
               </a>
             </li>
             <li class="nav-item hover-nav">
-              <a class="nav-link text-white" aria-current="page" routerLink="/frontpage"
-                routerLinkActive="active">Etusivu</a>
+              <a
+                class="nav-link text-white"
+                aria-current="page"
+                routerLink="/frontpage"
+                routerLinkActive="active"
+                >Etusivu</a
+              >
             </li>
             <li class="nav-item hover-nav">
-              <a class="nav-link text-white" routerLink="/magazines" routerLinkActive="active">Aikakausilehdet</a>
+              <a
+                class="nav-link text-white"
+                routerLink="/magazines"
+                routerLinkActive="active"
+                >Aikakausilehdet</a
+              >
             </li>
             <li class="nav-item hover-nav" *ngIf="isLogged">
-              <a class="nav-link text-white" routerLink="/blogs" routerLinkActive="active">Blogit</a>
+              <a
+                class="nav-link text-white"
+                routerLink="/blogs"
+                routerLinkActive="active"
+                >Blogit</a
+              >
             </li>
             <li class="nav-item hover-nav" *ngIf="isLogged">
-              <a class="nav-link text-white" routerLink="/my-library" routerLinkActive="active">Omat Lehdet</a>
+              <a
+                class="nav-link text-white"
+                routerLink="/my-library"
+                routerLinkActive="active"
+                >Omat Lehdet</a
+              >
             </li>
           </ul>
           <form class="d-flex search-box" *ngIf="isLogged">
-            <input class="form-control-sm me-2 search-box-input" type="text"
-              placeholder="Artikkeli, lehti, kirjoittaja..." aria-label="Search"
-              (input)="search($event.target.value!)" />
-            <button id="search-box-btn" type="button" class="background-transparent">
+            <input
+              class="form-control-sm me-2 search-box-input"
+              type="text"
+              placeholder="Artikkeli, lehti, kirjoittaja..."
+              aria-label="Search"
+              (keyup)="search($event)"
+            />
+            <button
+              id="search-box-btn"
+              type="button"
+              class="background-transparent"
+            >
               <i class="bi bi-search margin-navbar"></i>
             </button>
           </form>
         </div>
-        <div class="dropdown navbar-nav me-auto mb-2 mb-lg-0 float-right hover-nav">
+        <div
+          class="dropdown navbar-nav me-auto mb-2 mb-lg-0 float-right hover-nav"
+        >
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item hover-nav margin-navbar-right">
-              <a *ngIf="noOfItemsInCart > 0" class="nav-link text-white" (click)="openShoppingCartModal()"><i
-                  class="bi bi-bag margin-navbar text-white"></i>{{ noOfItemsInCart }}</a>
-              <a *ngIf="noOfItemsInCart === 0" class="nav-link text-white" href="#"><i
-                  class="bi margin-navbar text-white"></i>&nbsp;</a>
+              <a
+                *ngIf="noOfItemsInCart > 0"
+                class="nav-link text-white"
+                (click)="openShoppingCartModal()"
+                ><i class="bi bi-bag margin-navbar text-white"></i
+                >{{ noOfItemsInCart }}</a
+              >
+              <a
+                *ngIf="noOfItemsInCart === 0"
+                class="nav-link text-white"
+                href="#"
+                ><i class="bi margin-navbar text-white"></i>&nbsp;</a
+              >
             </li>
             <li class="nav-item hover-nav">
-              <a class="nav-link text-white" id="navbarScrollingDropdown" y role="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
+              <a
+                class="nav-link text-white"
+                id="navbarScrollingDropdown"
+                y
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
                 <div *ngIf="isLogged">
                   <div *ngIf="username !== undefined">
                     <span>{{ username }}</span>
@@ -59,23 +119,39 @@
                 </div>
                 <span *ngIf="!isLogged">Kirjaudu</span>
               </a>
-              <ul class="dropdown-menu dropdown-menu-sm-end" aria-labelledby="navbarScrollingDropdown">
+              <ul
+                class="dropdown-menu dropdown-menu-sm-end"
+                aria-labelledby="navbarScrollingDropdown"
+              >
                 <div *ngIf="!isLogged">
                   <li>
-                    <button type="button" class="dropdown-item kirjaudu" (click)="openSignIn()">
+                    <button
+                      type="button"
+                      class="dropdown-item kirjaudu"
+                      (click)="openSignIn()"
+                    >
                       <i class="bi bi-door-open margin-navbar"></i>Kirjaudu
                     </button>
                   </li>
 
                   <li>
-                    <button type="button" class="rekisteri dropdown-item" (click)="openSignUp()">
-                      <i class="bi bi-door-closed margin-navbar"></i>Rekisteröidy
+                    <button
+                      type="button"
+                      class="rekisteri dropdown-item"
+                      (click)="openSignUp()"
+                    >
+                      <i class="bi bi-door-closed margin-navbar"></i
+                      >Rekisteröidy
                     </button>
                   </li>
                 </div>
                 <div *ngIf="isLogged">
                   <li>
-                    <button type="button" class="dropdown-item kirjaudu" (click)="logout()">
+                    <button
+                      type="button"
+                      class="dropdown-item kirjaudu"
+                      (click)="logout()"
+                    >
                       <i class="bi bi-door-open margin-navbar"></i>Kirjaudu Ulos
                     </button>
                   </li>
@@ -84,23 +160,39 @@
                     <hr class="dropdown-divider" />
                   </li>
                   <li>
-                    <a class="dropdown-item kolmedropdown" routerLink="/favourites" routerLinkActive="active"><i
-                        class="bi bi-heart margin-navbar"></i>Suosikit</a>
+                    <a
+                      class="dropdown-item kolmedropdown"
+                      routerLink="/favourites"
+                      routerLinkActive="active"
+                      ><i class="bi bi-heart margin-navbar"></i>Suosikit</a
+                    >
                   </li>
                   <li>
-                    <a class="dropdown-item kolmedropdown" (click)="openShoppingCartModal()"><i
-                        class="bi bi-bag margin-navbar"></i>Ostoskori</a>
+                    <a
+                      class="dropdown-item kolmedropdown"
+                      (click)="openShoppingCartModal()"
+                      ><i class="bi bi-bag margin-navbar"></i>Ostoskori</a
+                    >
                   </li>
                   <li>
                     <hr class="dropdown-divider" />
                   </li>
                   <li>
-                    <a class="dropdown-item kolmedropdown" routerLink="/settings" routerLinkActive="active"><i
-                        class="bi bi-person margin-navbar"></i>Asetukset</a>
+                    <a
+                      class="dropdown-item kolmedropdown"
+                      routerLink="/settings"
+                      routerLinkActive="active"
+                      ><i class="bi bi-person margin-navbar"></i>Asetukset</a
+                    >
                   </li>
                   <li>
-                    <a class="dropdown-item kolmedropdown" routerLink="/support" routerLinkActive="active"><i
-                        class="bi bi-question-circle margin-navbar"></i>Tuki</a>
+                    <a
+                      class="dropdown-item kolmedropdown"
+                      routerLink="/support"
+                      routerLinkActive="active"
+                      ><i class="bi bi-question-circle margin-navbar"></i
+                      >Tuki</a
+                    >
                   </li>
                 </div>
               </ul>

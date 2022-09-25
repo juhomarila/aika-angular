@@ -1,0 +1,18 @@
+<div class="container-fluid" style="padding-top: 72.8px">
+  <div *ngIf="searchArticles" class="row">
+    <div class="col-sm-3" *ngFor="let a of sort(searchArticles)">
+      <a
+        href="#"
+        class="list-group-item list-group-item-action flex-column align-items-start active"
+      >
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">{{ a.name }}</h5>
+          <small>{{ a.date.day }}/{{ a.date.month }}/{{ a.date.year }}</small>
+        </div>
+        <p class="mb-1">{{ a.journalist }}</p>
+        <p class="mb-1">{{ a.magazine }}</p>
+        <small>{{ a.genre }}</small>
+      </a>
+    </div>
+  </div>
+</div>

@@ -9,6 +9,7 @@ import { MagazinesComponent } from './components/magazines/magazines.component';
 import { FavouritesComponent } from './components/favourites/favourites.component';
 import { AuthGuard } from './shared/guard/auth.guard';
 import { MyLibraryComponent } from './components/my-library/my-library.component';
+import { SearchComponent } from './components/search/search.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/frontpage', pathMatch: 'full' },
@@ -40,6 +41,11 @@ const routes: Routes = [
   {
     path: 'my-library',
     component: MyLibraryComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'search',
+    component: SearchComponent,
     canActivate: [AuthGuard],
   },
   { path: 'login', component: LoginComponent },
