@@ -28,6 +28,8 @@ export class PreviewComponent implements OnInit, OnChanges {
   @Input() article!: Article;
   @Input() owned: boolean = false;
   @Output() selectedArticle = new EventEmitter<Article>();
+  @Output() selectedMagazine = new EventEmitter<string>();
+  @Output() selectedJournalist = new EventEmitter<string>();
   hover: boolean = false;
   inCart: boolean = false;
   arrayKey: number = 0;
@@ -36,7 +38,7 @@ export class PreviewComponent implements OnInit, OnChanges {
     private shoppingCartSvc: ShoppingCartService,
     private ref: ChangeDetectorRef,
     private store: Store<AppState>,
-    public route: Router
+    public router: Router
   ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -53,6 +55,14 @@ export class PreviewComponent implements OnInit, OnChanges {
 
   onSelect(article: Article) {
     this.selectedArticle.emit(article);
+  }
+
+  onSelectMagazine(magazine: string) {
+    this.selectedMagazine.emit(magazine);
+  }
+
+  onSelectJournalist(journalist: string) {
+    this.selectedJournalist.emit(journalist);
   }
 
   mouseOver() {
@@ -82,8 +92,4 @@ export class PreviewComponent implements OnInit, OnChanges {
     }
     return true;
   }
-
-  // checkIfBought() {
-  //   if (!this.)
-  // }
 }

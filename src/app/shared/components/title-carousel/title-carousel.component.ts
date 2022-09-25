@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Article } from '../../interfaces/article';
 import { Owned } from '../../interfaces/owned';
@@ -17,7 +18,11 @@ export class TitleCarouselComponent implements OnInit {
   responsiveOptions: any;
   page: number = 1;
 
-  constructor(private userSvc: UserService, private modalSvc: NgbModal) {
+  constructor(
+    private userSvc: UserService,
+    private modalSvc: NgbModal,
+    private router: Router
+  ) {
     this.responsiveOptions = [
       {
         breakpoint: '1024px',
@@ -72,5 +77,18 @@ export class TitleCarouselComponent implements OnInit {
       }
     });
     return owned;
+  }
+
+  onSelectMagazine(magazine: string) {
+    console.log('painettu');
+    this.router.navigate(['magazine'], {
+      queryParams: { g: magazine },
+    });
+  }
+
+  onSelectJournalist(journalist: string) {
+    this.router.navigate(['journalist'], {
+      queryParams: { g: journalist },
+    });
   }
 }

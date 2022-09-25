@@ -36,6 +36,8 @@
       <preview
         [article]="article"
         (selectedArticle)="onSelect($event)"
+        (selectedMagazine)="onSelectMagazine($event)"
+        (selectedJournalist)="onSelectJournalist($event)"
         [owned]="onSelectCheckIfOwned(article)"
       ></preview>
     </div>

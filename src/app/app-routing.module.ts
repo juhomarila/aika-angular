@@ -10,9 +10,12 @@ import { FavouritesComponent } from './components/favourites/favourites.componen
 import { AuthGuard } from './shared/guard/auth.guard';
 import { MyLibraryComponent } from './components/my-library/my-library.component';
 import { SearchComponent } from './components/search/search.component';
+import { MagazineComponent } from './components/magazine/magazine.component';
+import { JournalistComponent } from './components/journalist/journalist.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/frontpage', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
   {
     path: 'frontpage',
     component: FrontpageComponent,
@@ -48,8 +51,21 @@ const routes: Routes = [
     component: SearchComponent,
     canActivate: [AuthGuard],
   },
-  { path: 'login', component: LoginComponent },
-  { path: 'magazines', component: MagazinesComponent },
+  {
+    path: 'magazines',
+    component: MagazinesComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'magazine',
+    component: MagazineComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'journalist',
+    component: JournalistComponent,
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({

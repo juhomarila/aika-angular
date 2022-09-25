@@ -92,4 +92,10 @@ export class FirestoreService {
       }
     );
   }
+
+  // async getJournalist(journalist: string) {
+  //   const snapShot = this.afs.collection('journalists').doc(key).get();
+  //   snapShot.subscribe(article => (this.article = article.data() as Article));
+  //   return this.article;
+  // }
 }

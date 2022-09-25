@@ -14,7 +14,7 @@
           />
         </div>
       </a>
-      <div *ngIf="route.url === '/frontpage'">
+      <div *ngIf="router.url === '/frontpage'">
         <div *ngIf="!owned" class="bottom-right">
           <a
             *ngIf="!inCart"
@@ -45,10 +45,20 @@
           </a>
         </li>
         <li>
-          <a class="article-info">Ilmestyy lehdessä: {{ article.magazine }}</a>
+          <a
+            class="article-info"
+            (click)="onSelectMagazine(article.magazine)"
+            routerLinkActive="active"
+            >Ilmestyy lehdessä: {{ article.magazine }}</a
+          >
         </li>
         <li>
-          <a class="article-info">Toimittaja: {{ article.journalist }}</a>
+          <a
+            class="article-info"
+            (click)="onSelectJournalist(article.journalist)"
+            routerLinkActive="active"
+            >Toimittaja: {{ article.journalist }}</a
+          >
         </li>
         <li>
           <p class="text-muted article-info">
@@ -71,10 +81,20 @@
           </a>
         </li>
         <li>
-          <a class="article-info">Ilmestyy lehdessä: {{ article.magazine }}</a>
+          <a
+            class="article-info"
+            (click)="onSelectMagazine(article.magazine)"
+            routerLinkActive="active"
+            >Ilmestyy lehdessä: {{ article.magazine }}</a
+          >
         </li>
         <li>
-          <a class="article-info">Toimittaja: {{ article.journalist }}</a>
+          <a
+            class="article-info"
+            (click)="onSelectJournalist(article.journalist)"
+            routerLinkActive="active"
+            >Toimittaja: {{ article.journalist }}</a
+          >
         </li>
         <li>
           <p class="text-muted article-info">

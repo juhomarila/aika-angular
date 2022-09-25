@@ -11,6 +11,8 @@ import { SupportComponent } from './support/support.component';
 import { MyLibraryComponent } from './my-library/my-library.component';
 import { SharedModule } from '../shared/shared.module';
 import { SearchComponent } from './search/search.component';
+import { JournalistComponent } from './journalist/journalist.component';
+import { MagazineComponent } from './magazine/magazine.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { SearchComponent } from './search/search.component';
     SettingsComponent,
     MyLibraryComponent,
     SearchComponent,
+    JournalistComponent,
+    MagazineComponent,
   ],
   imports: [CommonModule, RouterModule, FrontpageModule, MenuModule],
   exports: [
