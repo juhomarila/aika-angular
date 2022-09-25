@@ -453,7 +453,7 @@ button {
   display: flex;
   background: var(--text);
   background-color: transparent;
-  border-radius: 4em;
+  border-radius: 0em;
   margin-right: 10em;
 }
 
@@ -461,8 +461,9 @@ button {
   width: 0px;
   font-size: 1em;
   color: var(--text);
+  border: 0px;
   transition: .5s;
-
+  background-color: transparent;
 }
 
 .search-box-btn {
@@ -486,6 +487,7 @@ button {
   padding-right: 1em;
   border: 1px solid var(--text);
   width: 18em;
+  background-color: rgba(23, 25, 28, 0.5);
 }
 
 .search-box-btn:active {
