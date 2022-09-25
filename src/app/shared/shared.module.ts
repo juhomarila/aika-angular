@@ -10,6 +10,7 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
 import { TitleCarouselComponent } from './components/title-carousel/title-carousel.component';
 import { CarouselModule } from 'primeng/carousel';
 import { PreviewComponent } from './components/preview/preview.component';
+import { LoggedInCarouselComponent } from './components/logged-in-carousel/logged-in-carousel.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { PreviewComponent } from './components/preview/preview.component';
     SpinnerComponent,
     TitleCarouselComponent,
     PreviewComponent,
+    LoggedInCarouselComponent,
   ],
   imports: [CommonModule, BrowserModule, NgbCarouselModule, CarouselModule],
   exports: [
@@ -27,6 +29,7 @@ import { PreviewComponent } from './components/preview/preview.component';
     ArticleModalComponent,
     SpinnerComponent,
     TitleCarouselComponent,
+    LoggedInCarouselComponent,
   ],
 })
 export class SharedModule {}

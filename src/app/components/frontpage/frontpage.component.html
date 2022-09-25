@@ -1,14 +1,12 @@
 <div>
-  <carousel [carouselArray]="carouselEntityList"></carousel>
+  <logged-in-carousel [carouselArray]="carouselEntityList"></logged-in-carousel>
   <div class="container-fluid" style="padding-top: 12.8px">
     <h5>Hei {{ username }}, mitä tänään luettaisiin?</h5>
     <hr class="featurette-divider" />
     <div *ngIf="isLogged">
       <div *ngFor="let g of genreArray" class="row">
         <h5>{{ g }}:</h5>
-        <title-carousel
-          [articleList]="getGenreArticles(articleList, g)"
-        ></title-carousel>
+        <title-carousel [articleList]="getGenreArticles(articleList, g)"></title-carousel>
         <!-- <div
           *ngFor="let a of getGenreArticles(articleList, g)"
           class="col-sm-3"

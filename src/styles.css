@@ -12,17 +12,11 @@
   font-family: 'Raleway', 'arial', 'lato';
 }
 
-.skriinii {
-  display: block;
-  width: auto;
-  height: auto;
-}
-
 .loader {
   border: 11px solid rgba(255, 255, 255, 0.35);
   border-radius: 50%;
-  border-top: 20px solid rgba(23,25,28, 0.95);
-  border-bottom: 20px solid rgba(23,25,28, 0.95);
+  border-top: 20px solid rgba(23, 25, 28, 0.95);
+  border-bottom: 20px solid rgba(23, 25, 28, 0.95);
   width: 4em;
   height: 4em;
   -webkit-animation: spin 0.7s linear infinite;
@@ -38,23 +32,43 @@
 
 /* Safari */
 @-webkit-keyframes spin {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
 }
 
 @-webkit-keyframes zoom {
-  0% { -webkit-transform: scale(1.25); }
-  100% { -webkit-transform: scale(0.75); }
+  0% {
+    -webkit-transform: scale(1.25);
+  }
+
+  100% {
+    -webkit-transform: scale(0.75);
+  }
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes zoom {
-  0% { transform: scale(1.25); }
-  100% { transform: scale(0.75); }
+  0% {
+    transform: scale(1.25);
+  }
+
+  100% {
+    transform: scale(0.75);
+  }
 }
 
 @font-face {
@@ -62,7 +76,9 @@
   src: url(assets/fonts/raleway/Raleway-Medium.ttf) format("opentype");
 }
 
-p, i, small {
+p,
+i,
+small {
   color: var(--text);
 }
 
@@ -71,10 +87,6 @@ p, i, small {
   padding: 0;
   margin: 0;
 }
-
-.p-carousel-prev-icon, .p-carousel-next-icon {
-  font-size: 50px;
-  }
 
 .padding-bottom {
   padding-bottom: 1em;
@@ -89,7 +101,8 @@ h6 {
   color: var(--text);
 }
 
-td, th {
+td,
+th {
   font-size: 0.8em;
   color: var(--text);
 }
@@ -134,6 +147,7 @@ td, th {
 .modal-footer {
   border: 0px solid black;
 }
+
 .modal-header {
   border: 0px solid black;
 }
@@ -156,7 +170,7 @@ td, th {
 }
 
 #carousel p {
-  font-size:larger;
+  font-size: larger;
 }
 
 .centered {
@@ -255,7 +269,7 @@ td, th {
   -o-transform: scale(0.75);
 }
 
-.stack-top{
+.stack-top {
   z-index: -1;
 }
 
@@ -294,7 +308,7 @@ td, th {
   margin: 0;
 }
 
-#forgotpsw:hover{
+#forgotpsw:hover {
   text-decoration: underline;
   font-weight: bold;
   cursor: pointer;
@@ -333,11 +347,11 @@ body {
 }
 
 .bg-tumma-oma-header {
-  background: rgba(23,25,28, 0.01);
+  background: rgba(23, 25, 28, 0.01);
 }
 
 .active-header {
-  background: rgba(23,25,28, 0.8);
+  background: rgba(23, 25, 28, 0.8);
   transition: background 1.3s;
 }
 
@@ -355,7 +369,7 @@ a:hover {
   text-align: justify-all left;
 }
 
-input,
+.center input,
 button {
   border: none;
   background: none;
@@ -423,14 +437,14 @@ button {
 .kolmedropdown:hover,
 .kirjaudu:hover,
 .rekisteri:hover {
-  background-color: rgba(23,25,28, 0.5);
+  background-color: rgba(23, 25, 28, 0.5);
   color: var(--text);
 }
 
 
 .dropdown-menu {
   border: none;
-  background-color: rgba(23,25,28, 0.5);
+  background-color: rgba(23, 25, 28, 0.5);
 }
 
 /*HAKU*/
@@ -854,4 +868,3 @@ only screen and (min-resolution: 192dpi) {
     margin-left: 150px;
   }
 }
-
