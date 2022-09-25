@@ -24,20 +24,20 @@
 
 <p-carousel
   [value]="articleList"
-  [numVisible]="3"
-  [numScroll]="1"
-  styleClass="custom-carousel"
+  [numVisible]="4"
+  [numScroll]="4"
   [circular]="true"
   [autoplayInterval]="0"
   [responsiveOptions]="responsiveOptions"
+  [showIndicators]="true"
 >
   <ng-template let-article pTemplate="item">
-    <div class="product-item">
-      <div class="product-item-content">
-        <div class="mb-3">
-          <preview [article]="article" [owned]="false"></preview>
-        </div>
-      </div>
+    <div class="container">
+      <preview
+        [article]="article"
+        (selectedArticle)="onSelect($event)"
+        [owned]="onSelectCheckIfOwned(article)"
+      ></preview>
     </div>
   </ng-template>
 </p-carousel>
