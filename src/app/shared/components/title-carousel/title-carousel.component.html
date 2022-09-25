@@ -1,0 +1,43 @@
+<!-- <p-carousel
+  [value]="articleList"
+  styleClass="custom-carousel"
+  [numVisible]="3"
+  [numScroll]="1"
+  [circular]="true"
+  [autoplayInterval]="0"
+  [responsiveOptions]="responsiveOptions"
+>
+  <ng-template let-article pTemplate="item">
+    <div class="item card">
+      <img [src]="article.fileUrl" class="card-img-top" alt="..." />
+      <div class="card-body">
+        <h5 class="card-title">paska</h5>
+        <p class="card-text">
+          Some quick example text to build on the card title and make up the
+          bulk of the card's content.
+        </p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+  </ng-template>
+</p-carousel> -->
+
+<p-carousel
+  [value]="articleList"
+  [numVisible]="3"
+  [numScroll]="1"
+  styleClass="custom-carousel"
+  [circular]="true"
+  [autoplayInterval]="0"
+  [responsiveOptions]="responsiveOptions"
+>
+  <ng-template let-article pTemplate="item">
+    <div class="product-item">
+      <div class="product-item-content">
+        <div class="mb-3">
+          <preview [article]="article" [owned]="false"></preview>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</p-carousel>

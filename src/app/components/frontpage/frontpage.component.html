@@ -6,7 +6,10 @@
     <div *ngIf="isLogged">
       <div *ngFor="let g of genreArray" class="row">
         <h5>{{ g }}:</h5>
-        <div
+        <title-carousel
+          [articleList]="getGenreArticles(articleList, g)"
+        ></title-carousel>
+        <!-- <div
           *ngFor="let a of getGenreArticles(articleList, g)"
           class="col-sm-3"
         >
@@ -15,7 +18,7 @@
             (selectedArticle)="onSelect($event)"
             [owned]="onSelectCheckIfOwned(a)"
           ></preview>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

@@ -7,6 +7,9 @@ import { ArticleModalComponent } from './components/article-modal/article-modal.
 import { ShoppingCartModalComponent } from './components/shopping-cart-modal/shopping-cart-modal.component';
 import { MagazineComponent } from './components/magazine/magazine.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+import { TitleCarouselComponent } from './components/title-carousel/title-carousel.component';
+import { CarouselModule } from 'primeng/carousel';
+import { PreviewComponent } from './components/preview/preview.component';
 
 @NgModule({
   declarations: [
@@ -15,8 +18,15 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     ShoppingCartModalComponent,
     MagazineComponent,
     SpinnerComponent,
+    TitleCarouselComponent,
+    PreviewComponent,
   ],
-  imports: [CommonModule, BrowserModule, NgbCarouselModule],
-  exports: [CarouselComponent, ArticleModalComponent, SpinnerComponent],
+  imports: [CommonModule, BrowserModule, NgbCarouselModule, CarouselModule],
+  exports: [
+    CarouselComponent,
+    ArticleModalComponent,
+    SpinnerComponent,
+    TitleCarouselComponent,
+  ],
 })
 export class SharedModule {}

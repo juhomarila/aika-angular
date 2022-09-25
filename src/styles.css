@@ -72,6 +72,10 @@ p, i, small {
   margin: 0;
 }
 
+.p-carousel-prev-icon, .p-carousel-next-icon {
+  font-size: 50px;
+  }
+
 .padding-bottom {
   padding-bottom: 1em;
 }
