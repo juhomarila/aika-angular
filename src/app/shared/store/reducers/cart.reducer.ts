@@ -33,8 +33,14 @@ const initialState: CartState = {
     text: 'initial',
     fileUrl: 'initial',
     fileName: 'initial',
-    magazine: 'initial',
-    journalist: 'initial',
+    magazine: {
+      key: 'initial',
+      name: 'initial',
+    },
+    journalist: {
+      key: 'initial',
+      name: 'initial',
+    },
     genre: 'initial',
     uploader: 'initial',
     date: {

@@ -4,8 +4,14 @@ export interface Article {
   text: string;
   fileUrl: string;
   fileName: string;
-  magazine: string;
-  journalist: string;
+  magazine: {
+    key: string;
+    name: string;
+  };
+  journalist: {
+    key: string;
+    name: string;
+  };
   genre: string;
   uploader: string;
   date: {

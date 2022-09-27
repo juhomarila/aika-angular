@@ -47,7 +47,7 @@
         <li>
           <a
             class="article-info"
-            (click)="onSelectMagazine(article.magazine)"
+            (click)="onSelectMagazine(article.magazine.name)"
             routerLinkActive="active"
             >Ilmestyy lehdessä: {{ article.magazine }}</a
           >
@@ -55,9 +55,9 @@
         <li>
           <a
             class="article-info"
-            (click)="onSelectJournalist(article.journalist)"
+            (click)="onSelectJournalist(article.journalist.name)"
             routerLinkActive="active"
-            >Toimittaja: {{ article.journalist }}</a
+            >Toimittaja: {{ article.journalist.name }}</a
           >
         </li>
         <li>
@@ -83,7 +83,7 @@
         <li>
           <a
             class="article-info"
-            (click)="onSelectMagazine(article.magazine)"
+            (click)="onSelectMagazine(article.magazine.name)"
             routerLinkActive="active"
             >Ilmestyy lehdessä: {{ article.magazine }}</a
           >
@@ -91,9 +91,9 @@
         <li>
           <a
             class="article-info"
-            (click)="onSelectJournalist(article.journalist)"
+            (click)="onSelectJournalist(article.journalist.name)"
             routerLinkActive="active"
-            >Toimittaja: {{ article.journalist }}</a
+            >Toimittaja: {{ article.journalist.name }}</a
           >
         </li>
         <li>
