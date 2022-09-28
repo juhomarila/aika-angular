@@ -12,6 +12,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 import { ShoppingCartService } from 'src/app/shared/services/shopping-cart.service';
 import { SignInModalComponent } from '../signinmodal/signinmodal.component';
 import { SignUpModalComponent } from '../signupmodal/signupmodal.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'headerMenu',
@@ -19,19 +20,27 @@ import { SignUpModalComponent } from '../signupmodal/signupmodal.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeadermenuComponent implements OnInit {
+  languageList = [
+    { code: 'fi', label: 'Finnish' },
+    { code: 'en', label: 'English' },
+  ];
   noOfItemsInCart: number = 0;
   constructor(
     private modalSvc: NgbModal,
     private authSvc: AuthService,
     private shoppingCartSvc: ShoppingCartService,
     private ref: ChangeDetectorRef,
-    private router: Router
+    private router: Router,
+    private translateSvc: TranslateService
   ) {}
 
   isLogged = false;
   username: string | undefined;
 
   ngOnInit(): void {
+    if (localStorage.getItem('language')) {
+      this.translateSvc.use(localStorage.getItem('language')!);
+    }
     this.isLogged = this.authSvc.isLoggedIn;
     if (this.isLogged) {
       this.username = this.authSvc.user.displayName;
@@ -51,6 +60,16 @@ export class HeadermenuComponent implements OnInit {
       element.classList.add('active-header');
     } else {
       element.classList.remove('active-header');
+    }
+  }
+
+  changeSiteLanguage(localeCode: string): void {
+    const selectedLanguage = this.languageList
+      .find(language => language.code === localeCode)
+      ?.label.toString();
+    if (selectedLanguage) {
+      this.translateSvc.use(localeCode);
+      localStorage.setItem('language', localeCode);
     }
   }
 

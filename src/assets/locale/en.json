@@ -1,0 +1,42 @@
+{
+    "common": {
+        "login": "Login",
+        "logout": "Logout",
+        "email": "Email",
+        "password": "Password",
+        "register": "Register",
+        "retypePassword": "Retype Password",
+        "emailPlaceholder": "name@example.com",
+        "send": "Send"
+    },
+    "header": {
+        "frontpage": "Frontpage",
+        "magazines": "Magazines",
+        "blogs": "Blogs",
+        "ownMagazines": "Own Magazines",
+        "searchPlaceholder": "Article, magazine, writer...",
+        "ownAccount": "Own Account",
+        "favourites": "Favourites",
+        "cart": "Cart",
+        "settings": "Settings",
+        "support": "Support"
+    },
+    "footer": {
+        "newsletter": "Sign Up for Newsletter",
+        "newsletterPlaceholder": "E-mail address",
+        "info": "Information",
+        "infoText": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae aliquam voluptatem veniam, est atque cumque eum delectus sint!",
+        "socialMedia": "Social Media",
+        "link": "Link",
+        "linkText": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae aliquam voluptatem veniam, est atque cumque eum delectus sint!"
+    },
+    "signInUpModal": {
+        "title": "Login and come to see more",
+        "rememberme": "Remember me",
+        "forgottenPsw": "Did you forget your password?",
+        "forgottenPswLink": "Give your email address and we'll send you email reset link",
+        "mustSmallCapital": "Password must include capital and small letters and also numbers",
+        "mustAtLeastLength": "Password must be at least eight letters long",
+        "mustNotEmptySpaces": "Password can't have whitespaces"
+    }
+}

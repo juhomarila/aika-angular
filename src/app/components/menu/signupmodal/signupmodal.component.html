@@ -1,7 +1,9 @@
 <form class="form-register-sign">
   <div class="modal-content bg-tumma-oma">
     <div class="modal-header">
-      <h5 class="modal-title" id="rekisteroidyLabel">Rekisteröidy</h5>
+      <h5 class="modal-title" id="rekisteroidyLabel">
+        {{ 'common.register' | translate }}
+      </h5>
       <button
         type="button"
         class="btn-close"
@@ -17,49 +19,52 @@
               type="email"
               class="form-control"
               id="floatingInput2"
-              placeholder="name@example.com"
+              placeholder="{{ 'common.emailPlaceholder' | translate }}"
               #email
               required
             />
-            <label for="floatingInput2">Sähköposti</label>
+            <label for="floatingInput2">{{ 'common.email' | translate }}</label>
           </div>
           <div class="form-floating mb-4">
             <input
               type="password"
               class="form-control"
               id="floatingInput3"
-              placeholder="Salasana"
+              placeholder="{{ 'common.password' | translate }}"
               #userPwd
               required
             />
-            <label for="floatingInput3">Salasana</label>
+            <label for="floatingInput3">{{
+              'common.password' | translate
+            }}</label>
           </div>
           <div class="form-floating mb-4">
             <input
               type="password"
               class="form-control"
               id="floatingInput4"
-              placeholder="Salasana"
+              placeholder="{{ 'common.password' | translate }}"
               #userPwdReEnter
               required
             />
-            <label for="floatingInput3">Salasana uudelleen</label>
+            <label for="floatingInput3">{{
+              'common.retypePassword' | translate
+            }}</label>
           </div>
           <div class="form-floating mb-4">
             <ul class="ul-no-bullets">
               <li>
-                <i
-                  >Salasanan tulee sisältää isoja ja pieniä kirjaimia, sekä
-                  numeroita</i
-                >
+                <i>{{ 'signInUpModal.mustSmallCapital' | translate }}</i>
               </li>
               <li>
-                <i>Salasanan tulee olla vähintään kahdeksan merkkiä pitkä</i>
+                <i>{{ 'signInUpModal.mustAtLeastLength' | translate }}</i>
               </li>
               <li>
-                <i>Salasanassa ei saa olla tyhjiä välejä</i>
+                <i>{{ 'signInUpModal.mustNotEmptySpaces' | translate }}</i>
               </li>
-              <li [hidden]="!error"><h5 style="color: red;">{{errorMsg}}</h5></li>
+              <li [hidden]="!error">
+                <h5 style="color: red">{{ errorMsg }}</h5>
+              </li>
             </ul>
           </div>
 
@@ -79,7 +84,7 @@
               class="btn btn-primary float-end"
               (click)="signUp(email.value, userPwd.value, userPwdReEnter.value)"
             >
-              Rekisteröidy
+              {{ 'common.register' | translate }}
             </button>
           </div>
         </form>

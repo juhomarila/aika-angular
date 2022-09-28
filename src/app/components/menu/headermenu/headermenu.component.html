@@ -36,7 +36,7 @@
                 aria-current="page"
                 routerLink="/frontpage"
                 routerLinkActive="active"
-                >Etusivu</a
+                >{{ 'header.frontpage' | translate }}</a
               >
             </li>
             <li class="nav-item hover-nav">
@@ -44,7 +44,7 @@
                 class="nav-link text-white"
                 routerLink="/magazines"
                 routerLinkActive="active"
-                >Aikakausilehdet</a
+                >{{ 'header.magazines' | translate }}</a
               >
             </li>
             <li class="nav-item hover-nav" *ngIf="isLogged">
@@ -52,7 +52,7 @@
                 class="nav-link text-white"
                 routerLink="/blogs"
                 routerLinkActive="active"
-                >Blogit</a
+                >{{ 'header.blogs' | translate }}</a
               >
             </li>
             <li class="nav-item hover-nav" *ngIf="isLogged">
@@ -60,7 +60,7 @@
                 class="nav-link text-white"
                 routerLink="/my-library"
                 routerLinkActive="active"
-                >Omat Lehdet</a
+                >{{ 'header.ownMagazines' | translate }}</a
               >
             </li>
           </ul>
@@ -68,7 +68,7 @@
             <input
               class="form-control-sm me-2 search-box-input"
               type="text"
-              placeholder="Artikkeli, lehti, kirjoittaja..."
+              placeholder="{{ 'header.searchPlaceholder' | translate }}"
               aria-label="Search"
               (keyup)="search($event)"
             />
@@ -114,10 +114,10 @@
                     <span>{{ username }}</span>
                   </div>
                   <div *ngIf="username === undefined">
-                    <span>Oma tili</span>
+                    <span>{{ 'header.ownAccount' | translate }}</span>
                   </div>
                 </div>
-                <span *ngIf="!isLogged">Kirjaudu</span>
+                <span *ngIf="!isLogged">{{ 'common.login' | translate }}</span>
               </a>
               <ul
                 class="dropdown-menu dropdown-menu-sm-end"
@@ -130,7 +130,8 @@
                       class="dropdown-item kirjaudu"
                       (click)="openSignIn()"
                     >
-                      <i class="bi bi-door-open margin-navbar"></i>Kirjaudu
+                      <i class="bi bi-door-open margin-navbar"></i
+                      >{{ 'common.login' | translate }}
                     </button>
                   </li>
 
@@ -141,8 +142,27 @@
                       (click)="openSignUp()"
                     >
                       <i class="bi bi-door-closed margin-navbar"></i
-                      >Rekisteröidy
+                      >{{ 'common.register' | translate }}
                     </button>
+                  </li>
+                  <li>
+                    <hr class="dropdown-divider" />
+                  </li>
+                  <li>
+                    <div class="row">
+                      <div class="col-md-2">
+                        <a
+                          class="dropdown-item kolmedropdown"                      
+                          (click)="changeSiteLanguage('fi')"
+                          >FI</a
+                        >
+                        <a
+                          class="dropdown-item kolmedropdown"
+                          (click)="changeSiteLanguage('en')"
+                          >EN</a
+                        >
+                      </div>
+                    </div>
                   </li>
                 </div>
                 <div *ngIf="isLogged">
@@ -152,7 +172,8 @@
                       class="dropdown-item kirjaudu"
                       (click)="logout()"
                     >
-                      <i class="bi bi-door-open margin-navbar"></i>Kirjaudu Ulos
+                      <i class="bi bi-door-open margin-navbar"></i
+                      >{{ 'common.logout' | translate }}
                     </button>
                   </li>
 
@@ -164,14 +185,16 @@
                       class="dropdown-item kolmedropdown"
                       routerLink="/favourites"
                       routerLinkActive="active"
-                      ><i class="bi bi-heart margin-navbar"></i>Suosikit</a
+                      ><i class="bi bi-heart margin-navbar"></i
+                      >{{ 'header.favourites' | translate }}</a
                     >
                   </li>
                   <li>
                     <a
                       class="dropdown-item kolmedropdown"
                       (click)="openShoppingCartModal()"
-                      ><i class="bi bi-bag margin-navbar"></i>Ostoskori</a
+                      ><i class="bi bi-bag margin-navbar"></i
+                      >{{ 'header.cart' | translate }}</a
                     >
                   </li>
                   <li>
@@ -182,7 +205,8 @@
                       class="dropdown-item kolmedropdown"
                       routerLink="/settings"
                       routerLinkActive="active"
-                      ><i class="bi bi-person margin-navbar"></i>Asetukset</a
+                      ><i class="bi bi-person margin-navbar"></i
+                      >{{ 'header.settings' | translate }}</a
                     >
                   </li>
                   <li>
@@ -191,8 +215,27 @@
                       routerLink="/support"
                       routerLinkActive="active"
                       ><i class="bi bi-question-circle margin-navbar"></i
-                      >Tuki</a
+                      >{{ 'header.support' | translate }}</a
                     >
+                  </li>
+                  <li>
+                    <hr class="dropdown-divider" />
+                  </li>
+                  <li>
+                    <div class="row">
+                      <div class="col-md-2">
+                        <a
+                          class="dropdown-item kolmedropdown"
+                          (click)="changeSiteLanguage('fi')"
+                          >FI</a
+                        >
+                        <a
+                          class="dropdown-item kolmedropdown"
+                          (click)="changeSiteLanguage('en')"
+                          >EN</a
+                        >
+                      </div>
+                    </div>
                   </li>
                 </div>
               </ul>

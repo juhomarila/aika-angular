@@ -16,6 +16,7 @@ import { reducers } from './shared/store/reducers';
 import { ComponentsModule } from './components/components.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
+import { NgxTranslateModule } from './ngx-translate/ngx-translate.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -33,6 +34,7 @@ import { SharedModule } from './shared/shared.module';
     provideStorage(() => getStorage()),
     BrowserAnimationsModule,
     SharedModule,
+    NgxTranslateModule,
   ],
   providers: [
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase },

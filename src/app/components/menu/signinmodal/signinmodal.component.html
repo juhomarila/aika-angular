@@ -2,7 +2,7 @@
   <form class="form-register-sign" *ngIf="!forgotClicked">
     <div class="modal-content bg-tumma-oma">
       <div class="modal-header">
-        <h5 class="modal-title">Kirjaudu sisään, näet lisää!</h5>
+        <h5 class="modal-title">{{"signInUpModal.title" | translate }}</h5>
         <button
           type="button"
           class="btn-close"
@@ -16,29 +16,29 @@
             type="email"
             class="form-control"
             id="floatingInput6"
-            placeholder="name@example.com"
+            placeholder='{{"common.emailPlaceholder" | translate }}'
             #email
           />
-          <label for="floatingInput6">Sähköposti</label>
+          <label for="floatingInput6">{{"common.email" | translate }}</label>
         </div>
         <div class="form-floating mb-4">
           <input
             type="password"
             class="form-control"
             id="floatingInput7"
-            placeholder="Salasana"
+            placeholder='{{"common.password | translate }}'
             #psw
           />
-          <label for="floatingInput7">Salasana</label>
+          <label for="floatingInput7">{{"common.password" | translate }}</label>
         </div>
         <div class="form-check">
           <input class="form-check-input" type="checkbox" id="gridCheck1" />
           <label class="form-check-label" for="gridCheck1">
-            <p>Muista minut</p>
+            <p>{{"signInUpModal.rememberme" | translate }}</p>
           </label>
         </div>
         <div class="form-floating mb-4" (click)="forgotPassword()">
-          <p id="forgotpsw">Unohtuiko salasana?</p>
+          <p id="forgotpsw">{{"signInUpModal.forgottenPsw" | translate }}</p>
         </div>
         <div class="form-floating mb-4" [hidden]="!error">
           <p style="color: red;">{{ errorMsg }}</p>
@@ -59,7 +59,7 @@
           class="btn btn-primary float-end"
           (click)="signIn(email.value, psw.value)"
         >
-          Kirjaudu
+        {{"common.login" | translate }}
         </button>
       </div>
     </div>
@@ -68,7 +68,7 @@
     <div class="modal-content bg-tumma-oma">
       <div class="modal-header">
         <h5 class="modal-title">
-          Anna sähköpostiosoite, lähetämme sinne salasanan nollauslinkin
+          {{"signInUpModal.forgottenPswLink" | translate }}
         </h5>
         <button
           type="button"
@@ -83,17 +83,17 @@
             type="email"
             class="form-control"
             id="floatingInput6"
-            placeholder="name@example.com"
+            placeholder='{{"common.emailPlaceholder" | translate }}'
             #emailForgot
           />
-          <label for="floatingInput6">Sähköposti</label>
+          <label for="floatingInput6">{{"common.email" | translate }}</label>
         </div>
         <button
           type="button"
           class="btn btn-primary float-end"
           (click)="handleForgotPassword(emailForgot.value)"
         >
-          Lähetä
+        {{"common.send" | translate }}
         </button>
       </div>
     </div>
