@@ -1,5 +1,5 @@
 <div
-  class="my-overlay zoom rounded-top"
+  class="my-overlay white-border rounded-top"
   (mouseover)="mouseOver()"
   (mouseleave)="mouseLeave()"
 >
@@ -49,7 +49,7 @@
             class="article-info"
             (click)="onSelectMagazine(article.magazine.name)"
             routerLinkActive="active"
-            >Ilmestyy lehdessä: {{ article.magazine }}</a
+            >Ilmestyy lehdessä: {{ article.magazine.name }}</a
           >
         </li>
         <li>
@@ -85,7 +85,7 @@
             class="article-info"
             (click)="onSelectMagazine(article.magazine.name)"
             routerLinkActive="active"
-            >Ilmestyy lehdessä: {{ article.magazine }}</a
+            >Ilmestyy lehdessä: {{ article.magazine.name }}</a
           >
         </li>
         <li>
