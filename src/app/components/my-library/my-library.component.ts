@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { mergeMap, switchMap, tap } from 'rxjs';
 import { ArticleModalComponent } from 'src/app/shared/components/article-modal/article-modal.component';
 import { Article } from 'src/app/shared/interfaces/article';
 import { Owned } from 'src/app/shared/interfaces/owned';
@@ -20,8 +18,7 @@ export class MyLibraryComponent implements OnInit {
   constructor(
     private userSvc: UserService,
     private modalSvc: NgbModal,
-    private articleSvc: ArticlesvcService,
-    private route: Router
+    private articleSvc: ArticlesvcService
   ) {}
 
   ngOnInit(): void {

@@ -1,11 +1,46 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Journalist } from 'src/app/shared/interfaces/journalist';
+import { Magazine } from 'src/app/shared/interfaces/magazine';
+import { FirestoreService } from 'src/app/shared/services/firestore.service';
 
 @Component({
   selector: 'app-journalist',
   templateUrl: './journalist.component.html',
 })
-export class JournalistComponent implements OnInit {
-  constructor() {}
+export class JournalistComponent implements OnInit, OnDestroy {
+  journalist!: Journalist;
+  height: number = 0;
+  magazines: Magazine[] = [];
 
-  ngOnInit(): void {}
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private fireStoreSvc: FirestoreService
+  ) {
+    this.height = window.innerHeight * 0.85;
+  }
+
+  ngOnInit(): void {
+    if (history.state['journalist']) {
+      this.journalist = history.state['journalist'];
+      localStorage.setItem('journalist', JSON.stringify(this.journalist));
+    } else {
+      if (localStorage.getItem('journalist')) {
+        this.journalist = JSON.parse(localStorage.getItem('journalist')!);
+      }
+      if (!localStorage.getItem('journalist')) {
+        this.activatedRoute.queryParams.forEach(param => {
+          this.fireStoreSvc.getJournalist(param['g']).subscribe(journalist => {
+            this.journalist = journalist.data() as Journalist;
+          });
+        });
+      }
+    }
+  }
+
+  //todo fetch magazines and get their names
+
+  ngOnDestroy(): void {
+    localStorage.removeItem('journalist');
+  }
 }

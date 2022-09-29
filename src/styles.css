@@ -12,6 +12,14 @@
   font-family: 'Raleway', 'arial', 'lato';
 }
 
+.padding-top {
+  padding-top: 11vh;
+}
+
+.center-magazine-journalist {
+  margin: auto;
+}
+
 h5 {
   margin-bottom: 0;
 }
@@ -21,32 +29,32 @@ h5 {
 }
 
 .p-carousel .p-carousel-content .p-carousel-next {
-  margin-left: -2rem!important;
-  background-color: #faf0e6!important;
+  margin-left: -2rem !important;
+  background-color: #faf0e6 !important;
 }
 
 .p-carousel .p-carousel-content .p-carousel-prev {
-  margin-right: -2rem!important;
-  background-color: #faf0e6!important;
+  margin-right: -2rem !important;
+  background-color: #faf0e6 !important;
   z-index: 50;
 }
 
 .p-carousel .p-carousel-indicators {
-  padding: 0rem!important;
+  padding: 0rem !important;
 }
 
 .p-carousel .p-carousel-indicators .p-carousel-indicator {
-  margin-bottom: 0!important;
-  margin-right: 0.25rem!important;
+  margin-bottom: 0 !important;
+  margin-right: 0.25rem !important;
 }
 
-.p-carousel .p-carousel-indicators .p-carousel-indicator button { 
-  width: 1rem!important;
-  height: 0.25rem!important;
+.p-carousel .p-carousel-indicators .p-carousel-indicator button {
+  width: 1rem !important;
+  height: 0.25rem !important;
 }
 
 .p-carousel .p-carousel-indicators .p-carousel-indicator.p-highlight button {
-  background-color:rgba(90, 83, 83, 0.95)!important;
+  background-color: rgba(90, 83, 83, 0.95) !important;
 }
 
 .p-carousel {
@@ -54,8 +62,8 @@ h5 {
 }
 
 .p-carousel-items-content {
-  padding-top: 1vh!important;
-  padding-bottom: 1vh!important;
+  padding-top: 1vh !important;
+  padding-bottom: 1vh !important;
 }
 
 .p-carousel-content {
@@ -158,6 +166,11 @@ p {
 
 .padding-bottom {
   padding-bottom: 1em;
+}
+
+.padding-bottom-top {
+  padding-bottom: 1em;
+  padding-top: 1em;
 }
 
 h1,
@@ -338,7 +351,7 @@ th {
 }
 
 .white-border:hover {
-  outline: 0.25vh solid rgba(255, 255, 255, 0.55);  
+  outline: 0.25vh solid rgba(255, 255, 255, 0.55);
 }
 
 .unzoom {

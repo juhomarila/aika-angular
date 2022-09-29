@@ -13,6 +13,7 @@ import { SharedModule } from '../shared/shared.module';
 import { SearchComponent } from './search/search.component';
 import { JournalistComponent } from './journalist/journalist.component';
 import { MagazineComponent } from './magazine/magazine.component';
+import { NgxTranslateModule } from '../ngx-translate/ngx-translate.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,13 @@ import { MagazineComponent } from './magazine/magazine.component';
     JournalistComponent,
     MagazineComponent,
   ],
-  imports: [CommonModule, RouterModule, FrontpageModule, MenuModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    FrontpageModule,
+    MenuModule,
+    NgxTranslateModule,
+  ],
   exports: [
     FrontpageModule,
     MenuModule,

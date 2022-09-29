@@ -80,7 +80,6 @@ export class TitleCarouselComponent implements OnInit {
   }
 
   onSelectMagazine(magazine: string) {
-    console.log('painettu');
     this.router.navigate(['magazine'], {
       queryParams: { g: magazine },
     });

@@ -63,6 +63,7 @@ const routes: Routes = [
   },
   {
     path: 'journalist',
+    data: { journalist: null },
     component: JournalistComponent,
     canActivate: [AuthGuard],
   },

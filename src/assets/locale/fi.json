@@ -7,7 +7,13 @@
         "register": "Rekisteröidy",
         "retypePassword": "Salasana uudelleen",
         "emailPlaceholder": "etunimi.sukunimi@sahkoposti.fi",
-        "send": "Lähetä"
+        "send": "Lähetä",
+        "loading": "Ladataan",
+        "genres": "Genret",
+        "hometown": "Kotikaupunki",
+        "journalists": "Toimittajat",
+        "founded": "Perustettu",
+        "magazines":"Aikakausilehdet"
     },
     "header": {
         "frontpage": "Etusivu",

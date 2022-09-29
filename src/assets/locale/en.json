@@ -7,7 +7,13 @@
         "register": "Register",
         "retypePassword": "Retype Password",
         "emailPlaceholder": "name@example.com",
-        "send": "Send"
+        "send": "Send",
+        "loading": "Loading",
+        "genres": "Genres",
+        "hometown": "Hometown",
+        "journalists": "Journalists",
+        "founded": "Founded",
+        "magazines": "Magazines"
     },
     "header": {
         "frontpage": "Frontpage",

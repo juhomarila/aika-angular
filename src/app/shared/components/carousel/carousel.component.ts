@@ -23,7 +23,7 @@ export class CarouselComponent implements OnInit {
     config.showNavigationArrows = false;
     config.showNavigationIndicators = false;
 
-    this.height = screen.availHeight * 0.91;
+    this.height = window.innerHeight;
   }
 
   ngOnInit(): void {

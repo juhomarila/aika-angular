@@ -1,3 +1,31 @@
-<div class="container-fluid" style="padding-top: 72.8px">
-  <p>lehti toimii</p>
+<div class="container-fluid padding-top">
+  <div class="row" *ngIf="magazine">
+    <div class="col-6 center-magazine-journalist">
+      <img [src]="magazine.fileUrl" class="img-fluid" alt="{{ magazine.name }}"
+        [ngStyle]="{ 'max-height.px': height }" />
+    </div>
+    <div class="col-sm center-magazine-journalist">
+      <h3 class="padding-bottom"><u>{{magazine.name}}</u></h3>
+      <p>{{magazine.info}}</p>
+    </div>
+    <div class="col-sm center-magazine-journalist">
+      <h5 class="padding-bottom-top"><u>{{"common.genres" | translate}}</u></h5>
+      <div *ngFor="let genre of magazine.genres">
+        <i>
+          <p>{{genre}}</p>
+        </i>
+      </div>
+      <h5 class="padding-bottom-top"><u>{{"common.hometown" | translate}}</u></h5>
+      <p>{{magazine.hometown}}</p>
+      <h5 class="padding-bottom-top"><u>{{"common.journalists" | translate}}</u></h5>
+      <div *ngFor="let journalist of magazine.journalists">
+        <p><i><a (click)="goToJournalistPage(journalist)">{{getJournalist(journalist)}}</a></i></p>
+      </div>
+      <h5 class="padding-bottom-top"><u>{{"common.founded" | translate}}</u></h5>
+      <p>{{magazine.foundingdate.day}}/{{magazine.foundingdate.month}}/{{magazine.foundingdate.year}}</p>
+    </div>
+  </div>
+  <div *ngIf="!magazine">
+    <p>{{ 'common.loading' | translate }}</p>
+  </div>
 </div>

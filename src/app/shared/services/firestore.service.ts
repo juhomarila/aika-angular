@@ -7,6 +7,8 @@ import { Article } from '../interfaces/article';
 import { CarouselEntity } from '../interfaces/carouselentity';
 import { User } from '../interfaces/user';
 import { Owned } from '../interfaces/owned';
+import { Magazine } from '../interfaces/magazine';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +20,7 @@ export class FirestoreService {
   loginCarouselEntityList: CarouselEntity[] = [];
   user: User[] = [];
   ownedArticlesList: Article[] = [];
+  magazine!: Magazine;
 
   constructor(public afs: AngularFirestore) {}
 
@@ -31,10 +34,8 @@ export class FirestoreService {
     return this.articleList;
   }
 
-  async getArticle(key: string) {
-    const snapShot = this.afs.collection('articles').doc(key).get();
-    snapShot.subscribe(article => (this.article = article.data() as Article));
-    return this.article;
+  getArticle(key: string) {
+    return this.afs.collection('articles').doc(key).get();
   }
 
   async getAllLoginCarouselEntities() {
@@ -93,9 +94,11 @@ export class FirestoreService {
     );
   }
 
-  // async getJournalist(journalist: string) {
-  //   const snapShot = this.afs.collection('journalists').doc(key).get();
-  //   snapShot.subscribe(article => (this.article = article.data() as Article));
-  //   return this.article;
-  // }
+  getMagazine(key: string) {
+    return this.afs.collection('magazines').doc(key).get();
+  }
+
+  getJournalist(key: string) {
+    return this.afs.collection('journalists').doc(key).get();
+  }
 }
