@@ -50,14 +50,10 @@ export class MagazineComponent implements OnInit {
   goToJournalistPage(key: string) {
     this.journalists.map(journalist => {
       if (journalist.key === key) {
-        // this.router.navigate(['journalist'], {
-        //   queryParams: { g: journalist.name },
-        // });
         this.router.navigateByUrl(`/journalist?g=${journalist.key}`, {
           state: { journalist },
         });
       }
     });
   }
-  //todo route to journalistpage with readily available jounalist entities
 }
