@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Article } from 'src/app/shared/interfaces/article';
 import { Journalist } from 'src/app/shared/interfaces/journalist';
 import { Magazine } from 'src/app/shared/interfaces/magazine';
+import { ArticlesvcService } from 'src/app/shared/services/articlesvc.service';
 import { FirestoreService } from 'src/app/shared/services/firestore.service';
 
 @Component({
@@ -12,15 +14,18 @@ export class MagazineComponent implements OnInit {
   magazineKey!: string;
   magazine!: Magazine;
   height: number = 0;
+  width: number = 0;
   journalists: Journalist[] = [];
   selectedJournalist!: Journalist;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private fireStoreSvc: FirestoreService
+    private fireStoreSvc: FirestoreService,
+    private articleSvc: ArticlesvcService
   ) {
-    this.height = window.innerHeight * 0.85;
+    this.height = window.innerHeight * 0.75;
+    this.width = window.innerWidth * 0.4;
   }
 
   ngOnInit(): void {

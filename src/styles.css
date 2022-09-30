@@ -12,6 +12,10 @@
   font-family: 'Raleway', 'arial', 'lato';
 }
 
+.fit-image {
+  object-fit: cover;
+}
+
 .padding-top {
   padding-top: 11vh;
 }

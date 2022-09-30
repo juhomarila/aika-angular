@@ -6,9 +6,7 @@ import {
 import { Article } from '../interfaces/article';
 import { CarouselEntity } from '../interfaces/carouselentity';
 import { User } from '../interfaces/user';
-import { Owned } from '../interfaces/owned';
 import { Magazine } from '../interfaces/magazine';
-import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',

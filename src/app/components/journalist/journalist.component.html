@@ -1,8 +1,8 @@
 <div class="container-fluid padding-top">
   <div class="row" *ngIf="journalist">
     <div class="col-6">
-      <img [src]="journalist.fileUrl" class="img-fluid" alt="{{ journalist.name }}"
-        [ngStyle]="{ 'max-height.px': height }" />
+      <img [src]="journalist.fileUrl" class="fit-image" alt="{{ journalist.name }}"
+        [ngStyle]="{ 'height.px': height, 'width.px': width }" />
     </div>
     <div class="col-sm center-magazine-journalist">
       <h3 class="padding-bottom"><u>{{journalist.name}}</u></h3>

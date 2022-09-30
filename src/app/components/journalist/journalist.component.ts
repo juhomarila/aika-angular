@@ -11,13 +11,15 @@ import { FirestoreService } from 'src/app/shared/services/firestore.service';
 export class JournalistComponent implements OnInit, OnDestroy {
   journalist!: Journalist;
   height: number = 0;
+  width: number = 0;
   magazines: Magazine[] = [];
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private fireStoreSvc: FirestoreService
   ) {
-    this.height = window.innerHeight * 0.85;
+    this.height = window.innerHeight * 0.75;
+    this.width = window.innerWidth * 0.4;
   }
 
   ngOnInit(): void {
