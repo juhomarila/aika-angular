@@ -7,6 +7,7 @@ import { Article } from '../interfaces/article';
 import { CarouselEntity } from '../interfaces/carouselentity';
 import { User } from '../interfaces/user';
 import { Magazine } from '../interfaces/magazine';
+import { Owned } from '../interfaces/owned';
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +21,7 @@ export class FirestoreService {
   ownedArticlesList: Article[] = [];
   magazine!: Magazine;
   magazineList: Magazine[] = [];
+  boughtArticles: Owned[] = [];
 
   constructor(public afs: AngularFirestore) {}
 
@@ -83,7 +85,7 @@ export class FirestoreService {
       .collection('ownedArticles')
       .doc(key);
     return userRef.set(
-      { key: key },
+      { key: key, time: Date.now() },
       {
         merge: true,
       }
@@ -110,5 +112,17 @@ export class FirestoreService {
       )
     );
     return this.magazineList;
+  }
+
+  async getAllBoughtArticles(uid: string) {
+    const snapShot = this.afs
+      .collection('users')
+      .doc(uid)
+      .collection('ownedArticles')
+      .get();
+    snapShot.subscribe(owned =>
+      owned.forEach(data => this.boughtArticles.push(data.data() as Owned))
+    );
+    return this.boughtArticles;
   }
 }

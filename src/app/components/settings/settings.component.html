@@ -1,7 +1,7 @@
-<div *ngIf="user" class="container-fluid" style="padding-top: 72.8px">
+<div class="container-fluid" style="padding-top: 72.8px">
   <div class="helluva-lot-padding">
     <h3>Asetukset</h3>
-    <div class="background-is-fun rounded">
+    <div class="background-is-fun rounded" *ngIf="user">
       <h4>Tili</h4>
       <div class="d-flex justify-content-between settings-padding-top">
         <small>Sähköpostiosoite</small>
@@ -25,14 +25,22 @@
         <a><i>Vaihda</i></a>
       </div>
     </div>
-    <div class="background-is-fun rounded settings-margin-top">
+    <div
+      class="background-is-fun rounded settings-margin-top"
+      *ngIf="ownedArticles"
+    >
       <h4>Ostohistoria</h4>
-      <div class="d-flex justify-content-between settings-padding-top">
-        <small>Ostos</small>
-      </div>
-      <div class="d-flex justify-content-between">
-        <p>lehti</p>
-        <i>päivämäärä</i>
+      <div *ngFor="let o of ownedArticles" class="settings-padding-top">
+        <div class="d-flex justify-content-between">
+          <small>Ostos</small>
+        </div>
+        <div class="d-flex justify-content-between">
+          <p>{{ getArticleName(o.key) }}</p>
+          <div class="d-flex justify-content-end">
+            <i class="padding-frontpage">{{ setDate(o.time!) }}</i>
+            <small>1.99€</small>
+          </div>
+        </div>
       </div>
     </div>
   </div>

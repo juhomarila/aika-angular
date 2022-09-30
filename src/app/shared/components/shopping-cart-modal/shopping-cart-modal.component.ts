@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Store } from '@ngrx/store';
 import { Article } from '../../interfaces/article';
 import { LoadingService } from '../../services/loading.service';
 import { ShoppingCartService } from '../../services/shopping-cart.service';
-import { AppState } from '../../store/reducers';
 
 @Component({
   selector: 'app-shopping-cart-modal',
@@ -17,9 +14,7 @@ export class ShoppingCartModalComponent implements OnInit {
   constructor(
     private shoppingCartSvc: ShoppingCartService,
     private activeModal: NgbActiveModal,
-    private store: Store<AppState>,
-    private loading: LoadingService,
-    private route: Router
+    private loading: LoadingService
   ) {
     this.shoppingCartList = this.shoppingCartSvc.getCart();
   }
@@ -51,21 +46,4 @@ export class ShoppingCartModalComponent implements OnInit {
       this.loading.hide();
     }, 1500);
   }
-
-  // async checkOut() {
-  //   this.loading.show();
-  //   await this.shoppingCartSvc
-  //     .checkOut()
-  //     .then(result => {
-  //       if (!result) {
-  //         this.successfulPayment = false;
-  //       }
-  //     })
-  //     .then(() => {
-  //       this.activeModal.dismiss();
-  //       window.location.reload();
-  //       this.loading.hide();
-  //     })
-  //     .catch(error => error.log(error));
-  // }
 }
