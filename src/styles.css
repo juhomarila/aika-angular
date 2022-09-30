@@ -12,6 +12,28 @@
   font-family: 'Raleway', 'arial', 'lato';
 }
 
+.helluva-lot-padding {
+  padding-left: 40vh;
+  padding-right: 40vh;
+}
+
+.settings-padding-top {
+  padding-top: 6vh;
+}
+
+.settings-margin-top {
+  margin-top: 10vh;
+}
+
+.fking-tiny {
+  font-size: smaller;
+}
+
+.background-is-fun {
+  padding: 5vh;
+  background-color: rgba(255, 255, 255, 0.10);
+}
+
 .img-hover:hover {
   filter: blur(0.2px) brightness(0.95) opacity(0.95) saturate(0.95) sepia(0.05);
 }
@@ -572,6 +594,10 @@ button {
 .dropdown-menu {
   border: none;
   background-color: rgba(23, 25, 28, 0.5);
+}
+
+.dropdown-item.active, .dropdown-item:active {
+  background-color: var(--btn);
 }
 
 /*HAKU*/

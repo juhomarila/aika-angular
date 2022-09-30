@@ -55,10 +55,11 @@ export class FirestoreService {
     return this.loginCarouselEntityList;
   }
 
-  async getUser(uid: string) {
-    const snapShot = this.afs.collection('users').doc(uid).get();
-    snapShot.subscribe(user => this.user.push(user.data() as User));
-    return this.user;
+  getUser(uid: string) {
+    // const snapShot = this.afs.collection('users').doc(uid).get();
+    // snapShot.subscribe(user => this.user.push(user.data() as User));
+    // return this.user;
+    return this.afs.collection('users').doc(uid).get();
   }
 
   async getOwnedArticles(uid: string) {
