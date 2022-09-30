@@ -11,6 +11,7 @@ import { CarouselModule } from 'primeng/carousel';
 import { PreviewComponent } from './components/preview/preview.component';
 import { LoggedInCarouselComponent } from './components/logged-in-carousel/logged-in-carousel.component';
 import { RouterModule } from '@angular/router';
+import { MagazinePreviewComponent } from './components/magazine-preview/magazine-preview.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { RouterModule } from '@angular/router';
     TitleCarouselComponent,
     PreviewComponent,
     LoggedInCarouselComponent,
+    MagazinePreviewComponent,
   ],
   imports: [
     CommonModule,
@@ -35,6 +37,8 @@ import { RouterModule } from '@angular/router';
     SpinnerComponent,
     TitleCarouselComponent,
     LoggedInCarouselComponent,
+    PreviewComponent,
+    MagazinePreviewComponent,
   ],
 })
 export class SharedModule {}

@@ -12,6 +12,18 @@
   font-family: 'Raleway', 'arial', 'lato';
 }
 
+.img-hover:hover {
+  filter: blur(0.2px) brightness(0.95) opacity(0.95) saturate(0.95) sepia(0.05);
+}
+
+.img-hover:hover {
+  filter: blur(3px) brightness(0.5) opacity(0.7) saturate(0.7) sepia(0.25);
+}
+
+.hover-link:hover {
+  text-decoration: underline;
+}
+
 .fit-image {
   object-fit: cover;
 }
@@ -22,6 +34,23 @@
 
 .center-magazine-journalist {
   margin: auto;
+  padding-left: 4vh;
+  padding-right: 4vh;
+  padding-bottom: 4vh;
+}
+
+.center-hidden-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.center-overlay-mag-jour {
+  width: auto; /* Can be in percentage also. */
+  height: auto;
+  margin: 0 auto;
+  position: relative;
 }
 
 h5 {
@@ -430,7 +459,7 @@ body {
 }
 
 .my-overlay:hover img {
-  filter: none;
+  filter: blur(0.0px) brightness(1.25) opacity(1) saturate(1) sepia(0.0);
 }
 
 .bg-oma-gradient {

@@ -7,6 +7,7 @@ export interface Magazine {
   genres: string[];
   hometown: string;
   journalists: string[];
+  articles: string[];
   foundingdate: {
     day: number;
     month: number;

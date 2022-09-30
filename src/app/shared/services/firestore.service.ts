@@ -19,6 +19,7 @@ export class FirestoreService {
   user: User[] = [];
   ownedArticlesList: Article[] = [];
   magazine!: Magazine;
+  magazineList: Magazine[] = [];
 
   constructor(public afs: AngularFirestore) {}
 
@@ -30,10 +31,6 @@ export class FirestoreService {
       )
     );
     return this.articleList;
-  }
-
-  getArticle(key: string) {
-    return this.afs.collection('articles').doc(key).get();
   }
 
   async getAllLoginCarouselEntities() {
@@ -98,5 +95,19 @@ export class FirestoreService {
 
   getJournalist(key: string) {
     return this.afs.collection('journalists').doc(key).get();
+  }
+
+  getArticle(key: string) {
+    return this.afs.collection('articles').doc(key).get();
+  }
+
+  async getAllMagazines() {
+    const snapShot = this.afs.collection('magazines').get();
+    snapShot.subscribe(magazines =>
+      magazines.forEach(magazine =>
+        this.magazineList.push(magazine.data() as Magazine)
+      )
+    );
+    return this.magazineList;
   }
 }

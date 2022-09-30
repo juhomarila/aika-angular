@@ -33,6 +33,7 @@ import { NgxTranslateModule } from '../ngx-translate/ngx-translate.module';
     FrontpageModule,
     MenuModule,
     NgxTranslateModule,
+    SharedModule,
   ],
   exports: [
     FrontpageModule,

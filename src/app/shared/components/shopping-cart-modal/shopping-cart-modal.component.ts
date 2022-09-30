@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
-import { PreviewComponent } from 'src/app/components/frontpage/preview/preview.component';
 import { Article } from '../../interfaces/article';
 import { LoadingService } from '../../services/loading.service';
 import { ShoppingCartService } from '../../services/shopping-cart.service';

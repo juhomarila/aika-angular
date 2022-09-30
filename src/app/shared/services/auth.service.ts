@@ -134,6 +134,8 @@ export class AuthService {
     await this.afAuth.signOut();
     localStorage.removeItem('user');
     localStorage.removeItem('cart');
+    localStorage.removeItem('journalist');
+    localStorage.removeItem('magazine');
     this.router.navigate(['login']);
     window.location.reload();
   }

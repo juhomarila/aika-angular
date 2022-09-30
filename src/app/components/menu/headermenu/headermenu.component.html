@@ -32,7 +32,7 @@
             </li>
             <li class="nav-item hover-nav">
               <a
-                class="nav-link text-white"
+                class="nav-link text-white hover-link"
                 aria-current="page"
                 routerLink="/frontpage"
                 routerLinkActive="active"
@@ -41,13 +41,13 @@
             </li>
             <li class="nav-item hover-nav">
               <a
-                class="nav-link text-white"
+                class="nav-link text-white hover-link"
                 routerLink="/magazines"
                 routerLinkActive="active"
                 >{{ 'header.magazines' | translate }}</a
               >
             </li>
-            <li class="nav-item hover-nav" *ngIf="isLogged">
+            <li class="nav-item hover-nav hover-link" *ngIf="isLogged">
               <a
                 class="nav-link text-white"
                 routerLink="/blogs"
@@ -55,7 +55,7 @@
                 >{{ 'header.blogs' | translate }}</a
               >
             </li>
-            <li class="nav-item hover-nav" *ngIf="isLogged">
+            <li class="nav-item hover-nav hover-link" *ngIf="isLogged">
               <a
                 class="nav-link text-white"
                 routerLink="/my-library"
@@ -88,7 +88,7 @@
             <li class="nav-item hover-nav margin-navbar-right">
               <a
                 *ngIf="noOfItemsInCart > 0"
-                class="nav-link text-white"
+                class="nav-link text-white hover-link"
                 (click)="openShoppingCartModal()"
                 ><i class="bi bi-bag margin-navbar text-white"></i
                 >{{ noOfItemsInCart }}</a
@@ -102,7 +102,7 @@
             </li>
             <li class="nav-item hover-nav">
               <a
-                class="nav-link text-white"
+                class="nav-link text-white hover-link"
                 id="navbarScrollingDropdown"
                 y
                 role="button"

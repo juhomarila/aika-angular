@@ -4,7 +4,6 @@ import { ArticleModalComponent } from 'src/app/shared/components/article-modal/a
 import { Article } from 'src/app/shared/interfaces/article';
 import { Owned } from 'src/app/shared/interfaces/owned';
 import { ArticlesvcService } from 'src/app/shared/services/articlesvc.service';
-import { FirestoreService } from 'src/app/shared/services/firestore.service';
 import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({

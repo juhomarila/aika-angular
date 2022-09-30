@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Article } from '../interfaces/article';
+import { Magazine } from '../interfaces/magazine';
 import { FirestoreService } from './firestore.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ArticlesvcService {
+  magazineList: Magazine[] = [];
   articleList: Article[] = [];
   article!: Article;
 
@@ -14,6 +16,9 @@ export class ArticlesvcService {
     this.fireStoreSvc
       .getAllArticles()
       .then(articles => (this.articleList = articles));
+    this.fireStoreSvc
+      .getAllMagazines()
+      .then(magazines => (this.magazineList = magazines));
   }
 
   getArticles(): Observable<Article[]> {
@@ -27,10 +32,8 @@ export class ArticlesvcService {
     return of(article);
   }
 
-  // getArticle(key: string): Observable<Article> {
-  //   this.fireStoreSvc.getArticle(key).then(article => {
-  //     this.article = article;
-  //   });
-  //   return of(this.article);
-  // }
+  getMagazines(): Observable<Magazine[]> {
+    const magazines = of(this.magazineList);
+    return magazines;
+  }
 }

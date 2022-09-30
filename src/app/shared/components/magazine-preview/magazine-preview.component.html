@@ -1,0 +1,22 @@
+<div class="my-overlay white-border rounded-top">
+  <div class="card bg-transparent stack-top">
+    <div class="container g-0">
+      <a (click)="onSelectMagazine(magazine)" routerLinkActive="active">
+        <div class="row g-0">
+          <img
+            [src]="magazine.fileUrl"
+            class="front-page-image rounded"
+            alt="{{ magazine.name }}"
+          />
+        </div>
+      </a>
+    </div>
+    <ul class="ul-no-bullets">
+      <li>
+        <p>
+          {{ magazine.name }}
+        </p>
+      </li>
+    </ul>
+  </div>
+</div>

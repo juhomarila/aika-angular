@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Article } from 'src/app/shared/interfaces/article';
 import { Journalist } from 'src/app/shared/interfaces/journalist';
 import { Magazine } from 'src/app/shared/interfaces/magazine';
 import { FirestoreService } from 'src/app/shared/services/firestore.service';
@@ -9,14 +10,20 @@ import { FirestoreService } from 'src/app/shared/services/firestore.service';
   templateUrl: './journalist.component.html',
 })
 export class JournalistComponent implements OnInit, OnDestroy {
+  journalistKey!: string;
   journalist!: Journalist;
   height: number = 0;
   width: number = 0;
   magazines: Magazine[] = [];
+  selectedMagazine!: Magazine;
+  journalistArticles: Article[] = [];
+  hover: boolean = false;
+  loading: boolean = true;
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private fireStoreSvc: FirestoreService
+    private fireStoreSvc: FirestoreService,
+    private router: Router
   ) {
     this.height = window.innerHeight * 0.75;
     this.width = window.innerWidth * 0.4;
@@ -34,15 +41,56 @@ export class JournalistComponent implements OnInit, OnDestroy {
         this.activatedRoute.queryParams.forEach(param => {
           this.fireStoreSvc.getJournalist(param['g']).subscribe(journalist => {
             this.journalist = journalist.data() as Journalist;
+            this.journalist.magazines.map(magazineKey => {
+              this.fireStoreSvc.getMagazine(magazineKey).subscribe(magazine => {
+                this.magazines.push(magazine.data() as Magazine);
+              });
+            });
           });
         });
       }
     }
+    this.journalist.magazines.map(magazineKey => {
+      this.fireStoreSvc.getMagazine(magazineKey).subscribe(magazine => {
+        this.magazines.push(magazine.data() as Magazine);
+      });
+    });
+    this.journalist?.articles.map(articleKey => {
+      this.fireStoreSvc.getArticle(articleKey).subscribe(article => {
+        this.journalistArticles.push(article.data() as Article);
+      });
+    });
   }
 
-  //todo fetch magazines and get their names
+  getMagazine(key: string): string {
+    let magazineName = '';
+    this.magazines.map(magazine => {
+      if (magazine.key === key) {
+        magazineName = magazine.name;
+      }
+    });
+    return magazineName;
+  }
+
+  goToMagazinePage(key: string) {
+    this.magazines.map(magazine => {
+      if (magazine.key === key) {
+        this.router.navigateByUrl(`/magazine?g=${magazine.key}`, {
+          state: { magazine },
+        });
+      }
+    });
+  }
 
   ngOnDestroy(): void {
     localStorage.removeItem('journalist');
+  }
+
+  mouseOver() {
+    this.hover = true;
+  }
+
+  mouseLeave() {
+    this.hover = false;
   }
 }
