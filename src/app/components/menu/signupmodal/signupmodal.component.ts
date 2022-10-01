@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { UtilService } from 'src/app/shared/services/util.service';
 
 @Component({
   selector: 'app-signupmodal',
@@ -12,7 +13,8 @@ export class SignUpModalComponent {
 
   constructor(
     private activeModal: NgbActiveModal,
-    private authSvc: AuthService
+    private authSvc: AuthService,
+    private utilSvc: UtilService
   ) {}
 
   close() {
@@ -20,30 +22,30 @@ export class SignUpModalComponent {
   }
 
   async signUp(email: string, psw: string, retypePassword: string) {
-    if (this.validatePasswords(psw, retypePassword)) {
-      if (this.checkAllRequirements(psw)) {
+    if (this.utilSvc.validatePasswords(psw, retypePassword)) {
+      if (this.utilSvc.checkAllRequirements(psw)) {
         const result = await this.authSvc.SignUp(email, psw, this.activeModal);
         if (result === 'auth/email-already-in-use') {
           this.error = true;
           this.errorMsg = 'Sähköpostiosoite on jo käytössä';
         }
       }
-      if (!this.passwordRequirements(psw)) {
+      if (!this.utilSvc.passwordRequirements(psw)) {
         this.error = true;
         this.errorMsg =
           'Salasanan tulee sisältää isoja ja pieniä kirjaimia, sekä numeroita.';
       }
-      if (!this.passwordLength(psw)) {
+      if (!this.utilSvc.passwordLength(psw)) {
         this.error = true;
         this.errorMsg =
           'Salasanan tulee olla vähintään kahdeksan merkkiä pitkä.';
       }
-      if (!this.checkWhiteSpace(psw)) {
+      if (!this.utilSvc.checkWhiteSpace(psw)) {
         this.error = true;
         this.errorMsg = 'Salasanassa ei saa olla tyhjiä välejä.';
       }
     }
-    if (!this.validatePasswords(psw, retypePassword)) {
+    if (!this.utilSvc.validatePasswords(psw, retypePassword)) {
       this.error = true;
       this.errorMsg = 'Salasanat eivät täsmää.';
     }
@@ -59,38 +61,5 @@ export class SignUpModalComponent {
       return false;
     }
     return true;
-  }
-
-  passwordRequirements(password: string) {
-    const upper = /[A-Z]/.test(password),
-      lower = /[a-z]/.test(password),
-      num = /[0-9]/.test(password);
-
-    return upper && lower && num;
-  }
-
-  passwordLength(password: string) {
-    if (password.length < 8) {
-      return false;
-    }
-    return true;
-  }
-
-  checkWhiteSpace(password: string) {
-    if (/\s/.test(password)) {
-      return false;
-    }
-    return true;
-  }
-
-  checkAllRequirements(password: string) {
-    if (
-      this.passwordRequirements(password) &&
-      this.passwordLength(password) &&
-      this.checkWhiteSpace(password)
-    ) {
-      return true;
-    }
-    return false;
   }
 }

@@ -1,10 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Article } from 'src/app/shared/interfaces/article';
 import { Owned } from 'src/app/shared/interfaces/owned';
 import { User } from 'src/app/shared/interfaces/user';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { FirestoreService } from 'src/app/shared/services/firestore.service';
 import { UserService } from 'src/app/shared/services/user.service';
+import { SettingModalComponent } from './setting-modal/setting-modal.component';
 
 @Component({
   selector: 'app-settings',
@@ -18,7 +20,8 @@ export class SettingsComponent implements OnInit, OnDestroy {
   constructor(
     private authSvc: AuthService,
     private userSvc: UserService,
-    private fireStoreSvc: FirestoreService
+    private fireStoreSvc: FirestoreService,
+    private modalSvc: NgbModal
   ) {}
   ngOnDestroy(): void {
     localStorage.removeItem('owned');
@@ -62,5 +65,24 @@ export class SettingsComponent implements OnInit, OnDestroy {
 
   setDate(time: number) {
     return new Date(time).toLocaleString();
+  }
+
+  openEmailChangeModal() {
+    const modalRef = this.modalSvc.open(SettingModalComponent, { size: 'lg' });
+    modalRef.componentInstance.title = 'Vaihda sähköpostiosoite';
+    modalRef.componentInstance.email = true;
+  }
+
+  openPasswordChangeModal() {
+    const modalRef = this.modalSvc.open(SettingModalComponent, { size: 'lg' });
+    modalRef.componentInstance.title = 'Vaihda salasana';
+    modalRef.componentInstance.password = true;
+    modalRef.componentInstance.emailValue = this.user.email;
+  }
+
+  openNameChangeModal() {
+    const modalRef = this.modalSvc.open(SettingModalComponent, { size: 'lg' });
+    modalRef.componentInstance.title = 'Vaihda nimi';
+    modalRef.componentInstance.name = true;
   }
 }

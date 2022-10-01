@@ -14,6 +14,7 @@ import { SearchComponent } from './search/search.component';
 import { JournalistComponent } from './journalist/journalist.component';
 import { MagazineComponent } from './magazine/magazine.component';
 import { NgxTranslateModule } from '../ngx-translate/ngx-translate.module';
+import { SettingModalComponent } from './settings/setting-modal/setting-modal.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { NgxTranslateModule } from '../ngx-translate/ngx-translate.module';
     SearchComponent,
     JournalistComponent,
     MagazineComponent,
+    SettingModalComponent,
   ],
   imports: [
     CommonModule,

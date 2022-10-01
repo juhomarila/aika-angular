@@ -1,0 +1,104 @@
+<div>
+  <form class="form-register-sign">
+    <div class="modal-content bg-tumma-oma">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ title }}</h5>
+        <button
+          type="button"
+          class="btn-close"
+          (click)="close()"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-floating mb-4" *ngIf="status">
+          <h4>{{ statusMessage }}</h4>
+        </div>
+        <div class="form-floating mb-4" *ngIf="email">
+          <input
+            type="email"
+            class="form-control"
+            id="floatingInput6"
+            placeholder="Anna uusi sähköpostiosoite"
+            #email
+          />
+          <label for="floatingInput6">Anna uusi sähköpostiosoite</label>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary float-end">
+              {{ 'common.send' | translate }}
+            </button>
+          </div>
+        </div>
+        <div class="form-floating mb-4" *ngIf="name">
+          <input
+            type="text"
+            class="form-control"
+            id="floatingInput4"
+            placeholder="Anna uusi nimi"
+            #name
+          />
+          <label for="floatingInput4">Anna uusi nimi</label>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-primary float-end"
+              (click)="updateDisplayname(name.value)"
+            >
+              {{ 'common.send' | translate }}
+            </button>
+          </div>
+        </div>
+        <div *ngIf="password">
+          <div class="form-floating mb-4">
+            <input
+              type="password"
+              class="form-control"
+              id="floatingInput"
+              placeholder="Vanha salasana"
+              #oldPassword
+            />
+            <label for="floatingInput">Vanha salasana</label>
+          </div>
+          <div class="form-floating mb-4">
+            <input
+              type="password"
+              class="form-control"
+              id="floatingInput2"
+              placeholder="Uusi salasana"
+              #newPassword
+            />
+            <label for="floatingInput2">Uusi salasana</label>
+          </div>
+          <div class="form-floating mb-4">
+            <input
+              type="password"
+              class="form-control"
+              id="floatingInput3"
+              placeholder="Uusi salasana uudelleen"
+              #newPasswordRetype
+            />
+            <label for="floatingInput3">Uusi salasana uudelleen</label>
+            <div *ngIf="error">
+              <p>{{ errorMsg }}</p>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-primary float-end"
+                (click)="
+                  updatePassword(
+                    newPassword.value,
+                    newPasswordRetype.value,
+                    oldPassword.value
+                  )
+                "
+              >
+                {{ 'common.send' | translate }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

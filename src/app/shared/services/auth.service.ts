@@ -139,4 +139,69 @@ export class AuthService {
     this.router.navigate(['login']);
     window.location.reload();
   }
+
+  async LogOut() {
+    await this.afAuth.signOut();
+    localStorage.removeItem('user');
+    localStorage.removeItem('cart');
+    localStorage.removeItem('journalist');
+    localStorage.removeItem('magazine');
+    this.router.navigate(['login']);
+  }
+
+  async resetPasswordInSettings(email: string, oldPsw: string, newPsw: string) {
+    let msg = '';
+    const login = await this.afAuth
+      .signInWithEmailAndPassword(email, oldPsw)
+      .then(() => {})
+      .catch(e => {
+        msg = e.code;
+      });
+    if (msg === '') {
+      this.afAuth.currentUser.then(user => {
+        user
+          ?.updatePassword(newPsw)
+          .then(() => {})
+          .catch(e => {
+            msg = e.code;
+          });
+      });
+      return msg;
+    }
+    if (msg === 'auth/wrong-password') {
+      return msg;
+    }
+    msg = 'something went wrong';
+    return msg;
+  }
+
+  async updateEmail(email: string): Promise<boolean> {
+    return await this.afAuth.currentUser
+      .then(user => user?.updateEmail(email))
+      .then(() => {
+        return true;
+      })
+      .catch(error => {
+        return false;
+      });
+  }
+
+  async updateDisplayname(uid: string, name: string) {
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${uid}`);
+    this.afAuth.currentUser.then(user => {
+      user
+        ?.updateProfile({
+          displayName: name,
+        })
+        .then(() => {
+          userRef.set(
+            { displayName: name },
+            {
+              merge: true,
+            }
+          );
+        })
+        .catch(() => {});
+    });
+  }
 }

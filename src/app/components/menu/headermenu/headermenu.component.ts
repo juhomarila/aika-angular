@@ -45,6 +45,9 @@ export class HeadermenuComponent implements OnInit {
     if (this.isLogged) {
       this.username = this.authSvc.user.displayName;
     }
+    if (!this.isLogged) {
+      this.logoutUserIsError();
+    }
     setInterval(() => {
       this.noOfItemsInCart = this.shoppingCartSvc.getCart().length;
       this.ref.markForCheck();
@@ -97,6 +100,10 @@ export class HeadermenuComponent implements OnInit {
 
   logout() {
     this.authSvc.SignOut();
+  }
+
+  logoutUserIsError() {
+    this.authSvc.LogOut();
   }
 
   openShoppingCartModal() {
