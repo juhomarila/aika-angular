@@ -1,13 +1,13 @@
 <ng-container *ngIf="loading$ | async">
   <div class="overlay"></div>
-  <spinner></spinner>  
+  <spinner></spinner>
 </ng-container>
 <div class="bg-oma-gradient">
   <headerMenu class="fixed-top"></headerMenu>
-  <div>
-    <div>
-      <router-outlet></router-outlet>
-    </div>
+  <div [ngStyle]="{'min-height.px': minHeight}">
+    <router-outlet></router-outlet>
   </div>
-  <footerMenu></footerMenu>
+  <div #footer>
+    <footerMenu></footerMenu>
+  </div>
 </div>
