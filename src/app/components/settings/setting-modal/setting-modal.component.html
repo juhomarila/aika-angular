@@ -43,6 +43,7 @@
               type="button"
               class="btn btn-primary float-end"
               (click)="updateDisplayname(name.value)"
+              [disabled]="clicked"
             >
               {{ 'common.send' | translate }}
             </button>

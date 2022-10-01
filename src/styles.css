@@ -69,7 +69,8 @@
 }
 
 .center-overlay-mag-jour {
-  width: auto; /* Can be in percentage also. */
+  width: auto;
+  /* Can be in percentage also. */
   height: auto;
   margin: 0 auto;
   position: relative;
@@ -256,13 +257,62 @@ th {
   background-color: black;
 }
 
-.btn {
-  background-color: var(--btn);
+.btn-primary {
+  background-color: rgb(20, 36, 100);
+  border: 0;
 }
 
-.btn-primary {
-  background-color: var(--btn);
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active {
+  background-color: var(--btn) !important;
+  text-decoration: underline;
 }
+
+.btn-primary:disabled {
+  background-color: rgb(112, 8, 8);
+}
+
+.bi-eye-slash-fill {
+  padding: 1em;
+  color: black;
+  background-color: white;
+  border: 1px solid #ced4da;
+  border-radius: 0.375rem;
+  border-start-start-radius: 0;
+  border-bottom-left-radius: 0;
+  border-left: white;
+}
+
+.bi-eye-slash-fill:hover {
+  cursor: pointer;
+}
+
+.bi-eye-fill {
+  padding: 1em;
+  color: black;
+  background-color: white;
+  border: 1px solid #ced4da;
+  border-radius: 0.375rem;
+  border-start-start-radius: 0;
+  border-bottom-left-radius: 0;
+  border-left: white;
+}
+
+.bi-eye-fill:hover {
+  cursor: pointer;
+}
+
+.form-control {
+  border-end-end-radius: 0;
+  border-top-right-radius: 0;
+  border-right: white;
+}
+
+.form-control-custom {
+  border-end-end-radius: 0.375em;
+  border-top-right-radius: 0.375em;
+  border-right: 1px solid #ced4da;
+}
+
 
 .background-transparent {
   background-color: transparent;

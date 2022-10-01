@@ -2,7 +2,7 @@
   <form class="form-register-sign" *ngIf="!forgotClicked">
     <div class="modal-content bg-tumma-oma">
       <div class="modal-header">
-        <h5 class="modal-title">{{"signInUpModal.title" | translate }}</h5>
+        <h5 class="modal-title">{{ 'signInUpModal.title' | translate }}</h5>
         <button
           type="button"
           class="btn-close"
@@ -14,34 +14,46 @@
         <div class="form-floating mb-4">
           <input
             type="email"
-            class="form-control"
+            class="form-control form-control-custom"
             id="floatingInput6"
-            placeholder='{{"common.emailPlaceholder" | translate }}'
+            placeholder="{{ 'common.emailPlaceholder' | translate }}"
             #email
           />
-          <label for="floatingInput6">{{"common.email" | translate }}</label>
+          <label for="floatingInput6">{{ 'common.email' | translate }}</label>
         </div>
-        <div class="form-floating mb-4">
+        <div class="d-flex form-floating mb-4">
           <input
-            type="password"
+            [type]="show ? 'text' : 'password'"
             class="form-control"
             id="floatingInput7"
-            placeholder='{{"common.password" | translate }}'
+            placeholder="{{ 'common.password' | translate }}"
             #psw
           />
-          <label for="floatingInput7">{{"common.password" | translate }}</label>
+          <label for="floatingInput7">{{
+            'common.password' | translate
+          }}</label>
+          <i
+            class="bi bi-eye-slash-fill align-self-center"
+            (click)="showPsw()"
+            [hidden]="show"
+          ></i>
+          <i
+          class="bi bi-eye-fill align-self-center"
+          (click)="showPsw()"
+          [hidden]="!show"
+        ></i>
         </div>
         <div class="form-check">
           <input class="form-check-input" type="checkbox" id="gridCheck1" />
           <label class="form-check-label" for="gridCheck1">
-            <p>{{"signInUpModal.rememberme" | translate }}</p>
+            <p>{{ 'signInUpModal.rememberme' | translate }}</p>
           </label>
         </div>
         <div class="form-floating mb-4" (click)="forgotPassword()">
-          <p id="forgotpsw">{{"signInUpModal.forgottenPsw" | translate }}</p>
+          <p id="forgotpsw">{{ 'signInUpModal.forgottenPsw' | translate }}</p>
         </div>
         <div class="form-floating mb-4" [hidden]="!error">
-          <p style="color: red;">{{ errorMsg }}</p>
+          <p style="color: red">{{ errorMsg }}</p>
         </div>
         <div class="form-floating mb-4">
           <a class="google btn" (click)="signInWithGoogle()"
@@ -58,8 +70,9 @@
           type="button"
           class="btn btn-primary float-end"
           (click)="signIn(email.value, psw.value)"
+          [disabled]="clicked"
         >
-        {{"common.login" | translate }}
+          {{ 'common.login' | translate }}
         </button>
       </div>
     </div>
@@ -68,7 +81,7 @@
     <div class="modal-content bg-tumma-oma">
       <div class="modal-header">
         <h5 class="modal-title">
-          {{"signInUpModal.forgottenPswLink" | translate }}
+          {{ 'signInUpModal.forgottenPswLink' | translate }}
         </h5>
         <button
           type="button"
@@ -81,19 +94,23 @@
         <div class="form-floating mb-4">
           <input
             type="email"
-            class="form-control"
+            class="form-control form-control-custom"
             id="floatingInput6"
-            placeholder='{{"common.emailPlaceholder" | translate }}'
+            placeholder="{{ 'common.emailPlaceholder' | translate }}"
             #emailForgot
           />
-          <label for="floatingInput6">{{"common.email" | translate }}</label>
+          <label for="floatingInput6">{{ 'common.email' | translate }}</label>
+        </div>
+        <div class="form-floating mb-4" [hidden]="!error">
+          <p style="color: rgb(139, 10, 10)">{{ errorMsg }}</p>
         </div>
         <button
           type="button"
           class="btn btn-primary float-end"
           (click)="handleForgotPassword(emailForgot.value)"
+          [disabled]="clicked"
         >
-        {{"common.send" | translate }}
+          {{ 'common.send' | translate }}
         </button>
       </div>
     </div>

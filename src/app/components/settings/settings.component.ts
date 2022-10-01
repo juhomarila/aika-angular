@@ -84,5 +84,11 @@ export class SettingsComponent implements OnInit, OnDestroy {
     const modalRef = this.modalSvc.open(SettingModalComponent, { size: 'lg' });
     modalRef.componentInstance.title = 'Vaihda nimi';
     modalRef.componentInstance.name = true;
+    modalRef.result.then(data => {
+      if (data) {
+        window.location.reload();
+        localStorage.setItem('user', JSON.stringify(this.authSvc.userData));
+      }
+    });
   }
 }

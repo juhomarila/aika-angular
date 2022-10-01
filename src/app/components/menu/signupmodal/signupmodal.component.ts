@@ -10,6 +10,7 @@ import { UtilService } from 'src/app/shared/services/util.service';
 export class SignUpModalComponent {
   error: boolean = false;
   errorMsg: string = '';
+  clicked: boolean = false;
 
   constructor(
     private activeModal: NgbActiveModal,
@@ -22,6 +23,7 @@ export class SignUpModalComponent {
   }
 
   async signUp(email: string, psw: string, retypePassword: string) {
+    this.clicked = true;
     if (this.utilSvc.validatePasswords(psw, retypePassword)) {
       if (this.utilSvc.checkAllRequirements(psw)) {
         const result = await this.authSvc.SignUp(email, psw, this.activeModal);

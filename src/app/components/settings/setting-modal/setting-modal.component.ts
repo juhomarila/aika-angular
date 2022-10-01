@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { User } from 'src/app/shared/interfaces/user';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { UtilService } from 'src/app/shared/services/util.service';
@@ -18,6 +19,8 @@ export class SettingModalComponent implements OnInit {
   status: boolean = false;
   errorMsg: string = '';
   error: boolean = false;
+  user!: User;
+  clicked: boolean = false;
 
   constructor(
     private activeModal: NgbActiveModal,
@@ -26,7 +29,9 @@ export class SettingModalComponent implements OnInit {
     private loading: LoadingService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.user = this.authSvc.user;
+  }
 
   close() {
     this.activeModal.dismiss();
@@ -73,22 +78,23 @@ export class SettingModalComponent implements OnInit {
   }
 
   async updateDisplayname(name: string) {
-    this.authSvc.updateDisplayname(this.authSvc.user.uid, name).then(() => {
+    this.authSvc.updateDisplayname(this.user.uid, name).then(() => {
       this.setStatusMessage('Käyttäjänimen vaihto onnistui', true);
     });
   }
 
-  setStatusMessage(msg: string, reload?: boolean) {
+  async setStatusMessage(msg: string, reload?: boolean) {
+    this.clicked = true;
     this.loading.show();
     this.status = true;
     this.statusMessage = msg;
     setTimeout(() => {
       this.statusMessage = '';
       this.status = false;
-      this.activeModal.dismiss();
-      if (reload) {
-        window.location.reload();
-      }
+      this.activeModal.close('success');
+      // if (reload) {
+      //   window.location.reload();
+      // }
       this.loading.hide();
     }, 3000);
   }

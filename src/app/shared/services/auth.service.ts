@@ -175,6 +175,18 @@ export class AuthService {
     return msg;
   }
 
+  async sendForgotPasswordLink(email: string): Promise<boolean> {
+    const result = this.afAuth
+      .sendPasswordResetEmail(email)
+      .then(() => {
+        return true;
+      })
+      .catch(() => {
+        return false;
+      });
+    return result;
+  }
+
   async updateEmail(email: string): Promise<boolean> {
     return await this.afAuth.currentUser
       .then(user => user?.updateEmail(email))
@@ -188,7 +200,7 @@ export class AuthService {
 
   async updateDisplayname(uid: string, name: string) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${uid}`);
-    this.afAuth.currentUser.then(user => {
+    await this.afAuth.currentUser.then(user => {
       user
         ?.updateProfile({
           displayName: name,

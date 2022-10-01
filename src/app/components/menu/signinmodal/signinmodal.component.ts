@@ -11,6 +11,8 @@ export class SignInModalComponent {
   forgotClicked: boolean = false;
   error: boolean = false;
   errorMsg: string = '';
+  clicked: boolean = false;
+  show: boolean = false;
 
   constructor(
     private activeModal: NgbActiveModal,
@@ -28,6 +30,7 @@ export class SignInModalComponent {
   }
 
   async signIn(email: string, psw: string) {
+    this.clicked = true;
     const login = await this.authSvc.SignIn(email, psw, this.activeModal);
     if (login === 'auth/invalid-email') {
       this.error = true;
@@ -46,21 +49,29 @@ export class SignInModalComponent {
       this.errorMsg =
         'Sähköpostiosoitetta ei ole vahvistettu, tarkasta sähköpostisi';
     }
-
-    // if (!login) {
-    //   this.error = true;
-    //   this.errorMsg =
-    //     'Käyttäjätiliäsi ei ole vahvistettu. Käy tarkistamassa sähköpostisi';
-    // } else {
-    //   this.activeModal.dismiss();
-    // }
   }
 
   forgotPassword() {
     this.forgotClicked = true;
   }
 
-  handleForgotPassword(email: string) {
+  async handleForgotPassword(email: string) {
     console.log(email);
+    this.clicked = true;
+    this.authSvc.sendForgotPasswordLink(email).then(result => {
+      console.log(result);
+      if (result) {
+        this.error = true;
+        this.errorMsg =
+          'Sähköpostiisi on lähetetty salasanan nollauslinkki, tarkasta sähköpostisi ja odota muutama minuutti';
+      } else {
+        this.error = true;
+        this.errorMsg = 'Jokin meni pieleen, yritä uudelleen.';
+      }
+    });
+  }
+
+  showPsw() {
+    this.show = !this.show;
   }
 }
