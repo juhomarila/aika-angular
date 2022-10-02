@@ -177,27 +177,47 @@ export class AuthService {
     return msg;
   }
 
-  async sendForgotPasswordLink(email: string): Promise<boolean> {
-    const result = this.afAuth
+  async sendForgotPasswordLink(email: string): Promise<string> {
+    let msg = '';
+    await this.afAuth
       .sendPasswordResetEmail(email)
-      .then(() => {
-        return true;
-      })
-      .catch(() => {
-        return false;
+      .then(() => {})
+      .catch(e => {
+        console.log(e);
+        msg = e.code;
       });
-    return result;
+    return msg;
   }
 
-  async updateEmail(email: string): Promise<boolean> {
-    return await this.afAuth.currentUser
-      .then(user => user?.updateEmail(email))
-      .then(() => {
-        return true;
-      })
-      .catch(error => {
-        return false;
+  async updateEmail(
+    psw: string,
+    newEmail: string,
+    oldEmail: string
+  ): Promise<boolean> {
+    let msg = '';
+    await this.afAuth
+      .signInWithEmailAndPassword(oldEmail, psw)
+      .then(() => {})
+      .catch(e => {
+        msg = e.code;
       });
+    try {
+      if (msg === '') {
+        await this.afAuth.currentUser
+          .then(user => {
+            user?.verifyBeforeUpdateEmail(newEmail);
+          })
+          .then(() => {
+            return true;
+          })
+          .catch(() => {
+            return false;
+          });
+      }
+    } catch {
+      return false;
+    }
+    return false;
   }
 
   async updateDisplayname(uid: string, name: string) {
@@ -222,18 +242,20 @@ export class AuthService {
   async removeAccount(uid: string, email: string, removePsw: string) {
     let msg = '';
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${uid}`);
-    const login = await this.afAuth
+    await this.afAuth
       .signInWithEmailAndPassword(email, removePsw)
       .then(() => {})
       .catch(e => {
         msg = e.code;
       });
     try {
+      console.log(msg);
       if (msg === '') {
         this.afAuth.currentUser.then(user => {
           user?.delete();
         });
         userRef.delete();
+        //userRef.collection('ownedArticles');
         return true;
       }
     } catch {

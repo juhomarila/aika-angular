@@ -29,7 +29,7 @@
               (showPsw)="showPsw()"
               class="align-self-center"
             ></psw-view-toggler>
-          </div>F
+          </div>
           <div *ngIf="error">
             <p>{{ errorMsg }}</p>
           </div>
@@ -44,17 +44,42 @@
             </button>
           </div>
         </div>
-        <div class="form-floating mb-4" *ngIf="email">
-          <input
-            type="email"
-            class="form-control form-control-custom"
-            id="floatingInput6"
-            placeholder="Anna uusi sähköpostiosoite"
-            #email
-          />
-          <label for="floatingInput6">Anna uusi sähköpostiosoite</label>
+        <div *ngIf="email">
+          <div class="form-floating mb-4">
+            <input
+              type="email"
+              class="form-control form-control-custom"
+              id="floatingInput6"
+              placeholder="Anna uusi sähköpostiosoite"
+              #newEmail
+            />
+            <label for="floatingInput6">Anna uusi sähköpostiosoite</label>
+          </div>
+          <div class="d-flex form-floating mb-4">
+            <input
+              [type]="show ? 'text' : 'password'"
+              class="form-control"
+              id="floatingInput"
+              placeholder="Salasanasi"
+              #removeEmailPassword
+            />
+            <label for="floatingInput">Salasanasi</label>
+            <psw-view-toggler
+              [show]="show"
+              (showPsw)="showPsw()"
+              class="align-self-center"
+            ></psw-view-toggler>
+          </div>
+          <div *ngIf="error">
+            <p>{{ errorMsg }}</p>
+          </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary float-end">
+            <button
+              type="button"
+              class="btn btn-primary float-end"
+              (click)="updateEmail(removeEmailPassword.value, newEmail.value)"
+              [disabled]="clicked"
+            >
               {{ 'common.send' | translate }}
             </button>
           </div>

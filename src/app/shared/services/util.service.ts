@@ -55,4 +55,31 @@ export class UtilService {
     }
     return false;
   }
+
+  messageSvc(
+    result: string,
+    error: boolean,
+    errorMsg: string,
+    clicked: boolean,
+    message: string
+  ) {
+    if (result === '') {
+      error = true;
+      errorMsg = message;
+    }
+    if (result === 'auth/user-not-found') {
+      error = true;
+      errorMsg = 'Sähköpostiosoitteella ei löydy käyttäjää.';
+      clicked = false;
+    }
+    if (result === 'auth/invalid-email') {
+      error = true;
+      errorMsg = 'Väärä sähköpostiosoite';
+      clicked = false;
+    } else {
+      error = true;
+      errorMsg = 'Jokin meni pieleen, yritä uudelleen.';
+      clicked = false;
+    }
+  }
 }

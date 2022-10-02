@@ -71,6 +71,14 @@ export class SettingsComponent implements OnInit, OnDestroy {
     const modalRef = this.modalSvc.open(SettingModalComponent, { size: 'lg' });
     modalRef.componentInstance.title = 'Vaihda sähköpostiosoite';
     modalRef.componentInstance.email = true;
+    modalRef.componentInstance.emailValue = this.user.email;
+    modalRef.result.then(data => {
+      if (data) {
+        localStorage.clear();
+        this.authSvc.LogOut();
+        window.location.reload();
+      }
+    });
   }
 
   openPasswordChangeModal() {

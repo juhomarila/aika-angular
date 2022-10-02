@@ -48,14 +48,23 @@ export class SettingModalComponent implements OnInit {
 
   async removeAccount(removePsw: string) {
     this.clicked = true;
-    this.authSvc.removeAccount(
-      this.emailValue!,
-      this.authSvc.user.uid,
-      removePsw
-    );
+    this.authSvc
+      .removeAccount(this.authSvc.user.uid, this.emailValue!, removePsw)
+      .then(status => {
+        console.log(status);
+      });
     this.setStatusMessage(
       'Tilisi poistettu, sinut kirjataan ulos automaattisesti'
     );
+  }
+
+  async updateEmail(psw: string, newEmail: string) {
+    this.clicked = true;
+    this.authSvc.updateEmail(psw, newEmail, this.emailValue!);
+    this.error = true;
+    this.errorMsg =
+      'Tarkista sähköpostisi, se päivitetään kun olet käynyt verifioimassa sähköpostiosoitteesi sähköpostiin lähtetystä linkistä.';
+    this.setStatusMessage('Sinut kirjataan automaattisesti ulos');
   }
 
   async updatePassword(newPsw: string, retypeNewPsw: string, oldPsw: string) {

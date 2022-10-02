@@ -32,26 +32,36 @@ export class SignUpModalComponent {
         if (result === 'auth/email-already-in-use') {
           this.error = true;
           this.errorMsg = 'Sähköpostiosoite on jo käytössä';
+          this.clicked = false;
+        }
+        if (result === 'auth/invalid-email') {
+          this.error = true;
+          this.errorMsg = 'Sähköpostiosoite on väärässä muodossa';
+          this.clicked = false;
         }
       }
       if (!this.utilSvc.passwordRequirements(psw)) {
         this.error = true;
         this.errorMsg =
           'Salasanan tulee sisältää isoja ja pieniä kirjaimia, sekä numeroita.';
+        this.clicked = false;
       }
       if (!this.utilSvc.passwordLength(psw)) {
         this.error = true;
         this.errorMsg =
           'Salasanan tulee olla vähintään kahdeksan merkkiä pitkä.';
+        this.clicked = false;
       }
       if (!this.utilSvc.checkWhiteSpace(psw)) {
         this.error = true;
         this.errorMsg = 'Salasanassa ei saa olla tyhjiä välejä.';
+        this.clicked = false;
       }
     }
     if (!this.utilSvc.validatePasswords(psw, retypePassword)) {
       this.error = true;
       this.errorMsg = 'Salasanat eivät täsmää.';
+      this.clicked = false;
     }
   }
 

@@ -35,19 +35,23 @@ export class SignInModalComponent {
     if (login === 'auth/invalid-email') {
       this.error = true;
       this.errorMsg = 'Väärä sähköpostiosoite';
+      this.clicked = false;
     }
     if (login === 'auth/user-not-found') {
       this.error = true;
       this.errorMsg = 'Annetulla sähköpostilla ei rekisteröityneitä käyttäjiä';
+      this.clicked = false;
     }
     if (login === 'auth/wrong-password') {
       this.error = true;
       this.errorMsg = 'Väärä salasana';
+      this.clicked = false;
     }
     if (login === 'auth/email-not-verified') {
       this.error = true;
       this.errorMsg =
         'Sähköpostiosoitetta ei ole vahvistettu, tarkasta sähköpostisi';
+      this.clicked = false;
     }
   }
 
@@ -56,17 +60,27 @@ export class SignInModalComponent {
   }
 
   async handleForgotPassword(email: string) {
-    console.log(email);
     this.clicked = true;
     this.authSvc.sendForgotPasswordLink(email).then(result => {
       console.log(result);
-      if (result) {
+      if (result === '') {
         this.error = true;
         this.errorMsg =
           'Sähköpostiisi on lähetetty salasanan nollauslinkki, tarkasta sähköpostisi ja odota muutama minuutti';
+      }
+      if (result === 'auth/user-not-found') {
+        this.error = true;
+        this.errorMsg = 'Sähköpostiosoitteella ei löydy käyttäjää.';
+        this.clicked = false;
+      }
+      if (result === 'auth/invalid-email') {
+        this.error = true;
+        this.errorMsg = 'Väärä sähköpostiosoite';
+        this.clicked = false;
       } else {
         this.error = true;
         this.errorMsg = 'Jokin meni pieleen, yritä uudelleen.';
+        this.clicked = false;
       }
     });
   }
