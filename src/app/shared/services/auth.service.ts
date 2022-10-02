@@ -75,11 +75,12 @@ export class AuthService {
       .signInWithEmailAndPassword(email, password)
       .then(user => {
         if (user.user?.emailVerified) {
-          this.SetUserData(user.user);
-          this.router.navigate(['frontpage']).then(() => {
-            modal.dismiss();
-            window.location.reload();
-            this.loading.hide();
+          this.SetUserData(user.user).then(() => {
+            this.router.navigate(['frontpage']).then(() => {
+              modal.dismiss();
+              window.location.reload();
+              this.loading.hide();
+            });
           });
         } else {
           msg = 'auth/email-not-verified';
@@ -101,11 +102,12 @@ export class AuthService {
     await this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then(userCredentials => {
-        userCredentials.user?.sendEmailVerification();
-        this.SetUserData(userCredentials.user).then(() => {
-          modal.dismiss();
-          window.location.reload();
-          this.loading.hide();
+        userCredentials.user?.sendEmailVerification().then(() => {
+          this.SetUserData(userCredentials.user).then(() => {
+            modal.dismiss();
+            window.location.reload();
+            this.loading.hide();
+          });
         });
       })
       .catch(e => {
@@ -217,14 +219,26 @@ export class AuthService {
     });
   }
 
-  async removeAccount() {
-    try {
-      this.afAuth.currentUser.then(user => {
-        user?.delete();
+  async removeAccount(uid: string, email: string, removePsw: string) {
+    let msg = '';
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${uid}`);
+    const login = await this.afAuth
+      .signInWithEmailAndPassword(email, removePsw)
+      .then(() => {})
+      .catch(e => {
+        msg = e.code;
       });
-      return true;
+    try {
+      if (msg === '') {
+        this.afAuth.currentUser.then(user => {
+          user?.delete();
+        });
+        userRef.delete();
+        return true;
+      }
     } catch {
       return false;
     }
+    return false;
   }
 }

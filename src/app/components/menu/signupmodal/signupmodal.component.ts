@@ -11,6 +11,8 @@ export class SignUpModalComponent {
   error: boolean = false;
   errorMsg: string = '';
   clicked: boolean = false;
+  show: boolean = false;
+  show2: boolean = false;
 
   constructor(
     private activeModal: NgbActiveModal,
@@ -63,5 +65,13 @@ export class SignUpModalComponent {
       return false;
     }
     return true;
+  }
+
+  showPsw() {
+    this.show = !this.show;
+  }
+
+  showPsw2() {
+    this.show2 = !this.show2;
   }
 }

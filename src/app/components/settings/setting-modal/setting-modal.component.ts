@@ -46,9 +46,13 @@ export class SettingModalComponent implements OnInit {
     this.activeModal.dismiss();
   }
 
-  async removeAccount() {
+  async removeAccount(removePsw: string) {
     this.clicked = true;
-    this.authSvc.removeAccount();
+    this.authSvc.removeAccount(
+      this.emailValue!,
+      this.authSvc.user.uid,
+      removePsw
+    );
     this.setStatusMessage(
       'Tilisi poistettu, sinut kirjataan ulos automaattisesti'
     );

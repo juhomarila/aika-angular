@@ -15,6 +15,21 @@
           <h4>{{ statusMessage }}</h4>
         </div>
         <div class="form-floating mb-4" *ngIf="accountRemoval">
+          <div class="d-flex form-floating mb-4">
+            <input
+              [type]="show ? 'text' : 'password'"
+              class="form-control"
+              id="floatingInput"
+              placeholder="Vanha salasana"
+              #removePsw
+            />
+            <label for="floatingInput">Salasana</label>
+            <psw-view-toggler
+              [show]="show"
+              (showPsw)="showPsw()"
+              class="align-self-center"
+            ></psw-view-toggler>
+          </div>F
           <div *ngIf="error">
             <p>{{ errorMsg }}</p>
           </div>
@@ -22,7 +37,7 @@
             <button
               type="button"
               class="btn btn-primary float-end"
-              (click)="removeAccount()"
+              (click)="removeAccount(removePsw.value)"
               [disabled]="clicked"
             >
               Vahvista tilin poisto

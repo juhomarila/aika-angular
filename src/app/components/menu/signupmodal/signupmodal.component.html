@@ -17,7 +17,7 @@
           <div class="form-floating mb-4">
             <input
               type="email"
-              class="form-control"
+              class="form-control form-control-custom"
               id="floatingInput2"
               placeholder="{{ 'common.emailPlaceholder' | translate }}"
               #email
@@ -25,9 +25,9 @@
             />
             <label for="floatingInput2">{{ 'common.email' | translate }}</label>
           </div>
-          <div class="form-floating mb-4">
+          <div class="d-flex form-floating mb-4">
             <input
-              type="password"
+              [type]="show ? 'text' : 'password'"
               class="form-control"
               id="floatingInput3"
               placeholder="{{ 'common.password' | translate }}"
@@ -37,10 +37,15 @@
             <label for="floatingInput3">{{
               'common.password' | translate
             }}</label>
+            <psw-view-toggler
+              [show]="show"
+              (showPsw)="showPsw()"
+              class="align-self-center"
+            ></psw-view-toggler>
           </div>
-          <div class="form-floating mb-4">
+          <div class="d-flex form-floating mb-4">
             <input
-              type="password"
+              [type]="show2 ? 'text' : 'password'"
               class="form-control"
               id="floatingInput4"
               placeholder="{{ 'common.password' | translate }}"
@@ -50,6 +55,11 @@
             <label for="floatingInput3">{{
               'common.retypePassword' | translate
             }}</label>
+            <psw-view-toggler
+            [show]="show2"
+            (showPsw)="showPsw2()"
+            class="align-self-center"
+          ></psw-view-toggler>
           </div>
           <div class="form-floating mb-4">
             <ul class="ul-no-bullets">
