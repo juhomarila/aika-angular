@@ -18,6 +18,7 @@
             id="floatingInput6"
             placeholder="{{ 'common.emailPlaceholder' | translate }}"
             #email
+            required
           />
           <label for="floatingInput6">{{ 'common.email' | translate }}</label>
         </div>
@@ -28,6 +29,7 @@
             id="floatingInput7"
             placeholder="{{ 'common.password' | translate }}"
             #psw
+            required
           />
           <label for="floatingInput7">{{
             'common.password' | translate
@@ -47,8 +49,8 @@
         <div class="form-floating mb-4" (click)="forgotPassword()">
           <p id="forgotpsw">{{ 'signInUpModal.forgottenPsw' | translate }}</p>
         </div>
-        <div class="form-floating mb-4" [hidden]="!error">
-          <p style="color: red">{{ errorMsg }}</p>
+        <div class="form-floating mb-4" [hidden]="!error.error">
+          <p style="color: red">{{ error.errorMsg }}</p>
         </div>
         <div class="form-floating mb-4">
           <a class="google btn" (click)="signInWithGoogle()"
@@ -65,7 +67,7 @@
           type="button"
           class="btn btn-primary float-end"
           (click)="signIn(email.value, psw.value)"
-          [disabled]="clicked"
+          [disabled]="error.clicked"
         >
           {{ 'common.login' | translate }}
         </button>
@@ -93,17 +95,18 @@
             id="floatingInput6"
             placeholder="{{ 'common.emailPlaceholder' | translate }}"
             #emailForgot
+            required
           />
           <label for="floatingInput6">{{ 'common.email' | translate }}</label>
         </div>
-        <div class="form-floating mb-4" [hidden]="!error">
-          <p style="color: rgb(139, 10, 10)">{{ errorMsg }}</p>
+        <div class="form-floating mb-4" [hidden]="!error.error">
+          <p style="color: rgb(139, 10, 10)">{{ error.errorMsg }}</p>
         </div>
         <button
           type="button"
           class="btn btn-primary float-end"
           (click)="handleForgotPassword(emailForgot.value)"
-          [disabled]="clicked"
+          [disabled]="error.clicked"
         >
           {{ 'common.send' | translate }}
         </button>

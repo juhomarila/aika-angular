@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Article } from '../interfaces/article';
+import { ErrorMessage } from '../interfaces/error-message';
 
 @Injectable({
   providedIn: 'root',
@@ -56,30 +57,63 @@ export class UtilService {
     return false;
   }
 
-  messageSvc(
-    result: string,
-    error: boolean,
-    errorMsg: string,
-    clicked: boolean,
-    message: string
-  ) {
+  messageSvc(result: string, message?: string) {
+    let error: ErrorMessage = {
+      error: false,
+      errorMsg: '',
+      clicked: false,
+    };
     if (result === '') {
-      error = true;
-      errorMsg = message;
+      error = {
+        error: true,
+        errorMsg: message!,
+        clicked: true,
+      };
     }
     if (result === 'auth/user-not-found') {
-      error = true;
-      errorMsg = 'Sähköpostiosoitteella ei löydy käyttäjää.';
-      clicked = false;
+      error = {
+        error: true,
+        errorMsg: 'Annetulla sähköpostiosoitteella ei löydy käyttäjää.',
+        clicked: false,
+      };
     }
     if (result === 'auth/invalid-email') {
-      error = true;
-      errorMsg = 'Väärä sähköpostiosoite';
-      clicked = false;
-    } else {
-      error = true;
-      errorMsg = 'Jokin meni pieleen, yritä uudelleen.';
-      clicked = false;
+      error = {
+        error: true,
+        errorMsg: 'Väärä sähköpostiosoite',
+        clicked: false,
+      };
     }
+    if (result === 'auth/email-already-in-use') {
+      error = {
+        error: true,
+        errorMsg: 'Sähköpostiosoite on jo käytössä',
+        clicked: false,
+      };
+    }
+    if (result === 'auth/email-not-verified') {
+      error = {
+        error: true,
+        errorMsg:
+          'Sähköpostiosoitetta ei ole vahvistettu, tarkasta sähköpostisi',
+        clicked: false,
+      };
+    }
+    if (result === 'auth/wrong-password') {
+      error = {
+        error: true,
+        errorMsg: 'Väärä salasana',
+        clicked: false,
+      };
+    }
+
+    // else {
+    //   error = {
+    //     error: true,
+    //     errorMsg: 'Jokin meni pieleen, yritä uudelleen.',
+    //     clicked: false,
+    //   };
+    // }
+    return error;
   }
 }

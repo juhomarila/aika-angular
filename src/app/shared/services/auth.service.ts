@@ -153,12 +153,13 @@ export class AuthService {
 
   async resetPasswordInSettings(email: string, oldPsw: string, newPsw: string) {
     let msg = '';
-    const login = await this.afAuth
+    await this.afAuth
       .signInWithEmailAndPassword(email, oldPsw)
       .then(() => {})
       .catch(e => {
         msg = e.code;
       });
+
     if (msg === '') {
       this.afAuth.currentUser.then(user => {
         user
@@ -168,6 +169,7 @@ export class AuthService {
             msg = e.code;
           });
       });
+      console.log(msg);
       return msg;
     }
     if (msg === 'auth/wrong-password') {
@@ -183,7 +185,7 @@ export class AuthService {
       .sendPasswordResetEmail(email)
       .then(() => {})
       .catch(e => {
-        console.log(e);
+        console.log(e.code);
         msg = e.code;
       });
     return msg;
@@ -249,13 +251,11 @@ export class AuthService {
         msg = e.code;
       });
     try {
-      console.log(msg);
       if (msg === '') {
         this.afAuth.currentUser.then(user => {
           user?.delete();
         });
         userRef.delete();
-        //userRef.collection('ownedArticles');
         return true;
       }
     } catch {

@@ -68,42 +68,44 @@ export class SettingModalComponent implements OnInit {
   }
 
   async updatePassword(newPsw: string, retypeNewPsw: string, oldPsw: string) {
-    if (this.utilSvc.validatePasswords(newPsw, retypeNewPsw)) {
-      if (this.utilSvc.checkAllRequirements(newPsw)) {
-        await this.authSvc
-          .resetPasswordInSettings(this.emailValue!, oldPsw, newPsw)
-          .then(value => {
-            if (value === '') {
-              this.setStatusMessage('Salasananvaihto onnistui');
-            }
-            if (value === 'auth/wrong-password') {
-              this.setStatusMessage('Nykyinen salasana on väärä');
-            } else {
-              this.setStatusMessage(
-                'Salasananvaihto ei onnistunut, yritä uudelleen'
-              );
-            }
-          })
-          .catch(e => console.log(e));
-      }
-      if (!this.utilSvc.passwordRequirements(newPsw)) {
-        this.error = true;
-        this.errorMsg =
-          'Salasanan tulee sisältää isoja ja pieniä kirjaimia, sekä numeroita.';
-      }
-      if (!this.utilSvc.passwordLength(newPsw)) {
-        this.error = true;
-        this.errorMsg =
-          'Salasanan tulee olla vähintään kahdeksan merkkiä pitkä.';
-      }
-      if (!this.utilSvc.checkWhiteSpace(newPsw)) {
-        this.error = true;
-        this.errorMsg = 'Salasanassa ei saa olla tyhjiä välejä.';
-      }
-    }
-    if (!this.utilSvc.validatePasswords(newPsw, retypeNewPsw)) {
+    if (newPsw === oldPsw) {
       this.error = true;
-      this.errorMsg = 'Salasanat eivät täsmää.';
+      this.errorMsg = 'Uusi ja vanha salasana ovat samat';
+    } else {
+      if (this.utilSvc.validatePasswords(newPsw, retypeNewPsw)) {
+        if (this.utilSvc.checkAllRequirements(newPsw)) {
+          this.error = false;
+          await this.authSvc
+            .resetPasswordInSettings(this.emailValue!, oldPsw, newPsw)
+            .then(value => {
+              if (value === 'auth/wrong-password') {
+                this.error = true;
+                this.errorMsg = 'Nykyinen salasana on väärä';
+              } else {
+                this.setStatusMessage('Salasananvaihto onnistui');
+              }
+            })
+            .catch(e => console.log(e));
+        }
+        if (!this.utilSvc.passwordRequirements(newPsw)) {
+          this.error = true;
+          this.errorMsg =
+            'Salasanan tulee sisältää isoja ja pieniä kirjaimia, sekä numeroita.';
+        }
+        if (!this.utilSvc.passwordLength(newPsw)) {
+          this.error = true;
+          this.errorMsg =
+            'Salasanan tulee olla vähintään kahdeksan merkkiä pitkä.';
+        }
+        if (!this.utilSvc.checkWhiteSpace(newPsw)) {
+          this.error = true;
+          this.errorMsg = 'Salasanassa ei saa olla tyhjiä välejä.';
+        }
+      }
+      if (!this.utilSvc.validatePasswords(newPsw, retypeNewPsw)) {
+        this.error = true;
+        this.errorMsg = 'Salasanat eivät täsmää.';
+      }
     }
   }
 
@@ -128,7 +130,7 @@ export class SettingModalComponent implements OnInit {
       this.status = false;
       this.activeModal.close('success');
       this.loading.hide();
-    }, 3000);
+    }, 5000);
   }
 
   showPsw() {

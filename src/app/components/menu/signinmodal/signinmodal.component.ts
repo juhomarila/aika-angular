@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ErrorMessage } from 'src/app/shared/interfaces/error-message';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { UtilService } from 'src/app/shared/services/util.service';
 
 @Component({
   selector: 'app-signinmodal',
@@ -9,15 +11,18 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 })
 export class SignInModalComponent {
   forgotClicked: boolean = false;
-  error: boolean = false;
-  errorMsg: string = '';
-  clicked: boolean = false;
+  error: ErrorMessage = {
+    error: false,
+    errorMsg: '',
+    clicked: false,
+  };
   show: boolean = false;
 
   constructor(
     private activeModal: NgbActiveModal,
     private router: Router,
-    private authSvc: AuthService
+    private authSvc: AuthService,
+    private utilSvc: UtilService
   ) {}
 
   close() {
@@ -26,33 +31,13 @@ export class SignInModalComponent {
 
   async signInWithGoogle() {
     await this.authSvc.GoogleAuth(this.activeModal);
-    //this.activeModal.dismiss();
   }
 
   async signIn(email: string, psw: string) {
-    this.clicked = true;
-    const login = await this.authSvc.SignIn(email, psw, this.activeModal);
-    if (login === 'auth/invalid-email') {
-      this.error = true;
-      this.errorMsg = 'Väärä sähköpostiosoite';
-      this.clicked = false;
-    }
-    if (login === 'auth/user-not-found') {
-      this.error = true;
-      this.errorMsg = 'Annetulla sähköpostilla ei rekisteröityneitä käyttäjiä';
-      this.clicked = false;
-    }
-    if (login === 'auth/wrong-password') {
-      this.error = true;
-      this.errorMsg = 'Väärä salasana';
-      this.clicked = false;
-    }
-    if (login === 'auth/email-not-verified') {
-      this.error = true;
-      this.errorMsg =
-        'Sähköpostiosoitetta ei ole vahvistettu, tarkasta sähköpostisi';
-      this.clicked = false;
-    }
+    this.error.clicked = true;
+    await this.authSvc.SignIn(email, psw, this.activeModal).then(result => {
+      this.error = this.utilSvc.messageSvc(result);
+    });
   }
 
   forgotPassword() {
@@ -60,28 +45,12 @@ export class SignInModalComponent {
   }
 
   async handleForgotPassword(email: string) {
-    this.clicked = true;
+    this.error.clicked = true;
     this.authSvc.sendForgotPasswordLink(email).then(result => {
-      console.log(result);
-      if (result === '') {
-        this.error = true;
-        this.errorMsg =
-          'Sähköpostiisi on lähetetty salasanan nollauslinkki, tarkasta sähköpostisi ja odota muutama minuutti';
-      }
-      if (result === 'auth/user-not-found') {
-        this.error = true;
-        this.errorMsg = 'Sähköpostiosoitteella ei löydy käyttäjää.';
-        this.clicked = false;
-      }
-      if (result === 'auth/invalid-email') {
-        this.error = true;
-        this.errorMsg = 'Väärä sähköpostiosoite';
-        this.clicked = false;
-      } else {
-        this.error = true;
-        this.errorMsg = 'Jokin meni pieleen, yritä uudelleen.';
-        this.clicked = false;
-      }
+      this.error = this.utilSvc.messageSvc(
+        result,
+        'Sähköpostiisi on lähetetty salasanan nollauslinkki, tarkasta sähköpostisi ja odota muutama minuutti'
+      );
     });
   }
 

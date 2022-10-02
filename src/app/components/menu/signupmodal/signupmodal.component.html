@@ -73,7 +73,7 @@
                 <i>{{ 'signInUpModal.mustNotEmptySpaces' | translate }}</i>
               </li>
               <li [hidden]="!error">
-                <h5 style="color: red">{{ errorMsg }}</h5>
+                <h5 style="color: red">{{ error.errorMsg }}</h5>
               </li>
             </ul>
           </div>
@@ -93,7 +93,7 @@
               type="button"
               class="btn btn-primary float-end"
               (click)="signUp(email.value, userPwd.value, userPwdReEnter.value)"
-              [disabled]="clicked"
+              [disabled]="error.clicked"
             >
               {{ 'common.register' | translate }}
             </button>
