@@ -39,21 +39,12 @@ export class SearchComponent implements OnInit {
       this.searchSvc
         .search(params['s'], 'name', 'articles')
         .subscribe(articles => (this.searchArticles = articles));
-      // this.searchSvc
-      //   .search(params['s'], 'name', 'journalists')
-      //   .subscribe(articles => this.searchArticles.concat(articles));
-      // this.searchSvc
-      //   .search(params['s'], 'name', 'magazines')
-      //   .subscribe(articles => this.searchArticles.concat(articles));
       this.searchSvc
         .search(params['s'], 'name', 'journalists')
         .subscribe(journalists => (this.searchJournalists = journalists));
       this.searchSvc
         .search(params['s'], 'name', 'magazines')
         .subscribe(magazines => (this.searchMagazines = magazines));
-      // this.searchSvc
-      //   .search(params['s'], 'genre', 'magazines')
-      //   .subscribe(articles => this.searchArticles.concat(articles));
     });
   }
 

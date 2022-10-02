@@ -4,8 +4,10 @@ import {
   Component,
   OnInit,
   HostListener,
+  ViewChild,
+  ElementRef,
 } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ShoppingCartModalComponent } from 'src/app/shared/components/shopping-cart-modal/shopping-cart-modal.component';
 import { AuthService } from 'src/app/shared/services/auth.service';
@@ -20,6 +22,7 @@ import { TranslateService } from '@ngx-translate/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeadermenuComponent implements OnInit {
+  @ViewChild('searchInput') searchInput!: ElementRef;
   languageList = [
     { code: 'fi', label: 'Finnish' },
     { code: 'en', label: 'English' },
@@ -83,6 +86,13 @@ export class HeadermenuComponent implements OnInit {
       });
     }
     if (event.target.value.length > 1) {
+      this.router.events.subscribe(events => {
+        if (events instanceof NavigationEnd) {
+          if (events.urlAfterRedirects.substring(0, 7) !== '/search') {
+            event.target.value = '';
+          }
+        }
+      });
       this.router.navigate(['search'], {
         queryParams: { s: event.target.value },
         replaceUrl: true,

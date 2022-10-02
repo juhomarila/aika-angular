@@ -71,6 +71,7 @@
               placeholder="{{ 'header.searchPlaceholder' | translate }}"
               aria-label="Search"
               (keyup)="search($event)"
+              #searchInput
             />
             <button
               id="search-box-btn"
