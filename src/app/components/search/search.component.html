@@ -1,9 +1,93 @@
 <div class="container-fluid" style="padding-top: 12vh">
-  <h2 style="text-align: center; padding-bottom: 3vh" class="border-bottom">
+  <div class="row gx-20 justify-content-start">
+    <div class="col-md-3">
+      <div *ngIf="searchJournalists.length > 0">
+        <div *ngFor="let j of searchJournalists">
+          <div class="journalist-padding-bottom journalists">
+            <a href="#" class="list-group-item">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <h5 class="mb-1">{{ j.name }}</h5>
+                  <small
+                    >{{ j.dateofbirth.day }}/{{ j.dateofbirth.month }}/{{
+                      j.dateofbirth.year
+                    }}</small
+                  >
+                  <p style="font-size: 0.75em">Journalisti</p>
+                </div>
+                <img
+                  [src]="j.fileUrl"
+                  class="search-page-image fit-image rounded-circle"
+                  alt="{{ j.name }}"
+                />
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div *ngIf="searchArticles.length > 0">
+        <div class="justify-content-center">
+          <div *ngFor="let a of sort(searchArticles)">
+            <div class="articles journalist-padding-bottom">
+              <a href="#" class="list-group-item">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <h5 class="mb-1">{{ a.name }}</h5>
+                    <p class="mb-1">{{ a.journalist.name }}</p>
+                    <p class="mb-1">{{ a.magazine.name }}</p>
+                    <small
+                      >{{ a.date.day }}/{{ a.date.month }}/{{
+                        a.date.year
+                      }}</small
+                    >
+                  </div>
+                  <img
+                    [src]="a.fileUrl"
+                    class="search-page-image fit-image rounded-circle"
+                    alt="{{ a.name }}"
+                  />
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div *ngIf="searchMagazines.length > 0">
+        <div *ngFor="let m of searchMagazines">
+          <div class="journalist-padding-bottom magazines">
+            <a href="#" class="list-group-item">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <h5 class="mb-1">{{ m.name }}</h5>
+                  <p class="mb-1">{{ m.hometown }}</p>
+                  <small
+                    >{{ m.foundingdate.day }}/{{ m.foundingdate.month }}/{{
+                      m.foundingdate.year
+                    }}</small
+                  >
+                </div>
+                <img
+                  [src]="m.fileUrl"
+                  class="search-page-image fit-image rounded-circle"
+                  alt="{{ m.name }}"
+                />
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <h2 style="text-align: center; padding-bottom: 3vh" class="border-bottom">
     Hakutulokset
-  </h2>
-  <div class="row">
-    <div class="col-sm-5">
+  </h2> -->
+<!-- <div class="row">
+    <div class="col-sm-3">
       <h3 class="search-header">Journalistit</h3>
       <div *ngIf="searchJournalists.length > 0">
         <div *ngFor="let j of searchJournalists">
@@ -84,8 +168,8 @@
         <h5 class="search-header">Ei yhtään aikakausilehteä</h5>
       </div>
     </div>
-  </div>
-</div>
+  </div> 
+</div> -->
 
 <!-- <div *ngIf="searchJournalists.length > 0">
   <div *ngFor="let j of searchJournalists">

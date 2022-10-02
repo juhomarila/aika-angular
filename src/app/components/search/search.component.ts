@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Article } from 'src/app/shared/interfaces/article';
 import { Journalist } from 'src/app/shared/interfaces/journalist';
 import { Magazine } from 'src/app/shared/interfaces/magazine';
-import { ArticlesvcService } from 'src/app/shared/services/articlesvc.service';
 import { SearchService } from 'src/app/shared/services/search.service';
 import { UtilService } from 'src/app/shared/services/util.service';
 

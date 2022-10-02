@@ -12,20 +12,35 @@
   font-family: 'Raleway', 'arial', 'lato';
 }
 
+.journalists {
+  background-image: linear-gradient(to left, #1d1f4e, #151f43, #121e36, #141c29, #17191c);
+}
+
+.magazines {
+  background-image: linear-gradient(to right, #1d1f4e, #151f43, #121e36, #141c29, #17191c);
+}
+.articles {
+  background-color: #1d1f4e;
+}
+
+.journalist-padding-bottom {
+  padding-bottom: 1vh;
+}
+
 .border-right {
   border-right: 3px solid white;
 }
 
 .border-bottom {
-  border-bottom: 3px solid white!important;
+  border-bottom: 3px solid white !important;
 }
 
 .border-top {
-  border-top: 3px solid white!important;
+  border-top: 3px solid white !important;
 }
 
 .search-header {
-  text-align: center; 
+  text-align: center;
   padding-bottom: 2vh;
   padding-top: 4vh;
   text-decoration: underline;
@@ -541,8 +556,8 @@ th {
 }
 
 .search-page-image {
-  height: 20vh;
-  width: 20vh;
+  height: 15vh;
+  width: 15vh;
 }
 
 body {
