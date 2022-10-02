@@ -59,8 +59,7 @@ export class AuthService {
         });
         return true;
       })
-      .catch(e => {
-        console.log(e);
+      .catch(() => {
         return false;
       });
   }
@@ -169,7 +168,6 @@ export class AuthService {
             msg = e.code;
           });
       });
-      console.log(msg);
       return msg;
     }
     if (msg === 'auth/wrong-password') {
@@ -185,7 +183,6 @@ export class AuthService {
       .sendPasswordResetEmail(email)
       .then(() => {})
       .catch(e => {
-        console.log(e.code);
         msg = e.code;
       });
     return msg;

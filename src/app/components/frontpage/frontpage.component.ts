@@ -83,12 +83,6 @@ export class FrontpageComponent implements OnInit {
     const modalRef = this.modalSvc.open(ArticleModalComponent, { size: 'lg' });
     modalRef.componentInstance.article = this.selectedArticle;
     modalRef.componentInstance.owned = owned;
-    modalRef.result.then(
-      result => {
-        console.log(result);
-      },
-      () => {}
-    );
   }
 
   onSelectCheckIfOwned(selectedArticle: Article): boolean {

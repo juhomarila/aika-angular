@@ -50,9 +50,7 @@ export class SettingModalComponent implements OnInit {
     this.clicked = true;
     this.authSvc
       .removeAccount(this.authSvc.user.uid, this.emailValue!, removePsw)
-      .then(status => {
-        console.log(status);
-      });
+      .then(() => {});
     this.setStatusMessage(
       'Tilisi poistettu, sinut kirjataan ulos automaattisesti'
     );

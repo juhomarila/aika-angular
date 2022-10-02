@@ -14,7 +14,6 @@ export class MagazinesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllMagazines();
-    console.log(this.magazineList);
   }
 
   getAllMagazines(): void {
