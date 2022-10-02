@@ -3,8 +3,8 @@
     <div class="col-md-3">
       <div *ngIf="searchJournalists.length > 0">
         <div *ngFor="let j of searchJournalists">
-          <div class="journalist-padding-bottom journalists">
-            <a href="#" class="list-group-item">
+          <div class="journalist-padding-bottom journalists search-overlay">
+            <a (click)="selectJournalist(j)" class="list-group-item">
               <div class="d-flex justify-content-between align-items-center">
                 <div>
                   <h5 class="mb-1">{{ j.name }}</h5>
@@ -30,8 +30,8 @@
       <div *ngIf="searchArticles.length > 0">
         <div class="justify-content-center">
           <div *ngFor="let a of sort(searchArticles)">
-            <div class="articles journalist-padding-bottom">
-              <a href="#" class="list-group-item">
+            <div class="articles journalist-padding-bottom search-overlay">
+              <a (click)="selectArticle(a)" class="list-group-item">
                 <div class="d-flex justify-content-between align-items-center">
                   <div>
                     <h5 class="mb-1">{{ a.name }}</h5>
@@ -58,8 +58,8 @@
     <div class="col-md-3">
       <div *ngIf="searchMagazines.length > 0">
         <div *ngFor="let m of searchMagazines">
-          <div class="journalist-padding-bottom magazines">
-            <a href="#" class="list-group-item">
+          <div class="journalist-padding-bottom magazines search-overlay">
+            <a (click)="selectMagazine(m)" class="list-group-item">
               <div class="d-flex justify-content-between align-items-center">
                 <div>
                   <h5 class="mb-1">{{ m.name }}</h5>

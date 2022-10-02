@@ -23,6 +23,15 @@
   background-color: #1d1f4e;
 }
 
+.search-overlay {
+  filter: blur(0.3px) brightness(0.85) opacity(0.90) saturate(0.90) sepia(0.05);
+}
+
+.search-overlay:hover {
+  outline: 0.25vh solid rgba(255, 255, 255, 0.55);
+  filter: none;
+}
+
 .journalist-padding-bottom {
   padding-bottom: 1vh;
 }

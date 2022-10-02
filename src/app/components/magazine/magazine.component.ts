@@ -52,7 +52,7 @@ export class MagazineComponent implements OnInit, OnDestroy {
         });
       }
     }
-    this.magazine.journalists.map(jounalist => {
+    this.magazine?.journalists.map(jounalist => {
       this.fireStoreSvc.getJournalist(jounalist).subscribe(data => {
         this.journalists.push(data.data() as Journalist);
       });

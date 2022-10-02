@@ -50,7 +50,7 @@ export class JournalistComponent implements OnInit, OnDestroy {
         });
       }
     }
-    this.journalist.magazines.map(magazineKey => {
+    this.journalist?.magazines.map(magazineKey => {
       this.fireStoreSvc.getMagazine(magazineKey).subscribe(magazine => {
         this.magazines.push(magazine.data() as Magazine);
       });

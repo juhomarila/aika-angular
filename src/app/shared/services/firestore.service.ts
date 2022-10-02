@@ -75,7 +75,15 @@ export class FirestoreService {
         this.ownedArticlesList.push(permission.data() as Article)
       )
     );
+    localStorage.setItem(
+      'ownedArticles',
+      JSON.stringify(this.ownedArticlesList)
+    );
     return this.ownedArticlesList;
+  }
+
+  get ownedArticles() {
+    return JSON.parse(localStorage.getItem('ownedArticles')!);
   }
 
   async buyArticle(uid: string, key: string): Promise<any> {
