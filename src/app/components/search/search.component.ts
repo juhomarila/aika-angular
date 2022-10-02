@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Article } from 'src/app/shared/interfaces/article';
+import { Journalist } from 'src/app/shared/interfaces/journalist';
+import { Magazine } from 'src/app/shared/interfaces/magazine';
 import { ArticlesvcService } from 'src/app/shared/services/articlesvc.service';
 import { SearchService } from 'src/app/shared/services/search.service';
 import { UtilService } from 'src/app/shared/services/util.service';
@@ -18,6 +20,9 @@ import { UtilService } from 'src/app/shared/services/util.service';
 export class SearchComponent implements OnInit {
   allArticles: Article[] = [];
   searchArticles: Article[] = [];
+  searchJournalists: Journalist[] = [];
+  searchMagazines: Magazine[] = [];
+  minHeight: number = 0;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -26,19 +31,29 @@ export class SearchComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.minHeight = window.innerHeight;
     if (!this.route.snapshot.queryParams['s']) {
       this.router.navigate(['frontpage']);
     }
     this.route.queryParams.subscribe(params => {
       this.searchSvc
-        .search(params['s'], 'name')
+        .search(params['s'], 'name', 'articles')
         .subscribe(articles => (this.searchArticles = articles));
+      // this.searchSvc
+      //   .search(params['s'], 'name', 'journalists')
+      //   .subscribe(articles => this.searchArticles.concat(articles));
+      // this.searchSvc
+      //   .search(params['s'], 'name', 'magazines')
+      //   .subscribe(articles => this.searchArticles.concat(articles));
       this.searchSvc
-        .search(params['s'], 'journalist')
-        .subscribe(articles => this.searchArticles.concat(articles));
+        .search(params['s'], 'name', 'journalists')
+        .subscribe(journalists => (this.searchJournalists = journalists));
       this.searchSvc
-        .search(params['s'], 'magazine')
-        .subscribe(articles => this.searchArticles.concat(articles));
+        .search(params['s'], 'name', 'magazines')
+        .subscribe(magazines => (this.searchMagazines = magazines));
+      // this.searchSvc
+      //   .search(params['s'], 'genre', 'magazines')
+      //   .subscribe(articles => this.searchArticles.concat(articles));
     });
   }
 

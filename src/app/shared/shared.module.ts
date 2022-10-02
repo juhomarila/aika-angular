@@ -12,6 +12,7 @@ import { PreviewComponent } from './components/preview/preview.component';
 import { LoggedInCarouselComponent } from './components/logged-in-carousel/logged-in-carousel.component';
 import { RouterModule } from '@angular/router';
 import { MagazinePreviewComponent } from './components/magazine-preview/magazine-preview.component';
+import { PswViewTogglerComponent } from './components/psw-view-toggler/psw-view-toggler.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { MagazinePreviewComponent } from './components/magazine-preview/magazine
     PreviewComponent,
     LoggedInCarouselComponent,
     MagazinePreviewComponent,
+    PswViewTogglerComponent,
   ],
   imports: [
     CommonModule,
@@ -39,6 +41,7 @@ import { MagazinePreviewComponent } from './components/magazine-preview/magazine
     LoggedInCarouselComponent,
     PreviewComponent,
     MagazinePreviewComponent,
+    PswViewTogglerComponent,
   ],
 })
 export class SharedModule {}

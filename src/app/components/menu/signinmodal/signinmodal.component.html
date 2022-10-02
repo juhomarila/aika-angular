@@ -32,16 +32,11 @@
           <label for="floatingInput7">{{
             'common.password' | translate
           }}</label>
-          <i
-            class="bi bi-eye-slash-fill align-self-center"
-            (click)="showPsw()"
-            [hidden]="show"
-          ></i>
-          <i
-          class="bi bi-eye-fill align-self-center"
-          (click)="showPsw()"
-          [hidden]="!show"
-        ></i>
+          <psw-view-toggler
+            [show]="show"
+            (showPsw)="showPsw()"
+            class="align-self-center"
+          ></psw-view-toggler>
         </div>
         <div class="form-check">
           <input class="form-check-input" type="checkbox" id="gridCheck1" />

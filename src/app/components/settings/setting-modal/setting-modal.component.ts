@@ -21,6 +21,9 @@ export class SettingModalComponent implements OnInit {
   error: boolean = false;
   user!: User;
   clicked: boolean = false;
+  show: boolean = false;
+  show2: boolean = false;
+  show3: boolean = false;
 
   constructor(
     private activeModal: NgbActiveModal,
@@ -78,9 +81,14 @@ export class SettingModalComponent implements OnInit {
   }
 
   async updateDisplayname(name: string) {
-    this.authSvc.updateDisplayname(this.user.uid, name).then(() => {
-      this.setStatusMessage('Käyttäjänimen vaihto onnistui', true);
-    });
+    if (name.length > 4) {
+      this.authSvc.updateDisplayname(this.user.uid, name).then(() => {
+        this.setStatusMessage('Käyttäjänimen vaihto onnistui', true);
+      });
+    } else {
+      this.error = true;
+      this.errorMsg = 'Käyttäjänimen on oltava vähintään neljä merkkiä pitkä';
+    }
   }
 
   async setStatusMessage(msg: string, reload?: boolean) {
@@ -97,5 +105,17 @@ export class SettingModalComponent implements OnInit {
       // }
       this.loading.hide();
     }, 3000);
+  }
+
+  showPsw() {
+    this.show = !this.show;
+  }
+
+  showPsw2() {
+    this.show2 = !this.show2;
+  }
+
+  showPsw3() {
+    this.show3 = !this.show3;
   }
 }

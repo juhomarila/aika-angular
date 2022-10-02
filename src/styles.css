@@ -12,6 +12,25 @@
   font-family: 'Raleway', 'arial', 'lato';
 }
 
+.border-right {
+  border-right: 3px solid white;
+}
+
+.border-bottom {
+  border-bottom: 3px solid white!important;
+}
+
+.border-top {
+  border-top: 3px solid white!important;
+}
+
+.search-header {
+  text-align: center; 
+  padding-bottom: 2vh;
+  padding-top: 4vh;
+  text-decoration: underline;
+}
+
 .helluva-lot-padding {
   padding-left: 40vh;
   padding-right: 40vh;
@@ -272,7 +291,8 @@ th {
 }
 
 .bi-eye-slash-fill {
-  padding: 1em;
+  padding: 1.2rem;
+  font-size: 1rem;
   color: black;
   background-color: white;
   border: 1px solid #ced4da;
@@ -287,7 +307,8 @@ th {
 }
 
 .bi-eye-fill {
-  padding: 1em;
+  padding: 1.2rem;
+  font-size: 1rem;
   color: black;
   background-color: white;
   border: 1px solid #ced4da;
@@ -517,6 +538,11 @@ th {
   float: left;
   height: 18vh;
   object-fit: cover;
+}
+
+.search-page-image {
+  height: 20vh;
+  width: 20vh;
 }
 
 body {

@@ -42,11 +42,11 @@
       </div>
     </div>
     <div class="modal-footer" *ngIf="shoppingCartList.length > 0">
-      <a type="button" class="btn btn-primary" (click)="emptyCart()"
-        >Tyhjennä ostoskori</a
+      <button type="button" class="btn btn-primary" (click)="emptyCart()" [disabled]="clicked"
+        >Tyhjennä ostoskori</button
       >
-      <a type="button" class="btn btn-primary" (click)="checkOut()"
-        >Osta lehdet</a
+      <button type="button" class="btn btn-primary" (click)="checkOut()" [disabled]="clicked"
+        >Osta lehdet</button
       >
     </div>
   </div>

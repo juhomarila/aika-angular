@@ -13,7 +13,8 @@
         "hometown": "Kotikaupunki",
         "journalists": "Toimittajat",
         "founded": "Perustettu",
-        "magazines":"Aikakausilehdet"
+        "magazines": "Aikakausilehdet",
+        "birthday": "Syntymäpäivä"
     },
     "header": {
         "frontpage": "Etusivu",

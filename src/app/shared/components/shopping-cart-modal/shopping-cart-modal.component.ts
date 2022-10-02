@@ -11,6 +11,7 @@ import { ShoppingCartService } from '../../services/shopping-cart.service';
 export class ShoppingCartModalComponent implements OnInit {
   shoppingCartList: Article[] = [];
   successfulPayment: boolean = true;
+  clicked: boolean = false;
   constructor(
     private shoppingCartSvc: ShoppingCartService,
     private activeModal: NgbActiveModal,
@@ -35,6 +36,7 @@ export class ShoppingCartModalComponent implements OnInit {
   }
 
   async checkOut() {
+    this.clicked = true;
     this.loading.show();
     const result = await this.shoppingCartSvc.checkOut();
     if (!result) {

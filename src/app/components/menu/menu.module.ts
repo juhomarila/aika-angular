@@ -8,6 +8,7 @@ import { SignUpModalComponent } from './signupmodal/signupmodal.component';
 import { FooterComponent } from './footer/footer.component';
 import { RouterModule } from '@angular/router';
 import { NgxTranslateModule } from 'src/app/ngx-translate/ngx-translate.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,13 @@ import { NgxTranslateModule } from 'src/app/ngx-translate/ngx-translate.module';
     SignUpModalComponent,
     FooterComponent,
   ],
-  imports: [BrowserModule, CommonModule, RouterModule, NgxTranslateModule],
+  imports: [
+    BrowserModule,
+    CommonModule,
+    RouterModule,
+    NgxTranslateModule,
+    SharedModule,
+  ],
   exports: [HeadermenuComponent, FooterComponent],
   providers: [AuthService, RouterModule],
 })
