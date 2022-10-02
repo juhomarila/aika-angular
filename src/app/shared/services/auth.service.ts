@@ -216,4 +216,15 @@ export class AuthService {
         .catch(() => {});
     });
   }
+
+  async removeAccount() {
+    try {
+      this.afAuth.currentUser.then(user => {
+        user?.delete();
+      });
+      return true;
+    } catch {
+      return false;
+    }
+  }
 }

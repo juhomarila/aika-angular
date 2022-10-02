@@ -15,6 +15,7 @@ export class SettingModalComponent implements OnInit {
   @Input() emailValue?: string;
   @Input() password?: boolean;
   @Input() name?: boolean;
+  @Input() accountRemoval?: boolean;
   statusMessage: string = '';
   status: boolean = false;
   errorMsg: string = '';
@@ -34,10 +35,23 @@ export class SettingModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.authSvc.user;
+    if (this.accountRemoval) {
+      this.error = true;
+      this.errorMsg =
+        'Tilisi kaikki tiedot, ostot mukaanlukien poistetaan, etkä pysty palauttamaan tiliäsi. Vahvista poisto painamalla painiketta';
+    }
   }
 
   close() {
     this.activeModal.dismiss();
+  }
+
+  async removeAccount() {
+    this.clicked = true;
+    this.authSvc.removeAccount();
+    this.setStatusMessage(
+      'Tilisi poistettu, sinut kirjataan ulos automaattisesti'
+    );
   }
 
   async updatePassword(newPsw: string, retypeNewPsw: string, oldPsw: string) {
@@ -100,9 +114,6 @@ export class SettingModalComponent implements OnInit {
       this.statusMessage = '';
       this.status = false;
       this.activeModal.close('success');
-      // if (reload) {
-      //   window.location.reload();
-      // }
       this.loading.hide();
     }, 3000);
   }

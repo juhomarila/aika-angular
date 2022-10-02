@@ -14,6 +14,21 @@
         <div class="form-floating mb-4" *ngIf="status">
           <h4>{{ statusMessage }}</h4>
         </div>
+        <div class="form-floating mb-4" *ngIf="accountRemoval">
+          <div *ngIf="error">
+            <p>{{ errorMsg }}</p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-primary float-end"
+              (click)="removeAccount()"
+              [disabled]="clicked"
+            >
+              Vahvista tilin poisto
+            </button>
+          </div>
+        </div>
         <div class="form-floating mb-4" *ngIf="email">
           <input
             type="email"

@@ -91,4 +91,17 @@ export class SettingsComponent implements OnInit, OnDestroy {
       }
     });
   }
+
+  openRemoveAccountConfirmation() {
+    const modalRef = this.modalSvc.open(SettingModalComponent, { size: 'lg' });
+    modalRef.componentInstance.title = 'Vahvista tilin poisto';
+    modalRef.componentInstance.accountRemoval = true;
+    modalRef.result.then(data => {
+      if (data) {
+        localStorage.clear();
+        this.authSvc.LogOut();
+        window.location.reload();
+      }
+    });
+  }
 }
