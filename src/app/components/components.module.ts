@@ -15,6 +15,7 @@ import { JournalistComponent } from './journalist/journalist.component';
 import { MagazineComponent } from './magazine/magazine.component';
 import { NgxTranslateModule } from '../ngx-translate/ngx-translate.module';
 import { SettingModalComponent } from './settings/setting-modal/setting-modal.component';
+import { TbrComponent } from './tbr/tbr.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { SettingModalComponent } from './settings/setting-modal/setting-modal.co
     JournalistComponent,
     MagazineComponent,
     SettingModalComponent,
+    TbrComponent,
   ],
   imports: [
     CommonModule,

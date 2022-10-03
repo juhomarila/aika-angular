@@ -12,6 +12,7 @@ import { MyLibraryComponent } from './components/my-library/my-library.component
 import { SearchComponent } from './components/search/search.component';
 import { MagazineComponent } from './components/magazine/magazine.component';
 import { JournalistComponent } from './components/journalist/journalist.component';
+import { TbrComponent } from './components/tbr/tbr.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/frontpage', pathMatch: 'full' },
@@ -24,6 +25,11 @@ const routes: Routes = [
   {
     path: 'blogs',
     component: BlogsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'tbr',
+    component: TbrComponent,
     canActivate: [AuthGuard],
   },
   {
