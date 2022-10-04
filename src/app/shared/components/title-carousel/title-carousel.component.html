@@ -15,6 +15,7 @@
         (selectedMagazine)="onSelectMagazine($event)"
         (selectedJournalist)="onSelectJournalist($event)"
         [owned]="onSelectCheckIfOwned(article)"
+        [favourite]="checkIfFavourite(article)"
       ></preview>
     </div>
   </ng-template>

@@ -28,6 +28,7 @@ export class ArticlesvcService {
 
   getArticle(key: string): Observable<Article> {
     const article = this.articleList.find(h => h.key === key)!;
+    // allaolevan voi ehkä poistaa
     localStorage.setItem('article', JSON.stringify(article));
     return of(article);
   }

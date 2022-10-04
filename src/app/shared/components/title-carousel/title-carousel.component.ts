@@ -2,7 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Article } from '../../interfaces/article';
+import { Favourite } from '../../interfaces/favourite';
 import { Owned } from '../../interfaces/owned';
+import { FavouriteService } from '../../services/favourite.service';
 import { UserService } from '../../services/user.service';
 import { ArticleModalComponent } from '../article-modal/article-modal.component';
 
@@ -12,6 +14,7 @@ import { ArticleModalComponent } from '../article-modal/article-modal.component'
 })
 export class TitleCarouselComponent implements OnInit {
   @Input() articleList: Article[] = [];
+  @Input() favouriteList: Favourite[] = [];
   urlList: string[] = [];
   selectedArticle?: Article;
   ownedArticlesList: Owned[] = [];
@@ -71,6 +74,16 @@ export class TitleCarouselComponent implements OnInit {
       }
     });
     return owned;
+  }
+
+  checkIfFavourite(article: Article): boolean {
+    let favourite = false;
+    this.favouriteList.map(fav => {
+      if (fav.key === article.key) {
+        favourite = true;
+      }
+    });
+    return favourite;
   }
 
   onSelectMagazine(magazine: string) {

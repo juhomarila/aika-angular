@@ -9,6 +9,8 @@ import { StorageService } from 'src/app/shared/services/storage.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { Owned } from 'src/app/shared/interfaces/owned';
 import { UtilService } from 'src/app/shared/services/util.service';
+import { FavouriteService } from 'src/app/shared/services/favourite.service';
+import { Favourite } from 'src/app/shared/interfaces/favourite';
 
 @Component({
   selector: 'app-frontpage',
@@ -23,6 +25,7 @@ export class FrontpageComponent implements OnInit {
   uid: string = '';
   ownedArticlesList: Owned[] = [];
   genreArray: string[] = [];
+  favouriteArticlesList: Favourite[] = [];
 
   constructor(
     private authSvc: AuthService,
@@ -30,7 +33,8 @@ export class FrontpageComponent implements OnInit {
     private storageSvc: StorageService,
     private modalSvc: NgbModal,
     private userSvc: UserService,
-    private utilSvc: UtilService
+    private utilSvc: UtilService,
+    private favouriteSvc: FavouriteService
   ) {}
 
   ngOnInit(): void {
@@ -40,6 +44,7 @@ export class FrontpageComponent implements OnInit {
     this.getArticles();
     this.getCarouselImages();
     this.getOwnedArticles();
+    this.getFavouriteArticles();
     this.genreArray = [
       'Urheilu',
       'Kauneus',
@@ -56,6 +61,12 @@ export class FrontpageComponent implements OnInit {
     this.articleSvc
       .getArticles()
       .subscribe(articles => (this.articleList = articles));
+  }
+
+  getFavouriteArticles(): void {
+    this.favouriteSvc
+      .getUserArticleFavourites()
+      .subscribe(favs => (this.favouriteArticlesList = favs));
   }
 
   getCarouselImages(): void {

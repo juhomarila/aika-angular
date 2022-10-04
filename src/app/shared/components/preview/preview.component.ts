@@ -18,6 +18,8 @@ import {
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/shared/store/reducers';
 import { Router } from '@angular/router';
+import { LikeService } from '../../services/like.service';
+import { FavouriteService } from '../../services/favourite.service';
 
 @Component({
   selector: 'preview',
@@ -27,6 +29,7 @@ import { Router } from '@angular/router';
 export class PreviewComponent implements OnInit, OnChanges {
   @Input() article!: Article;
   @Input() owned: boolean = false;
+  @Input() favourite: boolean = false;
   @Output() selectedArticle = new EventEmitter<Article>();
   @Output() selectedMagazine = new EventEmitter<string>();
   @Output() selectedJournalist = new EventEmitter<string>();
@@ -36,6 +39,8 @@ export class PreviewComponent implements OnInit, OnChanges {
 
   constructor(
     private shoppingCartSvc: ShoppingCartService,
+    private likeSvc: LikeService,
+    private favouriteSvc: FavouriteService,
     private ref: ChangeDetectorRef,
     private store: Store<AppState>,
     public router: Router
@@ -91,5 +96,15 @@ export class PreviewComponent implements OnInit, OnChanges {
       return false;
     }
     return true;
+  }
+
+  like() {
+    this.favourite = true;
+    this.favouriteSvc.addArticleToFavourites(this.article.key);
+  }
+
+  unlike() {
+    this.favourite = false;
+    this.favouriteSvc.removeArticleFromFavourites(this.article.key);
   }
 }

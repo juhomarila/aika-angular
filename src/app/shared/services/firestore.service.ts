@@ -7,7 +7,9 @@ import { Article } from '../interfaces/article';
 import { CarouselEntity } from '../interfaces/carouselentity';
 import { User } from '../interfaces/user';
 import { Magazine } from '../interfaces/magazine';
+import { increment } from '@angular/fire/firestore';
 import { Owned } from '../interfaces/owned';
+import { Favourite } from '../interfaces/favourite';
 
 @Injectable({
   providedIn: 'root',
@@ -22,6 +24,7 @@ export class FirestoreService {
   magazine!: Magazine;
   magazineList: Magazine[] = [];
   boughtArticles: Owned[] = [];
+  favouritesList: Favourite[] = [];
 
   constructor(public afs: AngularFirestore) {}
 
@@ -132,5 +135,66 @@ export class FirestoreService {
       owned.forEach(data => this.boughtArticles.push(data.data() as Owned))
     );
     return this.boughtArticles;
+  }
+
+  async addArticleLikeToUser(key: string, uid: string) {
+    const userRef: AngularFirestoreDocument<any> = this.afs
+      .collection('users')
+      .doc(uid)
+      .collection('likedArticles')
+      .doc(key);
+    return userRef.set(
+      { key: key },
+      {
+        merge: true,
+      }
+    );
+  }
+
+  async addArticleLikeToArticle(key: string) {
+    const articleRef: AngularFirestoreDocument<any> = this.afs
+      .collection('articles')
+      .doc(key);
+    return await articleRef.set(
+      { likes: increment(1) },
+      {
+        merge: true,
+      }
+    );
+  }
+
+  async addArticleToFavourites(key: string, uid: string) {
+    const userRef: AngularFirestoreDocument<any> = this.afs
+      .collection('users')
+      .doc(uid)
+      .collection('favouriteArticles')
+      .doc(key);
+    return userRef.set(
+      { key: key },
+      {
+        merge: true,
+      }
+    );
+  }
+
+  async getUserArticleFavourites(uid: string) {
+    const snapShot = this.afs
+      .collection('users')
+      .doc(uid)
+      .collection('favouriteArticles')
+      .get();
+    snapShot.subscribe(favs =>
+      favs.forEach(fav => this.favouritesList.push(fav.data() as Favourite))
+    );
+    return this.favouritesList;
+  }
+
+  async removeArticleFromFavourites(key: string, uid: string) {
+    const userRef: AngularFirestoreDocument<any> = this.afs
+      .collection('users')
+      .doc(uid)
+      .collection('favouriteArticles')
+      .doc(key);
+    return userRef.delete();
   }
 }
