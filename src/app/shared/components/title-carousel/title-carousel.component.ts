@@ -20,11 +20,7 @@ export class TitleCarouselComponent {
   responsiveOptions: any;
   page: number = 1;
 
-  constructor(
-    private userSvc: UserService,
-    private modalSvc: NgbModal,
-    private router: Router
-  ) {
+  constructor(private modalSvc: NgbModal, private router: Router) {
     this.responsiveOptions = [
       {
         breakpoint: '1024px',

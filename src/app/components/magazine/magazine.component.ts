@@ -36,7 +36,7 @@ export class MagazineComponent implements OnInit, OnDestroy {
       localStorage.setItem('magazine', JSON.stringify(this.magazine));
     } else {
       if (localStorage.getItem('magazine')) {
-        this.magazine = JSON.parse(localStorage.getItem('journalist')!);
+        this.magazine = JSON.parse(localStorage.getItem('magazine')!);
       }
       if (!localStorage.getItem('magazine')) {
         this.activatedRoute.queryParams.forEach(param => {
@@ -52,12 +52,12 @@ export class MagazineComponent implements OnInit, OnDestroy {
         });
       }
     }
-    this.magazine?.journalists.map(jounalist => {
+    this.magazine?.journalists?.map(jounalist => {
       this.fireStoreSvc.getJournalist(jounalist).subscribe(data => {
         this.journalists.push(data.data() as Journalist);
       });
     });
-    this.magazine?.articles.map(articleKey => {
+    this.magazine?.articles?.map(articleKey => {
       this.fireStoreSvc.getArticle(articleKey).subscribe(article => {
         this.magazineArticles.push(article.data() as Article);
       });
