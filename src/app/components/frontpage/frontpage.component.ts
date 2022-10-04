@@ -31,7 +31,6 @@ export class FrontpageComponent implements OnInit {
     private authSvc: AuthService,
     private articleSvc: ArticlesvcService,
     private storageSvc: StorageService,
-    private modalSvc: NgbModal,
     private userSvc: UserService,
     private utilSvc: UtilService,
     private favouriteSvc: FavouriteService
@@ -81,29 +80,6 @@ export class FrontpageComponent implements OnInit {
     this.userSvc
       .getOwnedArticles()
       .subscribe(owned => (this.ownedArticlesList = owned));
-  }
-
-  onSelect(article: Article) {
-    let owned = false;
-    this.selectedArticle = article;
-    for (let i = 0; i < this.ownedArticlesList.length; i++) {
-      if (this.selectedArticle.key === this.ownedArticlesList[i].key) {
-        owned = true;
-      }
-    }
-    const modalRef = this.modalSvc.open(ArticleModalComponent, { size: 'lg' });
-    modalRef.componentInstance.article = this.selectedArticle;
-    modalRef.componentInstance.owned = owned;
-  }
-
-  onSelectCheckIfOwned(selectedArticle: Article): boolean {
-    let owned = false;
-    this.ownedArticlesList.map(article => {
-      if (article.key === selectedArticle.key) {
-        owned = true;
-      }
-    });
-    return owned;
   }
 
   sort(articles: Article[]) {

@@ -1,10 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Article } from '../../interfaces/article';
 import { Favourite } from '../../interfaces/favourite';
 import { Owned } from '../../interfaces/owned';
-import { FavouriteService } from '../../services/favourite.service';
 import { UserService } from '../../services/user.service';
 import { ArticleModalComponent } from '../article-modal/article-modal.component';
 
@@ -12,12 +11,12 @@ import { ArticleModalComponent } from '../article-modal/article-modal.component'
   selector: 'title-carousel',
   templateUrl: './title-carousel.component.html',
 })
-export class TitleCarouselComponent implements OnInit {
+export class TitleCarouselComponent {
   @Input() articleList: Article[] = [];
   @Input() favouriteList: Favourite[] = [];
+  @Input() ownedArticlesList: Owned[] = [];
   urlList: string[] = [];
   selectedArticle?: Article;
-  ownedArticlesList: Owned[] = [];
   responsiveOptions: any;
   page: number = 1;
 
@@ -35,22 +34,12 @@ export class TitleCarouselComponent implements OnInit {
     ];
   }
 
-  ngOnInit(): void {
-    this.getOwnedArticles();
-  }
-
   getUrls(articles: Article[]) {
     let tmpArr: string[] = [];
     articles.map(article => {
       tmpArr.push(article.fileUrl);
     });
     return tmpArr;
-  }
-
-  getOwnedArticles(): void {
-    this.userSvc
-      .getOwnedArticles()
-      .subscribe(owned => (this.ownedArticlesList = owned));
   }
 
   onSelect(article: Article) {
