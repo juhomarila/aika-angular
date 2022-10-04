@@ -1,32 +1,17 @@
-<div
-  class="my-overlay white-border rounded-top"
-  (mouseover)="mouseOver()"
-  (mouseleave)="mouseLeave()"
->
+<div class="my-overlay white-border rounded-top" (mouseover)="mouseOver()" (mouseleave)="mouseLeave()">
   <div class="card bg-transparent">
     <div class="container g-0">
       <a (click)="onSelect(article)" routerLinkActive="active">
-        <div class="row g-0" style="height: 18vh">
-          <div
-            style="background-image: url('{{article.fileUrl}}');height: 100%;background-size: cover;"
-          >
-          </div>
+        <div class="row g-0">
+          <img [src]="article.fileUrl" class="front-page-image" alt="{{ article.name }}" />
         </div>
       </a>
       <div *ngIf="router.url === '/frontpage'" class="row justify-content-between bottom-right">
         <div *ngIf="!owned" class="col-md-6 card-padding">
           <div class="add-padding-right">
-          <a
-            *ngIf="!inCart"
-            class="bi bi-bag-plus rounded-circle"
-            (click)="addToCart()"
-          ></a>
-          <a
-            *ngIf="inCart"
-            class="bi bi-bag-dash rounded-circle"
-            (click)="removeFromCart()"
-          ></a>
-        </div>
+            <a *ngIf="!inCart" class="bi bi-bag-plus rounded-circle" (click)="addToCart()"></a>
+            <a *ngIf="inCart" class="bi bi-bag-dash rounded-circle" (click)="removeFromCart()"></a>
+          </div>
           <i class="bi bi-plus rounded-circle"></i>
         </div>
 
@@ -39,29 +24,17 @@
     <div [hidden]="hover">
       <ul class="ul-no-bullets">
         <li>
-          <a
-            (click)="onSelect(article)"
-            routerLinkActive="active"
-            class="article-name-modal-show"
-          >
+          <a (click)="onSelect(article)" routerLinkActive="active" class="article-name-modal-show">
             {{ article.name }}
           </a>
         </li>
         <li>
-          <a
-            class="article-info"
-            (click)="onSelectMagazine(article.magazine.key)"
-            routerLinkActive="active"
-            >Ilmestyy lehdessä: {{ article.magazine.name }}</a
-          >
+          <a class="article-info" (click)="onSelectMagazine(article.magazine.key)" routerLinkActive="active">Ilmestyy
+            lehdessä: {{ article.magazine.name }}</a>
         </li>
         <li>
-          <a
-            class="article-info"
-            (click)="onSelectJournalist(article.journalist.key)"
-            routerLinkActive="active"
-            >Toimittaja: {{ article.journalist.name }}</a
-          >
+          <a class="article-info" (click)="onSelectJournalist(article.journalist.key)"
+            routerLinkActive="active">Toimittaja: {{ article.journalist.name }}</a>
         </li>
         <li>
           <p class="text-muted article-info">
@@ -75,29 +48,17 @@
     <div [hidden]="!hover">
       <ul class="ul-no-bullets">
         <li>
-          <a
-            (click)="onSelect(article)"
-            routerLinkActive="active"
-            class="article-name-modal-show"
-          >
+          <a (click)="onSelect(article)" routerLinkActive="active" class="article-name-modal-show">
             {{ article.name }}
           </a>
         </li>
         <li>
-          <a
-            class="article-info"
-            (click)="onSelectMagazine(article.magazine.key)"
-            routerLinkActive="active"
-            >Ilmestyy lehdessä: {{ article.magazine.name }}</a
-          >
+          <a class="article-info" (click)="onSelectMagazine(article.magazine.key)" routerLinkActive="active">Ilmestyy
+            lehdessä: {{ article.magazine.name }}</a>
         </li>
         <li>
-          <a
-            class="article-info"
-            (click)="onSelectJournalist(article.journalist.key)"
-            routerLinkActive="active"
-            >Toimittaja: {{ article.journalist.name }}</a
-          >
+          <a class="article-info" (click)="onSelectJournalist(article.journalist.key)"
+            routerLinkActive="active">Toimittaja: {{ article.journalist.name }}</a>
         </li>
         <li>
           <p class="text-muted article-info">
