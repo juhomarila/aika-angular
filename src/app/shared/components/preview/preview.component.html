@@ -21,11 +21,13 @@
         <div class="col-md-6 card-padding">
           <div class="add-padding-right" *ngIf="!owned">
             <a
+              title="Lisää ostoskoriin"
               *ngIf="!inCart"
               class="bi bi-bag-plus rounded-circle"
               (click)="addToCart()"
             ></a>
             <a
+              title="Poista ostoskorista"
               *ngIf="inCart"
               class="bi bi-bag-dash rounded-circle"
               (click)="removeFromCart()"
@@ -35,10 +37,14 @@
             <i class="bi bi-bag-check rounded-circle-bought" *ngIf="owned"></i>
           </div>
           <div *ngIf="!favourite">
-            <a class="bi bi-heart rounded-circle" (click)="like()"></a>
+            <a
+              class="bi bi-heart rounded-circle"
+              (click)="like()"
+              title="Lisää suosikkeihin"
+            ></a>
           </div>
           <div *ngIf="favourite">
-            <a class="bi bi-heart-fill rounded-circle" (click)="unlike()"></a>
+            <a class="bi bi-heart-fill rounded-circle" (click)="unlike()" title="Poista suosikeista"></a>
           </div>
         </div>
         <div *ngIf="owned" class="bottom-right"></div>
