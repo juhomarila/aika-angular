@@ -8,18 +8,12 @@
               <div class="d-flex justify-content-between align-items-center">
                 <div>
                   <h5 class="mb-1">{{ j.name }}</h5>
-                  <small
-                    >{{ j.dateofbirth.day }}/{{ j.dateofbirth.month }}/{{
+                  <small>{{ j.dateofbirth.day }}/{{ j.dateofbirth.month }}/{{
                       j.dateofbirth.year
-                    }}</small
-                  >
-                  <p style="font-size: 0.75em">Journalisti</p>
+                    }}</small>
+                  <p style="font-size: 0.75em">{{'common.journalist' | translate}}</p>
                 </div>
-                <img
-                  [src]="j.fileUrl"
-                  class="search-page-image fit-image rounded-circle"
-                  alt="{{ j.name }}"
-                />
+                <img [src]="j.fileUrl" class="search-page-image fit-image rounded-circle" alt="{{ j.name }}" />
               </div>
             </a>
           </div>
@@ -37,17 +31,12 @@
                     <h5 class="mb-1">{{ a.name }}</h5>
                     <p class="mb-1">{{ a.journalist.name }}</p>
                     <p class="mb-1">{{ a.magazine.name }}</p>
-                    <small
-                      >{{ a.date.day }}/{{ a.date.month }}/{{
+                    <small>{{ a.date.day }}/{{ a.date.month }}/{{
                         a.date.year
-                      }}</small
-                    >
+                      }}</small>
+                    <p style="font-size: 0.75em">{{'shoppingCart.article' | translate}}</p>
                   </div>
-                  <img
-                    [src]="a.fileUrl"
-                    class="search-page-image fit-image rounded-circle"
-                    alt="{{ a.name }}"
-                  />
+                  <img [src]="a.fileUrl" class="search-page-image fit-image rounded-circle" alt="{{ a.name }}" />
                 </div>
               </a>
             </div>
@@ -64,17 +53,12 @@
                 <div>
                   <h5 class="mb-1">{{ m.name }}</h5>
                   <p class="mb-1">{{ m.hometown }}</p>
-                  <small
-                    >{{ m.foundingdate.day }}/{{ m.foundingdate.month }}/{{
+                  <small>{{ m.foundingdate.day }}/{{ m.foundingdate.month }}/{{
                       m.foundingdate.year
-                    }}</small
-                  >
+                    }}</small>
+                  <p style="font-size: 0.75em">{{'shoppingCart.magazine' | translate}}</p>
                 </div>
-                <img
-                  [src]="m.fileUrl"
-                  class="search-page-image fit-image rounded-circle"
-                  alt="{{ m.name }}"
-                />
+                <img [src]="m.fileUrl" class="search-page-image fit-image rounded-circle" alt="{{ m.name }}" />
               </div>
             </a>
           </div>
@@ -168,7 +152,7 @@
         <h5 class="search-header">Ei yhtään aikakausilehteä</h5>
       </div>
     </div>
-  </div> 
+  </div>
 </div> -->
 
 <!-- <div *ngIf="searchJournalists.length > 0">

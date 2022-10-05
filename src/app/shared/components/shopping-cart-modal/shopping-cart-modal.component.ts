@@ -41,11 +41,14 @@ export class ShoppingCartModalComponent implements OnInit {
     const result = await this.shoppingCartSvc.checkOut();
     if (!result) {
       this.successfulPayment = false;
-    }
-    setTimeout(() => {
-      this.activeModal.dismiss();
-      window.location.reload();
       this.loading.hide();
-    }, 1500);
+      this.clicked = false;
+    } else {
+      setTimeout(() => {
+        this.activeModal.dismiss();
+        window.location.reload();
+        this.loading.hide();
+      }, 1500);
+    }
   }
 }

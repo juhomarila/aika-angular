@@ -1,25 +1,13 @@
 <div class="container-fluid padding-top">
   <div class="row" *ngIf="magazine">
     <div class="col-6 center-magazine-journalist">
-      <div
-        class="center-overlay-mag-jour"
-        (mouseover)="mouseOver()"
-        (mouseleave)="mouseLeave()"
-      >
-        <img
-          [src]="magazine.fileUrl"
-          class="fit-image rounded img-hover"
-          alt="{{ magazine.name }}"
-          [ngStyle]="{
+      <div class="center-overlay-mag-jour" (mouseover)="mouseOver()" (mouseleave)="mouseLeave()">
+        <img [src]="magazine.fileUrl" class="fit-image rounded img-hover" alt="{{ magazine.name }}" [ngStyle]="{
             'height.px': height,
             'width.px': width
-          }"
-        />
+          }" />
         <div *ngIf="hover">
-          <div
-            *ngFor="let article of magazineArticles"
-            class="center-hidden-overlay"
-          >
+          <div *ngFor="let article of magazineArticles" class="center-hidden-overlay">
             <p>{{ article.key }}</p>
           </div>
         </div>
@@ -37,7 +25,7 @@
       </h5>
       <div *ngFor="let genre of magazine.genres">
         <i>
-          <p>{{ genre }}</p>
+          <p>{{ genre | translate }}</p>
         </i>
       </div>
       <h5 class="padding-bottom-top">
@@ -49,11 +37,9 @@
       </h5>
       <div *ngFor="let journalist of magazine.journalists">
         <p>
-          <i
-            ><a class="hover-link" (click)="goToJournalistPage(journalist)">{{
+          <i><a class="hover-link" (click)="goToJournalistPage(journalist)">{{
               getJournalist(journalist)
-            }}</a></i
-          >
+            }}</a></i>
         </p>
       </div>
       <h5 class="padding-bottom-top">
