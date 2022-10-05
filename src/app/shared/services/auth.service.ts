@@ -103,9 +103,11 @@ export class AuthService {
       .then(userCredentials => {
         userCredentials.user?.sendEmailVerification().then(() => {
           this.SetUserData(userCredentials.user).then(() => {
-            modal.dismiss();
-            window.location.reload();
-            this.loading.hide();
+            setTimeout(() => {
+              modal.dismiss();
+              window.location.reload();
+              this.loading.hide();
+            }, 3000);
           });
         });
       })
