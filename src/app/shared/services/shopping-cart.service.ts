@@ -53,7 +53,6 @@ export class ShoppingCartService {
       return true;
     } else {
       return false;
-      // todo inform about unsuccessfull payment
     }
   }
 
