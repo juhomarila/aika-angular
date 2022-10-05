@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ArticleModalComponent } from 'src/app/shared/components/article-modal/article-modal.component';
 import { Article } from 'src/app/shared/interfaces/article';
 import { CarouselEntity } from 'src/app/shared/interfaces/carouselentity';
 import { ArticlesvcService } from 'src/app/shared/services/articlesvc.service';
@@ -11,6 +9,7 @@ import { Owned } from 'src/app/shared/interfaces/owned';
 import { UtilService } from 'src/app/shared/services/util.service';
 import { FavouriteService } from 'src/app/shared/services/favourite.service';
 import { Favourite } from 'src/app/shared/interfaces/favourite';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-frontpage',
@@ -18,6 +17,7 @@ import { Favourite } from 'src/app/shared/interfaces/favourite';
 })
 export class FrontpageComponent implements OnInit {
   articleList: Article[] = [];
+  filteredArticleList: Article[] = [];
   carouselEntityList: CarouselEntity[] = [];
   selectedArticle?: Article;
   isLogged: boolean = false;
@@ -26,6 +26,7 @@ export class FrontpageComponent implements OnInit {
   ownedArticlesList: Owned[] = [];
   genreArray: string[] = [];
   favouriteArticlesList: Favourite[] = [];
+  filterByGenre!: string[];
 
   constructor(
     private authSvc: AuthService,
@@ -56,10 +57,37 @@ export class FrontpageComponent implements OnInit {
     ];
   }
 
+  filterGenre() {
+    this.filterByGenre.map(genre => {
+      const index = this.genreArray.indexOf(genre);
+      if (index > -1) {
+        this.genreArray.splice(index, 1);
+      }
+    });
+  }
+
+  backToGenre(event: any) {
+    this.genreArray.unshift(event.value);
+  }
+
+  resetFilters() {
+    this.genreArray = [
+      'Urheilu',
+      'Kauneus',
+      'Vapaa-aika',
+      'Sisustaminen',
+      'Käsityöt',
+      'Tiede',
+      'Ajankohtaista',
+      'Viihde',
+    ];
+  }
+
   getArticles(): void {
-    this.articleSvc
-      .getArticles()
-      .subscribe(articles => (this.articleList = articles));
+    this.articleSvc.getArticles().subscribe(articles => {
+      this.articleList = articles;
+      this.filteredArticleList = this.articleList;
+    });
   }
 
   getFavouriteArticles(): void {
