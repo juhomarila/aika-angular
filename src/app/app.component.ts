@@ -1,3 +1,4 @@
+import { ViewportScroller } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectorRef,
@@ -5,6 +6,8 @@ import {
   ElementRef,
   ViewChild,
 } from '@angular/core';
+import { Router, Scroll } from '@angular/router';
+import { delay, filter } from 'rxjs';
 import { LoadingService } from './shared/services/loading.service';
 
 @Component({
@@ -17,7 +20,25 @@ export class AppComponent implements AfterViewInit {
   title = 'aika-angular';
   loading$ = this.loader.loading$;
   minHeight: number = 0;
-  constructor(public loader: LoadingService, private cdr: ChangeDetectorRef) {}
+  constructor(
+    public loader: LoadingService,
+    private cdr: ChangeDetectorRef,
+    router: Router,
+    viewportScroller: ViewportScroller
+  ) {
+    router.events
+      .pipe(filter((e): e is Scroll => e instanceof Scroll))
+      .pipe(delay(1)) // <--------------------------- This line
+      .subscribe(e => {
+        if (e.position) {
+          viewportScroller.scrollToPosition(e.position);
+        } else if (e.anchor) {
+          viewportScroller.scrollToAnchor(e.anchor);
+        } else {
+          viewportScroller.scrollToPosition([0, 0]);
+        }
+      });
+  }
 
   ngAfterViewInit(): void {
     if (this.footer) {
