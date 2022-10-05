@@ -12,6 +12,7 @@ export class LoggedInCarouselComponent implements OnInit {
   height: number = 0;
 
   constructor(config: NgbCarouselConfig) {
+    config.animation = false;
     config.interval = 8000;
     config.wrap = true;
     config.keyboard = false;
