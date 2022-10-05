@@ -1,8 +1,8 @@
 <div class="container-fluid" style="padding-top: 72.8px">
   <hr class="featurette-divider" />
   <div class="row">
-    <h6 *ngIf="ownedArticlesList.length === 0">Sinulla ei ole vielä yhtään lehteä ostettua.</h6>
-    <h6 *ngIf="ownedArticlesList.length > 0" class="padding-bottom">Sinun lehtesi: </h6>
+    <h6 *ngIf="ownedArticlesList.length === 0">{{ 'magazines.noMagazines' | translate }}.</h6>
+    <h6 *ngIf="ownedArticlesList.length > 0" class="padding-bottom">{{ 'magazines.yourMagazines' | translate }}: </h6>
     <div *ngFor="let a of ownedArticlesList" class="col-sm-3">
       <preview [article]="getOwnedArticles(a.key)" (selectedArticle)="onSelect($event)" [owned]="true"></preview>
     </div>

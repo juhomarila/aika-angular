@@ -21,13 +21,13 @@
         <div class="col-md-6 card-padding">
           <div class="add-padding-right" *ngIf="!owned">
             <a
-              title="Lisää ostoskoriin"
+              title="{{ 'preview.addToCart' | translate }}"
               *ngIf="!inCart"
               class="bi bi-bag-plus rounded-circle"
               (click)="addToCart()"
             ></a>
             <a
-              title="Poista ostoskorista"
+              title="{{ 'preview.removeFromCart' | translate }}"
               *ngIf="inCart"
               class="bi bi-bag-dash rounded-circle"
               (click)="removeFromCart()"
@@ -40,11 +40,15 @@
             <a
               class="bi bi-heart rounded-circle"
               (click)="like()"
-              title="Lisää suosikkeihin"
+              title="{{ 'preview.addToFavs' | translate }}"
             ></a>
           </div>
           <div *ngIf="favourite">
-            <a class="bi bi-heart-fill rounded-circle" (click)="unlike()" title="Poista suosikeista"></a>
+            <a
+              class="bi bi-heart-fill rounded-circle"
+              (click)="unlike()"
+              title="{{ 'preview.removeFromFavs' | translate }}"
+            ></a>
           </div>
         </div>
         <div *ngIf="owned" class="bottom-right"></div>
@@ -67,7 +71,8 @@
             class="article-info"
             (click)="onSelectMagazine(article.magazine.key)"
             routerLinkActive="active"
-            >Ilmestyy lehdessä: {{ article.magazine.name }}</a
+            >{{ 'common.publishedIn' | translate }}:
+            {{ article.magazine.name }}</a
           >
         </li>
         <li>
@@ -75,11 +80,17 @@
             class="article-info"
             (click)="onSelectJournalist(article.journalist.key)"
             routerLinkActive="active"
-            >Toimittaja: {{ article.journalist.name }}</a
+            >{{ 'common.journalist' | translate }}:
+            {{ article.journalist.name }}</a
           >
         </li>
         <li>
-          <p class="text-muted article-info">
+          <p class="text-muted article-info" *ngIf="language === 'en'">
+            {{ article.date.month }}/{{ article.date.day }}/{{
+              article.date.year
+            }}
+          </p>
+          <p class="text-muted article-info" *ngIf="language !== 'en'">
             {{ article.date.day }}/{{ article.date.month }}/{{
               article.date.year
             }}
@@ -103,7 +114,8 @@
             class="article-info"
             (click)="onSelectMagazine(article.magazine.key)"
             routerLinkActive="active"
-            >Ilmestyy lehdessä: {{ article.magazine.name }}</a
+            >{{ 'common.publishedIn' | translate }}:
+            {{ article.magazine.name }}</a
           >
         </li>
         <li>
@@ -111,11 +123,17 @@
             class="article-info"
             (click)="onSelectJournalist(article.journalist.key)"
             routerLinkActive="active"
-            >Toimittaja: {{ article.journalist.name }}</a
+            >{{ 'common.journalist' | translate }}:
+            {{ article.journalist.name }}</a
           >
         </li>
         <li>
-          <p class="text-muted article-info">
+          <p class="text-muted article-info" *ngIf="language === 'en'">
+            {{ article.date.month }}/{{ article.date.day }}/{{
+              article.date.year
+            }}
+          </p>
+          <p class="text-muted article-info" *ngIf="language !== 'en'">
             {{ article.date.day }}/{{ article.date.month }}/{{
               article.date.year
             }}

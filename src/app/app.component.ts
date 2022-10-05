@@ -5,7 +5,6 @@ import {
   ElementRef,
   ViewChild,
 } from '@angular/core';
-import { FooterComponent } from './components/menu/footer/footer.component';
 import { LoadingService } from './shared/services/loading.service';
 
 @Component({

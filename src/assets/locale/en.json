@@ -1,50 +1,110 @@
 {
-    "common": {
-        "login": "Login",
-        "logout": "Logout",
-        "email": "Email",
-        "password": "Password",
-        "register": "Register",
-        "retypePassword": "Retype Password",
-        "emailPlaceholder": "name@example.com",
-        "send": "Send",
-        "loading": "Loading",
-        "genres": "Genres",
-        "hometown": "Hometown",
-        "journalists": "Journalists",
-        "founded": "Founded",
-        "magazines": "Magazines",
-        "birthday": "Birthday"
-    },
-    "header": {
-        "frontpage": "Frontpage",
-        "magazines": "Magazines",
-        "blogs": "Blogs",
-        "tbr": "To Be Read",
-        "ownMagazines": "Own Magazines",
-        "searchPlaceholder": "Article, magazine, writer...",
-        "ownAccount": "Own Account",
-        "favourites": "Favourites",
-        "cart": "Cart",
-        "settings": "Settings",
-        "support": "Support"
-    },
-    "footer": {
-        "newsletter": "Sign Up for Newsletter",
-        "newsletterPlaceholder": "E-mail address",
-        "info": "Information",
-        "infoText": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae aliquam voluptatem veniam, est atque cumque eum delectus sint!",
-        "socialMedia": "Social Media",
-        "link": "Link",
-        "linkText": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae aliquam voluptatem veniam, est atque cumque eum delectus sint!"
-    },
-    "signInUpModal": {
-        "title": "Login and come to see more",
-        "rememberme": "Remember me",
-        "forgottenPsw": "Did you forget your password?",
-        "forgottenPswLink": "Give your email address and we'll send you email reset link",
-        "mustSmallCapital": "Password must include capital and small letters and also numbers",
-        "mustAtLeastLength": "Password must be at least eight letters long",
-        "mustNotEmptySpaces": "Password can't have whitespaces"
-    }
+  "common": {
+    "login": "Login",
+    "logout": "Logout",
+    "email": "Email",
+    "password": "Password",
+    "register": "Register",
+    "retypePassword": "Retype Password",
+    "emailPlaceholder": "name@example.com",
+    "send": "Send",
+    "loading": "Loading",
+    "genres": "Genres",
+    "hometown": "Hometown",
+    "journalists": "Journalists",
+    "founded": "Founded",
+    "magazines": "Magazines",
+    "birthday": "Birthday",
+    "journalist": "Journalist",
+    "publishedIn": "Published in",
+    "settings": "Settings",
+    "closeModal": "Close modal"
+  },
+  "header": {
+    "frontpage": "Frontpage",
+    "magazines": "Magazines",
+    "blogs": "Blogs",
+    "tbr": "To Be Read",
+    "ownMagazines": "Own Magazines",
+    "searchPlaceholder": "Article, magazine, writer...",
+    "ownAccount": "Own Account",
+    "favourites": "Favourites",
+    "cart": "Shopping Cart",
+    "support": "Support"
+  },
+  "footer": {
+    "newsletter": "Sign Up for Newsletter",
+    "newsletterPlaceholder": "E-mail address",
+    "info": "Information",
+    "infoText": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae aliquam voluptatem veniam, est atque cumque eum delectus sint!",
+    "socialMedia": "Social Media",
+    "link": "Link",
+    "linkText": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae aliquam voluptatem veniam, est atque cumque eum delectus sint!"
+  },
+  "signInUpModal": {
+    "title": "Login and come to see more",
+    "rememberme": "Remember me",
+    "forgottenPsw": "Did you forget your password?",
+    "forgottenPswLink": "Give your email address and we'll send you email reset link",
+    "mustSmallCapital": "Password must include capital and small letters and also numbers",
+    "mustAtLeastLength": "Password must be at least eight letters long",
+    "mustNotEmptySpaces": "Password can't have whitespaces"
+  },
+  "frontpage": {
+    "hello": "Hello",
+    "whatToRead": ", what would you like to read today?"
+  },
+  "Urheilu": "Sports",
+  "Kauneus": "Beauty",
+  "Vapaa-aika": "Leisure",
+  "Sisustaminen": "Interior Design",
+  "Käsityöt": "Hand Crafts",
+  "Tiede": "Science",
+  "Ajankohtaista": "Topical",
+  "Viihde": "Entertainment",
+  "magazines": {
+    "ourMagazines": "Our magazines",
+    "yourMagazines": "Your magazines",
+    "noMagazines": "You haven't bought any magazines"
+  },
+  "errors": {
+    "invalidEmail": "Email in wrong format",
+    "noUserWithEmail": "No user found with given email address",
+    "emailAlreadyInUse": "Email address already in use",
+    "emailNotVerified": "Email address is not verified, check your email",
+    "wrongPsw": "Wrong password given",
+    "pswResetLinkSent": "Password reset link has been sent to your email. Check your email after waiting for couple of minutes.",
+    "pwsCapital": "Password must contain upper and lower case letters and also numbers.",
+    "pswLength": "Password length must be at least eigth chatacters.",
+    "pswNoEmptySpaces": "Password must not have empty spaces.",
+    "pswsNotMatch": "Passwords don't match."
+  },
+  "success": {
+    "userCreated": "User successfully created, check your email verification link and follow given instructions"
+  },
+  "settings": {
+    "account": "Account",
+    "name": "Name",
+    "removeAccount": "Remove account",
+    "changePassword": "Change password",
+    "changeName": "Change name",
+    "changeEmail": "Change email address",
+    "shoppingHistory": "Shopping shoppingHistory",
+    "boughtItem": "Bought item"
+  },
+  "preview": {
+    "addToCart": "Add to cart",
+    "removeFromCart": "Remove from cart",
+    "addToFavs": "Add to favourites",
+    "removeFromFavs": "Remove from favourites"
+  },
+  "shoppingCart": {
+    "article": "Article",
+    "magazine": "Magazine",
+    "price": "Price",
+    "emptyCart": "Empty shopping cart",
+    "buyArticles": "Buy articles",
+    "cartIsEmpty": "Shopping cart is empty",
+    "paymentFailure": "Payment failed, please try again"
+  }
 }

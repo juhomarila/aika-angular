@@ -2,12 +2,15 @@
   <logged-in-carousel [carouselArray]="carouselEntityList"></logged-in-carousel>
   <div style="padding-top: 12.8px">
     <div class="small-padding">
-      <h5>Hei {{ username }}, mitä tänään luettaisiin?</h5>
+      <h5>
+        {{ 'frontpage.hello' | translate }} {{ username
+        }}{{ 'frontpage.whatToRead' | translate }}
+      </h5>
     </div>
     <div *ngIf="isLogged">
       <div *ngFor="let g of genreArray">
         <div class="small-padding">
-          <h5>{{ g }}:</h5>
+          <h5>{{ g | translate }}:</h5>
         </div>
         <title-carousel
           [articleList]="getGenreArticles(articleList, g)"

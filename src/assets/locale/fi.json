@@ -1,50 +1,110 @@
 {
-    "common": {
-        "login": "Kirjaudu",
-        "logout": "Kirjaudu ulos",
-        "email": "Sähköposti",
-        "password": "Salasana",
-        "register": "Rekisteröidy",
-        "retypePassword": "Salasana uudelleen",
-        "emailPlaceholder": "etunimi.sukunimi@sahkoposti.fi",
-        "send": "Lähetä",
-        "loading": "Ladataan",
-        "genres": "Genret",
-        "hometown": "Kotikaupunki",
-        "journalists": "Toimittajat",
-        "founded": "Perustettu",
-        "magazines": "Aikakausilehdet",
-        "birthday": "Syntymäpäivä"
-    },
-    "header": {
-        "frontpage": "Etusivu",
-        "magazines": "Aikakausilehdet",
-        "blogs": "Blogit",
-        "tbr": "Lukulista",
-        "ownMagazines": "Omat Lehdet",
-        "searchPlaceholder": "Artikkeli, lehti, kirjoittaja...",
-        "ownAccount": "Oma Tili",
-        "favourites": "Suosikit",
-        "cart": "Ostoskori",
-        "settings": "Asetukset",
-        "support": "Tuki"
-    },
-    "footer": {
-        "newsletter": "Tilaa Uutiskirje",
-        "newsletterPlaceholder": "Sähköpostiosoite",
-        "info": "Tietoa",
-        "infoText": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae aliquam voluptatem veniam, est atque cumque eum delectus sint!",
-        "socialMedia": "Sosiaalinen media",
-        "link": "Linkki",
-        "linkText": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae aliquam voluptatem veniam, est atque cumque eum delectus sint!"
-    },
-    "signInUpModal": {
-        "title": "Kirjaudu sisään, näet lisää",
-        "rememberme": "Muista minut",
-        "forgottenPsw": "Unohtuiko salasana?",
-        "forgottenPswLink": "Anna sähköpostiosoite, lähetämme sinne salasanan nollauslinkin",
-        "mustSmallCapital": "Salasanan tulee sisältää isoja ja pieniä kirjaimia, sekä numeroita",
-        "mustAtLeastLength": "Salasanan tulee olla vähintään kahdeksan merkkiä pitkä",
-        "mustNotEmptySpaces": "Salasanassa ei saa olla tyhjiä välejä"
-    }
+  "common": {
+    "login": "Kirjaudu",
+    "logout": "Kirjaudu ulos",
+    "email": "Sähköposti",
+    "password": "Salasana",
+    "register": "Rekisteröidy",
+    "retypePassword": "Salasana uudelleen",
+    "emailPlaceholder": "etunimi.sukunimi@sahkoposti.fi",
+    "send": "Lähetä",
+    "loading": "Ladataan",
+    "genres": "Genret",
+    "hometown": "Kotikaupunki",
+    "journalists": "Toimittajat",
+    "founded": "Perustettu",
+    "magazines": "Aikakausilehdet",
+    "birthday": "Syntymäpäivä",
+    "journalist": "Toimittaja",
+    "publishedIn": "Ilmestyy lehdessä",
+    "settings": "Asetukset",
+    "closeModal": "Sulje ikkuna"
+  },
+  "header": {
+    "frontpage": "Etusivu",
+    "magazines": "Aikakausilehdet",
+    "blogs": "Blogit",
+    "tbr": "Lukulista",
+    "ownMagazines": "Omat Lehdet",
+    "searchPlaceholder": "Artikkeli, lehti, kirjoittaja...",
+    "ownAccount": "Oma Tili",
+    "favourites": "Suosikit",
+    "cart": "Ostoskori",
+    "support": "Tuki"
+  },
+  "footer": {
+    "newsletter": "Tilaa Uutiskirje",
+    "newsletterPlaceholder": "Sähköpostiosoite",
+    "info": "Tietoa",
+    "infoText": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae aliquam voluptatem veniam, est atque cumque eum delectus sint!",
+    "socialMedia": "Sosiaalinen media",
+    "link": "Linkki",
+    "linkText": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae aliquam voluptatem veniam, est atque cumque eum delectus sint!"
+  },
+  "signInUpModal": {
+    "title": "Kirjaudu sisään, näet lisää",
+    "rememberme": "Muista minut",
+    "forgottenPsw": "Unohtuiko salasana?",
+    "forgottenPswLink": "Anna sähköpostiosoite, lähetämme sinne salasanan nollauslinkin",
+    "mustSmallCapital": "Salasanan tulee sisältää isoja ja pieniä kirjaimia, sekä numeroita",
+    "mustAtLeastLength": "Salasanan tulee olla vähintään kahdeksan merkkiä pitkä",
+    "mustNotEmptySpaces": "Salasanassa ei saa olla tyhjiä välejä"
+  },
+  "frontpage": {
+    "hello": "Hei",
+    "whatToRead": ", mitä tänään luettaisiin?"
+  },
+  "Urheilu": "Urheilu",
+  "Kauneus": "Kauneus",
+  "Vapaa-aika": "Vapaa-aika",
+  "Sisustaminen": "Sisustaminen",
+  "Käsityöt": "Käsityöt",
+  "Tiede": "Tiede",
+  "Ajankohtaista": "Ajankohtaista",
+  "Viihde": "Viihde",
+  "magazines": {
+    "ourMagazines": "Tarjolla olevat lehdet",
+    "yourMagazines": "Sinun lehtesi",
+    "noMagazines": "Sinulla ei ole vielä yhtään lehteä ostettua"
+  },
+  "errors": {
+    "invalidEmail": "Väärä sähköpostiosoite",
+    "noUserWithEmail": "Annetulla sähköpostiosoitteella ei löydy käyttäjää",
+    "emailAlreadyInUse": "Sähköpostiosoite on jo käytössä",
+    "emailNotVerified": "Sähköpostiosoitetta ei ole vahvistettu, tarkasta sähköpostisi",
+    "wrongPsw": "Väärä salasana",
+    "pswResetLinkSent": "Sähköpostiisi on lähetetty salasanan nollauslinkki, tarkasta sähköpostisi ja odota muutama minuutti",
+    "pwsCapital": "Salasanan tulee sisältää isoja ja pieniä kirjaimia, sekä numeroita.",
+    "pswLength": "Salasanan tulee olla vähintään kahdeksan merkkiä pitkä.",
+    "pswNoEmptySpaces": "Salasanassa ei saa olla tyhjiä välejä.",
+    "pswsNotMatch": "Salasanat eivät täsmää."
+  },
+  "success": {
+    "userCreated": "Käyttäjätili luotu onnistuneesti, tarkista sähköpostistasi vahvistusviesti ja seuraa ohjeita"
+  },
+  "settings": {
+    "account": "Tili",
+    "name": "Nimi",
+    "removeAccount": "Poista tili",
+    "changePassword": "Vaihda salasana",
+    "changeName": "Vaihda nimi",
+    "changeEmail": "Vaihda sähköpostiosoite",
+    "shoppingHistory": "Ostohistoria",
+    "boughtItem": "Ostos"
+  },
+  "preview": {
+    "addToCart": "Lisää ostoskoriin",
+    "removeFromCart": "Poista ostoskorista",
+    "addToFavs": "Lisää suosikkeihin",
+    "removeFromFavs": "Poista suosikeista"
+  },
+  "shoppingCart": {
+    "article": "Artikkeli",
+    "magazine": "Lehti",
+    "price": "Hinta",
+    "emptyCart": "Tyhjennä ostoskori",
+    "buyArticles": "Osta artikkelit",
+    "cartIsEmpty": "Ostoskori on tyhjä",
+    "paymentFailure": "Maksu epäonnistui, yritä uudelleen"
+  }
 }

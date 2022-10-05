@@ -4,10 +4,8 @@ import {
   Component,
   EventEmitter,
   Input,
-  OnChanges,
   OnInit,
   Output,
-  SimpleChanges,
 } from '@angular/core';
 import { Article } from 'src/app/shared/interfaces/article';
 import { ShoppingCartService } from 'src/app/shared/services/shopping-cart.service';
@@ -26,7 +24,7 @@ import { FavouriteService } from '../../services/favourite.service';
   templateUrl: './preview.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PreviewComponent implements OnInit, OnChanges {
+export class PreviewComponent implements OnInit {
   @Input() article!: Article;
   @Input() owned: boolean = false;
   @Input() favourite: boolean = false;
@@ -36,6 +34,7 @@ export class PreviewComponent implements OnInit, OnChanges {
   hover: boolean = false;
   inCart: boolean = false;
   arrayKey: number = 0;
+  language: string = '';
 
   constructor(
     private shoppingCartSvc: ShoppingCartService,
@@ -46,11 +45,8 @@ export class PreviewComponent implements OnInit, OnChanges {
     public router: Router
   ) {}
 
-  ngOnChanges(changes: SimpleChanges): void {
-    //console.log(changes['owned'].currentValue);
-  }
-
   ngOnInit(): void {
+    this.language = localStorage.getItem('language')!;
     this.ref.detach();
     setInterval(() => {
       this.inCart = this.checkIfIsInCart();

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
 import { ErrorMessage } from 'src/app/shared/interfaces/error-message';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { UtilService } from 'src/app/shared/services/util.service';
@@ -20,7 +21,8 @@ export class SignUpModalComponent {
   constructor(
     private activeModal: NgbActiveModal,
     private authSvc: AuthService,
-    private utilSvc: UtilService
+    private utilSvc: UtilService,
+    private translate: TranslateService
   ) {}
 
   close() {
@@ -34,31 +36,29 @@ export class SignUpModalComponent {
         await this.authSvc.SignUp(email, psw, this.activeModal).then(result => {
           this.error = this.utilSvc.messageSvc(
             result,
-            'Käyttäjätili luotu onnistuneesti, tarkista sähköpostistasi vahvistusviesti ja seuraa ohjeita'
+            this.translate.instant('success.userCreated')
           );
         });
       }
       if (!this.utilSvc.passwordRequirements(psw)) {
         this.error.error = true;
-        this.error.errorMsg =
-          'Salasanan tulee sisältää isoja ja pieniä kirjaimia, sekä numeroita.';
+        this.error.errorMsg = this.translate.instant('errors.pwsCapital');
         this.error.clicked = false;
       }
       if (!this.utilSvc.passwordLength(psw)) {
         this.error.error = true;
-        this.error.errorMsg =
-          'Salasanan tulee olla vähintään kahdeksan merkkiä pitkä.';
+        this.error.errorMsg = this.translate.instant('errors.pswLength');
         this.error.clicked = false;
       }
       if (!this.utilSvc.checkWhiteSpace(psw)) {
         this.error.error = true;
-        this.error.errorMsg = 'Salasanassa ei saa olla tyhjiä välejä.';
+        this.error.errorMsg = this.translate.instant('errors.pswNoEmptySpaces');
         this.error.clicked = false;
       }
     }
     if (!this.utilSvc.validatePasswords(psw, retypePassword)) {
       this.error.error = true;
-      this.error.errorMsg = 'Salasanat eivät täsmää.';
+      this.error.errorMsg = this.translate.instant('errors.pswsNotMatch');
       this.error.clicked = false;
     }
   }

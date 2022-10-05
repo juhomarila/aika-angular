@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { Article } from '../interfaces/article';
 import { ErrorMessage } from '../interfaces/error-message';
 
@@ -6,7 +7,7 @@ import { ErrorMessage } from '../interfaces/error-message';
   providedIn: 'root',
 })
 export class UtilService {
-  constructor() {}
+  constructor(private translate: TranslateService) {}
 
   byDateSorter(articles: Article[]) {
     return articles.sort(
@@ -73,36 +74,35 @@ export class UtilService {
     if (result === 'auth/user-not-found') {
       error = {
         error: true,
-        errorMsg: 'Annetulla sähköpostiosoitteella ei löydy käyttäjää.',
+        errorMsg: this.translate.instant('errors.noUserWithEmail'),
         clicked: false,
       };
     }
     if (result === 'auth/invalid-email') {
       error = {
         error: true,
-        errorMsg: 'Väärä sähköpostiosoite',
+        errorMsg: this.translate.instant('errors.invalidEmail'),
         clicked: false,
       };
     }
     if (result === 'auth/email-already-in-use') {
       error = {
         error: true,
-        errorMsg: 'Sähköpostiosoite on jo käytössä',
+        errorMsg: this.translate.instant('errors.emailAlreadyInUse'),
         clicked: false,
       };
     }
     if (result === 'auth/email-not-verified') {
       error = {
         error: true,
-        errorMsg:
-          'Sähköpostiosoitetta ei ole vahvistettu, tarkasta sähköpostisi',
+        errorMsg: this.translate.instant('errors.emailNotVerified'),
         clicked: false,
       };
     }
     if (result === 'auth/wrong-password') {
       error = {
         error: true,
-        errorMsg: 'Väärä salasana',
+        errorMsg: this.translate.instant('errors.wrongPsw'),
         clicked: false,
       };
     }

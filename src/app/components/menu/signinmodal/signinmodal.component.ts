@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
 import { ErrorMessage } from 'src/app/shared/interfaces/error-message';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { UtilService } from 'src/app/shared/services/util.service';
@@ -20,9 +20,9 @@ export class SignInModalComponent {
 
   constructor(
     private activeModal: NgbActiveModal,
-    private router: Router,
     private authSvc: AuthService,
-    private utilSvc: UtilService
+    private utilSvc: UtilService,
+    private translate: TranslateService
   ) {}
 
   close() {
@@ -49,7 +49,7 @@ export class SignInModalComponent {
     this.authSvc.sendForgotPasswordLink(email).then(result => {
       this.error = this.utilSvc.messageSvc(
         result,
-        'Sähköpostiisi on lähetetty salasanan nollauslinkki, tarkasta sähköpostisi ja odota muutama minuutti'
+        this.translate.instant('errors.pswResetLinkSent')
       );
     });
   }

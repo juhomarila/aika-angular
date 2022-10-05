@@ -1,9 +1,14 @@
 <div class="container-fluid" style="padding-top: 72.8px">
   <hr class="featurette-divider" />
   <div class="row">
-    <h6 *ngIf="magazineList.length > 0" class="padding-bottom">Tarjolla olevat lehdet: </h6>
+    <h6 *ngIf="magazineList.length > 0" class="padding-bottom">
+      {{ 'magazines.ourMagazines' | translate }}:
+    </h6>
     <div *ngFor="let m of magazineList" class="col-sm-3">
-      <magazine-preview [magazine]="m" (selectedMagazine)="onSelect($event)"></magazine-preview>
+      <magazine-preview
+        [magazine]="m"
+        (selectedMagazine)="onSelect($event)"
+      ></magazine-preview>
     </div>
   </div>
 </div>
