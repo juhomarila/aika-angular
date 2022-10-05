@@ -28,7 +28,7 @@ export class AppComponent implements AfterViewInit {
   ) {
     router.events
       .pipe(filter((e): e is Scroll => e instanceof Scroll))
-      .pipe(delay(1)) // <--------------------------- This line
+      .pipe(delay(1))
       .subscribe(e => {
         if (e.position) {
           viewportScroller.scrollToPosition(e.position);
