@@ -26,7 +26,7 @@ export class FrontpageComponent implements OnInit {
   ownedArticlesList: Owned[] = [];
   genreArray: string[] = [];
   favouriteArticlesList: Favourite[] = [];
-  filterByGenre!: string[];
+  filterByGenre: string[] = [];
   showFilters: boolean = false;
   filterMagazineName: string[] = [];
   magazineList: Magazine[] = [];
@@ -59,6 +59,17 @@ export class FrontpageComponent implements OnInit {
       'Ajankohtaista',
       'Viihde',
     ];
+    if (localStorage.getItem('filterGenre')) {
+      this.filterByGenre = JSON.parse(localStorage.getItem('filterGenre')!);
+      this.filterGenre();
+    }
+    // if (localStorage.getItem('filterMagazineName')) {
+    //   this.filterMagazineName = JSON.parse(
+    //     localStorage.getItem('filterMagazineName')!
+    //   );
+    //   console.log(this.filterMagazineName);
+    //   this.filterMagazine();
+    // }
   }
 
   showHideFilters() {
@@ -66,6 +77,7 @@ export class FrontpageComponent implements OnInit {
   }
 
   filterGenre() {
+    localStorage.setItem('filterGenre', JSON.stringify(this.filterByGenre));
     this.filterByGenre.map(genre => {
       const index = this.genreArray.indexOf(genre);
       if (index > -1) {
@@ -75,12 +87,22 @@ export class FrontpageComponent implements OnInit {
   }
 
   filterMagazine() {
+    // localStorage.setItem(
+    //   'filterMagazineName',
+    //   JSON.stringify(this.filterMagazineName)
+    // );
+    this.genreArray = [];
     let tempArticleList: Article[] = [];
-    console.log(this.filterMagazineName);
     this.articleList.map(article => {
       this.filterMagazineName.map(magazine => {
         if (magazine === article.magazine.name) {
           tempArticleList.push(article);
+          if (
+            !this.genreArray.includes(article.genre) &&
+            !this.filterByGenre.includes(article.genre)
+          ) {
+            this.genreArray.push(article.genre);
+          }
         }
       });
     });
@@ -92,8 +114,6 @@ export class FrontpageComponent implements OnInit {
   }
 
   backToMagazine(event: any) {
-    console.log(event);
-    console.log(this.filterMagazineName);
     const index = this.filterMagazineName.indexOf(event.value);
     if (index > -1) {
       this.filterMagazineName.splice(index, 1);
@@ -113,6 +133,10 @@ export class FrontpageComponent implements OnInit {
       'Viihde',
     ];
     this.filteredArticleList = this.articleList;
+    localStorage.removeItem('filterGenre');
+    localStorage.removeItem('filterMagazineName');
+    this.filterByGenre = [];
+    this.filterMagazineName = [];
   }
 
   getArticles(): void {
