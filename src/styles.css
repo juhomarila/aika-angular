@@ -12,12 +12,26 @@
   font-family: 'Raleway', 'arial', 'lato';
 }
 
+.filters {
+  background-color: rgba(23, 25, 28, 0.95);
+  padding: 4vh;
+  border: solid 1px var(--text);
+  margin-top: 4vh;
+  margin-left: 6.7vh;
+  margin-right: 8vh;
+}
+
 .select-filter {
   color: var(--text);
   border: 1px solid white;
   padding: 0.2em;
   width: 50vh;
-  height: auto;
+  border-radius: 0.2em;
+}
+
+.ng-value-container {
+  overflow: hidden;
+  height: 3vh;
 }
 
 .ng-value-label {
@@ -30,9 +44,14 @@
 
 .ng-dropdown-panel {
   border: 1px solid white !important;
-  margin-top: 0.4em;
-  padding: 0.5em;
+  margin-top: 0.5em;
+  margin-left: -0.2em;
+  padding: 1em;
   background-color: rgba(23, 25, 28, 0.95);
+}
+
+.ng-input>input {
+  color: var(--text)!important;
 }
 
 .journalists {
@@ -148,6 +167,10 @@ h5 {
 
 .padding-frontpage {
   padding-right: 1.5vh;
+}
+
+.padding-right {
+  padding-right: 9vh;
 }
 
 .p-carousel .p-carousel-content .p-carousel-next {
@@ -586,6 +609,10 @@ th {
 .small-padding {
   padding-top: 1em;
   padding-left: 6.7vh;
+}
+
+.margin-left {
+  margin-left: 6.7vh;
 }
 
 .container-fluid {

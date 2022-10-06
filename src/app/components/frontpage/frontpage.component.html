@@ -1,23 +1,53 @@
 <div>
   <logged-in-carousel [carouselArray]="carouselEntityList"></logged-in-carousel>
   <div style="padding-top: 12.8px">
-    <div class="small-padding">
+    <div class="small-padding d-flex justify-content-between">
       <h5>
         {{ 'frontpage.hello' | translate }} {{ username
         }}{{ 'frontpage.whatToRead' | translate }}
       </h5>
+      <div class="padding-right">
+        <a (click)="showHideFilters()">
+          <small *ngIf="showFilters" style="padding-right: 4px"
+            >Piilota filtterit</small
+          >
+          <small *ngIf="!showFilters" style="padding-right: 4px"
+            >Näytä filtterit</small
+          >
+          <i class="bi bi-arrow-down-up"></i>
+        </a>
+      </div>
     </div>
-    <div *ngIf="isLogged" class="container-fluid">
-      <div class="d-flex justify-content-between">
-        <ng-select
-          [items]="genreArray"
-          [(ngModel)]="filterByGenre"
-          (add)="filterGenre()"
-          (clear)="resetFilters()"
-          (remove)="backToGenre($event)"
-          [multiple]="true"
-          class="select-filter"
-        ></ng-select>
+    <div *ngIf="isLogged">
+      <div *ngIf="showFilters" class="d-flex justify-content-between filters">
+        <div class="d-flex">
+          <small class="align-self-center padding-frontpage"
+            >Poista genre</small
+          >
+          <ng-select
+            [items]="genreArray"
+            [(ngModel)]="filterByGenre"
+            (add)="filterGenre()"
+            (clear)="resetFilters()"
+            (remove)="backToGenre($event)"
+            [multiple]="true"
+            class="select-filter"
+          ></ng-select>
+        </div>
+        <div class="d-flex">
+          <small class="align-self-center padding-frontpage">Näytä lehti</small>
+          <ng-select
+            [items]="magazineList"
+            [(ngModel)]="filterMagazineName"
+            (add)="filterMagazine()"
+            (clear)="resetFilters()"
+            (remove)="backToMagazine($event)"
+            [multiple]="true"
+            bindLabel="name"
+            bindValue="name"
+            class="select-filter"
+          ></ng-select>
+        </div>
         <button
           type="submit"
           class="btn btn-primary float-end"

@@ -9,7 +9,7 @@ import { Owned } from 'src/app/shared/interfaces/owned';
 import { UtilService } from 'src/app/shared/services/util.service';
 import { FavouriteService } from 'src/app/shared/services/favourite.service';
 import { Favourite } from 'src/app/shared/interfaces/favourite';
-import * as _ from 'lodash';
+import { Magazine } from 'src/app/shared/interfaces/magazine';
 
 @Component({
   selector: 'app-frontpage',
@@ -27,6 +27,9 @@ export class FrontpageComponent implements OnInit {
   genreArray: string[] = [];
   favouriteArticlesList: Favourite[] = [];
   filterByGenre!: string[];
+  showFilters: boolean = false;
+  filterMagazineName: string[] = [];
+  magazineList: Magazine[] = [];
 
   constructor(
     private authSvc: AuthService,
@@ -45,6 +48,7 @@ export class FrontpageComponent implements OnInit {
     this.getCarouselImages();
     this.getOwnedArticles();
     this.getFavouriteArticles();
+    this.getAllMagazines();
     this.genreArray = [
       'Urheilu',
       'Kauneus',
@@ -57,6 +61,10 @@ export class FrontpageComponent implements OnInit {
     ];
   }
 
+  showHideFilters() {
+    this.showFilters = !this.showFilters;
+  }
+
   filterGenre() {
     this.filterByGenre.map(genre => {
       const index = this.genreArray.indexOf(genre);
@@ -66,8 +74,31 @@ export class FrontpageComponent implements OnInit {
     });
   }
 
+  filterMagazine() {
+    let tempArticleList: Article[] = [];
+    console.log(this.filterMagazineName);
+    this.articleList.map(article => {
+      this.filterMagazineName.map(magazine => {
+        if (magazine === article.magazine.name) {
+          tempArticleList.push(article);
+        }
+      });
+    });
+    this.filteredArticleList = tempArticleList;
+  }
+
   backToGenre(event: any) {
     this.genreArray.unshift(event.value);
+  }
+
+  backToMagazine(event: any) {
+    console.log(event);
+    console.log(this.filterMagazineName);
+    const index = this.filterMagazineName.indexOf(event.value);
+    if (index > -1) {
+      this.filterMagazineName.splice(index, 1);
+    }
+    this.filterMagazine();
   }
 
   resetFilters() {
@@ -81,6 +112,7 @@ export class FrontpageComponent implements OnInit {
       'Ajankohtaista',
       'Viihde',
     ];
+    this.filteredArticleList = this.articleList;
   }
 
   getArticles(): void {
@@ -122,5 +154,11 @@ export class FrontpageComponent implements OnInit {
       }
     });
     return this.sort(tempArray);
+  }
+
+  getAllMagazines(): void {
+    this.articleSvc.getMagazines().subscribe(magazines => {
+      this.magazineList = magazines;
+    });
   }
 }
