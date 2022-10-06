@@ -1,3 +1,14 @@
-<div class="container-fluid padding-top">   
-  <p>tbr works!</p>
+<div class="container-fluid padding-top">
+  <hr class="featurette-divider" />
+  <div class="row">
+    <h6 *ngIf="favouriteList.length === 0">
+      Et ole lisännyt yhtään artikkelia suosikkeihisi
+    </h6>
+    <h6 *ngIf="favouriteList.length > 0" class="padding-bottom">
+      Suosikkiartikkelisi
+    </h6>
+    <div *ngFor="let fav of favouriteArticlesList" class="col-sm-3">
+      <preview [article]="fav"></preview>
+    </div>
+  </div>
 </div>
