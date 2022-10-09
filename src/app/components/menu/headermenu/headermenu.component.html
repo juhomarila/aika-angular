@@ -5,7 +5,6 @@
         <a
           class="navbar-brand"
           routerLink="/frontpage"
-          routerLinkActive="active"
         >
           <img
             src="../../../../assets/logos/Asset 2@2x.png"
@@ -26,7 +25,7 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="logo-text hover-nav">
-              <a routerLink="/frontpage" routerLinkActive="active">
+              <a routerLink="/frontpage">
                 <h2>AIKA</h2>
               </a>
             </li>
@@ -35,7 +34,7 @@
                 class="nav-link text-white hover-link"
                 aria-current="page"
                 routerLink="/frontpage"
-                routerLinkActive="active"
+                routerLinkActive="navactive"
                 >{{ 'header.frontpage' | translate }}</a
               >
             </li>
@@ -43,7 +42,7 @@
               <a
                 class="nav-link text-white hover-link"
                 routerLink="/magazines"
-                routerLinkActive="active"
+                routerLinkActive="navactive"
                 >{{ 'header.magazines' | translate }}</a
               >
             </li>
@@ -51,7 +50,7 @@
               <a
                 class="nav-link text-white"
                 routerLink="/tbr"
-                routerLinkActive="active"
+                routerLinkActive="navactive"
                 >{{ 'header.tbr' | translate }}</a
               >
             </li>
@@ -59,7 +58,7 @@
               <a
                 class="nav-link text-white"
                 routerLink="/my-library"
-                routerLinkActive="active"
+                routerLinkActive="navactive"
                 >{{ 'header.ownMagazines' | translate }}</a
               >
             </li>
@@ -185,7 +184,6 @@
                     <a
                       class="dropdown-item kolmedropdown"
                       routerLink="/tbr"
-                      routerLinkActive="active"
                       ><i class="bi bi-heart margin-navbar"></i
                       >{{ 'header.tbr' | translate }}</a
                     >
@@ -205,7 +203,6 @@
                     <a
                       class="dropdown-item kolmedropdown"
                       routerLink="/settings"
-                      routerLinkActive="active"
                       ><i class="bi bi-person margin-navbar"></i
                       >{{ 'common.settings' | translate }}</a
                     >
@@ -214,7 +211,6 @@
                     <a
                       class="dropdown-item kolmedropdown"
                       routerLink="/support"
-                      routerLinkActive="active"
                       ><i class="bi bi-question-circle margin-navbar"></i
                       >{{ 'header.support' | translate }}</a
                     >

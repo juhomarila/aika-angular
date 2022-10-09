@@ -14,7 +14,6 @@
           <small *ngIf="!showFilters" style="padding-right: 4px"
             >Näytä filtterit</small
           >
-          <i class="bi bi-arrow-down-up"></i>
         </a>
       </div>
     </div>
@@ -28,7 +27,7 @@
             [items]="genreArray"
             [(ngModel)]="filterByGenre"
             (add)="filterGenre()"
-            (clear)="resetFilters()"
+            (clear)="resetGenreFilters()"
             (remove)="backToGenre($event)"
             [multiple]="true"
             class="select-filter"
@@ -40,7 +39,7 @@
             [items]="magazineList"
             [(ngModel)]="filterMagazineName"
             (add)="filterMagazine()"
-            (clear)="resetFilters()"
+            (clear)="resetArticleFilters()"
             (remove)="backToMagazine($event)"
             [multiple]="true"
             bindLabel="name"

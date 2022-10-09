@@ -602,6 +602,11 @@ th {
   font-weight: bolder;
 }
 
+.navactive {
+  font-weight: bolder;
+  text-decoration: underline;
+}
+
 #my-overlay img:not(:hover) {
   filter: blur(1px) brightness(0.65) opacity(0.80) saturate(0.80) sepia(0.15);
 }
@@ -1130,9 +1135,6 @@ only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (
     float: right;
     margin-left: 150px;
   }
-
-
-
   .siirraemail {
     width: 150%;
   }
@@ -1140,10 +1142,8 @@ only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (
   .uutiskirje {
     font-size: 25px;
   }
-
-
-
 }
+
 
 /* Desktops and laptops ----------- */
 @media only screen and (min-width : 1224px) {
@@ -1173,6 +1173,11 @@ only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (
 
   .socialmediafooter {
     margin-left: -1px;
+  }
+
+  .p-carousel-item {
+    flex: none!important;
+    width: 20%;
   }
 
 }

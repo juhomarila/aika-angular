@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Article } from 'src/app/shared/interfaces/article';
 import { Favourite } from 'src/app/shared/interfaces/favourite';
+import { ArticlesvcService } from 'src/app/shared/services/articlesvc.service';
 import { FavouriteService } from 'src/app/shared/services/favourite.service';
 import { FirestoreService } from 'src/app/shared/services/firestore.service';
 
@@ -10,25 +11,28 @@ import { FirestoreService } from 'src/app/shared/services/firestore.service';
 })
 export class TbrComponent implements OnInit {
   favouriteList: Favourite[] = [];
-  favouriteArticlesList: Article[] = [];
+  article!: Article;
 
   constructor(
     private favouriteSvc: FavouriteService,
-    private firestoreSvc: FirestoreService
+    private firestoreSvc: FirestoreService,
+    private articleSvc: ArticlesvcService
   ) {}
 
   ngOnInit(): void {
     this.getFavouriteArticles();
-    this.favouriteList?.map(key => {
-      this.firestoreSvc.getArticle(key.key).subscribe(article => {
-        this.favouriteArticlesList.push(article.data() as Article);
-      });
-    });
   }
 
   getFavouriteArticles(): void {
     this.favouriteSvc
       .getUserArticleFavourites()
       .subscribe(favs => (this.favouriteList = favs));
+  }
+
+  getFavouriteArticle(key: string): Article {
+    this.articleSvc.getArticle(key).subscribe(article => {
+      this.article = article;
+    });
+    return this.article;
   }
 }

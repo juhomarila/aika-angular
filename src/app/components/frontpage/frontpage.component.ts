@@ -59,17 +59,29 @@ export class FrontpageComponent implements OnInit {
       'Ajankohtaista',
       'Viihde',
     ];
+    if (localStorage.getItem('filterMagazineName')) {
+      this.filterMagazineName = JSON.parse(
+        localStorage.getItem('filterMagazineName')!
+      );
+      this.genreArray = JSON.parse(
+        localStorage.getItem('filteredArticleListGenres')!
+      );
+      if (localStorage.getItem('magazines')) {
+        this.magazineList = JSON.parse(localStorage.getItem('magazines')!);
+        this.filteredArticleList = JSON.parse(
+          localStorage.getItem('filteredArticleList')!
+        );
+      }
+      this.showFilters = true;
+    }
     if (localStorage.getItem('filterGenre')) {
+      if (localStorage.getItem('magazines')) {
+        this.magazineList = JSON.parse(localStorage.getItem('magazines')!);
+      }
+      this.showFilters = true;
       this.filterByGenre = JSON.parse(localStorage.getItem('filterGenre')!);
       this.filterGenre();
     }
-    // if (localStorage.getItem('filterMagazineName')) {
-    //   this.filterMagazineName = JSON.parse(
-    //     localStorage.getItem('filterMagazineName')!
-    //   );
-    //   console.log(this.filterMagazineName);
-    //   this.filterMagazine();
-    // }
   }
 
   showHideFilters() {
@@ -78,6 +90,7 @@ export class FrontpageComponent implements OnInit {
 
   filterGenre() {
     localStorage.setItem('filterGenre', JSON.stringify(this.filterByGenre));
+    localStorage.setItem('magazines', JSON.stringify(this.magazineList));
     this.filterByGenre.map(genre => {
       const index = this.genreArray.indexOf(genre);
       if (index > -1) {
@@ -87,15 +100,16 @@ export class FrontpageComponent implements OnInit {
   }
 
   filterMagazine() {
-    // localStorage.setItem(
-    //   'filterMagazineName',
-    //   JSON.stringify(this.filterMagazineName)
-    // );
+    localStorage.setItem(
+      'filterMagazineName',
+      JSON.stringify(this.filterMagazineName)
+    );
+    localStorage.setItem('magazines', JSON.stringify(this.magazineList));
     this.genreArray = [];
     let tempArticleList: Article[] = [];
     this.articleList.map(article => {
       this.filterMagazineName.map(magazine => {
-        if (magazine === article.magazine.name) {
+        if (magazine === article.magazine?.name) {
           tempArticleList.push(article);
           if (
             !this.genreArray.includes(article.genre) &&
@@ -107,18 +121,85 @@ export class FrontpageComponent implements OnInit {
       });
     });
     this.filteredArticleList = tempArticleList;
+    localStorage.setItem(
+      'filteredArticleList',
+      JSON.stringify(this.filteredArticleList)
+    );
+    localStorage.setItem(
+      'filteredArticleListGenres',
+      JSON.stringify(this.genreArray)
+    );
   }
 
   backToGenre(event: any) {
     this.genreArray.unshift(event.value);
+    console.log(event.value);
+    console.log(this.filterByGenre);
+    localStorage.setItem('filterGenre', JSON.stringify(this.filterByGenre));
+    this.filterMagazine();
   }
 
   backToMagazine(event: any) {
     const index = this.filterMagazineName.indexOf(event.value);
     if (index > -1) {
       this.filterMagazineName.splice(index, 1);
+      localStorage.setItem(
+        'filterMagazineName',
+        JSON.stringify(this.filterMagazineName)
+      );
     }
     this.filterMagazine();
+  }
+
+  resetGenreFilters() {
+    if (localStorage.getItem('filteredArticleListGenres')) {
+      this.genreArray = JSON.parse(
+        localStorage.getItem('filteredArticleListGenres')!
+      );
+    } else {
+      this.genreArray = [
+        'Urheilu',
+        'Kauneus',
+        'Vapaa-aika',
+        'Sisustaminen',
+        'Käsityöt',
+        'Tiede',
+        'Ajankohtaista',
+        'Viihde',
+      ];
+    }
+    if (localStorage.getItem('filteredArticleList')) {
+      this.filteredArticleList = JSON.parse(
+        localStorage.getItem('filteredArticleList')!
+      );
+    } else {
+      this.filteredArticleList = this.articleList;
+    }
+    localStorage.removeItem('filterGenre');
+    this.filterByGenre = [];
+  }
+
+  resetArticleFilters() {
+    if (localStorage.getItem('filterGenre')) {
+      this.filterByGenre = JSON.parse(localStorage.getItem('filterGenre')!);
+    }
+    this.filterGenre();
+    this.genreArray = [
+      'Urheilu',
+      'Kauneus',
+      'Vapaa-aika',
+      'Sisustaminen',
+      'Käsityöt',
+      'Tiede',
+      'Ajankohtaista',
+      'Viihde',
+    ];
+    this.filteredArticleList = this.articleList;
+    localStorage.removeItem('filterMagazineName');
+    localStorage.removeItem('magazines');
+    localStorage.removeItem('filteredArticleList');
+    localStorage.removeItem('filteredArticleListGenres');
+    this.filterMagazineName = [];
   }
 
   resetFilters() {
@@ -135,6 +216,9 @@ export class FrontpageComponent implements OnInit {
     this.filteredArticleList = this.articleList;
     localStorage.removeItem('filterGenre');
     localStorage.removeItem('filterMagazineName');
+    localStorage.removeItem('magazines');
+    localStorage.removeItem('filteredArticleList');
+    localStorage.removeItem('filteredArticleListGenres');
     this.filterByGenre = [];
     this.filterMagazineName = [];
   }
