@@ -12,59 +12,88 @@
     <div class="modal-body">
       <div class="row">
         <div class="col-sm-5 offset-sm-2 col-md-8 offset-md-2">
-          <p class="jaaicon"><i class="bi bi-heart"></i></p>
-          <img
-            [src]="article.fileUrl"
-            class="card-img-top rounded-3 mx-auto d-block"
-            alt="..."
-          />
-          <small class="text-muted"
-            >{{ article.date.day }}/{{ article.date.month }}/{{
-              article.date.year
-            }}</small
-          >
-          <div class="row">
-            <div class="col">
+          <div class="col">
+            <div class="row">
               <p class="kirjoittaja">
-                <!-- <img
-                  src="Kuvat/IMG_6413 2.JPG"
-                  class="rounded-circle"
-                  width="25"
-                  height="25"
-                  alt="..."
-                /> -->
-                <a href="#">{{ article.magazine.name }}</a>
+                <a href="#"
+                  ><small style="font-weight: bold">{{
+                    article.magazine.name
+                  }}</small></a
+                >
               </p>
-            </div>
-            <div class="col">
-              <p class="jaaicon">
-                <a href="#"><i class="bi bi-facebook"></i></a
-                ><a href="#"><i class="bi bi-twitter"></i></a
-                ><a href="#"><i class="bi bi-whatsapp"></i></a>
-              </p>
+              <small class="text-muted"
+                >{{ article.date.day }}/{{ article.date.month }}/{{
+                  article.date.year
+                }}</small
+              >
             </div>
           </div>
-          <div class="card-title h4 text-center mb-3">
-            <h4>{{ article.name }}</h4>
+          <div class="d-flex justify-content-between" *ngIf="owned">
+            <div class="padding-bottom-top">
+              <a href="#" class="bi bi-facebook"></a>
+              <a href="#" class="bi bi-twitter modal-icon-padding"></a>
+              <a href="#" class="bi bi-whatsapp modal-icon-padding"></a>
+            </div>
+            <div class="padding-bottom-top float-right">
+              <small *ngIf="likes === 1; else show">{{ likes }} tykkäys</small>
+              <ng-template #show><small>{{ likes }} tykkäystä</small></ng-template>
+            </div>
           </div>
-          <div *ngIf="owned">
-            <p class="artikkeli">
-              {{ article.text }}
-            </p>
-
-            <!-- <video class="img-fluid rounded-3" playsinline autoplay muted loop>
-            <source
-              src="https://mdbootstrap.com/img/video/animation-intro.mp4"
-              type="video/mp4"
-            />
-          </video> -->
-
+          <div class="col">
             <img
               [src]="article.fileUrl"
               class="card-img-top rounded-3 mx-auto d-block"
               alt="..."
             />
-            <p class="artikkeli small-padding">
+            <div class="row">
+              <div class="d-flex justify-content-between">
+                <div class="minus-padding">
+                  <div *ngIf="!favourite">
+                    <a
+                      class="bi bi-heart rounded-circle align-self-center"
+                      (click)="favor()"
+                      title="{{ 'preview.addToFavs' | translate }}"
+                    ></a>
+                  </div>
+                  <div *ngIf="favourite">
+                    <a
+                      class="bi bi-heart-fill rounded-circle align-self-center"
+                      (click)="unfavor()"
+                      title="{{ 'preview.removeFromFavs' | translate }}"
+                    ></a>
+                  </div>
+                </div>
+                <div class="minus-padding-right" *ngIf="owned">
+                  <div *ngIf="!liked">
+                    <a
+                      class="bi bi-hand-thumbs-up rounded-circle align-self-center"
+                      (click)="like()"
+                      title="Tykkää"
+                    ></a>
+                  </div>
+                  <div *ngIf="liked">
+                    <i
+                      class="bi bi-hand-thumbs-up-fill rounded-circle-bought align-self-center"
+                      title=""
+                    ></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-title h4 text-center padding-bottom-top">
+            <h4>{{ article.name }}</h4>
+          </div>
+          <div *ngIf="owned">
+            <p class="artikkeli padding-bottom">
+              {{ article.text }}
+            </p>
+            <img
+              [src]="article.fileUrl"
+              class="card-img-top rounded-3 mx-auto d-block padding-bottom"
+              alt="..."
+            />
+            <p class="artikkeli padding-bottom">
               {{ article.text }}
             </p>
             <hr class="my-2" />
@@ -75,18 +104,23 @@
               alt="..."
             />
             <hr class="my-2" />
-            <p class="artikkeli">
+            <p class="artikkeli padding-bottom">
               {{ article.text }}
             </p>
-            <div class="star-wrapper">
-              <div class="text-uppercase mitamielta">
-                <p>mitä mieltä artikkelista</p>
+            <div class="text-center">
+              <div *ngIf="!liked">
+                <a
+                  class="bi bi-hand-thumbs-up rounded-circle"
+                  (click)="like()"
+                  title="Tykkää"
+                ></a>
               </div>
-              <a href="#" class="fas fa-star s1"></a>
-              <a href="#" class="fas fa-star s2"></a>
-              <a href="#" class="fas fa-star s3"></a>
-              <a href="#" class="fas fa-star s4"></a>
-              <a href="#" class="fas fa-star s5"></a>
+              <div *ngIf="liked">
+                <i
+                  class="bi bi-hand-thumbs-up-fill rounded-circle-bought"
+                  title=""
+                ></i>
+              </div>
             </div>
           </div>
         </div>

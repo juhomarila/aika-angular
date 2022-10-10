@@ -50,15 +50,22 @@ export class TitleCarouselComponent {
 
   onSelect(article: Article) {
     let owned = false;
+    let favourite = false;
     this.selectedArticle = article;
     for (let i = 0; i < this.ownedArticlesList.length; i++) {
       if (this.selectedArticle.key === this.ownedArticlesList[i].key) {
         owned = true;
       }
     }
+    for (let i = 0; i < this.favouriteList.length; i++) {
+      if (this.selectedArticle.key === this.favouriteList[i].key) {
+        favourite = true;
+      }
+    }
     const modalRef = this.modalSvc.open(ArticleModalComponent, { size: 'lg' });
     modalRef.componentInstance.article = this.selectedArticle;
     modalRef.componentInstance.owned = owned;
+    modalRef.componentInstance.favourite = favourite;
   }
 
   onSelectCheckIfOwned(selectedArticle: Article): boolean {

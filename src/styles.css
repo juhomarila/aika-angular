@@ -12,6 +12,10 @@
   font-family: 'Raleway', 'arial', 'lato';
 }
 
+.modal-icon-padding {
+  padding-left: 0.6em;
+}
+
 .filters {
   background-color: rgba(23, 25, 28, 0.95);
   padding: 4vh;
@@ -486,6 +490,14 @@ th {
   color: var(--text);
 }
 
+.bi-hand-thumbs-up {
+  color: var(--text);
+}
+
+.bi-hand-thumbs-up-fill {
+  color: var(--text);
+}
+
 .bi-bag-dash {
   padding: 0.6em;
 }
@@ -502,6 +514,16 @@ th {
   background-color: rgba(0, 0, 0, 0.5);
   padding: 0.5em;
   transition: background-color .3s;
+}
+
+.minus-padding {
+  margin-top: -7vh;
+  margin-left: 1vh;
+}
+
+.minus-padding-right {
+  margin-top: -7vh;
+  margin-right: 1vh;
 }
 
 .rounded-circle:hover {
@@ -1160,10 +1182,6 @@ only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (
   .input {
     padding-top: 1em;
   }
-
-  /* .filters {
-    margin-bottom: 4vh;
-  } */
 }
 
 
