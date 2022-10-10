@@ -33,7 +33,7 @@
             class="select-filter"
           ></ng-select>
         </div>
-        <div class="d-flex">
+        <div class="d-flex input">
           <small class="align-self-center padding-frontpage">Näytä lehti</small>
           <ng-select
             [items]="magazineList"
@@ -47,13 +47,15 @@
             class="select-filter"
           ></ng-select>
         </div>
-        <button
-          type="submit"
-          class="btn btn-primary float-end"
-          (click)="resetFilters()"
-        >
-          Nollaa
-        </button>
+        <div class="input">
+          <button
+            type="submit"
+            class="btn btn-primary float-end"
+            (click)="resetFilters()"
+          >
+            Nollaa
+          </button>
+        </div>
       </div>
       <div *ngFor="let g of genreArray">
         <div class="small-padding">

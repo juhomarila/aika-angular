@@ -1151,7 +1151,19 @@ only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (
 
   .d-flex.align-items-end {
     display: block!important;
-}
+  }
+
+  .d-flex.justify-content-between.filters {
+    display: block!important;
+  }
+
+  .input {
+    padding-top: 1em;
+  }
+
+  /* .filters {
+    margin-bottom: 4vh;
+  } */
 }
 
 
