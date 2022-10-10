@@ -28,15 +28,15 @@
               >
             </div>
           </div>
-          <div class="d-flex justify-content-between" *ngIf="owned">
-            <div class="padding-bottom-top">
+          <div class="d-flex justify-content-between">
+            <div class="padding-bottom-top" *ngIf="owned">
               <a href="#" class="bi bi-facebook"></a>
               <a href="#" class="bi bi-twitter modal-icon-padding"></a>
               <a href="#" class="bi bi-whatsapp modal-icon-padding"></a>
             </div>
             <div class="padding-bottom-top float-right">
-              <small *ngIf="likes === 1; else show">{{ likes }} tykkäys</small>
-              <ng-template #show><small>{{ likes }} tykkäystä</small></ng-template>
+              <small *ngIf="this.article.likes === 1; else show">{{ this.article.likes }} tykkäys</small>
+              <ng-template #show><small>{{ this.article.likes }} tykkäystä</small></ng-template>
             </div>
           </div>
           <div class="col">

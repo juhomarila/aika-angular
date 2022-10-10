@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Article } from '../../interfaces/article';
 import { Favourite } from '../../interfaces/favourite';
+import { Like } from '../../interfaces/like';
 import { Owned } from '../../interfaces/owned';
 import { UserService } from '../../services/user.service';
 import { ArticleModalComponent } from '../article-modal/article-modal.component';
@@ -15,6 +16,7 @@ export class TitleCarouselComponent {
   @Input() articleList: Article[] = [];
   @Input() favouriteList: Favourite[] = [];
   @Input() ownedArticlesList: Owned[] = [];
+  @Input() likedArticlesList: Like[] = [];
   urlList: string[] = [];
   selectedArticle?: Article;
   responsiveOptions: any;
@@ -51,6 +53,7 @@ export class TitleCarouselComponent {
   onSelect(article: Article) {
     let owned = false;
     let favourite = false;
+    let liked = false;
     this.selectedArticle = article;
     for (let i = 0; i < this.ownedArticlesList.length; i++) {
       if (this.selectedArticle.key === this.ownedArticlesList[i].key) {
@@ -62,10 +65,16 @@ export class TitleCarouselComponent {
         favourite = true;
       }
     }
+    for (let i = 0; i < this.likedArticlesList.length; i++) {
+      if (this.selectedArticle.key === this.likedArticlesList[i].key) {
+        liked = true;
+      }
+    }
     const modalRef = this.modalSvc.open(ArticleModalComponent, { size: 'lg' });
     modalRef.componentInstance.article = this.selectedArticle;
     modalRef.componentInstance.owned = owned;
     modalRef.componentInstance.favourite = favourite;
+    modalRef.componentInstance.liked = liked;
   }
 
   onSelectCheckIfOwned(selectedArticle: Article): boolean {

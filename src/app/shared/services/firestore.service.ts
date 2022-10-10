@@ -10,6 +10,7 @@ import { Magazine } from '../interfaces/magazine';
 import { increment } from '@angular/fire/firestore';
 import { Owned } from '../interfaces/owned';
 import { Favourite } from '../interfaces/favourite';
+import { Like } from '../interfaces/like';
 
 @Injectable({
   providedIn: 'root',
@@ -25,6 +26,8 @@ export class FirestoreService {
   magazineList: Magazine[] = [];
   boughtArticles: Owned[] = [];
   favouritesList: Favourite[] = [];
+  likedList: Like[] = [];
+  likes: number = 0;
 
   constructor(public afs: AngularFirestore) {}
 
@@ -151,6 +154,18 @@ export class FirestoreService {
     );
   }
 
+  async getUserArticleLikes(uid: string) {
+    const snapShot = this.afs
+      .collection('users')
+      .doc(uid)
+      .collection('likedArticles')
+      .get();
+    snapShot.subscribe(likes =>
+      likes.forEach(like => this.likedList.push(like.data() as Like))
+    );
+    return this.likedList;
+  }
+
   async addArticleLikeToArticle(key: string) {
     const articleRef: AngularFirestoreDocument<any> = this.afs
       .collection('articles')
@@ -171,6 +186,30 @@ export class FirestoreService {
       .doc(key);
     return userRef.set(
       { key: key },
+      {
+        merge: true,
+      }
+    );
+  }
+
+  async addArticleFavouriteToArticle(key: string) {
+    const articleRef: AngularFirestoreDocument<any> = this.afs
+      .collection('articles')
+      .doc(key);
+    return await articleRef.set(
+      { tbr: increment(1) },
+      {
+        merge: true,
+      }
+    );
+  }
+
+  async removeArticleFavouriteFromArticle(key: string) {
+    const articleRef: AngularFirestoreDocument<any> = this.afs
+      .collection('articles')
+      .doc(key);
+    return await articleRef.set(
+      { tbr: increment(-1) },
       {
         merge: true,
       }

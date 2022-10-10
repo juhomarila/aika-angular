@@ -20,4 +20,6 @@ export interface Article {
     year: number;
   };
   uploadDate: number;
+  likes: number;
+  tbr: number;
 }

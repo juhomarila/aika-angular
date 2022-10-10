@@ -20,6 +20,7 @@ export class FavouriteService {
 
   async addArticleToFavourites(key: string) {
     await this.fireStoreSvc.addArticleToFavourites(key, this.authSvc.user.uid);
+    await this.fireStoreSvc.addArticleFavouriteToArticle(key);
   }
 
   async removeArticleFromFavourites(key: string) {
@@ -27,6 +28,7 @@ export class FavouriteService {
       key,
       this.authSvc.user.uid
     );
+    await this.fireStoreSvc.removeArticleFavouriteFromArticle(key);
   }
 
   getUserArticleFavourites() {

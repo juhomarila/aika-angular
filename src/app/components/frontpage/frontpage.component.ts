@@ -10,6 +10,8 @@ import { UtilService } from 'src/app/shared/services/util.service';
 import { FavouriteService } from 'src/app/shared/services/favourite.service';
 import { Favourite } from 'src/app/shared/interfaces/favourite';
 import { Magazine } from 'src/app/shared/interfaces/magazine';
+import { Like } from 'src/app/shared/interfaces/like';
+import { LikeService } from 'src/app/shared/services/like.service';
 
 @Component({
   selector: 'app-frontpage',
@@ -30,6 +32,7 @@ export class FrontpageComponent implements OnInit {
   showFilters: boolean = false;
   filterMagazineName: string[] = [];
   magazineList: Magazine[] = [];
+  likedArticlesList: Like[] = [];
 
   constructor(
     private authSvc: AuthService,
@@ -37,7 +40,8 @@ export class FrontpageComponent implements OnInit {
     private storageSvc: StorageService,
     private userSvc: UserService,
     private utilSvc: UtilService,
-    private favouriteSvc: FavouriteService
+    private favouriteSvc: FavouriteService,
+    private likeSvc: LikeService
   ) {}
 
   ngOnInit(): void {
@@ -49,6 +53,7 @@ export class FrontpageComponent implements OnInit {
     this.getOwnedArticles();
     this.getFavouriteArticles();
     this.getAllMagazines();
+    this.getLikedArticles();
     this.genreArray = [
       'Urheilu',
       'Kauneus',
@@ -234,6 +239,12 @@ export class FrontpageComponent implements OnInit {
     this.favouriteSvc
       .getUserArticleFavourites()
       .subscribe(favs => (this.favouriteArticlesList = favs));
+  }
+
+  getLikedArticles(): void {
+    this.likeSvc
+      .getUserArticleLikes()
+      .subscribe(likes => (this.likedArticlesList = likes));
   }
 
   getCarouselImages(): void {

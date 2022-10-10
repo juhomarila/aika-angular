@@ -1,14 +1,31 @@
 import { Injectable } from '@angular/core';
+import { of } from 'rxjs';
+import { Like } from '../interfaces/like';
+import { AuthService } from './auth.service';
 import { FirestoreService } from './firestore.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LikeService {
-  constructor(private fireStoreSvc: FirestoreService) {}
+  likedArticlesList: Like[] = [];
+  likes: number = 0;
 
-  async likeArticle(key: string, uid: string) {
+  constructor(
+    private fireStoreSvc: FirestoreService,
+    private authSvc: AuthService
+  ) {
+    this.fireStoreSvc
+      .getUserArticleLikes(this.authSvc.user.uid)
+      .then(likes => (this.likedArticlesList = likes));
+  }
+
+  async likeArticle(key: string) {
     await this.fireStoreSvc.addArticleLikeToArticle(key);
-    await this.fireStoreSvc.addArticleLikeToUser(key, uid);
+    await this.fireStoreSvc.addArticleLikeToUser(key, this.authSvc.user.uid);
+  }
+
+  getUserArticleLikes() {
+    return of(this.likedArticlesList);
   }
 }

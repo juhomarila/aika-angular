@@ -49,6 +49,8 @@ const initialState: CartState = {
       year: 1,
     },
     uploadDate: 1,
+    likes: 0,
+    tbr: 0,
   },
 };
 
