@@ -1144,6 +1144,16 @@ only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (
   }
 }
 
+@media only screen and (max-width : 992px) {
+  .nav-item {
+    padding: 0;
+  }
+
+  .d-flex {
+    display: block!important;
+}
+}
+
 
 /* Desktops and laptops ----------- */
 @media only screen and (min-width : 1224px) {

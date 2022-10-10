@@ -2,10 +2,7 @@
   <div class="justify-content-between" (scroll)="onWindowScroll()">
     <div class="container-fluid">
       <div class="navbar navbar-expand-lg navbar-dark">
-        <a
-          class="navbar-brand"
-          routerLink="/frontpage"
-        >
+        <a class="navbar-brand" routerLink="/frontpage">
           <img
             src="../../../../assets/logos/Asset 2@2x.png"
             class="logo-img"
@@ -63,181 +60,183 @@
               >
             </li>
           </ul>
-          <form class="d-flex search-box" *ngIf="isLogged">
-            <input
-              class="form-control-sm me-2 search-box-input"
-              type="text"
-              placeholder="{{ 'header.searchPlaceholder' | translate }}"
-              aria-label="Search"
-              (keyup)="search($event)"
-              #searchInput
-            />
-            <button
-              id="search-box-btn"
-              type="button"
-              class="background-transparent"
+          <div class="d-flex align-items-end">
+            <form class="d-flex search-box align-self-center" *ngIf="isLogged">
+              <input
+                class="form-control-sm me-2 search-box-input"
+                type="text"
+                placeholder="{{ 'header.searchPlaceholder' | translate }}"
+                aria-label="Search"
+                (keyup)="search($event)"
+                #searchInput
+              />
+              <button
+                id="search-box-btn"
+                type="button"
+                class="background-transparent"
+              >
+                <i class="bi bi-search margin-navbar"></i>
+              </button>
+            </form>
+            <div
+              class="dropdown navbar-nav me-auto mb-2 mb-lg-0 float-right hover-nav"
             >
-              <i class="bi bi-search margin-navbar"></i>
-            </button>
-          </form>
-        </div>
-        <div
-          class="dropdown navbar-nav me-auto mb-2 mb-lg-0 float-right hover-nav"
-        >
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item hover-nav margin-navbar-right">
-              <a
-                *ngIf="noOfItemsInCart > 0"
-                class="nav-link text-white hover-link"
-                (click)="openShoppingCartModal()"
-                ><i class="bi bi-bag margin-navbar text-white"></i
-                >{{ noOfItemsInCart }}</a
-              >
-              <a
-                *ngIf="noOfItemsInCart === 0"
-                class="nav-link text-white"
-                href="#"
-                ><i class="bi margin-navbar text-white"></i>&nbsp;</a
-              >
-            </li>
-            <li class="nav-item hover-nav">
-              <a
-                class="nav-link text-white hover-link"
-                id="navbarScrollingDropdown"
-                y
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <div *ngIf="isLogged">
-                  <div *ngIf="username !== undefined">
-                    <span>{{ username }}</span>
-                  </div>
-                  <div *ngIf="username === undefined">
-                    <span>{{ 'header.ownAccount' | translate }}</span>
-                  </div>
-                </div>
-                <span *ngIf="!isLogged">{{ 'common.login' | translate }}</span>
-              </a>
-              <ul
-                class="dropdown-menu dropdown-menu-sm-end"
-                aria-labelledby="navbarScrollingDropdown"
-              >
-                <div *ngIf="!isLogged">
-                  <li>
-                    <button
-                      type="button"
-                      class="dropdown-item kirjaudu"
-                      (click)="openSignIn()"
-                    >
-                      <i class="bi bi-door-open margin-navbar"></i
-                      >{{ 'common.login' | translate }}
-                    </button>
-                  </li>
-
-                  <li>
-                    <button
-                      type="button"
-                      class="rekisteri dropdown-item"
-                      (click)="openSignUp()"
-                    >
-                      <i class="bi bi-door-closed margin-navbar"></i
-                      >{{ 'common.register' | translate }}
-                    </button>
-                  </li>
-                  <li>
-                    <hr class="dropdown-divider" />
-                  </li>
-                  <li>
-                    <div class="row">
-                      <div class="col-md-2">
-                        <a
-                          class="dropdown-item kolmedropdown"                      
-                          (click)="changeSiteLanguage('fi')"
-                          >FI</a
-                        >
-                        <a
-                          class="dropdown-item kolmedropdown"
-                          (click)="changeSiteLanguage('en')"
-                          >EN</a
-                        >
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item hover-nav margin-navbar-right">
+                  <a
+                    *ngIf="noOfItemsInCart > 0"
+                    class="nav-link text-white hover-link"
+                    (click)="openShoppingCartModal()"
+                    ><i class="bi bi-bag margin-navbar text-white"></i
+                    >{{ noOfItemsInCart }}</a
+                  >
+                  <a
+                    *ngIf="noOfItemsInCart === 0"
+                    class="nav-link text-white"
+                    href="#"
+                    ><i class="bi margin-navbar text-white"></i>&nbsp;</a
+                  >
+                </li>
+                <li class="nav-item hover-nav">
+                  <a
+                    class="nav-link text-white hover-link"
+                    id="navbarScrollingDropdown"
+                    y
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    <div *ngIf="isLogged">
+                      <div *ngIf="username !== undefined">
+                        <span>{{ username }}</span>
+                      </div>
+                      <div *ngIf="username === undefined">
+                        <span>{{ 'header.ownAccount' | translate }}</span>
                       </div>
                     </div>
-                  </li>
-                </div>
-                <div *ngIf="isLogged">
-                  <li>
-                    <button
-                      type="button"
-                      class="dropdown-item kirjaudu"
-                      (click)="logout()"
-                    >
-                      <i class="bi bi-door-open margin-navbar"></i
-                      >{{ 'common.logout' | translate }}
-                    </button>
-                  </li>
+                    <span *ngIf="!isLogged">{{
+                      'common.login' | translate
+                    }}</span>
+                  </a>
+                  <ul
+                    class="dropdown-menu dropdown-menu-sm-end"
+                    aria-labelledby="navbarScrollingDropdown"
+                  >
+                    <div *ngIf="!isLogged">
+                      <li>
+                        <button
+                          type="button"
+                          class="dropdown-item kirjaudu"
+                          (click)="openSignIn()"
+                        >
+                          <i class="bi bi-door-open margin-navbar"></i
+                          >{{ 'common.login' | translate }}
+                        </button>
+                      </li>
 
-                  <li>
-                    <hr class="dropdown-divider" />
-                  </li>
-                  <li>
-                    <a
-                      class="dropdown-item kolmedropdown"
-                      routerLink="/tbr"
-                      ><i class="bi bi-heart margin-navbar"></i
-                      >{{ 'header.tbr' | translate }}</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      class="dropdown-item kolmedropdown"
-                      (click)="openShoppingCartModal()"
-                      ><i class="bi bi-bag margin-navbar"></i
-                      >{{ 'header.cart' | translate }}</a
-                    >
-                  </li>
-                  <li>
-                    <hr class="dropdown-divider" />
-                  </li>
-                  <li>
-                    <a
-                      class="dropdown-item kolmedropdown"
-                      routerLink="/settings"
-                      ><i class="bi bi-person margin-navbar"></i
-                      >{{ 'common.settings' | translate }}</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      class="dropdown-item kolmedropdown"
-                      routerLink="/support"
-                      ><i class="bi bi-question-circle margin-navbar"></i
-                      >{{ 'header.support' | translate }}</a
-                    >
-                  </li>
-                  <li>
-                    <hr class="dropdown-divider" />
-                  </li>
-                  <li>
-                    <div class="row">
-                      <div class="col-md-2">
-                        <a
-                          class="dropdown-item kolmedropdown"
-                          (click)="changeSiteLanguage('fi')"
-                          >FI</a
+                      <li>
+                        <button
+                          type="button"
+                          class="rekisteri dropdown-item"
+                          (click)="openSignUp()"
                         >
-                        <a
-                          class="dropdown-item kolmedropdown"
-                          (click)="changeSiteLanguage('en')"
-                          >EN</a
-                        >
-                      </div>
+                          <i class="bi bi-door-closed margin-navbar"></i
+                          >{{ 'common.register' | translate }}
+                        </button>
+                      </li>
+                      <li>
+                        <hr class="dropdown-divider" />
+                      </li>
+                      <li>
+                        <div class="row">
+                          <div class="col-md-2">
+                            <a
+                              class="dropdown-item kolmedropdown"
+                              (click)="changeSiteLanguage('fi')"
+                              >FI</a
+                            >
+                            <a
+                              class="dropdown-item kolmedropdown"
+                              (click)="changeSiteLanguage('en')"
+                              >EN</a
+                            >
+                          </div>
+                        </div>
+                      </li>
                     </div>
-                  </li>
-                </div>
+                    <div *ngIf="isLogged">
+                      <li>
+                        <button
+                          type="button"
+                          class="dropdown-item kirjaudu"
+                          (click)="logout()"
+                        >
+                          <i class="bi bi-door-open margin-navbar"></i
+                          >{{ 'common.logout' | translate }}
+                        </button>
+                      </li>
+
+                      <li>
+                        <hr class="dropdown-divider" />
+                      </li>
+                      <li>
+                        <a class="dropdown-item kolmedropdown" routerLink="/tbr"
+                          ><i class="bi bi-heart margin-navbar"></i
+                          >{{ 'header.tbr' | translate }}</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          class="dropdown-item kolmedropdown"
+                          (click)="openShoppingCartModal()"
+                          ><i class="bi bi-bag margin-navbar"></i
+                          >{{ 'header.cart' | translate }}</a
+                        >
+                      </li>
+                      <li>
+                        <hr class="dropdown-divider" />
+                      </li>
+                      <li>
+                        <a
+                          class="dropdown-item kolmedropdown"
+                          routerLink="/settings"
+                          ><i class="bi bi-person margin-navbar"></i
+                          >{{ 'common.settings' | translate }}</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          class="dropdown-item kolmedropdown"
+                          routerLink="/support"
+                          ><i class="bi bi-question-circle margin-navbar"></i
+                          >{{ 'header.support' | translate }}</a
+                        >
+                      </li>
+                      <li>
+                        <hr class="dropdown-divider" />
+                      </li>
+                      <li>
+                        <div class="row">
+                          <div class="col-md-2">
+                            <a
+                              class="dropdown-item kolmedropdown"
+                              (click)="changeSiteLanguage('fi')"
+                              >FI</a
+                            >
+                            <a
+                              class="dropdown-item kolmedropdown"
+                              (click)="changeSiteLanguage('en')"
+                              >EN</a
+                            >
+                          </div>
+                        </div>
+                      </li>
+                    </div>
+                  </ul>
+                </li>
               </ul>
-            </li>
-          </ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>
