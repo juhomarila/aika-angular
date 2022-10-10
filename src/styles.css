@@ -1149,7 +1149,7 @@ only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (
     padding: 0;
   }
 
-  .d-flex {
+  .d-flex.align-items-end {
     display: block!important;
 }
 }
