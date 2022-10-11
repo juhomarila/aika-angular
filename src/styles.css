@@ -482,11 +482,19 @@ th {
   color: var(--text);
 }
 
+.bi-bookmark {
+  color: var(--text);
+}
+
+.bi-bookmark-check-fill {
+  color: var(--text);
+}
+
 .bi-heart-fill {
   color: var(--text);
 }
 
-.bi-bag-check {
+.bi-bag-check-fill {
   color: var(--text);
 }
 
