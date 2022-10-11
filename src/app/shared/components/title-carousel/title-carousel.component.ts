@@ -5,7 +5,6 @@ import { Article } from '../../interfaces/article';
 import { Favourite } from '../../interfaces/favourite';
 import { Like } from '../../interfaces/like';
 import { Owned } from '../../interfaces/owned';
-import { UserService } from '../../services/user.service';
 import { ArticleModalComponent } from '../article-modal/article-modal.component';
 
 @Component({

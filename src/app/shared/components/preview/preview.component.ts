@@ -18,6 +18,7 @@ import { AppState } from 'src/app/shared/store/reducers';
 import { Router } from '@angular/router';
 import { LikeService } from '../../services/like.service';
 import { FavouriteService } from '../../services/favourite.service';
+import { Favourite } from '../../interfaces/favourite';
 
 @Component({
   selector: 'preview',
@@ -28,6 +29,7 @@ export class PreviewComponent implements OnInit {
   @Input() article!: Article;
   @Input() owned: boolean = false;
   @Input() favourite: boolean = false;
+  @Input() favouriteList: Favourite[] = [];
   @Output() selectedArticle = new EventEmitter<Article>();
   @Output() selectedMagazine = new EventEmitter<string>();
   @Output() selectedJournalist = new EventEmitter<string>();
@@ -97,10 +99,17 @@ export class PreviewComponent implements OnInit {
   like() {
     this.favourite = true;
     this.favouriteSvc.addArticleToFavourites(this.article.key);
+    this.favouriteList.push({ key: this.article.key });
   }
 
   unlike() {
     this.favourite = false;
     this.favouriteSvc.removeArticleFromFavourites(this.article.key);
+    const index = this.favouriteList.findIndex(
+      fav => fav.key === this.article.key
+    );
+    if (index > -1) {
+      this.favouriteList.splice(index, 1);
+    }
   }
 }
