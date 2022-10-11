@@ -74,6 +74,8 @@ export class TitleCarouselComponent {
     modalRef.componentInstance.owned = owned;
     modalRef.componentInstance.favourite = favourite;
     modalRef.componentInstance.liked = liked;
+    modalRef.componentInstance.favouriteList = this.favouriteList;
+    modalRef.componentInstance.likedArticlesList = this.likedArticlesList;
   }
 
   onSelectCheckIfOwned(selectedArticle: Article): boolean {

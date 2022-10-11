@@ -50,14 +50,14 @@
                 <div class="minus-padding">
                   <div *ngIf="!favourite">
                     <a
-                      class="bi bi-heart rounded-circle align-self-center"
+                      class="bi bi-bookmark rounded-circle align-self-center"
                       (click)="favor()"
                       title="{{ 'preview.addToFavs' | translate }}"
                     ></a>
                   </div>
                   <div *ngIf="favourite">
                     <a
-                      class="bi bi-heart-fill rounded-circle align-self-center"
+                      class="bi bi-bookmark-check-fill rounded-circle align-self-center"
                       (click)="unfavor()"
                       title="{{ 'preview.removeFromFavs' | translate }}"
                     ></a>
