@@ -138,8 +138,6 @@ export class FrontpageComponent implements OnInit {
 
   backToGenre(event: any) {
     this.genreArray.unshift(event.value);
-    console.log(event.value);
-    console.log(this.filterByGenre);
     localStorage.setItem('filterGenre', JSON.stringify(this.filterByGenre));
     this.filterMagazine();
   }

@@ -34,17 +34,6 @@ export class UtilService {
     );
   }
 
-  getDateValue(article: Article) {
-    const date =
-      new Date(
-        article.date.year,
-        article.date.month,
-        article.date.day
-      ).getTime() / 1000;
-    console.log(Date.now() - date);
-    return Date.now() - date;
-  }
-
   validatePasswords(password: string, retypePassword: string) {
     if (password != retypePassword) {
       return false;
