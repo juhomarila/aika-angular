@@ -130,5 +130,9 @@
   "support": {
     "contact": "Ota yhteyttä tukeen, vastaamme mahdollisimman pian teille",
     "privacy": "Tietosuojatiedot"
+  },
+  "tbr": {
+    "noArticles": "Et ole lisännyt yhtään artikkelia suosikkeihisi",
+    "favourites": "Suosikkiartikkelisi"
   }
 }

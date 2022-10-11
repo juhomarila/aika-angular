@@ -130,5 +130,9 @@
   "support": {
     "contact": "Contact support and we will answer shortly",
     "privacy": "Privacy"
+  },
+  "tbr": {
+    "noArticles": "You haven't added any articles to your to be read list",
+    "favourites": "To Be Read"
   }
 }
