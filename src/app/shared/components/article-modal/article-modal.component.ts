@@ -20,7 +20,11 @@ export class ArticleModalComponent implements OnInit {
     private likeSvc: LikeService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.article.likes === undefined) {
+      this.article.likes = 0;
+    }
+  }
 
   close() {
     this.activeModal.dismiss();

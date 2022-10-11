@@ -52,7 +52,12 @@
   },
   "frontpage": {
     "hello": "Hello",
-    "whatToRead": ", what would you like to read today?"
+    "whatToRead": ", what would you like to read today?",
+    "hideFilters": "Hide filters",
+    "showFilters": "Show filters",
+    "removeGenre": "Remove genre",
+    "addMagazine": "Add magazine",
+    "reset": "Reset"
   },
   "Urheilu": "Sports",
   "Kauneus": "Beauty",
@@ -77,10 +82,15 @@
     "pwsCapital": "Password must contain upper and lower case letters and also numbers.",
     "pswLength": "Password length must be at least eigth chatacters.",
     "pswNoEmptySpaces": "Password must not have empty spaces.",
-    "pswsNotMatch": "Passwords don't match."
+    "pswsNotMatch": "Passwords don't match.",
+    "newOldSame": "New and old passwords are the same",
+    "currentWrong": "Current password is wrong",
+    "usernameChange": "Length of an username must be at least 4 characters"
   },
   "success": {
-    "userCreated": "User successfully created, check your email verification link and follow given instructions"
+    "userCreated": "User successfully created, check your email verification link and follow given instructions",
+    "passwordChange": "Password changed successfully",
+    "usernameChange": "Username changed successfully"
   },
   "settings": {
     "account": "Account",
@@ -89,8 +99,14 @@
     "changePassword": "Change password",
     "changeName": "Change name",
     "changeEmail": "Change email address",
-    "shoppingHistory": "Shopping shoppingHistory",
-    "boughtItem": "Bought item"
+    "shoppingHistory": "Shopping history",
+    "boughtItem": "Bought item",
+    "modal": {
+      "confirmRemoval": "All your account information, including bought items, will be removed and you won't be able to restore your account. Confirm deletion by pressing button",
+      "afterRemoval": "Your account has been removed, you'll be automatically logged out",
+      "confirmEmailChange": "Check your email. Your email address will be updated after you have verified it from link sent to your newly given email.",
+      "autoLogout": "You will be automatically logged out"
+    }
   },
   "preview": {
     "addToCart": "Add to cart",
@@ -106,5 +122,13 @@
     "buyArticles": "Buy articles",
     "cartIsEmpty": "Shopping cart is empty",
     "paymentFailure": "Payment failed, please try again"
+  },
+  "Vaihda sähköpostiosoite": "Change email address",
+  "Vaihda nimi": "Change name",
+  "Vaihda salasana": "Change password",
+  "Vahvista tilin poisto": "Confirm deletion of account",
+  "support": {
+    "contact": "Contact support and we will answer shortly",
+    "privacy": "Privacy"
   }
 }

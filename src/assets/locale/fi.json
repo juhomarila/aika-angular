@@ -52,7 +52,12 @@
   },
   "frontpage": {
     "hello": "Hei",
-    "whatToRead": ", mitä tänään luettaisiin?"
+    "whatToRead": ", mitä tänään luettaisiin?",
+    "hideFilters": "Piilota filtterit",
+    "showFilters": "Näytä filtterit",
+    "removeGenre": "Poista genre",
+    "addMagazine": "Lisää lehti",
+    "reset": "Nollaa"
   },
   "Urheilu": "Urheilu",
   "Kauneus": "Kauneus",
@@ -77,10 +82,15 @@
     "pwsCapital": "Salasanan tulee sisältää isoja ja pieniä kirjaimia, sekä numeroita.",
     "pswLength": "Salasanan tulee olla vähintään kahdeksan merkkiä pitkä.",
     "pswNoEmptySpaces": "Salasanassa ei saa olla tyhjiä välejä.",
-    "pswsNotMatch": "Salasanat eivät täsmää."
+    "pswsNotMatch": "Salasanat eivät täsmää.",
+    "newOldSame": "Uusi ja vanha salasana ovat samat",
+    "currentWrong": "Nykyinen salasana on Väärä",
+    "usernameChange": "Käyttäjänimen on oltava vähintään neljä merkkiä pitkä"
   },
   "success": {
-    "userCreated": "Käyttäjätili luotu onnistuneesti, tarkista sähköpostistasi vahvistusviesti ja seuraa ohjeita"
+    "userCreated": "Käyttäjätili luotu onnistuneesti, tarkista sähköpostistasi vahvistusviesti ja seuraa ohjeita",
+    "passwordChange": "Salasananvaihto onnistui",
+    "usernameChange": "Käyttäjänimen vaihto onnistui"
   },
   "settings": {
     "account": "Tili",
@@ -90,7 +100,13 @@
     "changeName": "Vaihda nimi",
     "changeEmail": "Vaihda sähköpostiosoite",
     "shoppingHistory": "Ostohistoria",
-    "boughtItem": "Ostos"
+    "boughtItem": "Ostos",
+    "modal": {
+      "confirmRemoval": "Tilisi kaikki tiedot, ostot mukaanlukien poistetaan, etkä pysty palauttamaan tiliäsi. Vahvista poisto painamalla painiketta",
+      "afterRemoval": "Tilisi poistettu, sinut kirjataan ulos automaattisesti",
+      "confirmEmailChange": "Tarkista sähköpostisi, se päivitetään kun olet käynyt verifioimassa sähköpostiosoitteesi sähköpostiin lähtetystä linkistä.",
+      "autoLogout": "Sinut kirjataan automaattisesti ulos"
+    }
   },
   "preview": {
     "addToCart": "Lisää ostoskoriin",
@@ -106,5 +122,13 @@
     "buyArticles": "Osta artikkelit",
     "cartIsEmpty": "Ostoskori on tyhjä",
     "paymentFailure": "Maksu epäonnistui, yritä uudelleen"
+  },
+  "Vaihda sähköpostiosoite": "Change email address",
+  "Vaihda nimi": "Vaihda nimi",
+  "Vaihda salasana": "Vaihda salasana",
+  "Vahvista tilin poisto": "Vahvista tilin poisto",
+  "support": {
+    "contact": "Ota yhteyttä tukeen, vastaamme mahdollisimman pian teille",
+    "privacy": "Tietosuojatiedot"
   }
 }

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
 import { User } from 'src/app/shared/interfaces/user';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { LoadingService } from 'src/app/shared/services/loading.service';
@@ -30,15 +31,15 @@ export class SettingModalComponent implements OnInit {
     private activeModal: NgbActiveModal,
     private authSvc: AuthService,
     private utilSvc: UtilService,
-    private loading: LoadingService
+    private loading: LoadingService,
+    private translate: TranslateService
   ) {}
 
   ngOnInit(): void {
     this.user = this.authSvc.user;
     if (this.accountRemoval) {
       this.error = true;
-      this.errorMsg =
-        'Tilisi kaikki tiedot, ostot mukaanlukien poistetaan, etkä pysty palauttamaan tiliäsi. Vahvista poisto painamalla painiketta';
+      this.errorMsg = this.translate.instant('settings.modal.confirmRemoval');
     }
   }
 
@@ -52,7 +53,7 @@ export class SettingModalComponent implements OnInit {
       .removeAccount(this.authSvc.user.uid, this.emailValue!, removePsw)
       .then(() => {});
     this.setStatusMessage(
-      'Tilisi poistettu, sinut kirjataan ulos automaattisesti'
+      this.translate.instant('settings.modal.afterRemoval')
     );
   }
 
@@ -60,15 +61,14 @@ export class SettingModalComponent implements OnInit {
     this.clicked = true;
     this.authSvc.updateEmail(psw, newEmail, this.emailValue!);
     this.error = true;
-    this.errorMsg =
-      'Tarkista sähköpostisi, se päivitetään kun olet käynyt verifioimassa sähköpostiosoitteesi sähköpostiin lähtetystä linkistä.';
-    this.setStatusMessage('Sinut kirjataan automaattisesti ulos');
+    this.errorMsg = this.translate.instant('settings.modal.confirmEmailChange');
+    this.setStatusMessage(this.translate.instant('settings.modal.autoLogout'));
   }
 
   async updatePassword(newPsw: string, retypeNewPsw: string, oldPsw: string) {
     if (newPsw === oldPsw) {
       this.error = true;
-      this.errorMsg = 'Uusi ja vanha salasana ovat samat';
+      this.errorMsg = this.translate.instant('errors.newOldSame');
     } else {
       if (this.utilSvc.validatePasswords(newPsw, retypeNewPsw)) {
         if (this.utilSvc.checkAllRequirements(newPsw)) {
@@ -78,31 +78,31 @@ export class SettingModalComponent implements OnInit {
             .then(value => {
               if (value === 'auth/wrong-password') {
                 this.error = true;
-                this.errorMsg = 'Nykyinen salasana on väärä';
+                this.errorMsg = this.translate.instant('errors.currentWrong');
               } else {
-                this.setStatusMessage('Salasananvaihto onnistui');
+                this.setStatusMessage(
+                  this.translate.instant('success.passwordChange')
+                );
               }
             })
             .catch(e => console.log(e));
         }
         if (!this.utilSvc.passwordRequirements(newPsw)) {
           this.error = true;
-          this.errorMsg =
-            'Salasanan tulee sisältää isoja ja pieniä kirjaimia, sekä numeroita.';
+          this.errorMsg = this.translate.instant('errors.pswCapital');
         }
         if (!this.utilSvc.passwordLength(newPsw)) {
           this.error = true;
-          this.errorMsg =
-            'Salasanan tulee olla vähintään kahdeksan merkkiä pitkä.';
+          this.errorMsg = this.translate.instant('errors.pswLength');
         }
         if (!this.utilSvc.checkWhiteSpace(newPsw)) {
           this.error = true;
-          this.errorMsg = 'Salasanassa ei saa olla tyhjiä välejä.';
+          this.errorMsg = this.translate.instant('errors.pswNoEmptySpaces');
         }
       }
       if (!this.utilSvc.validatePasswords(newPsw, retypeNewPsw)) {
         this.error = true;
-        this.errorMsg = 'Salasanat eivät täsmää.';
+        this.errorMsg = this.translate.instant('errors.pswsNotMatch');
       }
     }
   }
@@ -110,11 +110,14 @@ export class SettingModalComponent implements OnInit {
   async updateDisplayname(name: string) {
     if (name.length > 4) {
       this.authSvc.updateDisplayname(this.user.uid, name).then(() => {
-        this.setStatusMessage('Käyttäjänimen vaihto onnistui', true);
+        this.setStatusMessage(
+          this.translate.instant('success.usernameChange'),
+          true
+        );
       });
     } else {
       this.error = true;
-      this.errorMsg = 'Käyttäjänimen on oltava vähintään neljä merkkiä pitkä';
+      this.errorMsg = this.translate.instant('errors.usernameChange');
     }
   }
 
