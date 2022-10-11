@@ -14,10 +14,17 @@
         <div class="col-sm-5 offset-sm-2 col-md-8 offset-md-2">
           <div class="col">
             <div class="row">
-              <p class="kirjoittaja">
-                <a href="#"
+              <p class="padding-bottom">
+                <a (click)="onSelectMagazine(article.magazine.key)"
                   ><small style="font-weight: bold">{{
                     article.magazine.name
+                  }}</small></a
+                >
+              </p>
+              <p>
+                <a (click)="onSelectJournalist(article.journalist.key)"
+                  ><small style="font-weight: bold">{{
+                    article.journalist.name
                   }}</small></a
                 >
               </p>

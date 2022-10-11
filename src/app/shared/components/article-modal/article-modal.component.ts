@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Article } from '../../interfaces/article';
 import { Favourite } from '../../interfaces/favourite';
@@ -22,13 +23,28 @@ export class ArticleModalComponent implements OnInit {
   constructor(
     private activeModal: NgbActiveModal,
     private favouriteSvc: FavouriteService,
-    private likeSvc: LikeService
+    private likeSvc: LikeService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     if (this.article.likes === undefined) {
       this.article.likes = 0;
     }
+  }
+
+  onSelectMagazine(magazine: string) {
+    this.activeModal.dismiss();
+    this.router.navigate(['magazine'], {
+      queryParams: { g: magazine },
+    });
+  }
+
+  onSelectJournalist(journalist: string) {
+    this.activeModal.dismiss();
+    this.router.navigate(['journalist'], {
+      queryParams: { g: journalist },
+    });
   }
 
   close() {
