@@ -21,7 +21,18 @@ export class ArticleModalComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.article.key);
+    console.log(
+      this.article.likes * 0.7 +
+        this.article.tbr * 0.3 -
+        (Date.now() -
+          new Date(
+            this.article.date.year,
+            this.article.date.month,
+            this.article.date.day
+          ).getTime()) /
+          8000000
+    );
+    console.log(this.article.likes * 0.7 + this.article.tbr * 0.3);
   }
 
   close() {

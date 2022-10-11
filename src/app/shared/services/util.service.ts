@@ -9,6 +9,22 @@ import { ErrorMessage } from '../interfaces/error-message';
 export class UtilService {
   constructor(private translate: TranslateService) {}
 
+  weightedSorter(articles: Article[]) {
+    return articles.sort(
+      (a, b) =>
+        b.likes * 0.6 +
+        b.tbr * 0.9 -
+        (Date.now() -
+          new Date(b.date.year, b.date.month, b.date.day).getTime()) /
+          8000000 -
+        (a.likes * 0.6 +
+          a.tbr * 0.9 -
+          (Date.now() -
+            new Date(a.date.year, a.date.month, a.date.day).getTime()) /
+            8000000)
+    );
+  }
+  // perus päivämääräsortteri
   byDateSorter(articles: Article[]) {
     return articles.sort(
       (a, b) =>
@@ -16,6 +32,17 @@ export class UtilService {
         b.date.month - a.date.month ||
         b.date.day - a.date.day
     );
+  }
+
+  getDateValue(article: Article) {
+    const date =
+      new Date(
+        article.date.year,
+        article.date.month,
+        article.date.day
+      ).getTime() / 1000;
+    console.log(Date.now() - date);
+    return Date.now() - date;
   }
 
   validatePasswords(password: string, retypePassword: string) {
