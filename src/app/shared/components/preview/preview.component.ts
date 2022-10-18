@@ -35,6 +35,7 @@ export class PreviewComponent implements OnInit {
   @Output() selectedJournalist = new EventEmitter<string>();
   hover: boolean = false;
   inCart: boolean = false;
+  bought: boolean = false;
   arrayKey: number = 0;
   language: string = '';
 
@@ -52,6 +53,10 @@ export class PreviewComponent implements OnInit {
     this.ref.detach();
     setInterval(() => {
       this.inCart = this.checkIfIsInCart();
+      this.bought = this.checkIfIsBought();
+      if (this.bought) {
+        this.owned = this.bought;
+      }
       this.ref.detectChanges();
     }, 1000);
   }
@@ -91,6 +96,15 @@ export class PreviewComponent implements OnInit {
 
   checkIfIsInCart() {
     if (!this.shoppingCartSvc.getCart().some(a => a.key === this.article.key)) {
+      return false;
+    }
+    return true;
+  }
+
+  checkIfIsBought() {
+    if (
+      !this.shoppingCartSvc.getBought().some(a => a.key === this.article.key)
+    ) {
       return false;
     }
     return true;

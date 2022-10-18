@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Article } from '../interfaces/article';
+import { Owned } from '../interfaces/owned';
 import { AuthService } from './auth.service';
 import { FirestoreService } from './firestore.service';
 
@@ -8,6 +9,7 @@ import { FirestoreService } from './firestore.service';
 })
 export class ShoppingCartService {
   shoppingCart: Article[] = [];
+  bought: Owned[] = [];
   constructor(
     private fireStoreSvc: FirestoreService,
     private authSvc: AuthService
@@ -43,10 +45,10 @@ export class ShoppingCartService {
 
   async checkOut() {
     if (this.doPayment()) {
-      this.shoppingCart.forEach(
-        async article =>
-          await this.fireStoreSvc.buyArticle(this.authSvc.user.uid, article.key)
-      );
+      this.shoppingCart.forEach(async article => {
+        await this.fireStoreSvc.buyArticle(this.authSvc.user.uid, article.key);
+        this.bought.push({ key: article.key, time: Date.now() });
+      });
       localStorage.removeItem('cart');
       this.shoppingCart = [];
       return true;
@@ -61,5 +63,13 @@ export class ShoppingCartService {
 
   doPayment() {
     return true;
+  }
+
+  getBought() {
+    return this.bought;
+  }
+
+  emptyBought() {
+    this.bought = [];
   }
 }

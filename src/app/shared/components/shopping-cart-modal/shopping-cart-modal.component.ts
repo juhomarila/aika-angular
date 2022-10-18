@@ -46,7 +46,7 @@ export class ShoppingCartModalComponent implements OnInit {
     } else {
       setTimeout(() => {
         this.activeModal.dismiss();
-        window.location.reload();
+        //window.location.reload();
         this.loading.hide();
       }, 1500);
     }
