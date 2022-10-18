@@ -19,6 +19,8 @@ import { Router } from '@angular/router';
 import { LikeService } from '../../services/like.service';
 import { FavouriteService } from '../../services/favourite.service';
 import { Favourite } from '../../interfaces/favourite';
+import { Owned } from '../../interfaces/owned';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'preview',
@@ -41,7 +43,6 @@ export class PreviewComponent implements OnInit {
 
   constructor(
     private shoppingCartSvc: ShoppingCartService,
-    private likeSvc: LikeService,
     private favouriteSvc: FavouriteService,
     private ref: ChangeDetectorRef,
     private store: Store<AppState>,

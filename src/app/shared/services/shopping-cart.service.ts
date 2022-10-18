@@ -3,6 +3,7 @@ import { Article } from '../interfaces/article';
 import { Owned } from '../interfaces/owned';
 import { AuthService } from './auth.service';
 import { FirestoreService } from './firestore.service';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,8 @@ export class ShoppingCartService {
   bought: Owned[] = [];
   constructor(
     private fireStoreSvc: FirestoreService,
-    private authSvc: AuthService
+    private authSvc: AuthService,
+    private userSvc: UserService
   ) {
     if (this.shoppingCart.length === 0) {
       if (localStorage.getItem('cart') === null) {
@@ -47,7 +49,9 @@ export class ShoppingCartService {
     if (this.doPayment()) {
       this.shoppingCart.forEach(async article => {
         await this.fireStoreSvc.buyArticle(this.authSvc.user.uid, article.key);
-        this.bought.push({ key: article.key, time: Date.now() });
+        let boughtArticle: Owned = { key: article.key, time: Date.now() };
+        this.bought.push(boughtArticle);
+        this.userSvc.setOwnedArticles(boughtArticle);
       });
       localStorage.removeItem('cart');
       this.shoppingCart = [];

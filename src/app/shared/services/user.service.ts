@@ -28,6 +28,10 @@ export class UserService {
   //   return user;
   // }
 
+  setOwnedArticles(owned: Owned) {
+    this.ownedArticlesList.push(owned);
+  }
+
   getOwnedArticles(): Observable<Owned[]> {
     const owned = of(this.ownedArticlesList);
     return owned;
