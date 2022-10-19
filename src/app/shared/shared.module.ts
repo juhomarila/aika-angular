@@ -15,6 +15,7 @@ import { MagazinePreviewComponent } from './components/magazine-preview/magazine
 import { PswViewTogglerComponent } from './components/psw-view-toggler/psw-view-toggler.component';
 import { ScrollService } from './services/scroll.service';
 import { NgxTranslateModule } from '../ngx-translate/ngx-translate.module';
+import { ShowcaseModalComponent } from './components/showcase-modal/showcase-modal/showcase-modal.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { NgxTranslateModule } from '../ngx-translate/ngx-translate.module';
     LoggedInCarouselComponent,
     MagazinePreviewComponent,
     PswViewTogglerComponent,
+    ShowcaseModalComponent,
   ],
   imports: [
     CommonModule,
@@ -45,6 +47,7 @@ import { NgxTranslateModule } from '../ngx-translate/ngx-translate.module';
     PreviewComponent,
     MagazinePreviewComponent,
     PswViewTogglerComponent,
+    ShowcaseModalComponent,
   ],
   providers: [ScrollService],
 })

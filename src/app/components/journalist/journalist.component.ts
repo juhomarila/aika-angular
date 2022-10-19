@@ -18,7 +18,6 @@ export class JournalistComponent implements OnInit, OnDestroy {
   selectedMagazine!: Magazine;
   journalistArticles: Article[] = [];
   hover: boolean = false;
-  loading: boolean = true;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -39,12 +38,13 @@ export class JournalistComponent implements OnInit, OnDestroy {
       }
       if (!localStorage.getItem('journalist')) {
         this.activatedRoute.queryParams.forEach(param => {
-          this.fireStoreSvc.getJournalist(param['g']).subscribe(journalist => {
-            this.journalist = journalist.data() as Journalist;
-            this.journalist.magazines.map(magazineKey => {
-              this.fireStoreSvc.getMagazine(magazineKey).subscribe(magazine => {
-                this.magazines.push(magazine.data() as Magazine);
-              });
+          this.journalistKey = param['g'];
+        });
+        this.fireStoreSvc.getJournalist(this.journalistKey).subscribe(journalist => {
+          this.journalist = journalist.data() as Journalist;
+          this.journalist.magazines.map(magazine => {
+            this.fireStoreSvc.getMagazine(magazine).subscribe(magazine => {
+              this.magazines.push(magazine.data() as Magazine);
             });
           });
         });
@@ -55,7 +55,7 @@ export class JournalistComponent implements OnInit, OnDestroy {
         this.magazines.push(magazine.data() as Magazine);
       });
     });
-    this.journalist?.articles.map(articleKey => {
+    this.journalist?.articles?.map(articleKey => {
       this.fireStoreSvc.getArticle(articleKey).subscribe(article => {
         this.journalistArticles.push(article.data() as Article);
       });

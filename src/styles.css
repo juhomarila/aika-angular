@@ -16,6 +16,24 @@
   padding-left: 0.6em;
 }
 
+.showcase {
+  background-color: rgba(23, 25, 28, 0.60);
+  max-width: 100%;
+  max-height: 100%;
+  padding-top: 10%;
+  padding-bottom: 8.3%;
+  opacity: 0;
+  transition: opacity 3s;
+  -webkit-transition: opacity 3s;
+  -moz-transition: opacity 3s;
+  -ms-transition: opacity 3s;
+  -o-transition: opacity 3s;
+}
+
+.showcase:hover {
+  opacity: 1;
+}
+
 .filters {
   background-color: rgba(23, 25, 28, 0.95);
   padding: 4vh;
@@ -55,7 +73,7 @@
 }
 
 .ng-input>input {
-  color: var(--text)!important;
+  color: var(--text) !important;
 }
 
 .journalists {
@@ -65,6 +83,7 @@
 .magazines {
   background-image: linear-gradient(to right, #1d1f4e, #151f43, #121e36, #141c29, #17191c);
 }
+
 .articles {
   background-color: #1d1f4e;
 }
@@ -152,9 +171,8 @@
 
 .center-hidden-overlay {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 0%;
+  left: 0%;
 }
 
 .center-overlay-mag-jour {
@@ -355,7 +373,10 @@ th {
   border: 0;
 }
 
-.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active {
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active {
   background-color: var(--btn) !important;
   text-decoration: underline;
 }
@@ -467,9 +488,10 @@ th {
   padding: 1em;
 }
 
-.add-padding-right {  
+.add-padding-right {
   padding-bottom: 1em;
 }
+
 .bi {
   font-size: 1.2em;
 }
@@ -803,7 +825,8 @@ button {
   background-color: rgba(23, 25, 28, 0.5);
 }
 
-.dropdown-item.active, .dropdown-item:active {
+.dropdown-item.active,
+.dropdown-item:active {
   background-color: var(--btn);
 }
 
@@ -1165,6 +1188,7 @@ only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (
     float: right;
     margin-left: 150px;
   }
+
   .siirraemail {
     width: 150%;
   }
@@ -1180,11 +1204,11 @@ only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (
   }
 
   .d-flex.align-items-end {
-    display: block!important;
+    display: block !important;
   }
 
   .d-flex.justify-content-between.filters {
-    display: block!important;
+    display: block !important;
   }
 
   .input {
@@ -1224,7 +1248,7 @@ only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (
   }
 
   .p-carousel-item {
-    flex: none!important;
+    flex: none !important;
     width: 20%;
   }
 

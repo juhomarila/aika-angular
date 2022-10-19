@@ -5,6 +5,7 @@ import { Journalist } from 'src/app/shared/interfaces/journalist';
 import { Magazine } from 'src/app/shared/interfaces/magazine';
 import { ArticlesvcService } from 'src/app/shared/services/articlesvc.service';
 import { FirestoreService } from 'src/app/shared/services/firestore.service';
+import { UtilService } from 'src/app/shared/services/util.service';
 
 @Component({
   selector: 'app-magazine',
@@ -24,7 +25,7 @@ export class MagazineComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private fireStoreSvc: FirestoreService,
-    private articleSvc: ArticlesvcService
+    private utilSvc: UtilService
   ) {
     this.height = window.innerHeight * 0.75;
     this.width = window.innerWidth * 0.4;
@@ -39,6 +40,7 @@ export class MagazineComponent implements OnInit, OnDestroy {
         this.magazine = JSON.parse(localStorage.getItem('magazine')!);
       }
       if (!localStorage.getItem('magazine')) {
+        console.log('tässä perkele');
         this.activatedRoute.queryParams.forEach(param => {
           this.magazineKey = param['g'];
         });
@@ -49,6 +51,7 @@ export class MagazineComponent implements OnInit, OnDestroy {
               this.journalists.push(data.data() as Journalist);
             });
           });
+          this.getMagazineArticles();
         });
       }
     }
@@ -57,14 +60,16 @@ export class MagazineComponent implements OnInit, OnDestroy {
         this.journalists.push(data.data() as Journalist);
       });
     });
+    this.getMagazineArticles();
+  }
+
+  getMagazineArticles() {
     this.magazine?.articles?.map(articleKey => {
       this.fireStoreSvc.getArticle(articleKey).subscribe(article => {
         this.magazineArticles.push(article.data() as Article);
       });
     });
   }
-
-  getMagazineArticles() {}
 
   getJournalist(key: string): string {
     let journalistName = '';
@@ -90,11 +95,21 @@ export class MagazineComponent implements OnInit, OnDestroy {
     localStorage.removeItem('magazine');
   }
 
-  mouseOver() {
-    this.hover = true;
+  mouseOver(isOver: boolean) {
+    this.hover = isOver;
   }
 
-  mouseLeave() {
-    this.hover = false;
+  sliceCol1(articles: Article[]) {
+    this.sort(articles);
+    return articles.slice(0, 2);
+  }
+
+  sliceCol2(articles: Article[]) {
+    this.sort(articles);
+    return articles.slice(2, 4);
+  }
+
+  sort(articles: Article[]) {
+    return this.utilSvc.weightedSorter(articles);
   }
 }

@@ -4,8 +4,8 @@
       <div class="center-overlay-mag-jour" (mouseover)="mouseOver()" (mouseleave)="mouseLeave()">
         <img [src]="journalist.fileUrl" class="fit-image rounded img-hover" alt="{{ journalist.name }}"
           [ngStyle]="{ 'height.px': height, 'width.px': width }" />
-        <div class="center-hidden-overlay">
-          <p>paskaa</p>
+        <div class="center-hidden-overlay" [hidden]="!hover">
+          <!-- <showcase-modal [key]="journalist.key" [articles]="journalistArticles"></showcase-modal> -->
         </div>
       </div>
     </div>
