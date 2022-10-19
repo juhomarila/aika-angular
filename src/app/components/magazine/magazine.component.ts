@@ -51,7 +51,6 @@ export class MagazineComponent implements OnInit, OnDestroy {
         this.magazine = JSON.parse(localStorage.getItem('magazine')!);
       }
       if (!localStorage.getItem('magazine')) {
-        console.log('tässä perkele');
         this.activatedRoute.queryParams.forEach(param => {
           this.magazineKey = param['g'];
         });
