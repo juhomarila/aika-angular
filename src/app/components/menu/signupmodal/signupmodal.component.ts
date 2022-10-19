@@ -65,7 +65,6 @@ export class SignUpModalComponent {
 
   async signInWithGoogle() {
     await this.authSvc.GoogleAuth(this.activeModal);
-    //this.activeModal.dismiss();
   }
 
   validatePasswords(password: string, retypePassword: string) {

@@ -64,9 +64,6 @@ export class FirestoreService {
   }
 
   getUser(uid: string) {
-    // const snapShot = this.afs.collection('users').doc(uid).get();
-    // snapShot.subscribe(user => this.user.push(user.data() as User));
-    // return this.user;
     return this.afs.collection('users').doc(uid).get();
   }
 

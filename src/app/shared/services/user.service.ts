@@ -15,18 +15,14 @@ export class UserService {
     private fireStoreSvc: FirestoreService,
     private authSvc: AuthService
   ) {
-    // this.fireStoreSvc
-    //   .getUser(this.authSvc.user.uid)
-    //   .then(user => (this.user = user));
-    this.fireStoreSvc
-      .getOwnedArticles(this.authSvc.user.uid)
-      .then(owned => (this.ownedArticlesList = owned));
+    if (this.authSvc.isLoggedIn) {
+      this.fireStoreSvc
+        .getOwnedArticles(this.authSvc.user.uid)
+        .then(owned => (this.ownedArticlesList = owned));
+    } else {
+      this.ownedArticlesList = [];
+    }
   }
-
-  // getUser(): Observable<User[]> {
-  //   const user = of(this.user);
-  //   return user;
-  // }
 
   setOwnedArticles(owned: Owned) {
     this.ownedArticlesList.push(owned);

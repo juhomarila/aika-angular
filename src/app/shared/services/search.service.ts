@@ -16,13 +16,8 @@ export class SearchService {
 
   constructor(public afs: AngularFirestore) {}
 
-  // tämä tulee olemaan tärkeä. Tänne order by popularity, rating jne
-  // hyvä ja toimiva hakualgoritmi tulee olemaan kaiken keskiössä
-
   search(searchString: string, field: string, collection: string) {
     let tmpArr: any[] = [];
-    // let tmpArrJour: Journalist[] = [];
-    // let tmpArrMag: Magazine[] = [];
     this.afs
       .collection(collection)
       .ref.where(field, '>=', searchString)

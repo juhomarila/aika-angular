@@ -24,7 +24,7 @@ export class UtilService {
             8000000)
     );
   }
-  // perus päivämääräsortteri
+
   byDateSorter(articles: Article[]) {
     return articles.sort(
       (a, b) =>
@@ -122,14 +122,6 @@ export class UtilService {
         clicked: false,
       };
     }
-
-    // else {
-    //   error = {
-    //     error: true,
-    //     errorMsg: 'Jokin meni pieleen, yritä uudelleen.',
-    //     clicked: false,
-    //   };
-    // }
     return error;
   }
 }

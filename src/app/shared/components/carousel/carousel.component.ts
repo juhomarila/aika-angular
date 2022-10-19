@@ -10,7 +10,6 @@ import { AuthService } from '../../services/auth.service';
 })
 export class CarouselComponent implements OnInit {
   @Input() carouselArray: CarouselEntity[] = [];
-  // ehkä sinne state handleriin tääkin screenin hallinta
   height: number = 0;
   width: number = 0;
   isLogged: boolean = false;

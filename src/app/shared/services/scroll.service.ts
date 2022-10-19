@@ -20,7 +20,6 @@ export class ScrollService {
         share()
       );
     } else {
-      //in non-browser environments, provide an empty observable so you can safely subscribe to scroll$
       this.navigation$ = empty();
     }
   }

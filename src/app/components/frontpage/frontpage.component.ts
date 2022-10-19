@@ -260,7 +260,6 @@ export class FrontpageComponent implements OnInit {
   }
 
   sort(articles: Article[]) {
-    //    return this.utilSvc.byDateSorter(articles);
     return this.utilSvc.weightedSorter(articles);
   }
 

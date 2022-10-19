@@ -6,26 +6,6 @@ export interface CartState {
   articles: Article;
 }
 
-// const initialState: CartState = {
-//   articlesInCart: [
-//     {
-//       key: 'initial',
-//       name: 'initial',
-//       text: 'initial',
-//       fileUrl: 'initial',
-//       fileName: 'initial',
-//       magazine: 'initial',
-//       uploader: 'initial',
-//       date: {
-//         day: 'initial',
-//         month: 'initial',
-//         year: 'initial',
-//       },
-//       uploadDate: 1,
-//     },
-//   ],
-// };
-
 const initialState: CartState = {
   articles: {
     key: 'initial',
