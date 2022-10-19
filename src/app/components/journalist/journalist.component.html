@@ -1,11 +1,13 @@
 <div class="container-fluid padding-top">
   <div class="row" *ngIf="journalist">
     <div class="col-6 center-magazine-journalist">
-      <div class="center-overlay-mag-jour" (mouseover)="mouseOver()" (mouseleave)="mouseLeave()">
+      <div class="center-overlay-mag-jour" (mouseover)="mouseOver(true)" (mouseleave)="mouseOver(false)">
         <img [src]="journalist.fileUrl" class="fit-image rounded img-hover" alt="{{ journalist.name }}"
           [ngStyle]="{ 'height.px': height, 'width.px': width }" />
-        <div class="center-hidden-overlay" [hidden]="!hover">
-          <!-- <showcase-modal [key]="journalist.key" [articles]="journalistArticles"></showcase-modal> -->
+          <div class="center-hidden-overlay" [hidden]="!hover" [ngStyle]="{ 'min-height.px': height,'width.px': width }"
+          (mouseover)="mouseOver(true)">
+          <showcase-modal [column1]="sliceCol1(journalistArticles)" [column2]="sliceCol2(journalistArticles)">
+          </showcase-modal>
         </div>
       </div>
     </div>

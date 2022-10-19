@@ -4,6 +4,7 @@ import { Article } from 'src/app/shared/interfaces/article';
 import { Journalist } from 'src/app/shared/interfaces/journalist';
 import { Magazine } from 'src/app/shared/interfaces/magazine';
 import { FirestoreService } from 'src/app/shared/services/firestore.service';
+import { UtilService } from 'src/app/shared/services/util.service';
 
 @Component({
   selector: 'app-journalist',
@@ -22,7 +23,8 @@ export class JournalistComponent implements OnInit, OnDestroy {
   constructor(
     private activatedRoute: ActivatedRoute,
     private fireStoreSvc: FirestoreService,
-    private router: Router
+    private router: Router,
+    private utilSvc: UtilService
   ) {
     this.height = window.innerHeight * 0.75;
     this.width = window.innerWidth * 0.4;
@@ -40,14 +42,17 @@ export class JournalistComponent implements OnInit, OnDestroy {
         this.activatedRoute.queryParams.forEach(param => {
           this.journalistKey = param['g'];
         });
-        this.fireStoreSvc.getJournalist(this.journalistKey).subscribe(journalist => {
-          this.journalist = journalist.data() as Journalist;
-          this.journalist.magazines.map(magazine => {
-            this.fireStoreSvc.getMagazine(magazine).subscribe(magazine => {
-              this.magazines.push(magazine.data() as Magazine);
+        this.fireStoreSvc
+          .getJournalist(this.journalistKey)
+          .subscribe(journalist => {
+            this.journalist = journalist.data() as Journalist;
+            this.journalist.magazines.map(magazine => {
+              this.fireStoreSvc.getMagazine(magazine).subscribe(magazine => {
+                this.magazines.push(magazine.data() as Magazine);
+              });
             });
+            this.getJournalistArticles();
           });
-        });
       }
     }
     this.journalist?.magazines.map(magazineKey => {
@@ -55,6 +60,10 @@ export class JournalistComponent implements OnInit, OnDestroy {
         this.magazines.push(magazine.data() as Magazine);
       });
     });
+    this.getJournalistArticles();
+  }
+
+  getJournalistArticles() {
     this.journalist?.articles?.map(articleKey => {
       this.fireStoreSvc.getArticle(articleKey).subscribe(article => {
         this.journalistArticles.push(article.data() as Article);
@@ -86,11 +95,21 @@ export class JournalistComponent implements OnInit, OnDestroy {
     localStorage.removeItem('journalist');
   }
 
-  mouseOver() {
-    this.hover = true;
+  mouseOver(isOver: boolean) {
+    this.hover = isOver;
   }
 
-  mouseLeave() {
-    this.hover = false;
+  sliceCol1(articles: Article[]) {
+    this.sort(articles);
+    return articles.slice(0, 2);
+  }
+
+  sliceCol2(articles: Article[]) {
+    this.sort(articles);
+    return articles.slice(2, 4);
+  }
+
+  sort(articles: Article[]) {
+    return this.utilSvc.weightedSorter(articles);
   }
 }
