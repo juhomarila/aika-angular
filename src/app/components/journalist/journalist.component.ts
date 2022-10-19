@@ -1,9 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Article } from 'src/app/shared/interfaces/article';
+import { Favourite } from 'src/app/shared/interfaces/favourite';
 import { Journalist } from 'src/app/shared/interfaces/journalist';
+import { Like } from 'src/app/shared/interfaces/like';
 import { Magazine } from 'src/app/shared/interfaces/magazine';
+import { Owned } from 'src/app/shared/interfaces/owned';
+import { FavouriteService } from 'src/app/shared/services/favourite.service';
 import { FirestoreService } from 'src/app/shared/services/firestore.service';
+import { LikeService } from 'src/app/shared/services/like.service';
+import { UserService } from 'src/app/shared/services/user.service';
 import { UtilService } from 'src/app/shared/services/util.service';
 
 @Component({
@@ -19,12 +25,18 @@ export class JournalistComponent implements OnInit, OnDestroy {
   selectedMagazine!: Magazine;
   journalistArticles: Article[] = [];
   hover: boolean = false;
+  ownedArticlesList: Owned[] = [];
+  favouriteArticlesList: Favourite[] = [];
+  likedArticlesList: Like[] = [];
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private fireStoreSvc: FirestoreService,
     private router: Router,
-    private utilSvc: UtilService
+    private utilSvc: UtilService,
+    private favouriteSvc: FavouriteService,
+    private likeSvc: LikeService,
+    private userSvc: UserService
   ) {
     this.height = window.innerHeight * 0.75;
     this.width = window.innerWidth * 0.4;
@@ -61,6 +73,27 @@ export class JournalistComponent implements OnInit, OnDestroy {
       });
     });
     this.getJournalistArticles();
+    this.getFavouriteArticles();
+    this.getLikedArticles();
+    this.getOwnedArticles();
+  }
+
+  getFavouriteArticles(): void {
+    this.favouriteSvc
+      .getUserArticleFavourites()
+      .subscribe(favs => (this.favouriteArticlesList = favs));
+  }
+
+  getLikedArticles(): void {
+    this.likeSvc
+      .getUserArticleLikes()
+      .subscribe(likes => (this.likedArticlesList = likes));
+  }
+
+  getOwnedArticles(): void {
+    this.userSvc
+      .getOwnedArticles()
+      .subscribe(owned => (this.ownedArticlesList = owned));
   }
 
   getJournalistArticles() {

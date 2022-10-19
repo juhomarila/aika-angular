@@ -2,10 +2,22 @@
 <div *ngIf="column1.length > 0" class="showcase">
   <div class="row">
     <div class="col-md-6" *ngFor="let article of column1">
-      <preview [article]="article"></preview>
+      <preview
+        [article]="article"
+        (selectedArticle)="onSelect($event)"
+        [owned]="onSelectCheckIfOwned(article)"
+        [favourite]="checkIfFavourite(article)"
+        [favouriteList]="favouriteList"
+      ></preview>
     </div>
     <div class="col-md-6" *ngFor="let article of column2">
-      <preview [article]="article"></preview>
+      <preview
+        [article]="article"
+        (selectedArticle)="onSelect($event)"
+        [owned]="onSelectCheckIfOwned(article)"
+        [favourite]="checkIfFavourite(article)"
+        [favouriteList]="favouriteList"
+      ></preview>
     </div>
   </div>
 </div>
