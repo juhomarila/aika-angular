@@ -25,6 +25,7 @@ export class UtilService {
     );
   }
 
+  // for article dates (separate strings for every value day/month/year)
   byDateSorter(articles: Article[]) {
     return articles.sort(
       (a, b) =>
@@ -32,6 +33,10 @@ export class UtilService {
         b.date.month - a.date.month ||
         b.date.day - a.date.day
     );
+  }
+
+  byEpochDateSorter(dates: number[]) {
+    return dates.sort((a, b) => a - b);
   }
 
   validatePasswords(password: string, retypePassword: string) {

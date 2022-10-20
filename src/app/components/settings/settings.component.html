@@ -59,7 +59,7 @@
       *ngIf="ownedArticles.length > 0"
     >
       <h4>{{ 'settings.shoppingHistory' | translate }}</h4>
-      <div *ngFor="let o of ownedArticles" class="settings-padding-top">
+      <div *ngFor="let o of sortOwnedByDate(ownedArticles)" class="settings-padding-top">
         <div class="d-flex justify-content-between">
           <small>{{ 'settings.boughtItem' | translate }}</small>
         </div>

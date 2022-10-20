@@ -6,6 +6,7 @@ import { User } from 'src/app/shared/interfaces/user';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { FirestoreService } from 'src/app/shared/services/firestore.service';
 import { UserService } from 'src/app/shared/services/user.service';
+import { UtilService } from 'src/app/shared/services/util.service';
 import { SettingModalComponent } from './setting-modal/setting-modal.component';
 
 @Component({
@@ -21,7 +22,8 @@ export class SettingsComponent implements OnInit, OnDestroy {
     private authSvc: AuthService,
     private userSvc: UserService,
     private fireStoreSvc: FirestoreService,
-    private modalSvc: NgbModal
+    private modalSvc: NgbModal,
+    private utilSvc: UtilService
   ) {}
   ngOnDestroy(): void {
     localStorage.removeItem('owned');
@@ -63,8 +65,12 @@ export class SettingsComponent implements OnInit, OnDestroy {
     return articleName;
   }
 
+  sortOwnedByDate(articles: Owned[]) {
+    return articles.sort((a, b) => a.time! - b.time!);
+  }
+
   setDate(time: number) {
-    return new Date(time).toLocaleString();
+    return new Date(time).toLocaleString(['fi-FI'], {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'});
   }
 
   openEmailChangeModal() {
