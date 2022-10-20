@@ -8,52 +8,28 @@
       </h5>
       <div class="padding-right">
         <a (click)="showHideFilters()">
-          <small *ngIf="showFilters" style="padding-right: 4px"
-            >{{ 'frontpage.hideFilters' | translate }}</small
-          >
-          <small *ngIf="!showFilters" style="padding-right: 4px"
-            >{{ 'frontpage.showFilters' | translate }}</small
-          >
+          <small *ngIf="showFilters" style="padding-right: 4px">{{ 'frontpage.hideFilters' | translate }}</small>
+          <small *ngIf="!showFilters" style="padding-right: 4px">{{ 'frontpage.showFilters' | translate }}</small>
         </a>
       </div>
     </div>
     <div *ngIf="isLogged">
       <div *ngIf="showFilters" class="d-flex justify-content-between filters">
         <div class="d-flex">
-          <small class="align-self-center padding-frontpage"
-            >{{ 'frontpage.removeGenre' | translate }}</small
-          >
-          <ng-select
-            [items]="genreArray"
-            [(ngModel)]="filterByGenre"
-            (add)="filterGenre()"
-            (clear)="resetGenreFilters()"
-            (remove)="backToGenre($event)"
-            [multiple]="true"
-            class="select-filter"
-          ></ng-select>
+          <small class="align-self-center padding-frontpage">{{ 'frontpage.removeGenre' | translate }}</small>
+          <ng-select [items]="genreArray" [(ngModel)]="filterByGenre" (add)="filterGenre()"
+            (clear)="resetGenreFilters()" (remove)="backToGenre($event)" [multiple]="true" class="select-filter">
+          </ng-select>
         </div>
         <div class="d-flex input">
           <small class="align-self-center padding-frontpage">{{ 'frontpage.addMagazine' | translate }}</small>
-          <ng-select
-            [items]="magazineList"
-            [(ngModel)]="filterMagazineName"
-            (add)="filterMagazine()"
-            (clear)="resetArticleFilters()"
-            (remove)="backToMagazine($event)"
-            [multiple]="true"
-            bindLabel="name"
-            bindValue="name"
-            class="select-filter"
-          ></ng-select>
+          <ng-select [items]="magazineList" [(ngModel)]="filterMagazineName" (add)="filterMagazine()"
+            (clear)="resetArticleFilters()" (remove)="backToMagazine($event)" [multiple]="true" bindLabel="name"
+            bindValue="name" class="select-filter"></ng-select>
         </div>
         <div class="input">
-          <button
-            type="submit"
-            class="btn btn-primary float-end"
-            (click)="resetFilters()"
-          >
-          {{ 'frontpage.reset' | translate }}
+          <button type="submit" class="btn btn-primary float-end" (click)="resetFilters()">
+            {{ 'frontpage.reset' | translate }}
           </button>
         </div>
       </div>
@@ -61,12 +37,8 @@
         <div class="small-padding">
           <h5>{{ g | translate }}:</h5>
         </div>
-        <title-carousel
-          [articleList]="getGenreArticles(filteredArticleList, g)"
-          [favouriteList]="favouriteArticlesList"
-          [ownedArticlesList]="ownedArticlesList"
-          [likedArticlesList]="likedArticlesList"
-        ></title-carousel>
+        <title-carousel [articleList]="getGenreArticles(filteredArticleList, g)" [favouriteList]="favouriteArticlesList"
+          [ownedArticlesList]="ownedArticlesList" [likedArticlesList]="likedArticlesList"></title-carousel>
       </div>
     </div>
   </div>

@@ -3,13 +3,8 @@
     <div class="modal-content bg-tumma-oma">
       <div class="modal-header">
         <h5 class="modal-title">{{ title | translate }}</h5>
-        <button
-          type="button"
-          class="btn-close"
-          (click)="close()"
-          aria-label="Close"
-          title="{{ 'common.closeModal' | translate }}"
-        ></button>
+        <button type="button" class="btn-close" (click)="close()" aria-label="Close"
+          title="{{ 'common.closeModal' | translate }}"></button>
       </div>
       <div class="modal-body">
         <div class="form-floating mb-4" *ngIf="status">
@@ -17,158 +12,87 @@
         </div>
         <div class="form-floating mb-4" *ngIf="accountRemoval">
           <div class="d-flex form-floating mb-4">
-            <input
-              [type]="show ? 'text' : 'password'"
-              class="form-control"
-              id="floatingInput"
-              placeholder="Vanha salasana"
-              #removePsw
-            />
+            <input [type]="show ? 'text' : 'password'" class="form-control" id="floatingInput"
+              placeholder="Vanha salasana" #removePsw />
             <label for="floatingInput">Salasana</label>
-            <psw-view-toggler
-              [show]="show"
-              (showPsw)="showPsw()"
-              class="align-self-center"
-            ></psw-view-toggler>
+            <psw-view-toggler [show]="show" (showPsw)="showPsw()" class="align-self-center"></psw-view-toggler>
           </div>
           <div *ngIf="error">
             <p>{{ errorMsg }}</p>
           </div>
           <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-primary float-end"
-              (click)="removeAccount(removePsw.value)"
-              [disabled]="clicked"
-            >
+            <button type="button" class="btn btn-primary float-end" (click)="removeAccount(removePsw.value)"
+              [disabled]="clicked">
               Vahvista tilin poisto
             </button>
           </div>
         </div>
         <div *ngIf="email">
           <div class="form-floating mb-4">
-            <input
-              type="email"
-              class="form-control form-control-custom"
-              id="floatingInput6"
-              placeholder="Anna uusi sähköpostiosoite"
-              #newEmail
-            />
+            <input type="email" class="form-control form-control-custom" id="floatingInput6"
+              placeholder="Anna uusi sähköpostiosoite" #newEmail />
             <label for="floatingInput6">Anna uusi sähköpostiosoite</label>
           </div>
           <div class="d-flex form-floating mb-4">
-            <input
-              [type]="show ? 'text' : 'password'"
-              class="form-control"
-              id="floatingInput"
-              placeholder="Salasanasi"
-              #removeEmailPassword
-            />
+            <input [type]="show ? 'text' : 'password'" class="form-control" id="floatingInput" placeholder="Salasanasi"
+              #removeEmailPassword />
             <label for="floatingInput">Salasanasi</label>
-            <psw-view-toggler
-              [show]="show"
-              (showPsw)="showPsw()"
-              class="align-self-center"
-            ></psw-view-toggler>
+            <psw-view-toggler [show]="show" (showPsw)="showPsw()" class="align-self-center"></psw-view-toggler>
           </div>
           <div *ngIf="error">
             <p>{{ errorMsg }}</p>
           </div>
           <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-primary float-end"
-              (click)="updateEmail(removeEmailPassword.value, newEmail.value)"
-              [disabled]="clicked"
-            >
+            <button type="button" class="btn btn-primary float-end"
+              (click)="updateEmail(removeEmailPassword.value, newEmail.value)" [disabled]="clicked">
               {{ 'common.send' | translate }}
             </button>
           </div>
         </div>
         <div class="form-floating mb-4" *ngIf="name">
-          <input
-            type="text"
-            class="form-control form-control-custom"
-            id="floatingInput4"
-            placeholder="Anna uusi nimi"
-            #name
-          />
+          <input type="text" class="form-control form-control-custom" id="floatingInput4" placeholder="Anna uusi nimi"
+            #name />
           <label for="floatingInput4">Anna uusi nimi</label>
           <div *ngIf="error">
             <p>{{ errorMsg }}</p>
           </div>
           <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-primary float-end"
-              (click)="updateDisplayname(name.value)"
-              [disabled]="clicked"
-            >
+            <button type="button" class="btn btn-primary float-end" (click)="updateDisplayname(name.value)"
+              [disabled]="clicked">
               {{ 'common.send' | translate }}
             </button>
           </div>
         </div>
         <div *ngIf="password">
           <div class="d-flex form-floating mb-4">
-            <input
-              [type]="show ? 'text' : 'password'"
-              class="form-control"
-              id="floatingInput"
-              placeholder="Vanha salasana"
-              #oldPassword
-            />
+            <input [type]="show ? 'text' : 'password'" class="form-control" id="floatingInput"
+              placeholder="Vanha salasana" #oldPassword />
             <label for="floatingInput">Vanha salasana</label>
-            <psw-view-toggler
-              [show]="show"
-              (showPsw)="showPsw()"
-              class="align-self-center"
-            ></psw-view-toggler>
+            <psw-view-toggler [show]="show" (showPsw)="showPsw()" class="align-self-center"></psw-view-toggler>
           </div>
           <div class="d-flex form-floating mb-4">
-            <input
-              [type]="show2 ? 'text' : 'password'"
-              class="form-control"
-              id="floatingInput2"
-              placeholder="Uusi salasana"
-              #newPassword
-            />
+            <input [type]="show2 ? 'text' : 'password'" class="form-control" id="floatingInput2"
+              placeholder="Uusi salasana" #newPassword />
             <label for="floatingInput2">Uusi salasana</label>
-            <psw-view-toggler
-              [show]="show2"
-              (showPsw)="showPsw2()"
-              class="align-self-center"
-            ></psw-view-toggler>
+            <psw-view-toggler [show]="show2" (showPsw)="showPsw2()" class="align-self-center"></psw-view-toggler>
           </div>
           <div class="d-flex form-floating mb-4">
-            <input
-              [type]="show3 ? 'text' : 'password'"
-              class="form-control"
-              id="floatingInput3"
-              placeholder="Uusi salasana uudelleen"
-              #newPasswordRetype
-            />
+            <input [type]="show3 ? 'text' : 'password'" class="form-control" id="floatingInput3"
+              placeholder="Uusi salasana uudelleen" #newPasswordRetype />
             <label for="floatingInput3">Uusi salasana uudelleen</label>
-            <psw-view-toggler
-              [show]="show3"
-              (showPsw)="showPsw3()"
-              class="align-self-center"
-            ></psw-view-toggler>
+            <psw-view-toggler [show]="show3" (showPsw)="showPsw3()" class="align-self-center"></psw-view-toggler>
           </div>
           <div *ngIf="error">
             <p>{{ errorMsg }}</p>
           </div>
           <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-primary float-end"
-              (click)="
+            <button type="button" class="btn btn-primary float-end" (click)="
                 updatePassword(
                   newPassword.value,
                   newPasswordRetype.value,
                   oldPassword.value
                 )
-              "
-            >
+              ">
               {{ 'common.send' | translate }}
             </button>
           </div>

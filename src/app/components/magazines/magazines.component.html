@@ -5,10 +5,7 @@
       {{ 'magazines.ourMagazines' | translate }}:
     </h6>
     <div *ngFor="let m of magazineList" class="col-sm-3">
-      <magazine-preview
-        [magazine]="m"
-        (selectedMagazine)="onSelect($event)"
-      ></magazine-preview>
+      <magazine-preview [magazine]="m" (selectedMagazine)="onSelect($event)"></magazine-preview>
     </div>
   </div>
 </div>

@@ -3,11 +3,7 @@
     <div class="container g-0">
       <a (click)="onSelectMagazine(magazine)" routerLinkActive="active">
         <div class="row g-0">
-          <img
-            [src]="magazine.fileUrl"
-            class="front-page-image rounded"
-            alt="{{ magazine.name }}"
-          />
+          <img [src]="magazine.fileUrl" class="front-page-image rounded" alt="{{ magazine.name }}" />
         </div>
       </a>
     </div>

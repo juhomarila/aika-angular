@@ -11,15 +11,11 @@
       </div>
       <div class="d-flex justify-content-between">
         <div class="d-flex justify-content-start">
-          <i
-            class="bi bi-envelope padding-frontpage"
-            style="font-size: 1.2em"
-          ></i>
+          <i class="bi bi-envelope padding-frontpage" style="font-size: 1.2em"></i>
           <p>{{ user.email }}</p>
         </div>
-        <a (click)="openEmailChangeModal()"
-          ><i class="bi bi-gear padding-frontpage" style="font-size: 1.5em" title="{{ 'settings.changeEmail' | translate }}"></i
-        ></a>
+        <a (click)="openEmailChangeModal()"><i class="bi bi-gear padding-frontpage" style="font-size: 1.5em"
+            title="{{ 'settings.changeEmail' | translate }}"></i></a>
       </div>
       <div class="d-flex justify-content-between settings-padding-top">
         <small>{{ 'settings.name' | translate }}</small>
@@ -29,9 +25,8 @@
           <i class="bi bi-fonts padding-frontpage" style="font-size: 1.2em"></i>
           <p>{{ user.displayName }}</p>
         </div>
-        <a (click)="openNameChangeModal()"
-          ><i class="bi bi-gear padding-frontpage" style="font-size: 1.5em" title="{{ 'settings.changeName' | translate }}"></i
-        ></a>
+        <a (click)="openNameChangeModal()"><i class="bi bi-gear padding-frontpage" style="font-size: 1.5em"
+            title="{{ 'settings.changeName' | translate }}"></i></a>
       </div>
       <div class="d-flex justify-content-between settings-padding-top">
         <small>{{ 'common.password' | translate }}</small>
@@ -41,23 +36,18 @@
           <i class="bi bi-lock padding-frontpage" style="font-size: 1.2em"></i>
           <p>********</p>
         </div>
-        <a (click)="openPasswordChangeModal()"
-          ><i class="bi bi-gear padding-frontpage" style="font-size: 1.5em" title="{{ 'settings.changePassword' | translate }}"></i
-        ></a>
+        <a (click)="openPasswordChangeModal()"><i class="bi bi-gear padding-frontpage" style="font-size: 1.5em"
+            title="{{ 'settings.changePassword' | translate }}"></i></a>
       </div>
       <div class="d-flex justify-content-between settings-padding-top">
         <div class="d-flex justify-content-start">
           <small>{{ 'settings.removeAccount' | translate }}</small>
         </div>
-        <a (click)="openRemoveAccountConfirmation()"
-          ><i class="bi bi-trash padding-frontpage" style="font-size: 1.5em" title="{{ 'settings.removeAccount' | translate }}"></i
-        ></a>
+        <a (click)="openRemoveAccountConfirmation()"><i class="bi bi-trash padding-frontpage" style="font-size: 1.5em"
+            title="{{ 'settings.removeAccount' | translate }}"></i></a>
       </div>
     </div>
-    <div
-      class="background-is-fun rounded settings-margin-top"
-      *ngIf="ownedArticles.length > 0"
-    >
+    <div class="background-is-fun rounded settings-margin-top" *ngIf="ownedArticles.length > 0">
       <h4>{{ 'settings.shoppingHistory' | translate }}</h4>
       <div *ngFor="let o of sortOwnedByDate(ownedArticles)" class="settings-padding-top">
         <div class="d-flex justify-content-between">

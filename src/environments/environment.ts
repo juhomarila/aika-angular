@@ -14,7 +14,7 @@ export const environment = {
     measurementId: 'G-LQ6C0P5DFM',
   },
   production: false,
-  ip: '192.168.56.1'
+  ip: '192.168.56.1',
 };
 
 /*

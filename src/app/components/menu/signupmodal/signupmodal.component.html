@@ -4,63 +4,32 @@
       <h5 class="modal-title" id="rekisteroidyLabel">
         {{ 'common.register' | translate }}
       </h5>
-      <button
-        type="button"
-        class="btn-close"
-        (click)="close()"
-        aria-label="Close"
-        title="{{ 'common.closeModal' | translate }}"
-      ></button>
+      <button type="button" class="btn-close" (click)="close()" aria-label="Close"
+        title="{{ 'common.closeModal' | translate }}"></button>
     </div>
     <div class="modal-body">
       <div class="mb-3">
         <form class="row g-3">
           <div class="form-floating mb-4">
-            <input
-              type="email"
-              class="form-control form-control-custom"
-              id="floatingInput2"
-              placeholder="{{ 'common.emailPlaceholder' | translate }}"
-              #email
-              required
-            />
+            <input type="email" class="form-control form-control-custom" id="floatingInput2"
+              placeholder="{{ 'common.emailPlaceholder' | translate }}" #email required />
             <label for="floatingInput2">{{ 'common.email' | translate }}</label>
           </div>
           <div class="d-flex form-floating mb-4">
-            <input
-              [type]="show ? 'text' : 'password'"
-              class="form-control"
-              id="floatingInput3"
-              placeholder="{{ 'common.password' | translate }}"
-              #userPwd
-              required
-            />
+            <input [type]="show ? 'text' : 'password'" class="form-control" id="floatingInput3"
+              placeholder="{{ 'common.password' | translate }}" #userPwd required />
             <label for="floatingInput3">{{
               'common.password' | translate
             }}</label>
-            <psw-view-toggler
-              [show]="show"
-              (showPsw)="showPsw()"
-              class="align-self-center"
-            ></psw-view-toggler>
+            <psw-view-toggler [show]="show" (showPsw)="showPsw()" class="align-self-center"></psw-view-toggler>
           </div>
           <div class="d-flex form-floating mb-4">
-            <input
-              [type]="show2 ? 'text' : 'password'"
-              class="form-control"
-              id="floatingInput4"
-              placeholder="{{ 'common.password' | translate }}"
-              #userPwdReEnter
-              required
-            />
+            <input [type]="show2 ? 'text' : 'password'" class="form-control" id="floatingInput4"
+              placeholder="{{ 'common.password' | translate }}" #userPwdReEnter required />
             <label for="floatingInput3">{{
               'common.retypePassword' | translate
             }}</label>
-            <psw-view-toggler
-            [show]="show2"
-            (showPsw)="showPsw2()"
-            class="align-self-center"
-          ></psw-view-toggler>
+            <psw-view-toggler [show]="show2" (showPsw)="showPsw2()" class="align-self-center"></psw-view-toggler>
           </div>
           <div class="form-floating mb-4">
             <ul class="ul-no-bullets">
@@ -80,22 +49,15 @@
           </div>
 
           <div class="form-floating mb-4">
-            <a class="google btn" (click)="signInWithGoogle()"
-              ><img
-                src="../../../../assets/logos/btn_google_signin_dark_normal_web.png"
-                alt="Google sign in"
-                class="img-fluid"
-              />
+            <a class="google btn" (click)="signInWithGoogle()"><img
+                src="../../../../assets/logos/btn_google_signin_dark_normal_web.png" alt="Google sign in"
+                class="img-fluid" />
             </a>
           </div>
 
           <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-primary float-end"
-              (click)="signUp(email.value, userPwd.value, userPwdReEnter.value)"
-              [disabled]="error.clicked"
-            >
+            <button type="button" class="btn btn-primary float-end"
+              (click)="signUp(email.value, userPwd.value, userPwdReEnter.value)" [disabled]="error.clicked">
               {{ 'common.register' | translate }}
             </button>
           </div>

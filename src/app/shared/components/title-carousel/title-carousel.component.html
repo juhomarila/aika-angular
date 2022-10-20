@@ -1,23 +1,10 @@
-<p-carousel
-  [value]="articleList"
-  [numVisible]="5"
-  [numScroll]="5"
-  [circular]="true"
-  [autoplayInterval]="0"
-  [responsiveOptions]="responsiveOptions"
-  [showIndicators]="true"
->
+<p-carousel [value]="articleList" [numVisible]="5" [numScroll]="5" [circular]="true" [autoplayInterval]="0"
+  [responsiveOptions]="responsiveOptions" [showIndicators]="true">
   <ng-template let-article pTemplate="item">
     <div class="padding-frontpage">
-      <preview
-        [article]="article"
-        (selectedArticle)="onSelect($event)"
-        (selectedMagazine)="onSelectMagazine($event)"
-        (selectedJournalist)="onSelectJournalist($event)"
-        [owned]="onSelectCheckIfOwned(article)"
-        [favourite]="checkIfFavourite(article)"
-        [favouriteList]="favouriteList"
-      ></preview>
+      <preview [article]="article" (selectedArticle)="onSelect($event)" (selectedMagazine)="onSelectMagazine($event)"
+        (selectedJournalist)="onSelectJournalist($event)" [owned]="onSelectCheckIfOwned(article)"
+        [favourite]="checkIfFavourite(article)" [favouriteList]="favouriteList"></preview>
     </div>
   </ng-template>
 </p-carousel>
