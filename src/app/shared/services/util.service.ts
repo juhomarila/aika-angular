@@ -129,4 +129,18 @@ export class UtilService {
     }
     return error;
   }
+
+  verifyLocale(locale: string): string {
+    if (
+      locale === 'sv_FI' ||
+      locale === 'sv' ||
+      locale === 'FI' ||
+      locale === 'fi' ||
+      locale === 'fi_FI'
+    ) {
+      return 'fi';
+    } else {
+      return 'en';
+    }
+  }
 }

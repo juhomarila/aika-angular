@@ -8,6 +8,7 @@ import { FirestoreService } from 'src/app/shared/services/firestore.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { UtilService } from 'src/app/shared/services/util.service';
 import { SettingModalComponent } from './setting-modal/setting-modal.component';
+import { Globals } from 'src/app/globals';
 
 @Component({
   selector: 'app-settings',
@@ -23,7 +24,8 @@ export class SettingsComponent implements OnInit, OnDestroy {
     private userSvc: UserService,
     private fireStoreSvc: FirestoreService,
     private modalSvc: NgbModal,
-    private utilSvc: UtilService
+    private utilSvc: UtilService,
+    private globals: Globals,
   ) {}
   ngOnDestroy(): void {
     localStorage.removeItem('owned');
@@ -70,7 +72,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
   }
 
   setDate(time: number) {
-    return new Date(time).toLocaleString(['fi-FI'], {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'});
+    return new Date(time).toLocaleString([this.globals.locale], {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'});
   }
 
   openEmailChangeModal() {
