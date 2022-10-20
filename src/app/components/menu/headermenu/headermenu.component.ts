@@ -69,6 +69,12 @@ export class HeadermenuComponent implements OnInit {
     }
   }
 
+  detectInputLength(input: string) {
+    if (input.length > 0) {
+      this.searchInput.nativeElement.setAttribute('style', 'width: 18em;');
+    }
+  }
+
   changeSiteLanguage(localeCode: string): void {
     const selectedLanguage = this.languageList
       .find(language => language.code === localeCode)
@@ -80,6 +86,12 @@ export class HeadermenuComponent implements OnInit {
   }
 
   search(event: any) {
+    if (event.target.value.length > 0) {
+      this.searchInput.nativeElement.setAttribute(
+        'style',
+        'width: 18em;   padding-left: 2em;   padding-right: 1em;   border: 1px solid var(--text);'
+      );
+    }
     if (event.target.value.length === 1) {
       this.router.navigate(['search'], {
         queryParams: { s: event.target.value },
@@ -90,6 +102,10 @@ export class HeadermenuComponent implements OnInit {
         if (events instanceof NavigationEnd) {
           if (events.urlAfterRedirects.substring(0, 7) !== '/search') {
             event.target.value = '';
+            this.searchInput.nativeElement.removeAttribute(
+              'style',
+              'width: 18em;   padding-left: 2em;   padding-right: 1em;   border: 1px solid var(--text);'
+            );
           }
         }
       });
