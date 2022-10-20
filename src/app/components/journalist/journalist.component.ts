@@ -28,6 +28,7 @@ export class JournalistComponent implements OnInit, OnDestroy {
   ownedArticlesList: Owned[] = [];
   favouriteArticlesList: Favourite[] = [];
   likedArticlesList: Like[] = [];
+  hidden: boolean = true;
 
   constructor(
     private activatedRoute: ActivatedRoute,

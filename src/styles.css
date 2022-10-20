@@ -12,6 +12,11 @@
   font-family: 'Raleway', 'arial', 'lato';
 }
 
+.center-header {
+  width: 100%;
+  text-align: center;
+}
+
 .modal-icon-padding {
   padding-left: 0.6em;
 }
@@ -411,6 +416,14 @@ th {
   border-start-start-radius: 0;
   border-bottom-left-radius: 0;
   border-left: white;
+}
+
+.bi-chevron-compact-down {
+  font-size: 2rem!important;
+}
+
+.bi-chevron-compact-up {
+  font-size: 2rem!important;
 }
 
 .bi-eye-fill:hover {
