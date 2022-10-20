@@ -23,7 +23,6 @@ export class LoginComponent implements OnInit {
   public isLogged: boolean = false;
 
   ngOnInit(): void {
-    console.log(localStorage.getItem('language'));
     if (!localStorage.getItem('language')) {
       this.globals.setLocale();
       localStorage.setItem(
