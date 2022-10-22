@@ -6,8 +6,6 @@ import { Article } from 'src/app/shared/interfaces/article';
 import { Journalist } from 'src/app/shared/interfaces/journalist';
 import { Magazine } from 'src/app/shared/interfaces/magazine';
 import { Owned } from 'src/app/shared/interfaces/owned';
-import { AuthService } from 'src/app/shared/services/auth.service';
-import { FirestoreService } from 'src/app/shared/services/firestore.service';
 import { SearchService } from 'src/app/shared/services/search.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { UtilService } from 'src/app/shared/services/util.service';
@@ -36,8 +34,7 @@ export class SearchComponent implements OnInit {
     private modalSvc: NgbModal,
     private userSvc: UserService,
     private searchSvc: SearchService,
-    private utilSvc: UtilService,
-    private authSvc: AuthService
+    private utilSvc: UtilService
   ) {}
 
   ngOnInit(): void {
@@ -78,14 +75,7 @@ export class SearchComponent implements OnInit {
   }
 
   selectArticle(selected: Article) {
-    let owned = false;
-    for (let i = 0; i < this.ownedArticlesList.length; i++) {
-      if (selected.key === this.ownedArticlesList[i].key) {
-        owned = true;
-      }
-    }
     const modalRef = this.modalSvc.open(ArticleModalComponent, { size: 'lg' });
     modalRef.componentInstance.article = selected;
-    modalRef.componentInstance.owned = owned;
   }
 }
