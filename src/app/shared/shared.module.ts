@@ -50,7 +50,7 @@ import { ArticleListComponent } from './components/article-list/article-list.com
     MagazinePreviewComponent,
     PswViewTogglerComponent,
     ShowcaseModalComponent,
-    ArticleListComponent
+    ArticleListComponent,
   ],
   providers: [ScrollService],
 })

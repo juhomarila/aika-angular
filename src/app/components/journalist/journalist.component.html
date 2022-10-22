@@ -1,14 +1,27 @@
 <div class="container-fluid padding-top">
   <div class="row" *ngIf="journalist">
     <div class="col-6 center-magazine-journalist">
-      <div class="center-overlay-mag-jour" (mouseover)="mouseOver(true)" (mouseleave)="mouseOver(false)">
-        <img [src]="journalist.fileUrl" class="fit-image rounded img-hover" alt="{{ journalist.name }}"
-          [ngStyle]="{ 'height.px': height, 'width.px': width }" />
-        <div class="center-hidden-overlay" [hidden]="!hover" [ngStyle]="{ 'min-height.px': height, 'width.px': width }"
-          (mouseover)="mouseOver(true)">
-          <showcase-modal [column1]="sliceCol1(journalistArticles)" [column2]="sliceCol2(journalistArticles)"
-            [favouriteList]="favouriteArticlesList" [likedArticlesList]="likedArticlesList"
-            [ownedArticlesList]="ownedArticlesList"></showcase-modal>
+      <div
+        class="center-overlay-mag-jour"
+        (mouseover)="mouseOver(true)"
+        (mouseleave)="mouseOver(false)"
+      >
+        <img
+          [src]="journalist.fileUrl"
+          class="fit-image rounded img-hover"
+          alt="{{ journalist.name }}"
+          [ngStyle]="{ 'height.px': height, 'width.px': width }"
+        />
+        <div
+          class="center-hidden-overlay"
+          [hidden]="!hover"
+          [ngStyle]="{ 'min-height.px': height, 'width.px': width }"
+          (mouseover)="mouseOver(true)"
+        >
+          <showcase-modal
+            [column1]="sliceCol1(journalistArticles)"
+            [column2]="sliceCol2(journalistArticles)"
+          ></showcase-modal>
         </div>
       </div>
     </div>
@@ -32,8 +45,11 @@
       </h5>
       <div *ngFor="let m of journalist.magazines">
         <p>
-          <i><a class="hover-link" (click)="goToMagazinePage(m)">
-              {{ getMagazine(m) }}</a></i>
+          <i
+            ><a class="hover-link" (click)="goToMagazinePage(m)">
+              {{ getMagazine(m) }}</a
+            ></i
+          >
         </p>
       </div>
       <h5 class="padding-bottom-top">
@@ -49,13 +65,13 @@
   <div class="center-header">
     <h4 *ngIf="hidden">Näytä artikkelit</h4>
     <h4 *ngIf="!hidden">Piilota artikkelit</h4>
-    <a (click)="hidden = !hidden"><i class="bi bi-chevron-compact-down" *ngIf="hidden"></i><i
-        class="bi bi-chevron-compact-up" *ngIf="!hidden"></i></a>
+    <a (click)="hidden = !hidden"
+      ><i class="bi bi-chevron-compact-down" *ngIf="hidden"></i
+      ><i class="bi bi-chevron-compact-up" *ngIf="!hidden"></i
+    ></a>
   </div>
   <div class="row" *ngIf="!hidden">
-    <div *ngFor="let a of journalistArticles" class="col-sm-3">
-      <preview [article]="a"></preview>
-    </div>
+    <article-list [articles]="journalistArticles"></article-list>
   </div>
   <div *ngIf="!journalist">
     <p>{{ 'common.loading' | translate }}</p>

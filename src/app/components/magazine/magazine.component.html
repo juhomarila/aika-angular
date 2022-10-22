@@ -1,14 +1,27 @@
 <div class="container-fluid padding-top">
   <div class="row" *ngIf="magazine">
     <div class="col-6 center-magazine-journalist">
-      <div class="center-overlay-mag-jour" (mouseleave)="mouseOver(false)" (mouseover)="mouseOver(true)">
-        <img [src]="magazine.fileUrl" class="fit-image rounded" alt="{{ magazine.name }}"
-          [ngStyle]="{ 'height.px': height, 'width.px': width }" />
-        <div class="center-hidden-overlay" [hidden]="!hover" [ngStyle]="{ 'min-height.px': height, 'width.px': width }"
-          (mouseover)="mouseOver(true)">
-          <showcase-modal [column1]="sliceCol1(magazineArticles)" [column2]="sliceCol2(magazineArticles)"
-            [favouriteList]="favouriteArticlesList" [likedArticlesList]="likedArticlesList"
-            [ownedArticlesList]="ownedArticlesList"></showcase-modal>
+      <div
+        class="center-overlay-mag-jour"
+        (mouseleave)="mouseOver(false)"
+        (mouseover)="mouseOver(true)"
+      >
+        <img
+          [src]="magazine.fileUrl"
+          class="fit-image rounded"
+          alt="{{ magazine.name }}"
+          [ngStyle]="{ 'height.px': height, 'width.px': width }"
+        />
+        <div
+          class="center-hidden-overlay"
+          [hidden]="!hover"
+          [ngStyle]="{ 'min-height.px': height, 'width.px': width }"
+          (mouseover)="mouseOver(true)"
+        >
+          <showcase-modal
+            [column1]="sliceCol1(magazineArticles)"
+            [column2]="sliceCol2(magazineArticles)"
+          ></showcase-modal>
         </div>
       </div>
     </div>
@@ -36,9 +49,11 @@
       </h5>
       <div *ngFor="let journalist of magazine.journalists">
         <p>
-          <i><a class="hover-link" (click)="goToJournalistPage(journalist)">{{
+          <i
+            ><a class="hover-link" (click)="goToJournalistPage(journalist)">{{
               getJournalist(journalist)
-            }}</a></i>
+            }}</a></i
+          >
         </p>
       </div>
       <h5 class="padding-bottom-top">
@@ -54,10 +69,12 @@
   <div class="center-header">
     <h4 *ngIf="hidden">Näytä artikkelit</h4>
     <h4 *ngIf="!hidden">Piilota artikkelit</h4>
-    <a (click)="hidden = !hidden"><i class="bi bi-chevron-compact-down" *ngIf="hidden"></i><i
-        class="bi bi-chevron-compact-up" *ngIf="!hidden"></i></a>
+    <a (click)="hidden = !hidden"
+      ><i class="bi bi-chevron-compact-down" *ngIf="hidden"></i
+      ><i class="bi bi-chevron-compact-up" *ngIf="!hidden"></i
+    ></a>
   </div>
-  <div *ngIf="!hidden">
+  <div class="row" *ngIf="!hidden">
     <article-list [articles]="magazineArticles"></article-list>
   </div>
   <div *ngIf="!magazine">

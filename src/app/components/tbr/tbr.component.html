@@ -7,10 +7,6 @@
     <h6 *ngIf="favouriteList.length > 0" class="padding-bottom">
       {{ 'tbr.favourites' | translate }}
     </h6>
-    <div *ngFor="let fav of favouriteList" class="col-sm-3">
-      <preview [article]="getFavouriteArticle(fav.key)"
-        (selectedArticle)="onSelect($event)" (selectedMagazine)="onSelectMagazine($event)"
-        (selectedJournalist)="onSelectJournalist($event)"></preview>
-    </div>
+    <article-list [favouriteArticles]="favouriteList"></article-list>
   </div>
 </div>

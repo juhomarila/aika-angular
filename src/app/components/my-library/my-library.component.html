@@ -7,10 +7,6 @@
     <h6 *ngIf="ownedArticlesList.length > 0" class="padding-bottom">
       {{ 'magazines.yourMagazines' | translate }}:
     </h6>
-    <div *ngFor="let a of ownedArticlesList" class="col-sm-3">
-      <preview [article]="getOwnedArticles(a.key)" (selectedArticle)="onSelect($event)"
-        (selectedMagazine)="onSelectMagazine($event)" (selectedJournalist)="onSelectJournalist($event)">
-      </preview>
-    </div>
+    <article-list [ownedArticles]="ownedArticlesList"></article-list>
   </div>
 </div>

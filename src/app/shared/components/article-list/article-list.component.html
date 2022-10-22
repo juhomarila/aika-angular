@@ -1,6 +1,37 @@
-<div class="row">
-  <div *ngFor="let a of articles" class="col-sm-3">
-    <preview [article]="a" (selectedArticle)="onSelect(a)" (selectedMagazine)="onSelectMagazine($event)"
-      (selectedJournalist)="onSelectJournalist($event)"></preview>
+<div *ngIf="articles">
+  <div class="row">
+    <div *ngFor="let a of articles" class="col-sm-3">
+      <preview
+        [article]="a"
+        (selectedArticle)="onSelect(a)"
+        (selectedMagazine)="onSelectMagazine($event)"
+        (selectedJournalist)="onSelectJournalist($event)"
+      ></preview>
+    </div>
   </div>
 </div>
+<div *ngIf="ownedArticles">
+  <div class="row">
+    <div *ngFor="let a of ownedArticles" class="col-sm-3">
+      <preview
+        [article]="getOwnedArticle(a.key)"
+        (selectedArticle)="onSelect(getOwnedArticle(a.key))"
+        (selectedMagazine)="onSelectMagazine($event)"
+        (selectedJournalist)="onSelectJournalist($event)"
+      ></preview>
+    </div>
+  </div>
+</div>
+<div *ngIf="favouriteArticles">
+  <div class="row">
+    <div *ngFor="let a of favouriteArticles" class="col-sm-3">
+      <preview
+        [article]="getFavouriteArticle(a.key)"
+        (selectedArticle)="onSelect(getFavouriteArticle(a.key))"
+        (selectedMagazine)="onSelectMagazine($event)"
+        (selectedJournalist)="onSelectJournalist($event)"
+      ></preview>
+    </div>
+  </div>
+</div>
+

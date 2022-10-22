@@ -1,17 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ArticleModalComponent } from 'src/app/shared/components/article-modal/article-modal.component';
 import { Article } from 'src/app/shared/interfaces/article';
-import { Favourite } from 'src/app/shared/interfaces/favourite';
 import { Journalist } from 'src/app/shared/interfaces/journalist';
-import { Like } from 'src/app/shared/interfaces/like';
 import { Magazine } from 'src/app/shared/interfaces/magazine';
-import { Owned } from 'src/app/shared/interfaces/owned';
-import { FavouriteService } from 'src/app/shared/services/favourite.service';
 import { FirestoreService } from 'src/app/shared/services/firestore.service';
-import { LikeService } from 'src/app/shared/services/like.service';
-import { UserService } from 'src/app/shared/services/user.service';
 import { UtilService } from 'src/app/shared/services/util.service';
 
 @Component({
@@ -27,21 +19,13 @@ export class MagazineComponent implements OnInit, OnDestroy {
   selectedJournalist!: Journalist;
   magazineArticles: Article[] = [];
   hover: boolean = false;
-  ownedArticlesList: Owned[] = [];
-  favouriteArticlesList: Favourite[] = [];
-  likedArticlesList: Like[] = [];
   hidden: boolean = true;
-  selectedArticle?: Article;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private fireStoreSvc: FirestoreService,
-    private utilSvc: UtilService,
-    private favouriteSvc: FavouriteService,
-    private likeSvc: LikeService,
-    private userSvc: UserService,
-    private modalSvc: NgbModal
+    private utilSvc: UtilService
   ) {
     this.height = window.innerHeight * 0.75;
     this.width = window.innerWidth * 0.4;
