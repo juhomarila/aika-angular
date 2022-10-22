@@ -29,9 +29,8 @@ import { UserService } from '../../services/user.service';
 })
 export class PreviewComponent implements OnInit {
   @Input() article!: Article;
-  @Input() owned: boolean = false;
-  @Input() favourite: boolean = false;
-  @Input() favouriteList: Favourite[] = [];
+  owned: boolean = false;
+  favourite: boolean = false;
   @Output() selectedArticle = new EventEmitter<Article>();
   @Output() selectedMagazine = new EventEmitter<string>();
   @Output() selectedJournalist = new EventEmitter<string>();
@@ -46,10 +45,18 @@ export class PreviewComponent implements OnInit {
     private favouriteSvc: FavouriteService,
     private ref: ChangeDetectorRef,
     private store: Store<AppState>,
-    public router: Router
+    public router: Router,
+    private userSvc: UserService
   ) {}
 
   ngOnInit(): void {
+    this.userSvc.getOwnedArticles().subscribe(ownedArticles => {
+      ownedArticles.map(a => {
+        if (a.key === this.article.key) {
+          this.owned = true;
+        }
+      });
+    });
     this.language = localStorage.getItem('language')!;
     this.ref.detach();
     setInterval(() => {
@@ -60,6 +67,11 @@ export class PreviewComponent implements OnInit {
       }
       this.ref.detectChanges();
     }, 1000);
+  }
+
+  checkIfFavourite(key: string) {
+    this.favourite = this.favouriteSvc.checkIfFavourite(key);
+    return this.favourite;
   }
 
   onSelect(article: Article) {
@@ -114,17 +126,10 @@ export class PreviewComponent implements OnInit {
   like() {
     this.favourite = true;
     this.favouriteSvc.addArticleToFavourites(this.article.key);
-    this.favouriteList.push({ key: this.article.key });
   }
 
   unlike() {
     this.favourite = false;
     this.favouriteSvc.removeArticleFromFavourites(this.article.key);
-    const index = this.favouriteList.findIndex(
-      fav => fav.key === this.article.key
-    );
-    if (index > -1) {
-      this.favouriteList.splice(index, 1);
-    }
   }
 }

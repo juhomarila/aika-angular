@@ -9,7 +9,7 @@
     </h6>
     <div *ngFor="let a of ownedArticlesList" class="col-sm-3">
       <preview [article]="getOwnedArticles(a.key)" (selectedArticle)="onSelect($event)"
-        (selectedMagazine)="onSelectMagazine($event)" (selectedJournalist)="onSelectJournalist($event)" [owned]="true">
+        (selectedMagazine)="onSelectMagazine($event)" (selectedJournalist)="onSelectJournalist($event)">
       </preview>
     </div>
   </div>

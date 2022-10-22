@@ -54,7 +54,7 @@
   </div>
   <div class="row" *ngIf="!hidden">
     <div *ngFor="let a of journalistArticles" class="col-sm-3">
-      <preview [article]="a" [owned]="true"></preview>
+      <preview [article]="a"></preview>
     </div>
   </div>
   <div *ngIf="!journalist">

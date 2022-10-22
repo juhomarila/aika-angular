@@ -21,7 +21,7 @@ export class FirestoreService {
   carouselEntityList: CarouselEntity[] = [];
   loginCarouselEntityList: CarouselEntity[] = [];
   user: User[] = [];
-  ownedArticlesList: Article[] = [];
+  ownedArticlesList: Owned[] = [];
   magazine!: Magazine;
   magazineList: Magazine[] = [];
   boughtArticles: Owned[] = [];
@@ -75,7 +75,7 @@ export class FirestoreService {
       .get();
     snapShot.subscribe(permissions =>
       permissions.forEach(permission =>
-        this.ownedArticlesList.push(permission.data() as Article)
+        this.ownedArticlesList.push(permission.data() as Owned)
       )
     );
     localStorage.setItem(

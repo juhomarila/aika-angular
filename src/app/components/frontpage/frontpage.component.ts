@@ -25,23 +25,17 @@ export class FrontpageComponent implements OnInit {
   isLogged: boolean = false;
   username: string = '';
   uid: string = '';
-  ownedArticlesList: Owned[] = [];
   genreArray: string[] = [];
-  favouriteArticlesList: Favourite[] = [];
   filterByGenre: string[] = [];
   showFilters: boolean = false;
   filterMagazineName: string[] = [];
   magazineList: Magazine[] = [];
-  likedArticlesList: Like[] = [];
 
   constructor(
     private authSvc: AuthService,
     private articleSvc: ArticlesvcService,
     private storageSvc: StorageService,
-    private userSvc: UserService,
-    private utilSvc: UtilService,
-    private favouriteSvc: FavouriteService,
-    private likeSvc: LikeService
+    private utilSvc: UtilService
   ) {}
 
   ngOnInit(): void {
@@ -50,10 +44,7 @@ export class FrontpageComponent implements OnInit {
     this.uid = this.authSvc.user.uid;
     this.getArticles();
     this.getCarouselImages();
-    this.getOwnedArticles();
-    this.getFavouriteArticles();
     this.getAllMagazines();
-    this.getLikedArticles();
     this.genreArray = [
       'Urheilu',
       'Kauneus',
@@ -233,30 +224,12 @@ export class FrontpageComponent implements OnInit {
     });
   }
 
-  getFavouriteArticles(): void {
-    this.favouriteSvc
-      .getUserArticleFavourites()
-      .subscribe(favs => (this.favouriteArticlesList = favs));
-  }
-
-  getLikedArticles(): void {
-    this.likeSvc
-      .getUserArticleLikes()
-      .subscribe(likes => (this.likedArticlesList = likes));
-  }
-
   getCarouselImages(): void {
     this.storageSvc
       .getLoggedInCarouselEntities()
       .subscribe(
         carouselEntities => (this.carouselEntityList = carouselEntities)
       );
-  }
-
-  getOwnedArticles(): void {
-    this.userSvc
-      .getOwnedArticles()
-      .subscribe(owned => (this.ownedArticlesList = owned));
   }
 
   sort(articles: Article[]) {

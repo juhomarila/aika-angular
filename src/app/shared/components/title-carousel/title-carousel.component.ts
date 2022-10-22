@@ -13,11 +13,7 @@ import { ArticleModalComponent } from '../article-modal/article-modal.component'
 })
 export class TitleCarouselComponent {
   @Input() articleList: Article[] = [];
-  @Input() favouriteList: Favourite[] = [];
-  @Input() ownedArticlesList: Owned[] = [];
-  @Input() likedArticlesList: Like[] = [];
   urlList: string[] = [];
-  selectedArticle?: Article;
   responsiveOptions: any;
   page: number = 1;
 
@@ -50,52 +46,8 @@ export class TitleCarouselComponent {
   }
 
   onSelect(article: Article) {
-    let owned = false;
-    let favourite = false;
-    let liked = false;
-    this.selectedArticle = article;
-    for (let i = 0; i < this.ownedArticlesList.length; i++) {
-      if (this.selectedArticle.key === this.ownedArticlesList[i].key) {
-        owned = true;
-      }
-    }
-    for (let i = 0; i < this.favouriteList.length; i++) {
-      if (this.selectedArticle.key === this.favouriteList[i].key) {
-        favourite = true;
-      }
-    }
-    for (let i = 0; i < this.likedArticlesList.length; i++) {
-      if (this.selectedArticle.key === this.likedArticlesList[i].key) {
-        liked = true;
-      }
-    }
     const modalRef = this.modalSvc.open(ArticleModalComponent, { size: 'lg' });
-    modalRef.componentInstance.article = this.selectedArticle;
-    modalRef.componentInstance.owned = owned;
-    modalRef.componentInstance.favourite = favourite;
-    modalRef.componentInstance.liked = liked;
-    modalRef.componentInstance.favouriteList = this.favouriteList;
-    modalRef.componentInstance.likedArticlesList = this.likedArticlesList;
-  }
-
-  onSelectCheckIfOwned(selectedArticle: Article): boolean {
-    let owned = false;
-    this.ownedArticlesList.map(article => {
-      if (article.key === selectedArticle.key) {
-        owned = true;
-      }
-    });
-    return owned;
-  }
-
-  checkIfFavourite(article: Article): boolean {
-    let favourite = false;
-    this.favouriteList.map(fav => {
-      if (fav.key === article.key) {
-        favourite = true;
-      }
-    });
-    return favourite;
+    modalRef.componentInstance.article = article;
   }
 
   onSelectMagazine(magazine: string) {

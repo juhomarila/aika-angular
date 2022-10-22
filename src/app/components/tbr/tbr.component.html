@@ -8,9 +8,9 @@
       {{ 'tbr.favourites' | translate }}
     </h6>
     <div *ngFor="let fav of favouriteList" class="col-sm-3">
-      <preview [article]="getFavouriteArticle(fav.key)" [owned]="true" [favourite]="true"
+      <preview [article]="getFavouriteArticle(fav.key)"
         (selectedArticle)="onSelect($event)" (selectedMagazine)="onSelectMagazine($event)"
-        (selectedJournalist)="onSelectJournalist($event)" [favouriteList]="favouriteList"></preview>
+        (selectedJournalist)="onSelectJournalist($event)"></preview>
     </div>
   </div>
 </div>

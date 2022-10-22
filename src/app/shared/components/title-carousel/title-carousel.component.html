@@ -3,8 +3,7 @@
   <ng-template let-article pTemplate="item">
     <div class="padding-frontpage">
       <preview [article]="article" (selectedArticle)="onSelect($event)" (selectedMagazine)="onSelectMagazine($event)"
-        (selectedJournalist)="onSelectJournalist($event)" [owned]="onSelectCheckIfOwned(article)"
-        [favourite]="checkIfFavourite(article)" [favouriteList]="favouriteList"></preview>
+        (selectedJournalist)="onSelectJournalist($event)"></preview>
     </div>
   </ng-template>
 </p-carousel>
