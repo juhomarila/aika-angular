@@ -1,5 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ArticleModalComponent } from 'src/app/shared/components/article-modal/article-modal.component';
 import { Article } from 'src/app/shared/interfaces/article';
 import { Favourite } from 'src/app/shared/interfaces/favourite';
 import { Journalist } from 'src/app/shared/interfaces/journalist';
@@ -29,6 +31,7 @@ export class MagazineComponent implements OnInit, OnDestroy {
   favouriteArticlesList: Favourite[] = [];
   likedArticlesList: Like[] = [];
   hidden: boolean = true;
+  selectedArticle?: Article;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -37,7 +40,8 @@ export class MagazineComponent implements OnInit, OnDestroy {
     private utilSvc: UtilService,
     private favouriteSvc: FavouriteService,
     private likeSvc: LikeService,
-    private userSvc: UserService
+    private userSvc: UserService,
+    private modalSvc: NgbModal
   ) {
     this.height = window.innerHeight * 0.75;
     this.width = window.innerWidth * 0.4;
@@ -72,27 +76,6 @@ export class MagazineComponent implements OnInit, OnDestroy {
       });
     });
     this.getMagazineArticles();
-    this.getFavouriteArticles();
-    this.getLikedArticles();
-    this.getOwnedArticles();
-  }
-
-  getFavouriteArticles(): void {
-    this.favouriteSvc
-      .getUserArticleFavourites()
-      .subscribe(favs => (this.favouriteArticlesList = favs));
-  }
-
-  getLikedArticles(): void {
-    this.likeSvc
-      .getUserArticleLikes()
-      .subscribe(likes => (this.likedArticlesList = likes));
-  }
-
-  getOwnedArticles(): void {
-    this.userSvc
-      .getOwnedArticles()
-      .subscribe(owned => (this.ownedArticlesList = owned));
   }
 
   getMagazineArticles() {
