@@ -27,7 +27,7 @@
           </label>
         </div>
         <div class="form-floating mb-4" (click)="forgotPassword()">
-          <p id="forgotpsw">{{ 'signInUpModal.forgottenPsw' | translate }}</p>
+          <a class="forgotPassword" id="forgotpsw">{{ 'signInUpModal.forgottenPsw' | translate }}</a>
         </div>
         <div class="form-floating mb-4" [hidden]="!error.error">
           <p style="color: red">{{ error.errorMsg }}</p>
