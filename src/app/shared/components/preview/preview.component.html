@@ -1,5 +1,5 @@
 <div class="my-overlay white-border rounded-top" (mouseover)="mouseOver()" (mouseleave)="mouseLeave()">
-  <div class="card bg-transparent">
+  <div class="card bg-transparent" *ngIf="article">
     <div class="container g-0">
       <a (click)="onSelect(article)" routerLinkActive="active">
         <div class="row g-0">

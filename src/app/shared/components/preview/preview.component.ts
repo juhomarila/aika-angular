@@ -16,10 +16,7 @@ import {
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/shared/store/reducers';
 import { Router } from '@angular/router';
-import { LikeService } from '../../services/like.service';
 import { FavouriteService } from '../../services/favourite.service';
-import { Favourite } from '../../interfaces/favourite';
-import { Owned } from '../../interfaces/owned';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -29,9 +26,8 @@ import { UserService } from '../../services/user.service';
 })
 export class PreviewComponent implements OnInit {
   @Input() article!: Article;
-  @Input() owned: boolean = false;
-  @Input() favourite: boolean = false;
-  @Input() favouriteList: Favourite[] = [];
+  owned: boolean = false;
+  favourite: boolean = false;
   @Output() selectedArticle = new EventEmitter<Article>();
   @Output() selectedMagazine = new EventEmitter<string>();
   @Output() selectedJournalist = new EventEmitter<string>();
@@ -43,23 +39,28 @@ export class PreviewComponent implements OnInit {
 
   constructor(
     private shoppingCartSvc: ShoppingCartService,
-    private favouriteSvc: FavouriteService,
     private ref: ChangeDetectorRef,
     private store: Store<AppState>,
-    public router: Router
+    public router: Router,
+    private userSvc: UserService,
+    private favouriteSvc: FavouriteService
   ) {}
 
   ngOnInit(): void {
-    this.language = localStorage.getItem('language')!;
-    this.ref.detach();
-    setInterval(() => {
-      this.inCart = this.checkIfIsInCart();
-      this.bought = this.checkIfIsBought();
-      if (this.bought) {
-        this.owned = this.bought;
-      }
-      this.ref.detectChanges();
-    }, 1000);
+    if (this.article) {
+      this.owned = this.userSvc.checkIfOwned(this.article.key);
+      this.favourite = this.favouriteSvc.checkIfFavourite(this.article.key);
+      this.language = localStorage.getItem('language')!;
+      this.ref.detach();
+      setInterval(() => {
+        this.inCart = this.checkIfIsInCart();
+        this.bought = this.checkIfIsBought();
+        if (this.bought) {
+          this.owned = this.bought;
+        }
+        this.ref.detectChanges();
+      }, 1000);
+    }
   }
 
   onSelect(article: Article) {
@@ -114,17 +115,10 @@ export class PreviewComponent implements OnInit {
   like() {
     this.favourite = true;
     this.favouriteSvc.addArticleToFavourites(this.article.key);
-    this.favouriteList.push({ key: this.article.key });
   }
 
   unlike() {
     this.favourite = false;
     this.favouriteSvc.removeArticleFromFavourites(this.article.key);
-    const index = this.favouriteList.findIndex(
-      fav => fav.key === this.article.key
-    );
-    if (index > -1) {
-      this.favouriteList.splice(index, 1);
-    }
   }
 }

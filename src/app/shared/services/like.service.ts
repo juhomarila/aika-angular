@@ -23,9 +23,20 @@ export class LikeService {
   async likeArticle(key: string) {
     await this.fireStoreSvc.addArticleLikeToArticle(key);
     await this.fireStoreSvc.addArticleLikeToUser(key, this.authSvc.user.uid);
+    this.likedArticlesList.push({ key: key });
   }
 
   getUserArticleLikes() {
     return of(this.likedArticlesList);
+  }
+
+  checkIfLiked(key: string) {
+    let liked = false;
+    this.likedArticlesList.map(like => {
+      if (like.key === key) {
+        liked = true;
+      }
+    });
+    return liked;
   }
 }
