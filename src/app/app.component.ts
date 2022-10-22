@@ -4,17 +4,20 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
+  OnInit,
   ViewChild,
 } from '@angular/core';
 import { Router, Scroll } from '@angular/router';
 import { delay, filter } from 'rxjs';
+import { FavouriteService } from './shared/services/favourite.service';
+import { LikeService } from './shared/services/like.service';
 import { LoadingService } from './shared/services/loading.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent implements AfterViewInit, OnInit {
   @ViewChild('footer') footer!: ElementRef;
   @ViewChild('header') header!: ElementRef;
   title = 'aika-angular';
@@ -24,7 +27,9 @@ export class AppComponent implements AfterViewInit {
     public loader: LoadingService,
     private cdr: ChangeDetectorRef,
     router: Router,
-    viewportScroller: ViewportScroller
+    viewportScroller: ViewportScroller,
+    private favouriteSvc: FavouriteService,
+    private likeSvc: LikeService
   ) {
     router.events
       .pipe(filter((e): e is Scroll => e instanceof Scroll))
@@ -38,6 +43,12 @@ export class AppComponent implements AfterViewInit {
           viewportScroller.scrollToPosition([0, 0]);
         }
       });
+  }
+  ngOnInit(): void {
+    // for some reason services needs to be opened here
+    //  or they wont fetch values on first frontpage render
+    this.favouriteSvc.checkIfFavourite('');
+    this.likeSvc.checkIfLiked('');
   }
 
   ngAfterViewInit(): void {
