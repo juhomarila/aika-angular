@@ -1,5 +1,5 @@
 <div class="my-overlay white-border rounded-top" (mouseover)="mouseOver()" (mouseleave)="mouseLeave()">
-  <div class="card bg-transparent">
+  <div class="card bg-transparent" *ngIf="article">
     <div class="container g-0">
       <a (click)="onSelect(article)" routerLinkActive="active">
         <div class="row g-0">
@@ -17,10 +17,10 @@
           <div class="add-padding-right" *ngIf="owned">
             <i class="bi bi-bag-check-fill rounded-circle-bought" *ngIf="owned"></i>
           </div>
-          <div *ngIf="!checkIfFavourite(article.key)">
+          <div *ngIf="!favourite">
             <a class="bi bi-bookmark rounded-circle" (click)="like()" title="{{ 'preview.addToFavs' | translate }}"></a>
           </div>
-          <div *ngIf="checkIfFavourite(article.key)">
+          <div *ngIf="favourite">
             <a class="bi bi-bookmark-check-fill rounded-circle" (click)="unlike()"
               title="{{ 'preview.removeFromFavs' | translate }}"></a>
           </div>

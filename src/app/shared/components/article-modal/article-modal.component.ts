@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Article } from '../../interfaces/article';
@@ -15,6 +15,7 @@ export class ArticleModalComponent implements OnInit {
   owned: boolean = false;
   favourite: boolean = false;
   liked: boolean = false;
+  likeChecked: boolean = false;
 
   constructor(
     private activeModal: NgbActiveModal,
@@ -25,13 +26,9 @@ export class ArticleModalComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.userSvc.getOwnedArticles().subscribe(ownedArticles => {
-      ownedArticles.map(a => {
-        if (a.key === this.article.key) {
-          this.owned = true;
-        }
-      });
-    });
+    this.owned = this.userSvc.checkIfOwned(this.article.key);
+    this.liked = this.likeSvc.checkIfLiked(this.article.key);
+    this.favourite = this.favouriteSvc.checkIfFavourite(this.article.key);
     if (this.article.likes === undefined) {
       this.article.likes = 0;
     }

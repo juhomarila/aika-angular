@@ -29,4 +29,14 @@ export class LikeService {
   getUserArticleLikes() {
     return of(this.likedArticlesList);
   }
+
+  checkIfLiked(key: string) {
+    let liked = false;
+    this.likedArticlesList.map(like => {
+      if (like.key === key) {
+        liked = true;
+      }
+    });
+    return liked;
+  }
 }

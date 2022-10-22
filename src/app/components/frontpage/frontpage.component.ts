@@ -35,10 +35,16 @@ export class FrontpageComponent implements OnInit {
     private authSvc: AuthService,
     private articleSvc: ArticlesvcService,
     private storageSvc: StorageService,
-    private utilSvc: UtilService
+    private utilSvc: UtilService,
+    private likeSvc: LikeService,
+    private favouriteSvc: FavouriteService,
+    private userSvc: UserService
   ) {}
 
   ngOnInit(): void {
+    // this.likeSvc.checkIfLiked('');
+    //this.favouriteSvc.checkIfFavourite('');
+    // this.userSvc.checkIfOwned('');
     this.isLogged = this.authSvc.isLoggedIn;
     this.username = this.authSvc.user.displayName;
     this.uid = this.authSvc.user.uid;

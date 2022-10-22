@@ -32,4 +32,14 @@ export class UserService {
     const owned = of(this.ownedArticlesList);
     return owned;
   }
+
+  checkIfOwned(key: string) {
+    let owned = false;
+    this.ownedArticlesList.map(ownedArticle => {
+      if (ownedArticle.key === key) {
+        owned = true;
+      }
+    });
+    return owned;
+  }
 }
