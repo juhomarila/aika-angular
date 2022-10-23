@@ -18,7 +18,9 @@
     "journalist": "Toimittaja",
     "publishedIn": "Ilmestyy lehdessä",
     "settings": "Asetukset",
-    "closeModal": "Sulje ikkuna"
+    "closeModal": "Sulje ikkuna",
+    "hideArticles": "Piilota artikkelit",
+    "showArticles": "Näytä artikkelit"
   },
   "header": {
     "frontpage": "Etusivu",

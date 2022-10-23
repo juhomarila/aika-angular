@@ -18,7 +18,9 @@
     "journalist": "Journalist",
     "publishedIn": "Published in",
     "settings": "Settings",
-    "closeModal": "Close modal"
+    "closeModal": "Close modal",
+    "hideArticles": "Hide articles",
+    "showArticles": "Show articles"
   },
   "header": {
     "frontpage": "Frontpage",

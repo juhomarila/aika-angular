@@ -63,8 +63,8 @@
     </div>
   </div>
   <div class="center-header">
-    <h4 *ngIf="hidden">Näytä artikkelit</h4>
-    <h4 *ngIf="!hidden">Piilota artikkelit</h4>
+    <h5 *ngIf="hidden">{{ 'common.showArticles' | translate }}</h5>
+    <h5 *ngIf="!hidden">{{ 'common.hideArticles' | translate }}</h5>
     <a (click)="hidden = !hidden"
       ><i class="bi bi-chevron-compact-down" *ngIf="hidden"></i
       ><i class="bi bi-chevron-compact-up" *ngIf="!hidden"></i

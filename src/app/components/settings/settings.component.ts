@@ -36,10 +36,11 @@ export class SettingsComponent implements OnInit, OnDestroy {
       this.ownedArticles = JSON.parse(localStorage.getItem('owned')!);
       this.user = JSON.parse(localStorage.getItem('user')!);
     } else {
-      const uid = this.authSvc.user.uid;
-      this.fireStoreSvc.getUser(uid).subscribe(user => {
-        this.user = user.data() as User;
-      });
+      this.user = this.authSvc.user;
+      //const uid = this.authSvc.user.uid;
+      // this.fireStoreSvc.getUser(uid).subscribe(user => {
+      //   this.user = user.data() as User;
+      // });
       this.userSvc.getOwnedArticles().subscribe(owned => {
         this.ownedArticles = owned;
         localStorage.setItem('owned', JSON.stringify(this.ownedArticles));
