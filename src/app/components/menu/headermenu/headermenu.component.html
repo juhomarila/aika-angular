@@ -15,11 +15,11 @@
                 <h2>AIKA</h2>
               </a>
             </li>
-            <li class="nav-item hover-nav">
+            <li class="nav-item hover-nav"*ngIf="isLogged">
               <a class="nav-link text-white hover-link" aria-current="page" routerLink="/frontpage"
                 routerLinkActive="navactive">{{ 'header.frontpage' | translate }}</a>
             </li>
-            <li class="nav-item hover-nav">
+            <li class="nav-item hover-nav" *ngIf="isLogged">
               <a class="nav-link text-white hover-link" routerLink="/magazines"
                 routerLinkActive="navactive">{{ 'header.magazines' | translate }}</a>
             </li>
