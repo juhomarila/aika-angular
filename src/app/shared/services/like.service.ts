@@ -15,9 +15,13 @@ export class LikeService {
     private fireStoreSvc: FirestoreService,
     private authSvc: AuthService
   ) {
-    this.fireStoreSvc
-      .getUserArticleLikes(this.authSvc.user.uid)
-      .then(likes => (this.likedArticlesList = likes));
+    if (this.authSvc.isLoggedIn) {
+      this.fireStoreSvc
+        .getUserArticleLikes(this.authSvc.user.uid)
+        .then(likes => (this.likedArticlesList = likes));
+    } else {
+      this.likedArticlesList = [];
+    }
   }
 
   async likeArticle(key: string) {

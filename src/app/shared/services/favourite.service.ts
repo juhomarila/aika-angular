@@ -13,9 +13,13 @@ export class FavouriteService {
     private fireStoreSvc: FirestoreService,
     private authSvc: AuthService
   ) {
-    this.fireStoreSvc
-      .getUserArticleFavourites(this.authSvc.user.uid)
-      .then(favs => (this.favourites = favs));
+    if (this.authSvc.isLoggedIn) {
+      this.fireStoreSvc
+        .getUserArticleFavourites(this.authSvc.user.uid)
+        .then(favs => (this.favourites = favs));
+    } else {
+      this.favourites = [];
+    }
   }
 
   async addArticleToFavourites(key: string) {
