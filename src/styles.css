@@ -483,6 +483,10 @@ th {
 }
 
 .carousel-overlay img {
+  filter: blur(0.2px) brightness(0.85) opacity(0.95) saturate(0.95) sepia(0.05);
+}
+
+.login-carousel-overlay img {
   filter: blur(0.2px) brightness(0.65) opacity(0.85) saturate(0.95) sepia(0.05);
 }
 
