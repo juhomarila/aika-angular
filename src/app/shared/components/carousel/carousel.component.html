@@ -4,10 +4,14 @@
         <div class="carousel-overlay">
           <img [src]="i.photoUrl" alt="Random first slide" class="img-fluid" />
         </div>
-        <div class="carousel-caption centered" id="carousel">
+        <div class="carousel-caption centered" id="carousel" *ngIf="width > 992">
           <h1>{{ i.header }}</h1>
           <p>{{ i.text }}</p>
         </div>
+      </div>
+      <div class="carousel-caption centered-small" id="carousel" *ngIf="width <= 992">
+        <h1>{{ i.header }}</h1>
+        <p>{{ i.text }}</p>
       </div>
     </ng-template>
   </ngb-carousel>

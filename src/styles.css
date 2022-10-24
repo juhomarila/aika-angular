@@ -497,6 +497,7 @@ th {
   transform: translate(-50%, -50%);
 }
 
+
 .card-padding {
   padding: 1em;
 }
@@ -1226,6 +1227,12 @@ only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (
 
   .input {
     padding-top: 1em;
+  }
+
+  .centered-small {
+    justify-content: center;
+    align-items: center;
+    padding: 1.5vh;
   }
 }
 
