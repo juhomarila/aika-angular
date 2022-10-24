@@ -483,7 +483,7 @@ th {
 }
 
 .carousel-overlay img {
-  filter: blur(0.2px) brightness(0.85) opacity(0.95) saturate(0.95) sepia(0.05);
+  filter: blur(0.2px) brightness(0.65) opacity(0.85) saturate(0.95) sepia(0.05);
 }
 
 #carousel p {
@@ -497,6 +497,30 @@ th {
   transform: translate(-50%, -50%);
 }
 
+.centered-small {
+  justify-content: center;
+  align-items: center;
+  padding: 1.5vh;
+  right: 15%;
+  bottom: 1.25rem;
+  left: 15%;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+  color: #fff;
+  text-align: center;
+}
+
+.centered-small h1 {
+  font-size: calc(1.375rem + 1.5vw);
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.centered-small p {
+  font-size: larger;
+}
 
 .card-padding {
   padding: 1em;
@@ -1227,12 +1251,6 @@ only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (
 
   .input {
     padding-top: 1em;
-  }
-
-  .centered-small {
-    justify-content: center;
-    align-items: center;
-    padding: 1.5vh;
   }
 }
 
