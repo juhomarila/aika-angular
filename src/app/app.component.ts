@@ -12,6 +12,7 @@ import { delay, filter } from 'rxjs';
 import { FavouriteService } from './shared/services/favourite.service';
 import { LikeService } from './shared/services/like.service';
 import { LoadingService } from './shared/services/loading.service';
+import { ShoppingCartService } from './shared/services/shopping-cart.service';
 
 @Component({
   selector: 'app-root',
@@ -29,7 +30,8 @@ export class AppComponent implements AfterViewInit, OnInit {
     router: Router,
     viewportScroller: ViewportScroller,
     private favouriteSvc: FavouriteService,
-    private likeSvc: LikeService
+    private likeSvc: LikeService,
+    private shoppingCartSvc: ShoppingCartService
   ) {
     router.events
       .pipe(filter((e): e is Scroll => e instanceof Scroll))

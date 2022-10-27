@@ -36,6 +36,7 @@ export class PreviewComponent implements OnInit {
   bought: boolean = false;
   arrayKey: number = 0;
   language: string = '';
+  shoppingCart: Article[] = [];
 
   constructor(
     private shoppingCartSvc: ShoppingCartService,
@@ -51,6 +52,9 @@ export class PreviewComponent implements OnInit {
       this.owned = this.userSvc.checkIfOwned(this.article.key);
       this.favourite = this.favouriteSvc.checkIfFavourite(this.article.key);
       this.language = localStorage.getItem('language')!;
+      this.shoppingCartSvc.shoppingCart.subscribe(cart => {
+        this.shoppingCart = cart;
+      });
       this.ref.detach();
       setInterval(() => {
         this.inCart = this.checkIfIsInCart();
@@ -85,7 +89,7 @@ export class PreviewComponent implements OnInit {
 
   addToCart() {
     this.inCart = true;
-    this.arrayKey = this.shoppingCartSvc.addToCart(this.article);
+    this.shoppingCartSvc.addToCart(this.article);
     this.store.dispatch(new AddCartAction(this.article));
     return true;
   }
@@ -93,11 +97,11 @@ export class PreviewComponent implements OnInit {
   removeFromCart() {
     this.inCart = false;
     this.store.dispatch(new RemoveCartAction(this.article));
-    this.shoppingCartSvc.removeFromCart(this.arrayKey);
+    this.shoppingCartSvc.removeFromCart(this.article);
   }
 
   checkIfIsInCart() {
-    if (!this.shoppingCartSvc.getCart().some(a => a.key === this.article.key)) {
+    if (!this.shoppingCart.some(a => a.key === this.article.key)) {
       return false;
     }
     return true;

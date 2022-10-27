@@ -51,10 +51,10 @@ export class HeadermenuComponent implements OnInit {
     if (!this.isLogged) {
       this.logoutUserIsError();
     }
-    setInterval(() => {
-      this.noOfItemsInCart = this.shoppingCartSvc.getCart().length;
+    this.shoppingCartSvc.shoppingCart.subscribe(cart => {
+      this.noOfItemsInCart = cart.length;
       this.ref.markForCheck();
-    }, 1000);
+    });
   }
 
   @HostListener('window:scroll', ['$event'])

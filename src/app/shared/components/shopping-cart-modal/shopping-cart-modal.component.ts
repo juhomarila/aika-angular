@@ -17,7 +17,9 @@ export class ShoppingCartModalComponent implements OnInit {
     private activeModal: NgbActiveModal,
     private loading: LoadingService
   ) {
-    this.shoppingCartList = this.shoppingCartSvc.getCart();
+    this.shoppingCartSvc.shoppingCart.subscribe(cart => {
+      this.shoppingCartList = cart;
+    });
   }
 
   ngOnInit(): void {}
@@ -26,8 +28,8 @@ export class ShoppingCartModalComponent implements OnInit {
     this.activeModal.dismiss();
   }
 
-  removeFromCart(index: number) {
-    this.shoppingCartSvc.removeFromCart(index);
+  removeFromCart(article: Article) {
+    this.shoppingCartSvc.removeFromCart(article);
   }
 
   emptyCart() {
