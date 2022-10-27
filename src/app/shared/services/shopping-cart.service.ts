@@ -20,15 +20,7 @@ export class ShoppingCartService {
     private fireStoreSvc: FirestoreService,
     private authSvc: AuthService,
     private userSvc: UserService
-  ) {
-    // if (this.shoppingCart.length === 0) {
-    //   if (localStorage.getItem('cart') === null) {
-    //     this.shoppingCart = [];
-    //   } else {
-    //     this.shoppingCart = JSON.parse(localStorage.getItem('cart')!);
-    //   }
-    // }
-  }
+  ) {}
 
   addToCart(article: Article) {
     this.shoppingCartArray.next([...this.shoppingCartArray.value, article]);
@@ -54,25 +46,9 @@ export class ShoppingCartService {
     JSON.parse(localStorage.getItem('cart')!);
   }
 
-  // addToCart(article: Article): number {
-  //   this.shoppingCart.push(article);
-  //   localStorage.setItem('cart', JSON.stringify(this.shoppingCart));
-  //   JSON.parse(localStorage.getItem('cart')!);
-  //   this.shoppingCart.slice();
-  //   return this.shoppingCart.length - 1;
-  // }
-
-  // removeFromCart(key: number) {
-  //   this.shoppingCart.splice(key, 1);
-  //   localStorage.setItem('cart', JSON.stringify(this.shoppingCart));
-  //   JSON.parse(localStorage.getItem('cart')!);
-  // }
-
-  // emptyCart() {
-  //   this.shoppingCart = [];
-  //   localStorage.setItem('cart', JSON.stringify(this.shoppingCart));
-  //   JSON.parse(localStorage.getItem('cart')!);
-  // }
+  setCart(articleArray: Article[]) {
+    this.shoppingCartArray.next(articleArray);
+  }
 
   async checkOut() {
     if (this.doPayment()) {

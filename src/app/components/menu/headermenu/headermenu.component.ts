@@ -55,6 +55,13 @@ export class HeadermenuComponent implements OnInit {
       this.noOfItemsInCart = cart.length;
       this.ref.markForCheck();
     });
+    if (this.noOfItemsInCart === 0) {
+      if (localStorage.getItem('cart') === null) {
+        this.shoppingCartSvc.emptyCart();
+      } else {
+        this.shoppingCartSvc.setCart(JSON.parse(localStorage.getItem('cart')!));
+      }
+    }
   }
 
   @HostListener('window:scroll', ['$event'])
