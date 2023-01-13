@@ -17,6 +17,7 @@ import { Like } from '../interfaces/like';
 })
 export class FirestoreService {
   articleList: Article[] = [];
+  genreArray: string[] = [];
   article!: Article;
   carouselEntityList: CarouselEntity[] = [];
   loginCarouselEntityList: CarouselEntity[] = [];
@@ -39,6 +40,19 @@ export class FirestoreService {
       )
     );
     return this.articleList;
+  }
+
+  async getGenres() {
+    const snapShot = this.afs.collection('articles').get();
+    snapShot.subscribe(articles =>
+      articles.forEach(article => {
+        let singleArticle = article.data() as Article;
+        if (!this.genreArray.includes(singleArticle.genre)) {
+          this.genreArray.push(singleArticle.genre);
+        }
+      })
+    );
+    return this.genreArray;
   }
 
   async getAllLoginCarouselEntities() {

@@ -16,11 +16,14 @@
     "magazines": "Magazines",
     "birthday": "Birthday",
     "journalist": "Journalist",
+    "magazine": "Magazine",
     "publishedIn": "Published in",
     "settings": "Settings",
     "closeModal": "Close modal",
     "hideArticles": "Hide articles",
-    "showArticles": "Show articles"
+    "showArticles": "Show articles",
+    "like": "like",
+    "likes": "likes"
   },
   "header": {
     "frontpage": "Frontpage",
