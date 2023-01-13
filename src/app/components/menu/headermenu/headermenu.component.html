@@ -17,19 +17,19 @@
             </li>
             <li class="nav-item hover-nav"*ngIf="isLogged">
               <a class="nav-link text-white hover-link" aria-current="page" routerLink="/frontpage"
-                routerLinkActive="navactive">{{ 'header.frontpage' | translate }}</a>
+                routerLinkActive="navactive">{{ 'header.frontpage' | translate | uppercase }}</a>
             </li>
             <li class="nav-item hover-nav" *ngIf="isLogged">
               <a class="nav-link text-white hover-link" routerLink="/magazines"
-                routerLinkActive="navactive">{{ 'header.magazines' | translate }}</a>
+                routerLinkActive="navactive">{{ 'header.magazines' | translate | uppercase }}</a>
             </li>
             <li class="nav-item hover-nav hover-link" *ngIf="isLogged">
               <a class="nav-link text-white" routerLink="/tbr"
-                routerLinkActive="navactive">{{ 'header.tbr' | translate }}</a>
+                routerLinkActive="navactive">{{ 'header.tbr' | translate | uppercase }}</a>
             </li>
             <li class="nav-item hover-nav hover-link" *ngIf="isLogged">
               <a class="nav-link text-white" routerLink="/my-library"
-                routerLinkActive="navactive">{{ 'header.ownMagazines' | translate }}</a>
+                routerLinkActive="navactive">{{ 'header.ownMagazines' | translate | uppercase }}</a>
             </li>
           </ul>
           <div class="d-flex align-items-end">

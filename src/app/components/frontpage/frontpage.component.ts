@@ -4,14 +4,13 @@ import { CarouselEntity } from 'src/app/shared/interfaces/carouselentity';
 import { ArticlesvcService } from 'src/app/shared/services/articlesvc.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { StorageService } from 'src/app/shared/services/storage.service';
-import { UserService } from 'src/app/shared/services/user.service';
-import { Owned } from 'src/app/shared/interfaces/owned';
 import { UtilService } from 'src/app/shared/services/util.service';
-import { FavouriteService } from 'src/app/shared/services/favourite.service';
-import { Favourite } from 'src/app/shared/interfaces/favourite';
 import { Magazine } from 'src/app/shared/interfaces/magazine';
-import { Like } from 'src/app/shared/interfaces/like';
-import { LikeService } from 'src/app/shared/services/like.service';
+import { FirestoreService } from 'src/app/shared/services/firestore.service';
+
+interface RemovedGenre {
+  [key: string]: number;
+}
 
 @Component({
   selector: 'app-frontpage',
@@ -26,6 +25,8 @@ export class FrontpageComponent implements OnInit {
   username: string = '';
   uid: string = '';
   genreArray: string[] = [];
+  originalGenreArray: string[] = [];
+  removedGenreArray: Map<string, number> = new Map<string, number>();
   filterByGenre: string[] = [];
   showFilters: boolean = false;
   filterMagazineName: string[] = [];
@@ -36,31 +37,17 @@ export class FrontpageComponent implements OnInit {
     private articleSvc: ArticlesvcService,
     private storageSvc: StorageService,
     private utilSvc: UtilService,
-    private likeSvc: LikeService,
-    private favouriteSvc: FavouriteService,
-    private userSvc: UserService
+    private firestoreSvc: FirestoreService
   ) {}
 
   ngOnInit(): void {
-    // this.likeSvc.checkIfLiked('');
-    //this.favouriteSvc.checkIfFavourite('');
-    // this.userSvc.checkIfOwned('');
     this.isLogged = this.authSvc.isLoggedIn;
     this.username = this.authSvc.user.displayName;
     this.uid = this.authSvc.user.uid;
     this.getArticles();
     this.getCarouselImages();
     this.getAllMagazines();
-    this.genreArray = [
-      'Urheilu',
-      'Kauneus',
-      'Vapaa-aika',
-      'Sisustaminen',
-      'Käsityöt',
-      'Tiede',
-      'Ajankohtaista',
-      'Viihde',
-    ];
+    this.getGenres();
     if (localStorage.getItem('filterMagazineName')) {
       this.filterMagazineName = JSON.parse(
         localStorage.getItem('filterMagazineName')!
@@ -97,6 +84,7 @@ export class FrontpageComponent implements OnInit {
       const index = this.genreArray.indexOf(genre);
       if (index > -1) {
         this.genreArray.splice(index, 1);
+        this.removedGenreArray.set(genre, index);
       }
     });
   }
@@ -134,9 +122,17 @@ export class FrontpageComponent implements OnInit {
   }
 
   backToGenre(event: any) {
-    this.genreArray.unshift(event.value);
+    const index = this.removedGenreArray.get(event.value);
+    console.log(index);
+    if (index) {
+      this.genreArray.splice(index, 0, event.value);
+    }
+    // const returnIndex = this.originalGenreArray.indexOf(event.value);
+    // console.log(returnIndex);
+    // this.genreArray.splice(returnIndex, 0, event.value);
+    // console.log(this.filterByGenre);
     localStorage.setItem('filterGenre', JSON.stringify(this.filterByGenre));
-    this.filterMagazine();
+    //this.filterMagazine();
   }
 
   backToMagazine(event: any) {
@@ -157,16 +153,7 @@ export class FrontpageComponent implements OnInit {
         localStorage.getItem('filteredArticleListGenres')!
       );
     } else {
-      this.genreArray = [
-        'Urheilu',
-        'Kauneus',
-        'Vapaa-aika',
-        'Sisustaminen',
-        'Käsityöt',
-        'Tiede',
-        'Ajankohtaista',
-        'Viihde',
-      ];
+      this.genreArray = this.originalGenreArray;
     }
     if (localStorage.getItem('filteredArticleList')) {
       this.filteredArticleList = JSON.parse(
@@ -184,16 +171,7 @@ export class FrontpageComponent implements OnInit {
       this.filterByGenre = JSON.parse(localStorage.getItem('filterGenre')!);
     }
     this.filterGenre();
-    this.genreArray = [
-      'Urheilu',
-      'Kauneus',
-      'Vapaa-aika',
-      'Sisustaminen',
-      'Käsityöt',
-      'Tiede',
-      'Ajankohtaista',
-      'Viihde',
-    ];
+    this.genreArray = this.originalGenreArray;
     this.filteredArticleList = this.articleList;
     localStorage.removeItem('filterMagazineName');
     localStorage.removeItem('magazines');
@@ -203,16 +181,7 @@ export class FrontpageComponent implements OnInit {
   }
 
   resetFilters() {
-    this.genreArray = [
-      'Urheilu',
-      'Kauneus',
-      'Vapaa-aika',
-      'Sisustaminen',
-      'Käsityöt',
-      'Tiede',
-      'Ajankohtaista',
-      'Viihde',
-    ];
+    this.genreArray = this.originalGenreArray;
     this.filteredArticleList = this.articleList;
     localStorage.removeItem('filterGenre');
     localStorage.removeItem('filterMagazineName');
@@ -227,6 +196,13 @@ export class FrontpageComponent implements OnInit {
     this.articleSvc.getArticles().subscribe(articles => {
       this.articleList = articles;
       this.filteredArticleList = this.articleList;
+    });
+  }
+
+  getGenres(): void {
+    this.articleSvc.getGenres().subscribe(genres => {
+      this.genreArray = genres;
+      this.originalGenreArray = genres;
     });
   }
 

@@ -16,11 +16,14 @@
     "magazines": "Aikakausilehdet",
     "birthday": "Syntymäpäivä",
     "journalist": "Toimittaja",
+    "magazine": "Aikakausilehti",
     "publishedIn": "Ilmestyy lehdessä",
     "settings": "Asetukset",
     "closeModal": "Sulje ikkuna",
     "hideArticles": "Piilota artikkelit",
-    "showArticles": "Näytä artikkelit"
+    "showArticles": "Näytä artikkelit",
+    "like": "tykkäys",
+    "likes": "tykkäystä"
   },
   "header": {
     "frontpage": "Etusivu",

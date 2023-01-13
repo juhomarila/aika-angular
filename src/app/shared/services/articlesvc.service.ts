@@ -10,6 +10,7 @@ import { FirestoreService } from './firestore.service';
 export class ArticlesvcService {
   magazineList: Magazine[] = [];
   articleList: Article[] = [];
+  genreArray: string[] = [];
   article!: Article;
 
   constructor(private fireStoreSvc: FirestoreService) {
@@ -19,11 +20,11 @@ export class ArticlesvcService {
     this.fireStoreSvc
       .getAllMagazines()
       .then(magazines => (this.magazineList = magazines));
+    this.fireStoreSvc.getGenres().then(genres => (this.genreArray = genres));
   }
 
   getArticles(): Observable<Article[]> {
-    const articles = of(this.articleList);
-    return articles;
+    return of(this.articleList);
   }
 
   getArticle(key: string): Observable<Article> {
@@ -32,7 +33,10 @@ export class ArticlesvcService {
   }
 
   getMagazines(): Observable<Magazine[]> {
-    const magazines = of(this.magazineList);
-    return magazines;
+    return of(this.magazineList);
+  }
+
+  getGenres(): Observable<string[]> {
+    return of(this.genreArray);
   }
 }
