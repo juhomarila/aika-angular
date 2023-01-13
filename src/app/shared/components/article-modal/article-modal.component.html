@@ -14,12 +14,22 @@
         <div class="col-sm-5 offset-sm-2 col-md-8 offset-md-2" *ngIf="article">
           <div class="col">
             <div class="row">
+              <p>
+                <small style="font-style: italic">
+                  {{ 'common.magazine' | translate }}
+              </small>
+              </p>
               <p class="padding-bottom">
                 <a (click)="onSelectMagazine(article.magazine.key)"
                   ><small style="font-weight: bold">{{
                     article.magazine.name
                   }}</small></a
                 >
+              </p>
+              <p>
+                <small style="font-style: italic">
+                  {{ 'common.journalist' | translate }}
+              </small>
               </p>
               <p>
                 <a (click)="onSelectJournalist(article.journalist.key)"
@@ -43,10 +53,10 @@
             </div>
             <div class="padding-bottom-top float-right">
               <small *ngIf="this.article.likes === 1; else show"
-                >{{ this.article.likes }} tykkäys</small
+                >{{ this.article.likes }} {{ 'common.like' | translate }}</small
               >
               <ng-template #show
-                ><small>{{ this.article.likes }} tykkäystä</small></ng-template
+                ><small>{{ this.article.likes }} {{ 'common.likes' | translate }}</small></ng-template
               >
             </div>
           </div>

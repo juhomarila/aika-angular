@@ -17,8 +17,9 @@
       <div *ngIf="showFilters" class="d-flex justify-content-between filters">
         <div class="d-flex">
           <small class="align-self-center padding-frontpage">{{ 'frontpage.removeGenre' | translate }}</small>
-          <ng-select [items]="genreArray" [(ngModel)]="filterByGenre" (add)="filterGenre()"
+          <ng-select [(ngModel)]="filterByGenre" (add)="filterGenre()"
             (clear)="resetGenreFilters()" (remove)="backToGenre($event)" [multiple]="true" class="select-filter">
+            <ng-option *ngFor="let genre of genreArray" [value]="genre">{{ genre | translate}}</ng-option>
           </ng-select>
         </div>
         <div class="d-flex input">

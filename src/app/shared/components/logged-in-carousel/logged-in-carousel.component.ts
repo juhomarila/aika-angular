@@ -20,7 +20,7 @@ export class LoggedInCarouselComponent implements OnInit {
     config.showNavigationArrows = false;
     config.showNavigationIndicators = false;
 
-    this.height = window.innerHeight;
+    this.height = window.innerHeight * 0.8;
   }
 
   ngOnInit(): void {}
