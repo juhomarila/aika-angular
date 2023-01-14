@@ -13,7 +13,9 @@ export class ArticlesvcService {
   genreArray: string[] = [];
   article!: Article;
 
-  constructor(private fireStoreSvc: FirestoreService) {
+  constructor(
+    private fireStoreSvc: FirestoreService,
+  ) {
     this.fireStoreSvc
       .getAllArticles()
       .then(articles => (this.articleList = articles));
@@ -36,7 +38,7 @@ export class ArticlesvcService {
     return of(this.magazineList);
   }
 
-  getGenres(): Observable<string[]> {
+  getGenres(): Observable<string[]> {;
     return of(this.genreArray);
   }
 }

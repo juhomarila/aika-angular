@@ -7,6 +7,11 @@ import { StorageService } from 'src/app/shared/services/storage.service';
 import { UtilService } from 'src/app/shared/services/util.service';
 import { Magazine } from 'src/app/shared/interfaces/magazine';
 import { FirestoreService } from 'src/app/shared/services/firestore.service';
+import { Observable } from '@firebase/util';
+import { Store } from '@ngrx/store';
+import { ActivatedRoute } from '@angular/router';
+import { AppState } from 'src/app/shared/store/reducers';
+import { RemoveGenreAction } from 'src/app/shared/store/actions/genre.action';
 
 interface RemovedGenre {
   [key: string]: number;
@@ -17,6 +22,7 @@ interface RemovedGenre {
   templateUrl: './frontpage.component.html',
 })
 export class FrontpageComponent implements OnInit {
+  genres!: Observable<string[]>;
   articleList: Article[] = [];
   filteredArticleList: Article[] = [];
   carouselEntityList: CarouselEntity[] = [];
@@ -37,7 +43,7 @@ export class FrontpageComponent implements OnInit {
     private articleSvc: ArticlesvcService,
     private storageSvc: StorageService,
     private utilSvc: UtilService,
-    private firestoreSvc: FirestoreService
+    private store: Store<AppState>,
   ) {}
 
   ngOnInit(): void {
@@ -47,7 +53,7 @@ export class FrontpageComponent implements OnInit {
     this.getArticles();
     this.getCarouselImages();
     this.getAllMagazines();
-    this.getGenres();
+    this.getGenreState();
     if (localStorage.getItem('filterMagazineName')) {
       this.filterMagazineName = JSON.parse(
         localStorage.getItem('filterMagazineName')!
@@ -78,14 +84,15 @@ export class FrontpageComponent implements OnInit {
   }
 
   filterGenre() {
-    localStorage.setItem('filterGenre', JSON.stringify(this.filterByGenre));
-    localStorage.setItem('magazines', JSON.stringify(this.magazineList));
+    // localStorage.setItem('filterGenre', JSON.stringify(this.filterByGenre));
+    // localStorage.setItem('magazines', JSON.stringify(this.magazineList));
+    // this.genreArray = this.genreArray.filter(
+    //   genre => !this.filterByGenre.includes(genre)
+    // );
+    // console.log(this.genreArray);
     this.filterByGenre.map(genre => {
       const index = this.genreArray.indexOf(genre);
-      if (index > -1) {
-        this.genreArray.splice(index, 1);
-        this.removedGenreArray.set(genre, index);
-      }
+      this.store.dispatch(new RemoveGenreAction(index, genre));
     });
   }
 
@@ -126,13 +133,14 @@ export class FrontpageComponent implements OnInit {
     console.log(index);
     if (index) {
       this.genreArray.splice(index, 0, event.value);
+      this.genreArray.slice();
     }
     // const returnIndex = this.originalGenreArray.indexOf(event.value);
     // console.log(returnIndex);
     // this.genreArray.splice(returnIndex, 0, event.value);
     // console.log(this.filterByGenre);
     localStorage.setItem('filterGenre', JSON.stringify(this.filterByGenre));
-    //this.filterMagazine();
+    //this.filterGenre();
   }
 
   backToMagazine(event: any) {
@@ -199,10 +207,12 @@ export class FrontpageComponent implements OnInit {
     });
   }
 
-  getGenres(): void {
-    this.articleSvc.getGenres().subscribe(genres => {
-      this.genreArray = genres;
-      this.originalGenreArray = genres;
+  getGenreState(): void {
+    this.store.subscribe(state => {
+      this.genreArray = state.genres.genres;
+      this.originalGenreArray = state.genres.genres;
+      this.filterByGenre = state.genres.removedGenres;
+      this.originalGenreArray = state.genres.originalGenres;
     });
   }
 

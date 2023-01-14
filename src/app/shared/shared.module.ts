@@ -17,6 +17,8 @@ import { ScrollService } from './services/scroll.service';
 import { NgxTranslateModule } from '../ngx-translate/ngx-translate.module';
 import { ShowcaseModalComponent } from './components/showcase-modal/showcase-modal/showcase-modal.component';
 import { ArticleListComponent } from './components/article-list/article-list.component';
+import { StoreModule } from '@ngrx/store';
+import { reducers } from './store/reducers';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,7 @@ import { ArticleListComponent } from './components/article-list/article-list.com
     CarouselModule,
     RouterModule,
     NgxTranslateModule,
+    StoreModule.forRoot(reducers),
   ],
   exports: [
     CarouselComponent,

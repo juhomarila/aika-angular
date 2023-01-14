@@ -14,7 +14,9 @@ import { UtilService } from 'src/app/shared/services/util.service';
   poistuu edellinen painikkeella edellisene näkymään */
 
 /* TODO jos searchparami on genre niin ehdota genreä. Eli lista kaikista genreistä tänne
-  ja sitten jos käyttäjä kirjoittaa genreä niin ehdota sitä väliin mukaan myös jotenkin */
+  ja sitten jos käyttäjä kirjoittaa genreä niin ehdota sitä väliin mukaan myös jotenkin
+  https://dev.to/idrisrampurawala/creating-a-search-filter-in-angular-562d
+  */
 
 @Component({
   selector: 'app-search',

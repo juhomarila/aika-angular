@@ -11,6 +11,9 @@ import { increment } from '@angular/fire/firestore';
 import { Owned } from '../interfaces/owned';
 import { Favourite } from '../interfaces/favourite';
 import { Like } from '../interfaces/like';
+import { Store } from '@ngrx/store';
+import { AppState } from '../store/reducers';
+import { AddGenreAction, AddOriginalGenresAction } from '../store/actions/genre.action';
 
 @Injectable({
   providedIn: 'root',
@@ -30,7 +33,7 @@ export class FirestoreService {
   likedList: Like[] = [];
   likes: number = 0;
 
-  constructor(public afs: AngularFirestore) {}
+  constructor(public afs: AngularFirestore, private store: Store<AppState>) {}
 
   async getAllArticles() {
     const snapShot = this.afs.collection('articles').get();
@@ -49,6 +52,8 @@ export class FirestoreService {
         let singleArticle = article.data() as Article;
         if (!this.genreArray.includes(singleArticle.genre)) {
           this.genreArray.push(singleArticle.genre);
+          this.store.dispatch(new AddGenreAction(singleArticle.genre));
+          this.store.dispatch(new AddOriginalGenresAction(singleArticle.genre));
         }
       })
     );
