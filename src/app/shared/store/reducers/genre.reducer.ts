@@ -11,29 +11,42 @@ const initialState: GenreState = {
   genres: [],
   removedGenres: [],
 };
+
 export function genreReducer(
   state: GenreState = initialState,
-  action:
-    | genreActions.AddGenreAction
-    | genreActions.RemoveGenreAction
-    | genreActions.AddOriginalGenresAction
+  action: genreActions.GenreActions
 ): GenreState {
   switch (action.type) {
-    case genreActions.GenreActionType.ADD_ITEM:
+    case genreActions.GenreActionType.ADD_GENRE:
       return {
         ...state,
         genres: [...state.genres, action.payload],
       };
-    case genreActions.GenreActionType.REMOVE_ITEM:
+    case genreActions.GenreActionType.ADD_GENRE_BACK:
+      console.log(action.payload);
+      return {
+        ...state,
+        genres: [
+          ...state.genres.slice(0, action.addIndex),
+          action.payload,
+          ...state.genres.slice(action.addIndex),
+        ],
+        removedGenres: [
+          ...state.removedGenres.filter(genre => {
+            return genre != action.payload;
+          }),
+        ],
+      };
+    case genreActions.GenreActionType.REMOVE_GENRE:
       return {
         genres: [
-          ...state.genres.slice(0, action.id),
-          ...state.genres.slice(action.id + 1),
+          ...state.genres.slice(0, action.index),
+          ...state.genres.slice(action.index + 1),
         ],
         removedGenres: [...state.removedGenres, action.payload],
-        originalGenres: [...state.removedGenres],
+        originalGenres: [...state.originalGenres],
       };
-    case genreActions.GenreActionType.ADD_ORIGINAL:
+    case genreActions.GenreActionType.ADD_ORIGINAL_GENRES:
       return {
         ...state,
         originalGenres: [...state.originalGenres, action.payload],

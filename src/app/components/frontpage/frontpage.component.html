@@ -17,16 +17,18 @@
       <div *ngIf="showFilters" class="d-flex justify-content-between filters">
         <div class="d-flex">
           <small class="align-self-center padding-frontpage">{{ 'frontpage.removeGenre' | translate }}</small>
-          <ng-select [(ngModel)]="filterByGenre" (add)="filterGenre()"
+          <ng-select [(ngModel)]="filterByGenre" (add)="filterGenre($event)"
             (clear)="resetGenreFilters()" (remove)="backToGenre($event)" [multiple]="true" class="select-filter">
             <ng-option *ngFor="let genre of genreArray" [value]="genre">{{ genre | translate}}</ng-option>
           </ng-select>
         </div>
         <div class="d-flex input">
           <small class="align-self-center padding-frontpage">{{ 'frontpage.addMagazine' | translate }}</small>
-          <ng-select [items]="magazineList" [(ngModel)]="filterMagazineName" (add)="filterMagazine()"
-            (clear)="resetArticleFilters()" (remove)="backToMagazine($event)" [multiple]="true" bindLabel="name"
-            bindValue="name" class="select-filter"></ng-select>
+          <ng-select [(ngModel)]="filterMagazineName" (add)="filterMagazine($event)"
+            (clear)="resetMagazineFilters()" (remove)="backToMagazine($event)" [multiple]="true" bindLabel="name"
+            bindValue="name" class="select-filter">
+            <ng-option *ngFor="let magazine of magazineList" [value]="magazine">{{ magazine }}</ng-option>
+          </ng-select>
         </div>
         <div class="input">
           <button type="submit" class="btn btn-primary float-end" (click)="resetFilters()">

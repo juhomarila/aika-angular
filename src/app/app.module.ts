@@ -12,11 +12,11 @@ import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
-import { reducers } from './shared/store/reducers';
 import { ComponentsModule } from './components/components.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { NgxTranslateModule } from './ngx-translate/ngx-translate.module';
+import { genreReducers, magazineReducers } from './shared/store/reducers';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,7 +26,6 @@ import { NgxTranslateModule } from './ngx-translate/ngx-translate.module';
     NgbModule,
     ComponentsModule,
     CommonModule,
-    StoreModule.forRoot(reducers),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),
@@ -35,6 +34,9 @@ import { NgxTranslateModule } from './ngx-translate/ngx-translate.module';
     BrowserAnimationsModule,
     SharedModule,
     NgxTranslateModule,
+    StoreModule.forRoot({}),
+    StoreModule.forFeature('genres', genreReducers),
+    StoreModule.forFeature('magazines', magazineReducers),
   ],
   providers: [
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase },

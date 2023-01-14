@@ -1,19 +1,35 @@
-import { CartState, cartReducer } from './cart.reducer';
 import { ActionReducerMap } from '@ngrx/store';
 import { GenreState, genreReducer } from './genre.reducer';
 import * as genreActions from '../actions/genre.action';
+import * as magazineActions from '../actions/magazine.action';
+import { magazineReducer, MagazineState } from './magazine.reducer';
 
 export const rootReducer = {};
 
-export interface AppState {
+export interface GenreStateInterface {
   genres: GenreState;
 }
 
-export const reducers: ActionReducerMap<
-  AppState,
+export interface MagazineStateInterface {
+  magazines: MagazineState;
+}
+
+export const genreReducers: ActionReducerMap<
+  GenreStateInterface,
   | genreActions.AddGenreAction
   | genreActions.RemoveGenreAction
   | genreActions.AddOriginalGenresAction
+  | genreActions.AddGenreBackAction
 > = {
   genres: genreReducer,
+};
+
+export const magazineReducers: ActionReducerMap<
+  MagazineStateInterface,
+  | magazineActions.AddMagazineAction
+  | magazineActions.RemoveMagazineAction
+  | magazineActions.AddOriginalMagazinesAction
+  | magazineActions.AddMagazineBackAction
+> = {
+  magazines: magazineReducer,
 };

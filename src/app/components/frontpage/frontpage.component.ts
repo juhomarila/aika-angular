@@ -6,12 +6,13 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 import { StorageService } from 'src/app/shared/services/storage.service';
 import { UtilService } from 'src/app/shared/services/util.service';
 import { Magazine } from 'src/app/shared/interfaces/magazine';
-import { FirestoreService } from 'src/app/shared/services/firestore.service';
 import { Observable } from '@firebase/util';
 import { Store } from '@ngrx/store';
-import { ActivatedRoute } from '@angular/router';
-import { AppState } from 'src/app/shared/store/reducers';
-import { RemoveGenreAction } from 'src/app/shared/store/actions/genre.action';
+import {
+  AddGenreBackAction,
+  RemoveGenreAction,
+} from 'src/app/shared/store/actions/genre.action';
+import { RemoveMagazineAction } from 'src/app/shared/store/actions/magazine.action';
 
 interface RemovedGenre {
   [key: string]: number;
@@ -36,14 +37,15 @@ export class FrontpageComponent implements OnInit {
   filterByGenre: string[] = [];
   showFilters: boolean = false;
   filterMagazineName: string[] = [];
-  magazineList: Magazine[] = [];
+  magazineList: string[] = [];
+  originalMagazineArray: string[] = [];
 
   constructor(
     private authSvc: AuthService,
     private articleSvc: ArticlesvcService,
     private storageSvc: StorageService,
     private utilSvc: UtilService,
-    private store: Store<AppState>,
+    private store: Store<any>
   ) {}
 
   ngOnInit(): void {
@@ -52,8 +54,7 @@ export class FrontpageComponent implements OnInit {
     this.uid = this.authSvc.user.uid;
     this.getArticles();
     this.getCarouselImages();
-    this.getAllMagazines();
-    this.getGenreState();
+    this.getState();
     if (localStorage.getItem('filterMagazineName')) {
       this.filterMagazineName = JSON.parse(
         localStorage.getItem('filterMagazineName')!
@@ -75,7 +76,7 @@ export class FrontpageComponent implements OnInit {
       }
       this.showFilters = true;
       this.filterByGenre = JSON.parse(localStorage.getItem('filterGenre')!);
-      this.filterGenre();
+      //this.filterGenre();
     }
   }
 
@@ -83,20 +84,14 @@ export class FrontpageComponent implements OnInit {
     this.showFilters = !this.showFilters;
   }
 
-  filterGenre() {
-    // localStorage.setItem('filterGenre', JSON.stringify(this.filterByGenre));
-    // localStorage.setItem('magazines', JSON.stringify(this.magazineList));
-    // this.genreArray = this.genreArray.filter(
-    //   genre => !this.filterByGenre.includes(genre)
-    // );
-    // console.log(this.genreArray);
-    this.filterByGenre.map(genre => {
-      const index = this.genreArray.indexOf(genre);
-      this.store.dispatch(new RemoveGenreAction(index, genre));
-    });
+  filterGenre(event: string) {
+    const index = this.genreArray.indexOf(event);
+    this.store.dispatch(new RemoveGenreAction(index, event));
   }
 
-  filterMagazine() {
+  filterMagazine(event: string) {
+    const index = this.magazineList.indexOf(event);
+    this.store.dispatch(new RemoveMagazineAction(index, event));
     localStorage.setItem(
       'filterMagazineName',
       JSON.stringify(this.filterMagazineName)
@@ -129,18 +124,8 @@ export class FrontpageComponent implements OnInit {
   }
 
   backToGenre(event: any) {
-    const index = this.removedGenreArray.get(event.value);
-    console.log(index);
-    if (index) {
-      this.genreArray.splice(index, 0, event.value);
-      this.genreArray.slice();
-    }
-    // const returnIndex = this.originalGenreArray.indexOf(event.value);
-    // console.log(returnIndex);
-    // this.genreArray.splice(returnIndex, 0, event.value);
-    // console.log(this.filterByGenre);
-    localStorage.setItem('filterGenre', JSON.stringify(this.filterByGenre));
-    //this.filterGenre();
+    const addIndex = this.originalGenreArray.indexOf(event.value);
+    this.store.dispatch(new AddGenreBackAction(addIndex, event.value));
   }
 
   backToMagazine(event: any) {
@@ -152,7 +137,7 @@ export class FrontpageComponent implements OnInit {
         JSON.stringify(this.filterMagazineName)
       );
     }
-    this.filterMagazine();
+    //this.filterMagazine();
   }
 
   resetGenreFilters() {
@@ -174,11 +159,11 @@ export class FrontpageComponent implements OnInit {
     this.filterByGenre = [];
   }
 
-  resetArticleFilters() {
+  resetMagazineFilters() {
     if (localStorage.getItem('filterGenre')) {
       this.filterByGenre = JSON.parse(localStorage.getItem('filterGenre')!);
     }
-    this.filterGenre();
+    //this.filterGenre();
     this.genreArray = this.originalGenreArray;
     this.filteredArticleList = this.articleList;
     localStorage.removeItem('filterMagazineName');
@@ -190,6 +175,7 @@ export class FrontpageComponent implements OnInit {
 
   resetFilters() {
     this.genreArray = this.originalGenreArray;
+    console.log(this.genreArray);
     this.filteredArticleList = this.articleList;
     localStorage.removeItem('filterGenre');
     localStorage.removeItem('filterMagazineName');
@@ -207,12 +193,15 @@ export class FrontpageComponent implements OnInit {
     });
   }
 
-  getGenreState(): void {
+  getState(): void {
     this.store.subscribe(state => {
-      this.genreArray = state.genres.genres;
-      this.originalGenreArray = state.genres.genres;
-      this.filterByGenre = state.genres.removedGenres;
-      this.originalGenreArray = state.genres.originalGenres;
+      this.magazineList = state.magazines.magazines.magazines;
+      this.filterMagazineName = state.magazines.magazines.removedMagazines;
+      this.originalMagazineArray = state.magazines.magazines.originalMagazines;
+      this.genreArray = state.genres.genres.genres;
+      this.originalGenreArray = state.genres.genres.genres;
+      this.filterByGenre = state.genres.genres.removedGenres;
+      this.originalGenreArray = state.genres.genres.originalGenres;
     });
   }
 
@@ -236,11 +225,5 @@ export class FrontpageComponent implements OnInit {
       }
     });
     return this.sort(tempArray);
-  }
-
-  getAllMagazines(): void {
-    this.articleSvc.getMagazines().subscribe(magazines => {
-      this.magazineList = magazines;
-    });
   }
 }
