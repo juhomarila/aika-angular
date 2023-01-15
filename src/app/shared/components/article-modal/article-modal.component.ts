@@ -1,9 +1,10 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Article } from '../../interfaces/article';
 import { FavouriteService } from '../../services/favourite.service';
 import { LikeService } from '../../services/like.service';
+import { ShoppingCartService } from '../../services/shopping-cart.service';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -16,13 +17,16 @@ export class ArticleModalComponent implements OnInit {
   favourite: boolean = false;
   liked: boolean = false;
   likeChecked: boolean = false;
+  inCart: boolean = false;
+  shoppingCart: Article[] = [];
 
   constructor(
     private activeModal: NgbActiveModal,
     private favouriteSvc: FavouriteService,
     private likeSvc: LikeService,
     private userSvc: UserService,
-    private router: Router
+    private router: Router,
+    private shoppingCartSvc: ShoppingCartService
   ) {}
 
   ngOnInit(): void {
@@ -32,6 +36,10 @@ export class ArticleModalComponent implements OnInit {
     if (this.article.likes === undefined) {
       this.article.likes = 0;
     }
+    this.shoppingCartSvc.shoppingCart.subscribe(cart => {
+      this.shoppingCart = cart;
+    });
+    this.inCart = this.checkIfIsInCart();
   }
 
   onSelectMagazine(magazine: string) {
@@ -66,5 +74,29 @@ export class ArticleModalComponent implements OnInit {
     this.liked = true;
     this.likeSvc.likeArticle(this.article.key);
     this.article.likes += 1;
+  }
+
+  addToCart() {
+    this.inCart = true;
+    this.shoppingCartSvc.addToCart(this.article);
+    return true;
+  }
+
+  removeFromCart() {
+    this.inCart = false;
+    this.shoppingCartSvc.removeFromCart(this.article);
+  }
+
+  checkIfIsInCart() {
+    if (!this.shoppingCart.some(a => a.key === this.article.key)) {
+      return false;
+    }
+    return true;
+  }
+
+  preview(text: string): string {
+    let tmpArr = text.split(/\s+/g);
+    tmpArr.splice(50, tmpArr.length - 50);
+    return tmpArr.join(' ');
   }
 }

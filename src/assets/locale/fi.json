@@ -111,7 +111,13 @@
       "confirmRemoval": "Tilisi kaikki tiedot, ostot mukaanlukien poistetaan, etkä pysty palauttamaan tiliäsi. Vahvista poisto painamalla painiketta",
       "afterRemoval": "Tilisi poistettu, sinut kirjataan ulos automaattisesti",
       "confirmEmailChange": "Tarkista sähköpostisi, se päivitetään kun olet käynyt verifioimassa sähköpostiosoitteesi sähköpostiin lähtetystä linkistä.",
-      "autoLogout": "Sinut kirjataan automaattisesti ulos"
+      "autoLogout": "Sinut kirjataan automaattisesti ulos",
+      "confirmButton": "Vahvista tilin poisto",
+      "newEmail": "Anna uusi sähköpostiosoite",
+      "newName": "Anna uusi nimi",
+      "oldPassword": "Vanha salasana",
+      "newPassword": "Uusi salasana",
+      "retypeNewPassword": "Uusi salasana uudelleen"
     }
   },
   "preview": {

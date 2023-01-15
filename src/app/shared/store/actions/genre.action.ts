@@ -16,7 +16,11 @@ export class AddGenreAction implements Action {
 
 export class AddGenreBackAction implements Action {
   readonly type = GenreActionType.ADD_GENRE_BACK;
-  constructor(public addIndex: number, public payload: string) {}
+  constructor(
+    public addIndex: number,
+    public payload: string,
+    public payloadTranslated: string
+  ) {}
 }
 
 export class RemoveGenreAction implements Action {

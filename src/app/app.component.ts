@@ -8,11 +8,11 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Router, Scroll } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { delay, filter } from 'rxjs';
 import { FavouriteService } from './shared/services/favourite.service';
 import { LikeService } from './shared/services/like.service';
 import { LoadingService } from './shared/services/loading.service';
-import { ShoppingCartService } from './shared/services/shopping-cart.service';
 
 @Component({
   selector: 'app-root',
@@ -31,7 +31,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     viewportScroller: ViewportScroller,
     private favouriteSvc: FavouriteService,
     private likeSvc: LikeService,
-    private shoppingCartSvc: ShoppingCartService
+    private translateSvc: TranslateService
   ) {
     router.events
       .pipe(filter((e): e is Scroll => e instanceof Scroll))
@@ -49,8 +49,12 @@ export class AppComponent implements AfterViewInit, OnInit {
   ngOnInit(): void {
     // for some reason services needs to be opened here
     //  or they wont fetch values on first frontpage render
+    this.translateSvc.setDefaultLang('fi');
     this.favouriteSvc.checkIfFavourite('');
     this.likeSvc.checkIfLiked('');
+    if (localStorage.getItem('language')) {
+      this.translateSvc.use(localStorage.getItem('language')!);
+    }
   }
 
   ngAfterViewInit(): void {

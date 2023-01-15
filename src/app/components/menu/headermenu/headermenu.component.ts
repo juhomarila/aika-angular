@@ -41,9 +41,6 @@ export class HeadermenuComponent implements OnInit {
   username: string | undefined;
 
   ngOnInit(): void {
-    if (localStorage.getItem('language')) {
-      this.translateSvc.use(localStorage.getItem('language')!);
-    }
     this.isLogged = this.authSvc.isLoggedIn;
     if (this.isLogged) {
       this.username = this.authSvc.user.displayName;
@@ -93,6 +90,13 @@ export class HeadermenuComponent implements OnInit {
   }
 
   search(event: any) {
+    if (event.target.value.length === 0) {
+      this.router.navigate(['frontpage']);
+      this.searchInput.nativeElement.removeAttribute(
+        'style',
+        'width: 18em;   padding-left: 2em;   padding-right: 1em;   border: 1px solid var(--text);'
+      );
+    }
     if (event.target.value.length > 0) {
       this.searchInput.nativeElement.setAttribute(
         'style',

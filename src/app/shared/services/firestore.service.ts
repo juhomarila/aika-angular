@@ -27,13 +27,13 @@ import {
 })
 export class FirestoreService {
   articleList: Article[] = [];
+  magazineList: Magazine[] = [];
   article!: Article;
   carouselEntityList: CarouselEntity[] = [];
   loginCarouselEntityList: CarouselEntity[] = [];
   user: User[] = [];
   ownedArticlesList: Owned[] = [];
   magazine!: Magazine;
-  magazineList: Magazine[] = [];
   boughtArticles: Owned[] = [];
   favouritesList: Favourite[] = [];
   likedList: Like[] = [];

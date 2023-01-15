@@ -16,7 +16,6 @@ export function magazineReducer(
   state: MagazineState = initialState,
   action: magazineActions.MagazineActions
 ): MagazineState {
-  console.log(state);
   switch (action.type) {
     case magazineActions.MagazineActionType.ADD_MAGAZINE:
       return {
