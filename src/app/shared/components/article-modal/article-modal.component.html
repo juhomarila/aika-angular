@@ -10,140 +10,156 @@
       ></button>
     </div>
     <div class="modal-body">
-      <div class="row">
-        <div class="col-sm-5 offset-sm-2 col-md-8 offset-md-2" *ngIf="article">
-          <div class="col">
-            <div class="row">
-              <p>
-                <small style="font-style: italic">
-                  {{ 'common.magazine' | translate }}
-              </small>
-              </p>
-              <p class="padding-bottom">
-                <a (click)="onSelectMagazine(article.magazine.key)"
-                  ><small style="font-weight: bold">{{
-                    article.magazine.name
-                  }}</small></a
-                >
-              </p>
-              <p>
-                <small style="font-style: italic">
-                  {{ 'common.journalist' | translate }}
-              </small>
-              </p>
-              <p>
-                <a (click)="onSelectJournalist(article.journalist.key)"
-                  ><small style="font-weight: bold">{{
-                    article.journalist.name
-                  }}</small></a
-                >
-              </p>
-              <small class="text-muted"
-                >{{ article.date.day }}/{{ article.date.month }}/{{
-                  article.date.year
-                }}</small
-              >
-            </div>
+      <div class="col-sm-5 offset-sm-2 col-md-8 offset-md-2" *ngIf="article">
+        <div class="row">
+          <p>
+            <small style="font-style: italic">
+              {{ 'common.magazine' | translate }}
+            </small>
+          </p>
+          <p class="padding-bottom">
+            <a (click)="onSelectMagazine(article.magazine.key)"
+              ><small style="font-weight: bold">{{
+                article.magazine.name
+              }}</small></a
+            >
+          </p>
+          <p>
+            <small style="font-style: italic">
+              {{ 'common.journalist' | translate }}
+            </small>
+          </p>
+          <p>
+            <a (click)="onSelectJournalist(article.journalist.key)"
+              ><small style="font-weight: bold">{{
+                article.journalist.name
+              }}</small></a
+            >
+          </p>
+          <small class="text-muted"
+            >{{ article.date.day }}/{{ article.date.month }}/{{
+              article.date.year
+            }}</small
+          >
+        </div>
+        <div class="d-flex justify-content-between">
+          <div class="padding-bottom-top" *ngIf="owned">
+            <a href="#" class="bi bi-facebook"></a>
+            <a href="#" class="bi bi-twitter modal-icon-padding"></a>
+            <a href="#" class="bi bi-whatsapp modal-icon-padding"></a>
           </div>
-          <div class="d-flex justify-content-between">
-            <div class="padding-bottom-top" *ngIf="owned">
-              <a href="#" class="bi bi-facebook"></a>
-              <a href="#" class="bi bi-twitter modal-icon-padding"></a>
-              <a href="#" class="bi bi-whatsapp modal-icon-padding"></a>
-            </div>
-            <div class="padding-bottom-top float-right">
-              <small *ngIf="this.article.likes === 1; else show"
-                >{{ this.article.likes }} {{ 'common.like' | translate }}</small
-              >
-              <ng-template #show
-                ><small>{{ this.article.likes }} {{ 'common.likes' | translate }}</small></ng-template
-              >
-            </div>
+          <div class="padding-bottom-top float-right">
+            <small *ngIf="this.article.likes === 1; else show"
+              >{{ this.article.likes }} {{ 'common.like' | translate }}</small
+            >
+            <ng-template #show
+              ><small
+                >{{ this.article.likes }}
+                {{ 'common.likes' | translate }}</small
+              ></ng-template
+            >
           </div>
-          <div class="col">
-            <img
-              [src]="article.fileUrl"
-              class="card-img-top rounded-3 mx-auto d-block"
-              alt="..."
-            />
-            <div class="row">
-              <div class="d-flex justify-content-between">
-                <div class="minus-padding">
-                  <div *ngIf="!favourite">
-                    <a
-                      class="bi bi-bookmark rounded-circle align-self-center"
-                      (click)="favor()"
-                      title="{{ 'preview.addToFavs' | translate }}"
-                    ></a>
-                  </div>
-                  <div *ngIf="favourite">
-                    <a
-                      class="bi bi-bookmark-check-fill rounded-circle align-self-center"
-                      (click)="unfavor()"
-                      title="{{ 'preview.removeFromFavs' | translate }}"
-                    ></a>
-                  </div>
+        </div>
+        <div class="col">
+          <img
+            [src]="article.fileUrl"
+            class="card-img-top rounded-3 mx-auto d-block"
+            alt="..."
+          />
+          <div class="row">
+            <div class="d-flex justify-content-between">
+              <div class="minus-padding">
+                <div *ngIf="!favourite">
+                  <a
+                    class="bi bi-bookmark rounded-circle align-self-center"
+                    (click)="favor()"
+                    title="{{ 'preview.addToFavs' | translate }}"
+                  ></a>
                 </div>
-                <div class="minus-padding-right" *ngIf="owned">
-                  <div *ngIf="!liked">
-                    <a
-                      class="bi bi-hand-thumbs-up rounded-circle align-self-center"
-                      (click)="like()"
-                      title="Tykkää"
-                    ></a>
-                  </div>
-                  <div *ngIf="liked">
-                    <i
-                      class="bi bi-hand-thumbs-up-fill rounded-circle-bought align-self-center"
-                      title=""
-                    ></i>
-                  </div>
+                <div *ngIf="favourite">
+                  <a
+                    class="bi bi-bookmark-check-fill rounded-circle align-self-center"
+                    (click)="unfavor()"
+                    title="{{ 'preview.removeFromFavs' | translate }}"
+                  ></a>
                 </div>
               </div>
-            </div>
-          </div>
-          <div class="card-title h4 text-center padding-bottom-top">
-            <h4>{{ article.name }}</h4>
-          </div>
-          <div *ngIf="owned">
-            <p class="artikkeli padding-bottom">
-              {{ article.text }}
-            </p>
-            <img
-              [src]="article.fileUrl"
-              class="card-img-top rounded-3 mx-auto d-block padding-bottom"
-              alt="..."
-            />
-            <p class="artikkeli padding-bottom">
-              {{ article.text }}
-            </p>
-            <hr class="my-2" />
-            <img
-              [src]="article.fileUrl"
-              width="200"
-              class="rounded-3 mx-auto d-block"
-              alt="..."
-            />
-            <hr class="my-2" />
-            <p class="artikkeli padding-bottom">
-              {{ article.text }}
-            </p>
-            <div class="text-center">
-              <div *ngIf="!liked">
-                <a
-                  class="bi bi-hand-thumbs-up rounded-circle"
-                  (click)="like()"
-                  title="Tykkää"
-                ></a>
-              </div>
-              <div *ngIf="liked">
-                <i
-                  class="bi bi-hand-thumbs-up-fill rounded-circle-bought"
-                  title=""
-                ></i>
+              <div class="minus-padding-right" *ngIf="owned">
+                <div *ngIf="!liked">
+                  <a
+                    class="bi bi-hand-thumbs-up rounded-circle align-self-center"
+                    (click)="like()"
+                    title="Tykkää"
+                  ></a>
+                </div>
+                <div *ngIf="liked">
+                  <i
+                    class="bi bi-hand-thumbs-up-fill rounded-circle-bought align-self-center"
+                    title=""
+                  ></i>
+                </div>
               </div>
             </div>
           </div>
+        </div>
+        <div class="text-center" *ngIf="!owned" style="padding-top: 5vh;">
+          <a
+            title="{{ 'preview.addToCart' | translate }}"
+            *ngIf="!inCart"
+            class="bi bi-bag-plus rounded-circle"
+            (click)="addToCart()"
+          ></a>
+          <a
+            title="{{ 'preview.removeFromCart' | translate }}"
+            *ngIf="inCart"
+            class="bi bi-bag-dash rounded-circle"
+            (click)="removeFromCart()"
+          ></a>
+        </div>
+        <div class="card-title h4 text-center padding-bottom-top">
+          <h4>{{ article.name }}</h4>
+        </div>
+        <div *ngIf="owned">
+          <p class="artikkeli padding-bottom">
+            {{ article.text }}
+          </p>
+          <img
+            [src]="article.fileUrl"
+            class="card-img-top rounded-3 mx-auto d-block padding-bottom"
+            alt="..."
+          />
+          <p class="artikkeli padding-bottom">
+            {{ article.text }}
+          </p>
+          <hr class="my-2" />
+          <img
+            [src]="article.fileUrl"
+            width="200"
+            class="rounded-3 mx-auto d-block"
+            alt="..."
+          />
+          <hr class="my-2" />
+          <p class="artikkeli padding-bottom">
+            {{ article.text }}
+          </p>
+          <div class="text-center">
+            <div *ngIf="!liked">
+              <a
+                class="bi bi-hand-thumbs-up rounded-circle"
+                (click)="like()"
+                title="Tykkää"
+              ></a>
+            </div>
+            <div *ngIf="liked">
+              <i
+                class="bi bi-hand-thumbs-up-fill rounded-circle-bought"
+                title=""
+              ></i>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!owned">
+          <p class="artikkeli padding-bottom">{{ preview(article.text) }}...</p>
         </div>
       </div>
     </div>

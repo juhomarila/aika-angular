@@ -139,6 +139,7 @@ export class AuthService {
     localStorage.removeItem('cart');
     localStorage.removeItem('journalist');
     localStorage.removeItem('magazine');
+    localStorage.removeItem('state');
     this.router.navigate(['login']);
     window.location.reload();
   }
@@ -149,6 +150,7 @@ export class AuthService {
     localStorage.removeItem('cart');
     localStorage.removeItem('journalist');
     localStorage.removeItem('magazine');
+    localStorage.removeItem('state');
     this.router.navigate(['login']);
   }
 

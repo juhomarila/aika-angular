@@ -34,7 +34,7 @@ export class PreviewComponent implements OnInit {
   bought: boolean = false;
   arrayKey: number = 0;
   language: string = '';
-  shoppingCart: Article[] = [];
+  shoppingCart: string[] = [];
 
   constructor(
     private shoppingCartSvc: ShoppingCartService,
@@ -86,17 +86,17 @@ export class PreviewComponent implements OnInit {
 
   addToCart() {
     this.inCart = true;
-    this.shoppingCartSvc.addToCart(this.article);
+    this.shoppingCartSvc.addToCart(this.article.key);
     return true;
   }
 
   removeFromCart() {
     this.inCart = false;
-    this.shoppingCartSvc.removeFromCart(this.article);
+    this.shoppingCartSvc.removeFromCart(this.article.key);
   }
 
   checkIfIsInCart() {
-    if (!this.shoppingCart.some(a => a.key === this.article.key)) {
+    if (!this.shoppingCart.some(a => a === this.article.key)) {
       return false;
     }
     return true;

@@ -3,7 +3,6 @@ import { GenreState, genreReducer } from './genre.reducer';
 import * as genreActions from '../actions/genre.action';
 import * as magazineActions from '../actions/magazine.action';
 import { magazineReducer, MagazineState } from './magazine.reducer';
-import { MetaReducer } from "@ngrx/store";;
 
 export const rootReducer = {};
 
@@ -22,20 +21,14 @@ export interface AppState {
 
 export const genreReducers: ActionReducerMap<
   GenreStateInterface,
-  | genreActions.AddGenreAction
-  | genreActions.RemoveGenreAction
-  | genreActions.AddOriginalGenresAction
-  | genreActions.AddGenreBackAction
+  genreActions.GenreActions
 > = {
   genres: genreReducer,
 };
 
 export const magazineReducers: ActionReducerMap<
   MagazineStateInterface,
-  | magazineActions.AddMagazineAction
-  | magazineActions.RemoveMagazineAction
-  | magazineActions.AddOriginalMagazinesAction
-  | magazineActions.AddMagazineBackAction
+  magazineActions.MagazineActions
 > = {
   magazines: magazineReducer,
 };

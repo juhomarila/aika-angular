@@ -16,7 +16,6 @@ export function genreReducer(
   state: GenreState = initialState,
   action: genreActions.GenreActions
 ): GenreState {
-  console.log(state);
   switch (action.type) {
     case genreActions.GenreActionType.ADD_GENRE:
       return {
@@ -33,7 +32,7 @@ export function genreReducer(
         ],
         removedGenres: [
           ...state.removedGenres.filter(genre => {
-            return genre != action.payload;
+            return genre != action.payloadTranslated;
           }),
         ],
       };

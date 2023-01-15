@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Article } from '../../interfaces/article';
+import { ArticlesvcService } from '../../services/articlesvc.service';
 import { LoadingService } from '../../services/loading.service';
 import { ShoppingCartService } from '../../services/shopping-cart.service';
 
@@ -9,27 +10,33 @@ import { ShoppingCartService } from '../../services/shopping-cart.service';
   templateUrl: './shopping-cart-modal.component.html',
 })
 export class ShoppingCartModalComponent implements OnInit {
-  shoppingCartList: Article[] = [];
+  shoppingCartList: string[] = [];
+  shoppingCartArticles: Article[] = [];
   successfulPayment: boolean = true;
   clicked: boolean = false;
   constructor(
     private shoppingCartSvc: ShoppingCartService,
     private activeModal: NgbActiveModal,
-    private loading: LoadingService
+    private loading: LoadingService,
+    private articleSvc: ArticlesvcService
   ) {
     this.shoppingCartSvc.shoppingCart.subscribe(cart => {
       this.shoppingCartList = cart;
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.shoppingCartList.map(id => {
+      this.shoppingCartArticles.push(this.articleSvc.getSingleArticle(id));
+    });
+  }
 
   close() {
     this.activeModal.dismiss();
   }
 
-  removeFromCart(article: Article) {
-    this.shoppingCartSvc.removeFromCart(article);
+  removeFromCart(id: string) {
+    this.shoppingCartSvc.removeFromCart(id);
   }
 
   emptyCart() {

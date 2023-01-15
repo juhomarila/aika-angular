@@ -111,7 +111,13 @@
       "confirmRemoval": "All your account information, including bought items, will be removed and you won't be able to restore your account. Confirm deletion by pressing button",
       "afterRemoval": "Your account has been removed, you'll be automatically logged out",
       "confirmEmailChange": "Check your email. Your email address will be updated after you have verified it from link sent to your newly given email.",
-      "autoLogout": "You will be automatically logged out"
+      "autoLogout": "You will be automatically logged out",
+      "confirmButton": "Confirm account removal",
+      "newEmail": "New email address",
+      "newName": "New name",
+      "oldPassword": "Old password",
+      "newPassword": "New password",
+      "retypeNewPassword": "Retype new password"
     }
   },
   "preview": {

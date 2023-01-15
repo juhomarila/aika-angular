@@ -87,13 +87,15 @@ export class SettingsComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.title = 'Vaihda sähköpostiosoite';
     modalRef.componentInstance.email = true;
     modalRef.componentInstance.emailValue = this.user.email;
-    modalRef.result.then(data => {
-      if (data) {
-        localStorage.clear();
-        this.authSvc.LogOut();
-        window.location.reload();
-      }
-    });
+    modalRef.result
+      .then(data => {
+        if (data) {
+          localStorage.clear();
+          this.authSvc.LogOut();
+          window.location.reload();
+        }
+      })
+      .catch(e => e);
   }
 
   openPasswordChangeModal() {
@@ -107,12 +109,14 @@ export class SettingsComponent implements OnInit, OnDestroy {
     const modalRef = this.modalSvc.open(SettingModalComponent, { size: 'lg' });
     modalRef.componentInstance.title = 'Vaihda nimi';
     modalRef.componentInstance.name = true;
-    modalRef.result.then(data => {
-      if (data) {
-        window.location.reload();
-        localStorage.setItem('user', JSON.stringify(this.authSvc.userData));
-      }
-    });
+    modalRef.result
+      .then(data => {
+        if (data) {
+          window.location.reload();
+          localStorage.setItem('user', JSON.stringify(this.authSvc.userData));
+        }
+      })
+      .catch(e => e);
   }
 
   openRemoveAccountConfirmation() {
@@ -120,12 +124,14 @@ export class SettingsComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.title = 'Vahvista tilin poisto';
     modalRef.componentInstance.accountRemoval = true;
     modalRef.componentInstance.emailValue = this.user.email;
-    modalRef.result.then(data => {
-      if (data) {
-        localStorage.clear();
-        this.authSvc.LogOut();
-        window.location.reload();
-      }
-    });
+    modalRef.result
+      .then(data => {
+        if (data) {
+          localStorage.clear();
+          this.authSvc.LogOut();
+          window.location.reload();
+        }
+      })
+      .catch(e => e);
   }
 }
