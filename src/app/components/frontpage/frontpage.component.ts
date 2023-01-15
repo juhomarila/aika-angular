@@ -1,18 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Article } from 'src/app/shared/interfaces/article';
 import { CarouselEntity } from 'src/app/shared/interfaces/carouselentity';
 import { ArticlesvcService } from 'src/app/shared/services/articlesvc.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { StorageService } from 'src/app/shared/services/storage.service';
 import { UtilService } from 'src/app/shared/services/util.service';
-import { Magazine } from 'src/app/shared/interfaces/magazine';
-import { Observable } from '@firebase/util';
 import { Store } from '@ngrx/store';
 import {
   AddGenreBackAction,
   EmptyFilterGenreAction,
   RemoveGenreAction,
-  RemoveOnlyGenreAction,
 } from 'src/app/shared/store/actions/genre.action';
 import {
   AddMagazineBackAction,
@@ -53,9 +50,11 @@ export class FrontpageComponent implements OnInit {
     this.uid = this.authSvc.user.uid;
     this.getArticles();
     this.getCarouselImages();
-    this.getState();
     this.store.subscribe(state => {
       this.state$ = state;
+      this.filterMagazineName =
+        this.state$.magazines.magazines.removedMagazines;
+      this.filterByGenre = this.state$.genres.genres.removedGenres;
     });
   }
 
@@ -70,13 +69,13 @@ export class FrontpageComponent implements OnInit {
   filterGenre(event: string) {
     const index = this.state$.genres.genres.genres.indexOf(event);
     this.store.dispatch(new RemoveGenreAction(index, event));
+    localStorage.setItem('state', JSON.stringify(this.state$));
   }
 
   filterMagazine(event: string) {
-    if (this.state$.magazines.magazines.removedMagazines) {
-    }
     const index = this.state$.magazines.magazines.magazines.indexOf(event);
     this.store.dispatch(new RemoveMagazineAction(index, event));
+    localStorage.setItem('state', JSON.stringify(this.state$));
     let tmpArr: string[] = [];
     let tempArticleList: Article[] = [];
     this.articleList.map(article => {
@@ -100,6 +99,7 @@ export class FrontpageComponent implements OnInit {
       event.value
     );
     this.store.dispatch(new AddGenreBackAction(addIndex, event.value));
+    localStorage.setItem('state', JSON.stringify(this.state$));
   }
 
   backToMagazine(event: any) {
@@ -117,34 +117,31 @@ export class FrontpageComponent implements OnInit {
       });
     });
     this.filteredArticleList = tempArticleList;
+    localStorage.setItem('state', JSON.stringify(this.state$));
   }
 
   resetGenreFilters() {
     this.store.dispatch(new EmptyFilterGenreAction());
+    localStorage.setItem('state', JSON.stringify(this.state$));
   }
 
   resetMagazineFilters() {
     this.filteredArticleList = this.articleList;
     this.store.dispatch(new EmptyMagazineFilterAction());
+    localStorage.setItem('state', JSON.stringify(this.state$));
   }
 
   resetFilters() {
     this.filteredArticleList = this.articleList;
     this.store.dispatch(new EmptyFilterGenreAction());
     this.store.dispatch(new EmptyMagazineFilterAction());
+    localStorage.removeItem('state');
   }
 
   getArticles(): void {
     this.articleSvc.getArticles().subscribe(articles => {
       this.articleList = articles;
       this.filteredArticleList = this.articleList;
-    });
-  }
-
-  getState(): void {
-    this.store.subscribe(state => {
-      this.filterMagazineName = state.magazines.magazines.removedMagazines;
-      this.filterByGenre = state.genres.genres.removedGenres;
     });
   }
 

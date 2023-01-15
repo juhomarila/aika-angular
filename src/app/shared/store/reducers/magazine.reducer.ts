@@ -16,6 +16,7 @@ export function magazineReducer(
   state: MagazineState = initialState,
   action: magazineActions.MagazineActions
 ): MagazineState {
+  console.log(state);
   switch (action.type) {
     case magazineActions.MagazineActionType.ADD_MAGAZINE:
       return {
@@ -57,9 +58,11 @@ export function magazineReducer(
         magazines: [...state.originalMagazines],
       };
     default: {
-      if (localStorage.getItem('magazineState')) {
-        return JSON.parse(localStorage.getItem('magazineState')!);
-      } else return state;
+      if (localStorage.getItem('state')) {
+        return JSON.parse(localStorage.getItem('state')!).magazines.magazines;
+      } else {
+        return state;
+      }
     }
   }
 }

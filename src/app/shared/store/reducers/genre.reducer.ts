@@ -16,6 +16,7 @@ export function genreReducer(
   state: GenreState = initialState,
   action: genreActions.GenreActions
 ): GenreState {
+  console.log(state);
   switch (action.type) {
     case genreActions.GenreActionType.ADD_GENRE:
       return {
@@ -65,7 +66,11 @@ export function genreReducer(
         ],
       };
     default: {
-      return state;
+      if (localStorage.getItem('state')) {
+        return JSON.parse(localStorage.getItem('state')!).genres.genres;
+      } else {
+        return state;
+      }
     }
   }
 }
