@@ -62,7 +62,8 @@
     "showFilters": "Näytä filtterit",
     "removeGenre": "Poista genre",
     "addMagazine": "Lisää lehti",
-    "reset": "Nollaa"
+    "reset": "Nollaa",
+    "genre": "Aihealue"
   },
   "Urheilu": "Urheilu",
   "Kauneus": "Kauneus",

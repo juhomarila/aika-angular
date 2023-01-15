@@ -11,13 +11,22 @@ import { increment } from '@angular/fire/firestore';
 import { Owned } from '../interfaces/owned';
 import { Favourite } from '../interfaces/favourite';
 import { Like } from '../interfaces/like';
+import { Store } from '@ngrx/store';
+import { GenreStateInterface } from '../store/reducers';
+import {
+  AddGenreAction,
+  AddOriginalGenresAction,
+} from '../store/actions/genre.action';
+import {
+  AddMagazineAction,
+  AddOriginalMagazinesAction,
+} from '../store/actions/magazine.action';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FirestoreService {
   articleList: Article[] = [];
-  genreArray: string[] = [];
   article!: Article;
   carouselEntityList: CarouselEntity[] = [];
   loginCarouselEntityList: CarouselEntity[] = [];
@@ -30,7 +39,10 @@ export class FirestoreService {
   likedList: Like[] = [];
   likes: number = 0;
 
-  constructor(public afs: AngularFirestore) {}
+  constructor(
+    public afs: AngularFirestore,
+    private store: Store<GenreStateInterface>
+  ) {}
 
   async getAllArticles() {
     const snapShot = this.afs.collection('articles').get();
@@ -44,15 +56,17 @@ export class FirestoreService {
 
   async getGenres() {
     const snapShot = this.afs.collection('articles').get();
+    let tmpArr: string[] = [];
     snapShot.subscribe(articles =>
       articles.forEach(article => {
         let singleArticle = article.data() as Article;
-        if (!this.genreArray.includes(singleArticle.genre)) {
-          this.genreArray.push(singleArticle.genre);
+        if (!tmpArr.includes(singleArticle.genre)) {
+          tmpArr.push(singleArticle.genre);
+          this.store.dispatch(new AddGenreAction(singleArticle.genre));
+          this.store.dispatch(new AddOriginalGenresAction(singleArticle.genre));
         }
       })
     );
-    return this.genreArray;
   }
 
   async getAllLoginCarouselEntities() {
@@ -132,9 +146,12 @@ export class FirestoreService {
   async getAllMagazines() {
     const snapShot = this.afs.collection('magazines').get();
     snapShot.subscribe(magazines =>
-      magazines.forEach(magazine =>
-        this.magazineList.push(magazine.data() as Magazine)
-      )
+      magazines.forEach(magazine => {
+        let mag = magazine.data() as Magazine;
+        this.magazineList.push(mag);
+        this.store.dispatch(new AddMagazineAction(mag.name));
+        this.store.dispatch(new AddOriginalMagazinesAction(mag.name));
+      })
     );
     return this.magazineList;
   }

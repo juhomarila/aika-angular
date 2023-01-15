@@ -6,17 +6,27 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 import { StorageService } from 'src/app/shared/services/storage.service';
 import { UtilService } from 'src/app/shared/services/util.service';
 import { Magazine } from 'src/app/shared/interfaces/magazine';
-import { FirestoreService } from 'src/app/shared/services/firestore.service';
-
-interface RemovedGenre {
-  [key: string]: number;
-}
+import { Observable } from '@firebase/util';
+import { Store } from '@ngrx/store';
+import {
+  AddGenreBackAction,
+  EmptyFilterGenreAction,
+  RemoveGenreAction,
+  RemoveOnlyGenreAction,
+} from 'src/app/shared/store/actions/genre.action';
+import {
+  AddMagazineBackAction,
+  EmptyMagazineFilterAction,
+  RemoveMagazineAction,
+} from 'src/app/shared/store/actions/magazine.action';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-frontpage',
   templateUrl: './frontpage.component.html',
 })
 export class FrontpageComponent implements OnInit {
+  state$: any;
   articleList: Article[] = [];
   filteredArticleList: Article[] = [];
   carouselEntityList: CarouselEntity[] = [];
@@ -24,20 +34,17 @@ export class FrontpageComponent implements OnInit {
   isLogged: boolean = false;
   username: string = '';
   uid: string = '';
-  genreArray: string[] = [];
-  originalGenreArray: string[] = [];
-  removedGenreArray: Map<string, number> = new Map<string, number>();
   filterByGenre: string[] = [];
   showFilters: boolean = false;
   filterMagazineName: string[] = [];
-  magazineList: Magazine[] = [];
 
   constructor(
     private authSvc: AuthService,
     private articleSvc: ArticlesvcService,
     private storageSvc: StorageService,
     private utilSvc: UtilService,
-    private firestoreSvc: FirestoreService
+    private store: Store<any>,
+    private translate: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -46,150 +53,85 @@ export class FrontpageComponent implements OnInit {
     this.uid = this.authSvc.user.uid;
     this.getArticles();
     this.getCarouselImages();
-    this.getAllMagazines();
-    this.getGenres();
-    if (localStorage.getItem('filterMagazineName')) {
-      this.filterMagazineName = JSON.parse(
-        localStorage.getItem('filterMagazineName')!
-      );
-      this.genreArray = JSON.parse(
-        localStorage.getItem('filteredArticleListGenres')!
-      );
-      if (localStorage.getItem('magazines')) {
-        this.magazineList = JSON.parse(localStorage.getItem('magazines')!);
-        this.filteredArticleList = JSON.parse(
-          localStorage.getItem('filteredArticleList')!
-        );
-      }
-      this.showFilters = true;
-    }
-    if (localStorage.getItem('filterGenre')) {
-      if (localStorage.getItem('magazines')) {
-        this.magazineList = JSON.parse(localStorage.getItem('magazines')!);
-      }
-      this.showFilters = true;
-      this.filterByGenre = JSON.parse(localStorage.getItem('filterGenre')!);
-      this.filterGenre();
-    }
+    this.getState();
+    this.store.subscribe(state => {
+      this.state$ = state;
+    });
+  }
+
+  translator(event: string) {
+    this.translate.instant(event);
   }
 
   showHideFilters() {
     this.showFilters = !this.showFilters;
   }
 
-  filterGenre() {
-    localStorage.setItem('filterGenre', JSON.stringify(this.filterByGenre));
-    localStorage.setItem('magazines', JSON.stringify(this.magazineList));
-    this.filterByGenre.map(genre => {
-      const index = this.genreArray.indexOf(genre);
-      if (index > -1) {
-        this.genreArray.splice(index, 1);
-        this.removedGenreArray.set(genre, index);
-      }
-    });
+  filterGenre(event: string) {
+    const index = this.state$.genres.genres.genres.indexOf(event);
+    this.store.dispatch(new RemoveGenreAction(index, event));
   }
 
-  filterMagazine() {
-    localStorage.setItem(
-      'filterMagazineName',
-      JSON.stringify(this.filterMagazineName)
-    );
-    localStorage.setItem('magazines', JSON.stringify(this.magazineList));
-    this.genreArray = [];
+  filterMagazine(event: string) {
+    if (this.state$.magazines.magazines.removedMagazines) {
+    }
+    const index = this.state$.magazines.magazines.magazines.indexOf(event);
+    this.store.dispatch(new RemoveMagazineAction(index, event));
+    let tmpArr: string[] = [];
     let tempArticleList: Article[] = [];
     this.articleList.map(article => {
       this.filterMagazineName.map(magazine => {
         if (magazine === article.magazine?.name) {
           tempArticleList.push(article);
           if (
-            !this.genreArray.includes(article.genre) &&
-            !this.filterByGenre.includes(article.genre)
+            !this.filterByGenre.includes(article.genre) &&
+            !tmpArr.includes(article.genre)
           ) {
-            this.genreArray.push(article.genre);
+            tmpArr.push(article.genre);
           }
         }
       });
     });
     this.filteredArticleList = tempArticleList;
-    localStorage.setItem(
-      'filteredArticleList',
-      JSON.stringify(this.filteredArticleList)
-    );
-    localStorage.setItem(
-      'filteredArticleListGenres',
-      JSON.stringify(this.genreArray)
-    );
   }
 
   backToGenre(event: any) {
-    const index = this.removedGenreArray.get(event.value);
-    console.log(index);
-    if (index) {
-      this.genreArray.splice(index, 0, event.value);
-    }
-    // const returnIndex = this.originalGenreArray.indexOf(event.value);
-    // console.log(returnIndex);
-    // this.genreArray.splice(returnIndex, 0, event.value);
-    // console.log(this.filterByGenre);
-    localStorage.setItem('filterGenre', JSON.stringify(this.filterByGenre));
-    //this.filterMagazine();
+    const addIndex = this.state$.genres.genres.originalGenres.indexOf(
+      event.value
+    );
+    this.store.dispatch(new AddGenreBackAction(addIndex, event.value));
   }
 
   backToMagazine(event: any) {
-    const index = this.filterMagazineName.indexOf(event.value);
-    if (index > -1) {
-      this.filterMagazineName.splice(index, 1);
-      localStorage.setItem(
-        'filterMagazineName',
-        JSON.stringify(this.filterMagazineName)
-      );
-    }
-    this.filterMagazine();
+    const addIndex = this.state$.magazines.magazines.originalMagazines.indexOf(
+      event.value
+    );
+    this.store.dispatch(new AddMagazineBackAction(addIndex, event.value));
+    let tempArticleList: Article[] = [];
+    this.state$.magazines.magazines.removedMagazines.map((magazine: string) => {
+      console.log(magazine);
+      this.articleList.map(article => {
+        if (article.magazine.name === magazine) {
+          tempArticleList.push(article);
+        }
+      });
+    });
+    this.filteredArticleList = tempArticleList;
   }
 
   resetGenreFilters() {
-    if (localStorage.getItem('filteredArticleListGenres')) {
-      this.genreArray = JSON.parse(
-        localStorage.getItem('filteredArticleListGenres')!
-      );
-    } else {
-      this.genreArray = this.originalGenreArray;
-    }
-    if (localStorage.getItem('filteredArticleList')) {
-      this.filteredArticleList = JSON.parse(
-        localStorage.getItem('filteredArticleList')!
-      );
-    } else {
-      this.filteredArticleList = this.articleList;
-    }
-    localStorage.removeItem('filterGenre');
-    this.filterByGenre = [];
+    this.store.dispatch(new EmptyFilterGenreAction());
   }
 
-  resetArticleFilters() {
-    if (localStorage.getItem('filterGenre')) {
-      this.filterByGenre = JSON.parse(localStorage.getItem('filterGenre')!);
-    }
-    this.filterGenre();
-    this.genreArray = this.originalGenreArray;
+  resetMagazineFilters() {
     this.filteredArticleList = this.articleList;
-    localStorage.removeItem('filterMagazineName');
-    localStorage.removeItem('magazines');
-    localStorage.removeItem('filteredArticleList');
-    localStorage.removeItem('filteredArticleListGenres');
-    this.filterMagazineName = [];
+    this.store.dispatch(new EmptyMagazineFilterAction());
   }
 
   resetFilters() {
-    this.genreArray = this.originalGenreArray;
     this.filteredArticleList = this.articleList;
-    localStorage.removeItem('filterGenre');
-    localStorage.removeItem('filterMagazineName');
-    localStorage.removeItem('magazines');
-    localStorage.removeItem('filteredArticleList');
-    localStorage.removeItem('filteredArticleListGenres');
-    this.filterByGenre = [];
-    this.filterMagazineName = [];
+    this.store.dispatch(new EmptyFilterGenreAction());
+    this.store.dispatch(new EmptyMagazineFilterAction());
   }
 
   getArticles(): void {
@@ -199,10 +141,10 @@ export class FrontpageComponent implements OnInit {
     });
   }
 
-  getGenres(): void {
-    this.articleSvc.getGenres().subscribe(genres => {
-      this.genreArray = genres;
-      this.originalGenreArray = genres;
+  getState(): void {
+    this.store.subscribe(state => {
+      this.filterMagazineName = state.magazines.magazines.removedMagazines;
+      this.filterByGenre = state.genres.genres.removedGenres;
     });
   }
 
@@ -226,11 +168,5 @@ export class FrontpageComponent implements OnInit {
       }
     });
     return this.sort(tempArray);
-  }
-
-  getAllMagazines(): void {
-    this.articleSvc.getMagazines().subscribe(magazines => {
-      this.magazineList = magazines;
-    });
   }
 }

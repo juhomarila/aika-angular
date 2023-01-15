@@ -12,6 +12,10 @@
   font-family: 'Raleway', 'arial', 'lato';
 }
 
+.hover-choice:hover {
+  background-color: #121e36;
+}
+
 .center-header {
   width: 100%;
   text-align: center;

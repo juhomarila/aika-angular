@@ -62,7 +62,8 @@
     "showFilters": "Show filters",
     "removeGenre": "Remove genre",
     "addMagazine": "Add magazine",
-    "reset": "Reset"
+    "reset": "Reset",
+    "genre": "Genre"
   },
   "Urheilu": "Sports",
   "Kauneus": "Beauty",

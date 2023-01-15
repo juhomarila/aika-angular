@@ -13,8 +13,6 @@ import {
   AddCartAction,
   RemoveCartAction,
 } from 'src/app/shared/store/actions/cart.action';
-import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/shared/store/reducers';
 import { Router } from '@angular/router';
 import { FavouriteService } from '../../services/favourite.service';
 import { UserService } from '../../services/user.service';
@@ -41,7 +39,6 @@ export class PreviewComponent implements OnInit {
   constructor(
     private shoppingCartSvc: ShoppingCartService,
     private ref: ChangeDetectorRef,
-    private store: Store<AppState>,
     public router: Router,
     private userSvc: UserService,
     private favouriteSvc: FavouriteService
@@ -90,13 +87,11 @@ export class PreviewComponent implements OnInit {
   addToCart() {
     this.inCart = true;
     this.shoppingCartSvc.addToCart(this.article);
-    this.store.dispatch(new AddCartAction(this.article));
     return true;
   }
 
   removeFromCart() {
     this.inCart = false;
-    this.store.dispatch(new RemoveCartAction(this.article));
     this.shoppingCartSvc.removeFromCart(this.article);
   }
 
