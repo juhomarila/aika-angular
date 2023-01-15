@@ -10,20 +10,23 @@ import { Observable } from '@firebase/util';
 import { Store } from '@ngrx/store';
 import {
   AddGenreBackAction,
+  EmptyFilterGenreAction,
   RemoveGenreAction,
+  RemoveOnlyGenreAction,
 } from 'src/app/shared/store/actions/genre.action';
-import { RemoveMagazineAction } from 'src/app/shared/store/actions/magazine.action';
-
-interface RemovedGenre {
-  [key: string]: number;
-}
+import {
+  AddMagazineBackAction,
+  EmptyMagazineFilterAction,
+  RemoveMagazineAction,
+} from 'src/app/shared/store/actions/magazine.action';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-frontpage',
   templateUrl: './frontpage.component.html',
 })
 export class FrontpageComponent implements OnInit {
-  genres!: Observable<string[]>;
+  state$: any;
   articleList: Article[] = [];
   filteredArticleList: Article[] = [];
   carouselEntityList: CarouselEntity[] = [];
@@ -31,21 +34,17 @@ export class FrontpageComponent implements OnInit {
   isLogged: boolean = false;
   username: string = '';
   uid: string = '';
-  genreArray: string[] = [];
-  originalGenreArray: string[] = [];
-  removedGenreArray: Map<string, number> = new Map<string, number>();
   filterByGenre: string[] = [];
   showFilters: boolean = false;
   filterMagazineName: string[] = [];
-  magazineList: string[] = [];
-  originalMagazineArray: string[] = [];
 
   constructor(
     private authSvc: AuthService,
     private articleSvc: ArticlesvcService,
     private storageSvc: StorageService,
     private utilSvc: UtilService,
-    private store: Store<any>
+    private store: Store<any>,
+    private translate: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -55,29 +54,13 @@ export class FrontpageComponent implements OnInit {
     this.getArticles();
     this.getCarouselImages();
     this.getState();
-    if (localStorage.getItem('filterMagazineName')) {
-      this.filterMagazineName = JSON.parse(
-        localStorage.getItem('filterMagazineName')!
-      );
-      this.genreArray = JSON.parse(
-        localStorage.getItem('filteredArticleListGenres')!
-      );
-      if (localStorage.getItem('magazines')) {
-        this.magazineList = JSON.parse(localStorage.getItem('magazines')!);
-        this.filteredArticleList = JSON.parse(
-          localStorage.getItem('filteredArticleList')!
-        );
-      }
-      this.showFilters = true;
-    }
-    if (localStorage.getItem('filterGenre')) {
-      if (localStorage.getItem('magazines')) {
-        this.magazineList = JSON.parse(localStorage.getItem('magazines')!);
-      }
-      this.showFilters = true;
-      this.filterByGenre = JSON.parse(localStorage.getItem('filterGenre')!);
-      //this.filterGenre();
-    }
+    this.store.subscribe(state => {
+      this.state$ = state;
+    });
+  }
+
+  translator(event: string) {
+    this.translate.instant(event);
   }
 
   showHideFilters() {
@@ -85,105 +68,70 @@ export class FrontpageComponent implements OnInit {
   }
 
   filterGenre(event: string) {
-    const index = this.genreArray.indexOf(event);
+    const index = this.state$.genres.genres.genres.indexOf(event);
     this.store.dispatch(new RemoveGenreAction(index, event));
   }
 
   filterMagazine(event: string) {
-    const index = this.magazineList.indexOf(event);
+    if (this.state$.magazines.magazines.removedMagazines) {
+    }
+    const index = this.state$.magazines.magazines.magazines.indexOf(event);
     this.store.dispatch(new RemoveMagazineAction(index, event));
-    localStorage.setItem(
-      'filterMagazineName',
-      JSON.stringify(this.filterMagazineName)
-    );
-    localStorage.setItem('magazines', JSON.stringify(this.magazineList));
-    this.genreArray = [];
+    let tmpArr: string[] = [];
     let tempArticleList: Article[] = [];
     this.articleList.map(article => {
       this.filterMagazineName.map(magazine => {
         if (magazine === article.magazine?.name) {
           tempArticleList.push(article);
           if (
-            !this.genreArray.includes(article.genre) &&
-            !this.filterByGenre.includes(article.genre)
+            !this.filterByGenre.includes(article.genre) &&
+            !tmpArr.includes(article.genre)
           ) {
-            this.genreArray.push(article.genre);
+            tmpArr.push(article.genre);
           }
         }
       });
     });
     this.filteredArticleList = tempArticleList;
-    localStorage.setItem(
-      'filteredArticleList',
-      JSON.stringify(this.filteredArticleList)
-    );
-    localStorage.setItem(
-      'filteredArticleListGenres',
-      JSON.stringify(this.genreArray)
-    );
   }
 
   backToGenre(event: any) {
-    const addIndex = this.originalGenreArray.indexOf(event.value);
+    const addIndex = this.state$.genres.genres.originalGenres.indexOf(
+      event.value
+    );
     this.store.dispatch(new AddGenreBackAction(addIndex, event.value));
   }
 
   backToMagazine(event: any) {
-    const index = this.filterMagazineName.indexOf(event.value);
-    if (index > -1) {
-      this.filterMagazineName.splice(index, 1);
-      localStorage.setItem(
-        'filterMagazineName',
-        JSON.stringify(this.filterMagazineName)
-      );
-    }
-    //this.filterMagazine();
+    const addIndex = this.state$.magazines.magazines.originalMagazines.indexOf(
+      event.value
+    );
+    this.store.dispatch(new AddMagazineBackAction(addIndex, event.value));
+    let tempArticleList: Article[] = [];
+    this.state$.magazines.magazines.removedMagazines.map((magazine: string) => {
+      console.log(magazine);
+      this.articleList.map(article => {
+        if (article.magazine.name === magazine) {
+          tempArticleList.push(article);
+        }
+      });
+    });
+    this.filteredArticleList = tempArticleList;
   }
 
   resetGenreFilters() {
-    if (localStorage.getItem('filteredArticleListGenres')) {
-      this.genreArray = JSON.parse(
-        localStorage.getItem('filteredArticleListGenres')!
-      );
-    } else {
-      this.genreArray = this.originalGenreArray;
-    }
-    if (localStorage.getItem('filteredArticleList')) {
-      this.filteredArticleList = JSON.parse(
-        localStorage.getItem('filteredArticleList')!
-      );
-    } else {
-      this.filteredArticleList = this.articleList;
-    }
-    localStorage.removeItem('filterGenre');
-    this.filterByGenre = [];
+    this.store.dispatch(new EmptyFilterGenreAction());
   }
 
   resetMagazineFilters() {
-    if (localStorage.getItem('filterGenre')) {
-      this.filterByGenre = JSON.parse(localStorage.getItem('filterGenre')!);
-    }
-    //this.filterGenre();
-    this.genreArray = this.originalGenreArray;
     this.filteredArticleList = this.articleList;
-    localStorage.removeItem('filterMagazineName');
-    localStorage.removeItem('magazines');
-    localStorage.removeItem('filteredArticleList');
-    localStorage.removeItem('filteredArticleListGenres');
-    this.filterMagazineName = [];
+    this.store.dispatch(new EmptyMagazineFilterAction());
   }
 
   resetFilters() {
-    this.genreArray = this.originalGenreArray;
-    console.log(this.genreArray);
     this.filteredArticleList = this.articleList;
-    localStorage.removeItem('filterGenre');
-    localStorage.removeItem('filterMagazineName');
-    localStorage.removeItem('magazines');
-    localStorage.removeItem('filteredArticleList');
-    localStorage.removeItem('filteredArticleListGenres');
-    this.filterByGenre = [];
-    this.filterMagazineName = [];
+    this.store.dispatch(new EmptyFilterGenreAction());
+    this.store.dispatch(new EmptyMagazineFilterAction());
   }
 
   getArticles(): void {
@@ -195,13 +143,8 @@ export class FrontpageComponent implements OnInit {
 
   getState(): void {
     this.store.subscribe(state => {
-      this.magazineList = state.magazines.magazines.magazines;
       this.filterMagazineName = state.magazines.magazines.removedMagazines;
-      this.originalMagazineArray = state.magazines.magazines.originalMagazines;
-      this.genreArray = state.genres.genres.genres;
-      this.originalGenreArray = state.genres.genres.genres;
       this.filterByGenre = state.genres.genres.removedGenres;
-      this.originalGenreArray = state.genres.genres.originalGenres;
     });
   }
 

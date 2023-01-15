@@ -50,8 +50,16 @@ export function magazineReducer(
         ...state,
         originalMagazines: [...state.originalMagazines, action.payload],
       };
+    case magazineActions.MagazineActionType.EMPTY_FILTER:
+      return {
+        ...state,
+        removedMagazines: [],
+        magazines: [...state.originalMagazines],
+      };
     default: {
-      return state;
+      if (localStorage.getItem('magazineState')) {
+        return JSON.parse(localStorage.getItem('magazineState')!);
+      } else return state;
     }
   }
 }

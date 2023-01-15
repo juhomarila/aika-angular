@@ -5,11 +5,17 @@ export enum MagazineActionType {
   ADD_MAGAZINE_BACK = '[MAGAZINE] Add Back MAGAZINE',
   REMOVE_MAGAZINE = '[MAGAZINE] Remove MAGAZINE',
   ADD_ORIGINAL_MAGAZINES = '[MAGAZINE] Add Original MAGAZINE',
+  EMPTY_FILTER = '[MAGAZINE] Empty filter MAGAZINE',
 }
 
 export class AddMagazineAction implements Action {
   readonly type = MagazineActionType.ADD_MAGAZINE;
   constructor(public payload: string) {}
+}
+
+export class EmptyMagazineFilterAction implements Action {
+  readonly type = MagazineActionType.EMPTY_FILTER;
+  constructor() {}
 }
 
 export class AddMagazineBackAction implements Action {
@@ -31,4 +37,5 @@ export type MagazineActions =
   | AddMagazineAction
   | RemoveMagazineAction
   | AddOriginalMagazinesAction
-  | AddMagazineBackAction;
+  | AddMagazineBackAction
+  | EmptyMagazineFilterAction;

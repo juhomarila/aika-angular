@@ -23,7 +23,6 @@ export function genreReducer(
         genres: [...state.genres, action.payload],
       };
     case genreActions.GenreActionType.ADD_GENRE_BACK:
-      console.log(action.payload);
       return {
         ...state,
         genres: [
@@ -50,6 +49,20 @@ export function genreReducer(
       return {
         ...state,
         originalGenres: [...state.originalGenres, action.payload],
+      };
+    case genreActions.GenreActionType.EMPTY_FILTER:
+      return {
+        ...state,
+        removedGenres: [],
+        genres: [...state.originalGenres],
+      };
+    case genreActions.GenreActionType.REMOVE_ONLY_GENRE:
+      return {
+        ...state,
+        genres: [
+          ...state.genres.slice(0, action.index),
+          ...state.genres.slice(action.index + 1),
+        ],
       };
     default: {
       return state;
