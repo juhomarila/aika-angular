@@ -18,9 +18,9 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let a of shoppingCartList">
+            <tr *ngFor="let a of shoppingCartArticles">
               <td>
-                <a class="bi bi-trash" (click)="removeFromCart(a)"
+                <a class="bi bi-trash" (click)="removeFromCart(a.key)"
                   title="{{ 'preview.removeFromCart' | translate }}"></a>
               </td>
               <td>{{ a.name }}</td>

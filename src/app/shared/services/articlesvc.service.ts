@@ -32,6 +32,10 @@ export class ArticlesvcService {
     return of(article);
   }
 
+  getSingleArticle(key: string): Article {
+    return this.articleList.find(h => h.key === key)!;
+  }
+
   getMagazines(): Observable<Magazine[]> {
     return of(this.magazineList);
   }

@@ -18,7 +18,7 @@ export class ArticleModalComponent implements OnInit {
   liked: boolean = false;
   likeChecked: boolean = false;
   inCart: boolean = false;
-  shoppingCart: Article[] = [];
+  shoppingCart: string[] = [];
 
   constructor(
     private activeModal: NgbActiveModal,
@@ -78,17 +78,17 @@ export class ArticleModalComponent implements OnInit {
 
   addToCart() {
     this.inCart = true;
-    this.shoppingCartSvc.addToCart(this.article);
+    this.shoppingCartSvc.addToCart(this.article.key);
     return true;
   }
 
   removeFromCart() {
     this.inCart = false;
-    this.shoppingCartSvc.removeFromCart(this.article);
+    this.shoppingCartSvc.removeFromCart(this.article.key);
   }
 
   checkIfIsInCart() {
-    if (!this.shoppingCart.some(a => a.key === this.article.key)) {
+    if (!this.shoppingCart.some(a => a === this.article.key)) {
       return false;
     }
     return true;

@@ -10,9 +10,9 @@ import { UserService } from './user.service';
   providedIn: 'root',
 })
 export class ShoppingCartService {
-  shoppingCartArray: BehaviorSubject<Article[]> = new BehaviorSubject<
-    Article[]
-  >([]);
+  shoppingCartArray: BehaviorSubject<string[]> = new BehaviorSubject<string[]>(
+    []
+  );
   shoppingCart = this.shoppingCartArray.asObservable();
 
   bought: Owned[] = [];
@@ -22,16 +22,16 @@ export class ShoppingCartService {
     private userSvc: UserService
   ) {}
 
-  addToCart(article: Article) {
-    this.shoppingCartArray.next([...this.shoppingCartArray.value, article]);
+  addToCart(id: string) {
+    this.shoppingCartArray.next([...this.shoppingCartArray.value, id]);
     localStorage.setItem('cart', JSON.stringify(this.shoppingCartArray.value));
     JSON.parse(localStorage.getItem('cart')!);
   }
 
-  removeFromCart(article: Article) {
-    let tmpArr: Article[] = this.shoppingCartArray.value;
+  removeFromCart(id: string) {
+    let tmpArr: string[] = this.shoppingCartArray.value;
     tmpArr.forEach((item, index) => {
-      if (item.key === article.key) {
+      if (item === id) {
         tmpArr.splice(index, 1);
       }
     });
@@ -46,15 +46,15 @@ export class ShoppingCartService {
     JSON.parse(localStorage.getItem('cart')!);
   }
 
-  setCart(articleArray: Article[]) {
+  setCart(articleArray: string[]) {
     this.shoppingCartArray.next(articleArray);
   }
 
   async checkOut() {
     if (this.doPayment()) {
       this.shoppingCartArray.value.forEach(async article => {
-        await this.fireStoreSvc.buyArticle(this.authSvc.user.uid, article.key);
-        let boughtArticle: Owned = { key: article.key, time: Date.now() };
+        await this.fireStoreSvc.buyArticle(this.authSvc.user.uid, article);
+        let boughtArticle: Owned = { key: article, time: Date.now() };
         this.bought.push(boughtArticle);
         this.userSvc.setOwnedArticles(boughtArticle);
       });
