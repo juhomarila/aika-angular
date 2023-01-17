@@ -40,20 +40,34 @@
           </button>
         </div>
       </div>
-      <div *ngIf="state$.genres.genres.removedGenres.length === 0">
+      <div *ngIf="state$.genres.genres.removedGenres.length === 0 && !magazineFilter">
         <div *ngFor="let g of state$.genres.genres.genres">
-          <div class="small-padding">
-            <h5>{{ g | translate }}:</h5>
+          <div *ngIf="getGenreArticles(filteredArticleList, g).length > 0">
+            <div class="small-padding">
+              <h5>{{ g | translate }}:</h5>
+            </div>
+            <title-carousel [articleList]="getGenreArticles(filteredArticleList, g)"></title-carousel>
           </div>
-          <title-carousel [articleList]="getGenreArticles(filteredArticleList, g)"></title-carousel>
         </div>
       </div>
-      <div *ngIf="state$.genres.genres.removedGenres.length > 0">
+      <div *ngIf="state$.genres.genres.removedGenres.length > 0 && !magazineFilter">
         <div *ngFor="let g of state$.genres.genres.removedGenres">
-          <div class="small-padding">
-            <h5>{{ g | translate }}:</h5>
+          <div *ngIf="getGenreArticles(filteredArticleList, g).length > 0">
+            <div class="small-padding">
+              <h5>{{ g | translate }}:</h5>
+            </div>
+            <title-carousel [articleList]="getGenreArticles(filteredArticleList, g)"></title-carousel>
           </div>
-          <title-carousel [articleList]="getGenreArticles(filteredArticleList, g)"></title-carousel>
+        </div>
+      </div>
+      <div *ngIf="magazineFilter">
+        <div *ngFor="let g of genresWhenMagazineFilter">
+          <div *ngIf="getGenreArticles(filteredArticleList, g).length > 0">
+            <div class="small-padding">
+              <h5>{{ g | translate }}:</h5>
+            </div>
+            <title-carousel [articleList]="getGenreArticles(filteredArticleList, g)"></title-carousel>
+          </div>
         </div>
       </div>
     </div>

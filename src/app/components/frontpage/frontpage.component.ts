@@ -35,6 +35,10 @@ export class FrontpageComponent implements OnInit {
   filterByGenre: string[] = [];
   showFilters: boolean = false;
   filterMagazineName: string[] = [];
+  magazineFilter: boolean = false;
+  genreFilter: boolean = false;
+  genresWhenMagazineFilter: string[] = [];
+  magazinesByGenre: string[] = [];
 
   constructor(
     private authSvc: AuthService,
@@ -52,11 +56,14 @@ export class FrontpageComponent implements OnInit {
     this.getArticles();
     this.getCarouselImages();
     this.store.subscribe(state => {
+      if (state.genres.genres.removedGenres.length > 0) {
+        this.genreFilter = true;
+      }
       this.state$ = state;
       this.filterMagazineName =
         this.state$.magazines.magazines.removedMagazines;
       this.filterByGenre = this.state$.genres.genres.removedGenres;
-      state.genres.genres.genres.map((genre: string) => {
+      state.genres.genres.originalGenres.map((genre: string) => {
         this.translatedGenres.set(this.translate.instant(genre), genre);
         localStorage.setItem(
           'translations',
@@ -77,6 +84,16 @@ export class FrontpageComponent implements OnInit {
         JSON.parse(localStorage.getItem('translations')!)
       );
     }
+    if (localStorage.getItem('genresWhenMagazineFilter')) {
+      if (this.genreFilter) {
+        this.magazineFilter = false;
+      } else {
+        this.magazineFilter = true;
+        this.genresWhenMagazineFilter = JSON.parse(
+          localStorage.getItem('genresWhenMagazineFilter')!
+        );
+      }
+    }
   }
 
   translator(event: string): string {
@@ -88,6 +105,8 @@ export class FrontpageComponent implements OnInit {
   }
 
   filterGenre(event: string) {
+    this.magazineFilter = false;
+    this.genreFilter = true;
     let translatedEvent: string = '';
     if (this.translate.currentLang === 'en') {
       translatedEvent = this.translatedGenres.get(event)!;
@@ -100,6 +119,11 @@ export class FrontpageComponent implements OnInit {
   }
 
   filterMagazine(event: string) {
+    if (this.genreFilter) {
+      this.magazineFilter = false;
+    } else {
+      this.magazineFilter = true;
+    }
     const index = this.state$.magazines.magazines.magazines.indexOf(event);
     this.store.dispatch(new RemoveMagazineAction(index, event));
     localStorage.setItem('state', JSON.stringify(this.state$));
@@ -109,6 +133,12 @@ export class FrontpageComponent implements OnInit {
       this.filterMagazineName.map(magazine => {
         if (magazine === article.magazine?.name) {
           tempArticleList.push(article);
+          if (
+            !this.genresWhenMagazineFilter.includes(article.genre) &&
+            this.state$.genres.genres.genres.includes(article.genre)
+          ) {
+            this.genresWhenMagazineFilter.push(article.genre);
+          }
           if (
             !this.filterByGenre.includes(article.genre) &&
             !tmpArr.includes(article.genre)
@@ -122,6 +152,10 @@ export class FrontpageComponent implements OnInit {
     localStorage.setItem(
       'filteredArticles',
       JSON.stringify(this.filteredArticleList)
+    );
+    localStorage.setItem(
+      'genresWhenMagazineFilter',
+      JSON.stringify(this.genresWhenMagazineFilter)
     );
   }
 
@@ -138,6 +172,10 @@ export class FrontpageComponent implements OnInit {
       new AddGenreBackAction(addIndex, translatedEvent, event.value)
     );
     localStorage.setItem('state', JSON.stringify(this.state$));
+    localStorage.setItem(
+      'genresWhenMagazineFilter',
+      JSON.stringify(this.genresWhenMagazineFilter)
+    );
   }
 
   backToMagazine(event: any) {
@@ -159,26 +197,38 @@ export class FrontpageComponent implements OnInit {
       'filteredArticles',
       JSON.stringify(this.filteredArticleList)
     );
+    if (this.state$.magazines.magazines.removedMagazines.length == 0) {
+      this.magazineFilter = false;
+      this.filteredArticleList = this.articleList;
+    }
   }
 
   resetGenreFilters() {
+    this.genreFilter = false;
     this.store.dispatch(new EmptyFilterGenreAction());
     localStorage.setItem('state', JSON.stringify(this.state$));
   }
 
   resetMagazineFilters() {
+    this.magazineFilter = false;
+    this.genresWhenMagazineFilter = [];
     this.filteredArticleList = this.articleList;
     this.store.dispatch(new EmptyMagazineFilterAction());
     localStorage.setItem('state', JSON.stringify(this.state$));
     localStorage.removeItem('filteredArticles');
+    localStorage.removeItem('genresWhenMagazineFilter');
   }
 
   resetFilters() {
+    this.genreFilter = false;
+    this.magazineFilter = false;
+    this.genresWhenMagazineFilter = [];
     this.filteredArticleList = this.articleList;
     this.store.dispatch(new EmptyFilterGenreAction());
     this.store.dispatch(new EmptyMagazineFilterAction());
     localStorage.removeItem('state');
     localStorage.removeItem('filteredArticles');
+    localStorage.removeItem('genresWhenMagazineFilter');
   }
 
   getArticles(): void {
