@@ -7,6 +7,12 @@ export enum GenreActionType {
   REMOVE_ONLY_GENRE = '[GENRE] Remove only GENRE',
   ADD_ORIGINAL_GENRES = '[GENRE] Add Original GENRE',
   EMPTY_FILTER = '[GENRE] Empty filter GENRE',
+  LOAD_GENRE_STATE = '[GENRE] Load Genre State GENRE',
+}
+
+export class LoadGenreState implements Action {
+  readonly type = GenreActionType.LOAD_GENRE_STATE;
+  constructor() {}
 }
 
 export class AddGenreAction implements Action {
@@ -49,4 +55,5 @@ export type GenreActions =
   | AddOriginalGenresAction
   | AddGenreBackAction
   | EmptyFilterGenreAction
-  | RemoveOnlyGenreAction;
+  | RemoveOnlyGenreAction
+  | LoadGenreState;

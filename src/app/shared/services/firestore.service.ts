@@ -149,8 +149,6 @@ export class FirestoreService {
       magazines.forEach(magazine => {
         let mag = magazine.data() as Magazine;
         this.magazineList.push(mag);
-        this.store.dispatch(new AddMagazineAction(mag.name));
-        this.store.dispatch(new AddOriginalMagazinesAction(mag.name));
       })
     );
     return this.magazineList;
