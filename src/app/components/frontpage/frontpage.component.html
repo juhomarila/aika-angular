@@ -17,7 +17,7 @@
       <div *ngIf="showFilters" class="d-flex justify-content-between filters">
         <div class="d-flex">
           <small class="align-self-center padding-frontpage">{{ 'frontpage.genre' | translate }}</small>
-          <ng-select [(ngModel)]="state$.filters.removedGenres" (add)="filterGenre($event)" [closeOnSelect]="false"
+          <ng-select [(ngModel)]="genreFilters" (add)="filterGenre($event)" [closeOnSelect]="false"
             (clear)="resetFilters()" (remove)="backToGenre($event)" [multiple]="true" class="select-filter">
             <ng-option *ngFor="let genre of state$.filters.genres" 
             [value]="translator(genre)" style="cursor: pointer;">
@@ -27,7 +27,7 @@
         </div>
         <div class="d-flex input" *ngIf="state$.filters.removedGenres.length > 0">
           <small class="align-self-center padding-frontpage">{{ 'common.magazine' | translate }}</small>
-          <ng-select [(ngModel)]="state$.filters.removedMagazines" (add)="filterMagazine($event)" [closeOnSelect]="false"
+          <ng-select [(ngModel)]="magazineFilters" (add)="filterMagazine($event)" [closeOnSelect]="false"
             (clear)="resetMagazineFilters()" (remove)="backToMagazine($event)" [multiple]="true" class="select-filter">
             <ng-option *ngFor="let magazine of state$.filters.magazines" [value]="magazine" style="cursor: pointer;">
               <p class="hover-choice">{{ magazine }}</p>

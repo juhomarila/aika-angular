@@ -14,18 +14,18 @@ import {
   AddMagazineBackAction,
   EmptyMagazineFilterAction,
   RemoveMagazineAction,
+  ResetMagazineFilterAction,
+  AlterMagazinesAction,
 } from 'src/app/shared/store/actions/filter.actions';
 import { TranslateService } from '@ngx-translate/core';
-import { FilterStateInterface } from 'src/app/shared/store/reducers';
+import { AppState } from 'src/app/shared/store/reducers';
 
 @Component({
   selector: 'app-frontpage',
   templateUrl: './frontpage.component.html',
 })
 export class FrontpageComponent implements OnInit {
-  state$!: FilterStateInterface;
-  articleList: Article[] = [];
-  filteredArticleList: Article[] = [];
+  state$!: AppState;
   translatedGenres: Map<string, string> = new Map();
   carouselEntityList: CarouselEntity[] = [];
   selectedArticle?: Article;
@@ -33,24 +33,28 @@ export class FrontpageComponent implements OnInit {
   username: string = '';
   uid: string = '';
   showFilters: boolean = false;
+  genreFilters: string[] = [];
+  magazineFilters: string[] = [];
 
   constructor(
     private authSvc: AuthService,
     private articleSvc: ArticlesvcService,
     private storageSvc: StorageService,
     private utilSvc: UtilService,
-    private store: Store<FilterStateInterface>,
+    private store: Store<AppState>,
     private translate: TranslateService
   ) {}
 
   ngOnInit(): void {
+    this.articleSvc.init();
     this.isLogged = this.authSvc.isLoggedIn;
     this.username = this.authSvc.user.displayName;
     this.uid = this.authSvc.user.uid;
-    this.getArticles();
     this.getCarouselImages();
     this.store.subscribe(state => {
       this.state$ = state;
+      this.genreFilters = state.filters.removedGenres;
+      this.magazineFilters = state.filters.removedMagazines;
       this.state$.filters.originalGenres.map((genre: string) => {
         this.translatedGenres.set(this.translate.instant(genre), genre);
         localStorage.setItem(
@@ -86,7 +90,7 @@ export class FrontpageComponent implements OnInit {
     }
     const index = this.state$.filters.genres.indexOf(translatedEvent);
     this.store.dispatch(new RemoveGenreAction(index, event));
-    this.articleList.map(article => {
+    this.state$.articles.articles.map(article => {
       if (
         translatedEvent === article.genre &&
         !this.state$.filters.magazines.includes(article.magazine.name)
@@ -104,6 +108,7 @@ export class FrontpageComponent implements OnInit {
   }
 
   backToGenre(event: any) {
+    //TODO wip. if genre gets removed now active magazine get removed too.
     let translatedEvent: string = '';
     if (this.translate.currentLang === 'en') {
       translatedEvent = this.translatedGenres.get(event.value)!;
@@ -115,6 +120,19 @@ export class FrontpageComponent implements OnInit {
     this.store.dispatch(
       new AddGenreBackAction(addIndex, translatedEvent, event.value)
     );
+    let tmpMagazines: string[] = [];
+    this.store.dispatch(new EmptyMagazineFilterAction());
+    this.state$.articles.articles.map(article => {
+      if (
+        this.state$.filters.removedGenres.includes(
+          this.translator(article.genre)
+        ) &&
+        !tmpMagazines.includes(article.magazine.name)
+      ) {
+        tmpMagazines.push(article.magazine.name);
+        this.store.dispatch(new AddMagazineAction(article.magazine.name));
+      }
+    });
     localStorage.setItem('state', JSON.stringify(this.state$));
   }
 
@@ -131,8 +149,7 @@ export class FrontpageComponent implements OnInit {
   }
 
   resetMagazineFilters() {
-    this.store.dispatch(new EmptyMagazineFilterAction());
-    //TODO, if reset return list of genre magazines
+    this.store.dispatch(new ResetMagazineFilterAction());
     localStorage.setItem('state', JSON.stringify(this.state$));
   }
 
@@ -140,12 +157,6 @@ export class FrontpageComponent implements OnInit {
     this.store.dispatch(new EmptyFilterGenreAction());
     this.store.dispatch(new EmptyMagazineFilterAction());
     localStorage.removeItem('state');
-  }
-
-  getArticles(): void {
-    this.articleSvc.getArticles().subscribe(articles => {
-      this.articleList = articles;
-    });
   }
 
   getCarouselImages(): void {
@@ -162,7 +173,7 @@ export class FrontpageComponent implements OnInit {
 
   getArticlesByGenre(genre: string) {
     let tempArray: Article[] = [];
-    this.articleList.forEach(article => {
+    this.state$.articles.articles.forEach(article => {
       if (
         this.translatedGenres.get(genre)! === article.genre ||
         genre === article.genre

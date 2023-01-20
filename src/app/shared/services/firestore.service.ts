@@ -12,11 +12,13 @@ import { Owned } from '../interfaces/owned';
 import { Favourite } from '../interfaces/favourite';
 import { Like } from '../interfaces/like';
 import { Store } from '@ngrx/store';
-import { FilterStateInterface } from '../store/reducers';
+import { AppState } from '../store/reducers';
 import {
   AddGenreAction,
   AddOriginalGenresAction,
 } from '../store/actions/filter.actions';
+import { AddArticlesAction } from '../store/actions/article.actions';
+import * as _ from 'lodash';
 
 @Injectable({
   providedIn: 'root',
@@ -35,17 +37,15 @@ export class FirestoreService {
   likedList: Like[] = [];
   likes: number = 0;
 
-  constructor(
-    public afs: AngularFirestore,
-    private store: Store<FilterStateInterface>
-  ) {}
+  constructor(public afs: AngularFirestore, private store: Store<AppState>) {}
 
   async getAllArticles() {
     const snapShot = this.afs.collection('articles').get();
     snapShot.subscribe(articles =>
-      articles.forEach(article =>
-        this.articleList.push(article.data() as Article)
-      )
+      articles.forEach(article => {
+        this.articleList.push(article.data() as Article);
+        this.store.dispatch(new AddArticlesAction(article.data() as Article));
+      })
     );
     return this.articleList;
   }

@@ -9,8 +9,11 @@ export enum FilterActionType {
   EMPTY_GENRE_FILTER = '[GENRE] Empty filter GENRE',
   ADD_MAGAZINE = '[MAGAZINE] Add MAGAZINE',
   ADD_MAGAZINE_BACK = '[MAGAZINE] Add Back MAGAZINE',
+  REMOVE_MAGAZINE_ORIGINAL = '[MAGAZINE] Remove Original List MAGAZINE',
   REMOVE_MAGAZINE = '[MAGAZINE] Remove MAGAZINE',
+  RESET_MAGAZINE_FILTER = '[MAGAZINE] Reset Filter MAGAZINE',
   ADD_ORIGINAL_MAGAZINES = '[MAGAZINE] Add Original MAGAZINE',
+  ALTER_MAGAZINES = '[MAGAZINE] Alter MAGAZINE',
   EMPTY_MAGAZINE_FILTER = '[MAGAZINE] Empty filter MAGAZINE',
 }
 
@@ -68,8 +71,18 @@ export class RemoveMagazineAction implements Action {
   constructor(public index: number, public payload: string) {}
 }
 
+export class ResetMagazineFilterAction implements Action {
+  readonly type = FilterActionType.RESET_MAGAZINE_FILTER;
+  constructor() {}
+}
+
 export class AddOriginalMagazinesAction implements Action {
   readonly type = FilterActionType.ADD_ORIGINAL_MAGAZINES;
+  constructor(public payload: string) {}
+}
+
+export class AlterMagazinesAction implements Action {
+  readonly type = FilterActionType.ALTER_MAGAZINES;
   constructor(public payload: string) {}
 }
 
@@ -82,6 +95,8 @@ export type FilterActions =
   | RemoveOnlyGenreAction
   | AddMagazineAction
   | RemoveMagazineAction
+  | ResetMagazineFilterAction
   | AddOriginalMagazinesAction
   | AddMagazineBackAction
+  | AlterMagazinesAction
   | EmptyMagazineFilterAction;

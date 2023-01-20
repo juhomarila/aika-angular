@@ -103,6 +103,20 @@ export function filterReducer(
         ...state,
         originalMagazines: [...state.originalMagazines, action.payload],
       };
+    case filterActions.FilterActionType.ALTER_MAGAZINES:
+      return {
+        ...state,
+        magazines: [
+          ...state.magazines.filter(magazine => {
+            return magazine != action.payload;
+          }),
+        ],
+        removedMagazines: [
+          ...state.removedMagazines.filter(magazine => {
+            return magazine != action.payload;
+          }),
+        ],
+      };
     case filterActions.FilterActionType.EMPTY_MAGAZINE_FILTER:
       return {
         ...state,

@@ -85,7 +85,7 @@ export class SettingModalComponent implements OnInit {
                 );
               }
             })
-            .catch(e => console.log(e));
+            .catch(e => '');
         }
         if (!this.utilSvc.passwordRequirements(newPsw)) {
           this.error = true;
