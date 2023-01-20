@@ -16,7 +16,7 @@ import { ComponentsModule } from './components/components.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { NgxTranslateModule } from './ngx-translate/ngx-translate.module';
-import { genreReducers, magazineReducers } from './shared/store/reducers';
+import { reducers } from './shared/store/reducers';
 
 @NgModule({
   declarations: [AppComponent],
@@ -34,9 +34,10 @@ import { genreReducers, magazineReducers } from './shared/store/reducers';
     BrowserAnimationsModule,
     SharedModule,
     NgxTranslateModule,
-    StoreModule.forRoot({}),
-    StoreModule.forFeature('genres', genreReducers),
-    StoreModule.forFeature('magazines', magazineReducers),
+    StoreModule.forRoot(reducers),
+    // StoreModule.forFeature('genres', genreReducers),
+    // StoreModule.forFeature('magazines', magazineReducers),
+    //StoreModule.forFeature('filters', filterReducers.filters),
   ],
   providers: [
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase },

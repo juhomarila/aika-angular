@@ -12,15 +12,13 @@ import { Owned } from '../interfaces/owned';
 import { Favourite } from '../interfaces/favourite';
 import { Like } from '../interfaces/like';
 import { Store } from '@ngrx/store';
-import { GenreStateInterface } from '../store/reducers';
+import { AppState } from '../store/reducers';
 import {
   AddGenreAction,
   AddOriginalGenresAction,
-} from '../store/actions/genre.action';
-import {
-  AddMagazineAction,
-  AddOriginalMagazinesAction,
-} from '../store/actions/magazine.action';
+} from '../store/actions/filter.actions';
+import { AddArticlesAction } from '../store/actions/article.actions';
+import * as _ from 'lodash';
 
 @Injectable({
   providedIn: 'root',
@@ -39,34 +37,36 @@ export class FirestoreService {
   likedList: Like[] = [];
   likes: number = 0;
 
-  constructor(
-    public afs: AngularFirestore,
-    private store: Store<GenreStateInterface>
-  ) {}
+  constructor(public afs: AngularFirestore, private store: Store<AppState>) {}
 
   async getAllArticles() {
     const snapShot = this.afs.collection('articles').get();
     snapShot.subscribe(articles =>
-      articles.forEach(article =>
-        this.articleList.push(article.data() as Article)
-      )
+      articles.forEach(article => {
+        this.articleList.push(article.data() as Article);
+        this.store.dispatch(new AddArticlesAction(article.data() as Article));
+      })
     );
     return this.articleList;
   }
 
   async getGenres() {
-    const snapShot = this.afs.collection('articles').get();
-    let tmpArr: string[] = [];
-    snapShot.subscribe(articles =>
-      articles.forEach(article => {
-        let singleArticle = article.data() as Article;
-        if (!tmpArr.includes(singleArticle.genre)) {
-          tmpArr.push(singleArticle.genre);
-          this.store.dispatch(new AddGenreAction(singleArticle.genre));
-          this.store.dispatch(new AddOriginalGenresAction(singleArticle.genre));
-        }
-      })
-    );
+    if (!localStorage.getItem('state')) {
+      const snapShot = this.afs.collection('articles').get();
+      let tmpArr: string[] = [];
+      snapShot.subscribe(articles =>
+        articles.forEach(article => {
+          let singleArticle = article.data() as Article;
+          if (!tmpArr.includes(singleArticle.genre)) {
+            tmpArr.push(singleArticle.genre);
+            this.store.dispatch(new AddGenreAction(singleArticle.genre));
+            this.store.dispatch(
+              new AddOriginalGenresAction(singleArticle.genre)
+            );
+          }
+        })
+      );
+    }
   }
 
   async getAllLoginCarouselEntities() {
@@ -149,8 +149,6 @@ export class FirestoreService {
       magazines.forEach(magazine => {
         let mag = magazine.data() as Magazine;
         this.magazineList.push(mag);
-        this.store.dispatch(new AddMagazineAction(mag.name));
-        this.store.dispatch(new AddOriginalMagazinesAction(mag.name));
       })
     );
     return this.magazineList;

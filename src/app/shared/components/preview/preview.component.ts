@@ -9,10 +9,6 @@ import {
 } from '@angular/core';
 import { Article } from 'src/app/shared/interfaces/article';
 import { ShoppingCartService } from 'src/app/shared/services/shopping-cart.service';
-import {
-  AddCartAction,
-  RemoveCartAction,
-} from 'src/app/shared/store/actions/cart.action';
 import { Router } from '@angular/router';
 import { FavouriteService } from '../../services/favourite.service';
 import { UserService } from '../../services/user.service';

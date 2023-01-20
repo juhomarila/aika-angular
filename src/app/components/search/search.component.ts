@@ -44,7 +44,6 @@ export class SearchComponent implements OnInit {
       this.ownedArticlesList = articles;
     });
     this.minHeight = window.innerHeight;
-    console.log(this.route.snapshot.queryParams);
     if (!this.route.snapshot.queryParams['s']) {
       this.router.navigate(['frontpage']);
     }

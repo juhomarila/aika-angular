@@ -23,6 +23,10 @@ export class ArticlesvcService {
     this.fireStoreSvc.getGenres();
   }
 
+  init() {
+    return;
+  }
+
   getArticles(): Observable<Article[]> {
     return of(this.articleList);
   }
