@@ -40,7 +40,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary float-end" (click)="signIn(email.value, psw.value)"
+        <button type="button" class="btn btn-primary float-end" (click)="signIn(email.value.trim(), psw.value.trim())"
           [disabled]="error.clicked">
           {{ 'common.login' | translate }}
         </button>
