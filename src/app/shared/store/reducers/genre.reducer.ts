@@ -64,7 +64,7 @@ export function genreReducer(
           ...state.genres.slice(action.index + 1),
         ],
       };
-    case genreActions.GenreActionType.REMOVE_ONLY_GENRE:
+    case genreActions.GenreActionType.LOAD_GENRE_STATE:
       return state;
     default: {
       if (localStorage.getItem('state')) {

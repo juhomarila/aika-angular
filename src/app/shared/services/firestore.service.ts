@@ -12,15 +12,11 @@ import { Owned } from '../interfaces/owned';
 import { Favourite } from '../interfaces/favourite';
 import { Like } from '../interfaces/like';
 import { Store } from '@ngrx/store';
-import { GenreStateInterface } from '../store/reducers';
+import { FilterStateInterface } from '../store/reducers';
 import {
   AddGenreAction,
   AddOriginalGenresAction,
-} from '../store/actions/genre.action';
-import {
-  AddMagazineAction,
-  AddOriginalMagazinesAction,
-} from '../store/actions/magazine.action';
+} from '../store/actions/filter.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -41,7 +37,7 @@ export class FirestoreService {
 
   constructor(
     public afs: AngularFirestore,
-    private store: Store<GenreStateInterface>
+    private store: Store<FilterStateInterface>
   ) {}
 
   async getAllArticles() {
@@ -55,18 +51,22 @@ export class FirestoreService {
   }
 
   async getGenres() {
-    const snapShot = this.afs.collection('articles').get();
-    let tmpArr: string[] = [];
-    snapShot.subscribe(articles =>
-      articles.forEach(article => {
-        let singleArticle = article.data() as Article;
-        if (!tmpArr.includes(singleArticle.genre)) {
-          tmpArr.push(singleArticle.genre);
-          this.store.dispatch(new AddGenreAction(singleArticle.genre));
-          this.store.dispatch(new AddOriginalGenresAction(singleArticle.genre));
-        }
-      })
-    );
+    if (!localStorage.getItem('state')) {
+      const snapShot = this.afs.collection('articles').get();
+      let tmpArr: string[] = [];
+      snapShot.subscribe(articles =>
+        articles.forEach(article => {
+          let singleArticle = article.data() as Article;
+          if (!tmpArr.includes(singleArticle.genre)) {
+            tmpArr.push(singleArticle.genre);
+            this.store.dispatch(new AddGenreAction(singleArticle.genre));
+            this.store.dispatch(
+              new AddOriginalGenresAction(singleArticle.genre)
+            );
+          }
+        })
+      );
+    }
   }
 
   async getAllLoginCarouselEntities() {

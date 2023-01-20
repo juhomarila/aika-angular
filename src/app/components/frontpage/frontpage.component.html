@@ -17,19 +17,19 @@
       <div *ngIf="showFilters" class="d-flex justify-content-between filters">
         <div class="d-flex">
           <small class="align-self-center padding-frontpage">{{ 'frontpage.genre' | translate }}</small>
-          <ng-select [(ngModel)]="state$.genres.genres.removedGenres" (add)="filterGenre($event)" [closeOnSelect]="false"
+          <ng-select [(ngModel)]="state$.filters.removedGenres" (add)="filterGenre($event)" [closeOnSelect]="false"
             (clear)="resetFilters()" (remove)="backToGenre($event)" [multiple]="true" class="select-filter">
-            <ng-option *ngFor="let genre of state$.genres.genres.genres" 
-            [value]="translator(genre)" onmouseover="" style="cursor: pointer;">
+            <ng-option *ngFor="let genre of state$.filters.genres" 
+            [value]="translator(genre)" style="cursor: pointer;">
               <p class="hover-choice">{{ genre | translate}}</p>
             </ng-option>
           </ng-select>
         </div>
-        <div class="d-flex input" *ngIf="state$.genres.genres.removedGenres.length > 0">
+        <div class="d-flex input" *ngIf="state$.filters.removedGenres.length > 0">
           <small class="align-self-center padding-frontpage">{{ 'common.magazine' | translate }}</small>
-          <ng-select [(ngModel)]="filterByMagazine" (add)="filterMagazine($event)" [closeOnSelect]="false"
+          <ng-select [(ngModel)]="state$.filters.removedMagazines" (add)="filterMagazine($event)" [closeOnSelect]="false"
             (clear)="resetMagazineFilters()" (remove)="backToMagazine($event)" [multiple]="true" class="select-filter">
-            <ng-option *ngFor="let magazine of state$.magazines.magazines.magazines" [value]="magazine" onmouseover="" style="cursor: pointer;">
+            <ng-option *ngFor="let magazine of state$.filters.magazines" [value]="magazine" style="cursor: pointer;">
               <p class="hover-choice">{{ magazine }}</p>
             </ng-option>
           </ng-select>
@@ -40,23 +40,23 @@
           </button>
         </div>
       </div>
-      <div *ngIf="state$.genres.genres.removedGenres.length > 0">
-       <div *ngFor="let g of state$.genres.genres.removedGenres">
-         <div *ngIf="getArticlesByGenre(articleList, g).length > 0">
+      <div *ngIf="state$.filters.removedGenres.length > 0">
+       <div *ngFor="let g of state$.filters.removedGenres">
+         <div *ngIf="getArticlesByGenre(g).length > 0">
            <div class="small-padding">
              <h5>{{ g | translate }}:</h5>
            </div>
-           <title-carousel [articleList]="getArticlesByGenre(articleList, g)"></title-carousel>
+           <title-carousel [articleList]="getArticlesByGenre(g)"></title-carousel>
          </div>
        </div>
       </div>
-      <div *ngIf="state$.genres.genres.removedGenres.length == 0">
-        <div *ngFor="let g of state$.genres.genres.genres">
-          <div *ngIf="getArticlesByGenre(articleList, g).length > 0">
+      <div *ngIf="state$.filters.removedGenres.length == 0">
+        <div *ngFor="let g of state$.filters.genres">
+          <div *ngIf="getArticlesByGenre(g).length > 0">
             <div class="small-padding">
               <h5>{{ g | translate }}:</h5>
             </div>
-            <title-carousel [articleList]="getArticlesByGenre(articleList, g)"></title-carousel>
+            <title-carousel [articleList]="getArticlesByGenre(g)"></title-carousel>
           </div>
         </div>
       </div>

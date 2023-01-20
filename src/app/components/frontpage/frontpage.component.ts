@@ -10,21 +10,20 @@ import {
   AddGenreBackAction,
   EmptyFilterGenreAction,
   RemoveGenreAction,
-} from 'src/app/shared/store/actions/genre.action';
-import {
   AddMagazineAction,
   AddMagazineBackAction,
   EmptyMagazineFilterAction,
   RemoveMagazineAction,
-} from 'src/app/shared/store/actions/magazine.action';
+} from 'src/app/shared/store/actions/filter.actions';
 import { TranslateService } from '@ngx-translate/core';
+import { FilterStateInterface } from 'src/app/shared/store/reducers';
 
 @Component({
   selector: 'app-frontpage',
   templateUrl: './frontpage.component.html',
 })
 export class FrontpageComponent implements OnInit {
-  state$: any;
+  state$!: FilterStateInterface;
   articleList: Article[] = [];
   filteredArticleList: Article[] = [];
   translatedGenres: Map<string, string> = new Map();
@@ -34,31 +33,15 @@ export class FrontpageComponent implements OnInit {
   username: string = '';
   uid: string = '';
   showFilters: boolean = false;
-  filterByGenre: string[] = [];
-  filterByMagazine: string[] = [];
 
   constructor(
     private authSvc: AuthService,
     private articleSvc: ArticlesvcService,
     private storageSvc: StorageService,
     private utilSvc: UtilService,
-    private store: Store<any>,
+    private store: Store<FilterStateInterface>,
     private translate: TranslateService
-  ) {
-    this.store.subscribe(state => {
-      this.state$ = state;
-      this.filterByMagazine = this.state$.magazines.magazines.removedMagazines;
-      this.filterByGenre = this.state$.genres.genres.removedGenres;
-      this.translatedGenres.clear();
-      this.state$.genres.genres.originalGenres.map((genre: string) => {
-        this.translatedGenres.set(this.translate.instant(genre), genre);
-        localStorage.setItem(
-          'translations',
-          JSON.stringify(Array.from(this.translatedGenres.entries()))
-        );
-      });
-    });
-  }
+  ) {}
 
   ngOnInit(): void {
     this.isLogged = this.authSvc.isLoggedIn;
@@ -66,6 +49,16 @@ export class FrontpageComponent implements OnInit {
     this.uid = this.authSvc.user.uid;
     this.getArticles();
     this.getCarouselImages();
+    this.store.subscribe(state => {
+      this.state$ = state;
+      this.state$.filters.originalGenres.map((genre: string) => {
+        this.translatedGenres.set(this.translate.instant(genre), genre);
+        localStorage.setItem(
+          'translations',
+          JSON.stringify(Array.from(this.translatedGenres.entries()))
+        );
+      });
+    });
     if (localStorage.getItem('state')) {
       this.showFilters = true;
     }
@@ -91,14 +84,12 @@ export class FrontpageComponent implements OnInit {
     } else {
       translatedEvent = event;
     }
-    const index = this.state$.genres.genres.genres.indexOf(translatedEvent);
+    const index = this.state$.filters.genres.indexOf(translatedEvent);
     this.store.dispatch(new RemoveGenreAction(index, event));
     this.articleList.map(article => {
       if (
         translatedEvent === article.genre &&
-        !this.state$.magazines.magazines.magazines.includes(
-          article.magazine.name
-        )
+        !this.state$.filters.magazines.includes(article.magazine.name)
       ) {
         this.store.dispatch(new AddMagazineAction(article.magazine.name));
       }
@@ -107,7 +98,7 @@ export class FrontpageComponent implements OnInit {
   }
 
   filterMagazine(event: string) {
-    const index = this.state$.magazines.magazines.magazines.indexOf(event);
+    const index = this.state$.filters.magazines.indexOf(event);
     this.store.dispatch(new RemoveMagazineAction(index, event));
     localStorage.setItem('state', JSON.stringify(this.state$));
   }
@@ -120,7 +111,7 @@ export class FrontpageComponent implements OnInit {
       translatedEvent = event.value;
     }
     const addIndex =
-      this.state$.genres.genres.originalGenres.indexOf(translatedEvent);
+      this.state$.filters.originalGenres.indexOf(translatedEvent);
     this.store.dispatch(
       new AddGenreBackAction(addIndex, translatedEvent, event.value)
     );
@@ -128,9 +119,7 @@ export class FrontpageComponent implements OnInit {
   }
 
   backToMagazine(event: any) {
-    const addIndex = this.state$.magazines.magazines.originalMagazines.indexOf(
-      event.value
-    );
+    const addIndex = this.state$.filters.originalMagazines.indexOf(event.value);
     this.store.dispatch(new AddMagazineBackAction(addIndex, event.value));
     localStorage.setItem('state', JSON.stringify(this.state$));
   }
@@ -171,21 +160,19 @@ export class FrontpageComponent implements OnInit {
     return this.utilSvc.weightedSorter(articles);
   }
 
-  getArticlesByGenre(articles: Article[], genre: string) {
+  getArticlesByGenre(genre: string) {
     let tempArray: Article[] = [];
-    articles.forEach(article => {
+    this.articleList.forEach(article => {
       if (
         this.translatedGenres.get(genre)! === article.genre ||
         genre === article.genre
       ) {
-        if (this.state$.magazines.magazines.removedMagazines.length > 0) {
-          this.state$.magazines.magazines.removedMagazines.map(
-            (magazine: string) => {
-              if (magazine === article.magazine.name) {
-                tempArray.push(article);
-              }
+        if (this.state$.filters.removedMagazines.length > 0) {
+          this.state$.filters.removedMagazines.map((magazine: string) => {
+            if (magazine === article.magazine.name) {
+              tempArray.push(article);
             }
-          );
+          });
         } else {
           tempArray.push(article);
         }

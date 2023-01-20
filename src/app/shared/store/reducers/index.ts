@@ -2,7 +2,9 @@ import { ActionReducerMap } from '@ngrx/store';
 import { GenreState, genreReducer } from './genre.reducer';
 import * as genreActions from '../actions/genre.action';
 import * as magazineActions from '../actions/magazine.action';
+import * as filterActions from '../actions/filter.actions';
 import { magazineReducer, MagazineState } from './magazine.reducer';
+import { filterReducer, FilterState } from './filter.reducers';
 
 export const rootReducer = {};
 
@@ -12,6 +14,10 @@ export interface GenreStateInterface {
 
 export interface MagazineStateInterface {
   magazines: MagazineState;
+}
+
+export interface FilterStateInterface {
+  filters: FilterState;
 }
 
 export interface AppState {
@@ -31,4 +37,11 @@ export const magazineReducers: ActionReducerMap<
   magazineActions.MagazineActions
 > = {
   magazines: magazineReducer,
+};
+
+export const filterReducers: ActionReducerMap<
+  FilterStateInterface,
+  filterActions.FilterActions
+> = {
+  filters: filterReducer,
 };
